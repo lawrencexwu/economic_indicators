@@ -41,7 +41,7 @@ def _fetch_html(url: str, wait_ms: int = 4000) -> str:
         stealth.apply_stealth_sync(ctx)
         page = ctx.new_page()
         logger.info("MBA: fetching %s", url)
-        page.goto(url, wait_until="load", timeout=25000)
+        page.goto(url, wait_until="networkidle", timeout=30000)
         if wait_ms:
             page.wait_for_timeout(wait_ms)
         html = page.content()
@@ -73,9 +73,11 @@ def _press_release_url_from_newsroom(html: str) -> str | None:
     for a in soup.find_all("a", href=True):
         text = a.get_text(strip=True).lower()
         href = a["href"]
-        if "weekly survey" in text and "mortgage" in text and "application" in text:
-            if href.startswith("/"):
-                return _BASE + href
+        if href.startswith("/"):
+            href = _BASE + href
+        # Accept any link that mentions mortgage + application pointing to a news article.
+        # MBA changed titles over time — don't require "weekly survey" phrase.
+        if "mortgage" in text and "application" in text and "/news/" in href:
             return href
     return None
 
