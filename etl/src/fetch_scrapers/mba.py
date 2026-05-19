@@ -1,157 +1,173 @@
 """
 MBA Weekly Mortgage Applications scraper.
+Source: Trading Economics (server-side rendered, no Cloudflare WAF).
+  Purchase: https://tradingeconomics.com/united-states/mba-purchase-index
+  Refi:     https://tradingeconomics.com/united-states/mba-mortgage-refinance-index
 
-Strategy: bypass the JS-rendered newsroom listing entirely.
-MBA press release URLs follow a predictable pattern:
-  /news-and-research/newsroom/news/{YYYY}/{MM}/{DD}/{slug}
-where slug is one of two variants (increase/decrease).
-We probe recent Wednesdays with both slugs via plain requests.HEAD,
-then fetch and parse the winning article page with BeautifulSoup.
+Merges fresh records with existing JSON history so Phase 2 data is preserved.
+No Playwright needed — plain requests + BeautifulSoup.
 """
 
+import json
 import logging
-import re
-import requests
-from datetime import date, timedelta
+from datetime import datetime
+from pathlib import Path
 
+import requests
 from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
-from playwright_stealth import Stealth
 
 logger = logging.getLogger(__name__)
 
-_BASE = "https://www.mba.org"
+_TE_BASE = "https://tradingeconomics.com"
+_URLS = {
+    "mba_purchase": f"{_TE_BASE}/united-states/mba-purchase-index",
+    "mba_refi":     f"{_TE_BASE}/united-states/mba-mortgage-refinance-index",
+}
+# etl/src/fetch_scrapers/ -> 4 parents up -> economic_indicators/
+_DATA_DIR = Path(__file__).parent.parent.parent.parent / "data" / "indicators"
 _UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/124.0.0.0 Safari/537.36"
 )
 
-_SLUGS = [
-    "mortgage-applications-increase-in-latest-mba-weekly-survey",
-    "mortgage-applications-decrease-in-latest-mba-weekly-survey",
-]
-
 _cache: dict | None = None
 
 
-# ── Date helpers ──────────────────────────────────────────────────────────────
+# ── HTTP ──────────────────────────────────────────────────────────────────────
 
-def _recent_wednesdays(n: int = 8) -> list[date]:
-    """Return the n most recent Wednesdays (MBA release day)."""
-    today = date.today()
-    results: list[date] = []
-    d = today
-    while len(results) < n:
-        if d.weekday() == 2:
-            results.append(d)
-        d -= timedelta(days=1)
-    return results
-
-
-# ── URL discovery via direct probe ────────────────────────────────────────────
-
-def _find_article_url() -> tuple[str, str] | None:
-    """
-    Probe candidate Wednesday URLs with both slug variants.
-    Returns (full_url, release_date_iso) for the first hit, or None.
-    """
+def _fetch_html(url: str) -> str:
     session = requests.Session()
-    session.headers["User-Agent"] = _UA
-
-    for release_date in _recent_wednesdays(8):
-        y = release_date.year
-        m = f"{release_date.month:02d}"
-        d = f"{release_date.day:02d}"
-        for slug in _SLUGS:
-            url = f"{_BASE}/news-and-research/newsroom/news/{y}/{m}/{d}/{slug}"
-            try:
-                resp = session.head(url, timeout=10, allow_redirects=True)
-                logger.info("MBA probe %s → %d", url, resp.status_code)
-                if resp.status_code == 200:
-                    return url, release_date.isoformat()
-            except Exception as exc:
-                logger.debug("MBA probe error %s: %s", url, exc)
-
-    return None
+    session.headers.update({
+        "User-Agent": _UA,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Referer": "https://tradingeconomics.com/",
+    })
+    resp = session.get(url, timeout=20)
+    resp.raise_for_status()
+    return resp.text
 
 
-# ── Article parsing ───────────────────────────────────────────────────────────
+# ── Parsing ───────────────────────────────────────────────────────────────────
 
-def _fetch_article_html(url: str) -> str:
-    """Fetch a JS-rendered MBA article page using Playwright."""
-    stealth = Stealth()
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        ctx = browser.new_context(viewport={"width": 1280, "height": 800}, user_agent=_UA)
-        stealth.apply_stealth_sync(ctx)
-        page = ctx.new_page()
-        page.goto(url, wait_until="networkidle", timeout=30000)
-        page.wait_for_timeout(2000)
-        # Scroll to bottom to trigger lazy-loaded article body sections
-        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        page.wait_for_timeout(3000)
-        html = page.content()
-        browser.close()
-    return html
-
-
-def _parse_article(html: str, release_date: str) -> dict | None:
+def _parse_records(html: str, url: str) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
-    article = soup.find("article") or soup.find(class_="field-body") or soup.find("main")
-    text = article.get_text(separator=" ") if article else soup.get_text()
 
-    def _find_index(name: str) -> float | None:
-        patterns = [
-            rf"{name}[^.]*?(?:decreased|increased|fell|rose|remained|was)[^.]*?to\s+(\d{{3,}}(?:\.\d+)?)",
-            rf"{name}[^.]*?(?:at|of)\s+(\d{{3,}}(?:\.\d+)?)",
-        ]
-        for pat in patterns:
-            m = re.search(pat, text, re.IGNORECASE)
-            if m:
-                return float(m.group(1))
+    table = (
+        soup.find("table", id="calendar1")
+        or soup.find("table", {"class": lambda c: c and "table" in c})
+        or soup.find("table")
+    )
+    if not table:
+        excerpt = soup.get_text()[:500]
+        logger.warning("TE MBA: no table at %s — page excerpt: %s", url, excerpt)
+        raise ValueError(f"TE MBA: no table found at {url}")
+
+    headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
+    logger.info("TE MBA: columns = %s", headers)
+
+    def _col(keywords: list[str]) -> int | None:
+        for i, h in enumerate(headers):
+            if any(k in h for k in keywords):
+                return i
         return None
 
-    purchase = _find_index("Purchase Index")
-    refi = _find_index("Refinance Index")
+    cal_idx = _col(["calendar", "date", "release"])
+    ref_idx = _col(["reference", "period"])
+    act_idx = _col(["actual"])
 
-    if purchase is None and refi is None:
-        logger.warning(
-            "MBA: could not parse indices. text length=%d, first 500: %s",
-            len(text), text[:500],
-        )
-        # Log any line containing 'index' or 'percent' to see what data is present
-        for line in text.splitlines():
-            l = line.strip().lower()
-            if ("index" in l or "percent" in l) and len(line.strip()) > 10:
-                logger.warning("MBA candidate line: %r", line.strip()[:200])
-        return None
+    if act_idx is None:
+        raise ValueError(f"TE MBA: no 'Actual' column — headers: {headers}")
 
-    return {"date": release_date, "purchase": purchase, "refi": refi}
+    records: list[dict] = []
+    for row in table.find_all("tr")[1:]:
+        cells = row.find_all("td")
+        if not cells or act_idx >= len(cells):
+            continue
+
+        act_text = cells[act_idx].get_text(strip=True)
+        if not act_text:
+            continue  # future release — no value yet
+
+        # Resolve date: prefer Reference (survey week) over Calendar (release date)
+        date_iso: str | None = None
+
+        if ref_idx is not None and ref_idx < len(cells):
+            ref_text = cells[ref_idx].get_text(strip=True)
+            if ref_text and "/" in ref_text:
+                try:
+                    cal_text = (
+                        cells[cal_idx].get_text(strip=True)
+                        if cal_idx is not None and cal_idx < len(cells)
+                        else ""
+                    )
+                    release_year = int(cal_text[:4]) if len(cal_text) >= 4 else datetime.now().year
+                    mon_abbr, day = ref_text.split("/", 1)
+                    dt = datetime.strptime(f"{mon_abbr} {day} {release_year}", "%b %d %Y")
+                    # Handle Dec reference / Jan release year-rollover
+                    if cal_text:
+                        cal_month = int(cal_text[5:7])
+                        if dt.month > cal_month and (dt.month - cal_month) > 6:
+                            dt = dt.replace(year=release_year - 1)
+                    date_iso = dt.strftime("%Y-%m-%d")
+                except Exception as exc:
+                    logger.debug("TE MBA: ref date parse failed %r: %s", ref_text, exc)
+
+        if date_iso is None and cal_idx is not None and cal_idx < len(cells):
+            cal_text = cells[cal_idx].get_text(strip=True)
+            try:
+                date_iso = datetime.strptime(cal_text[:10], "%Y-%m-%d").strftime("%Y-%m-%d")
+            except Exception:
+                pass
+
+        if date_iso is None:
+            continue
+
+        try:
+            value = float(act_text.replace(",", ""))
+            records.append({"date": date_iso, "value": value})
+        except ValueError:
+            continue
+
+    logger.info("TE MBA: parsed %d records from %s", len(records), url)
+    return records
+
+
+# ── History merge ─────────────────────────────────────────────────────────────
+
+def _load_existing(indicator_id: str) -> list[dict]:
+    path = _DATA_DIR / f"{indicator_id}.json"
+    if path.exists():
+        try:
+            return json.loads(path.read_text()).get("data", [])
+        except Exception:
+            return []
+    return []
+
+
+def _merge(fresh: list[dict], existing: list[dict]) -> list[dict]:
+    """Overlay fresh records onto existing history; fresh takes priority by date."""
+    by_date = {r["date"]: r for r in existing}
+    for r in fresh:
+        by_date[r["date"]] = r
+    return sorted(by_date.values(), key=lambda r: r["date"], reverse=True)
 
 
 # ── Cache builder ─────────────────────────────────────────────────────────────
 
 def _build_cache() -> dict:
-    result = _find_article_url()
-    if result is None:
-        raise RuntimeError(
-            "MBA: could not find press release for any of the last 8 Wednesdays. "
-            "Check slug variants or release schedule."
+    cache: dict[str, list[dict]] = {}
+    for ind_id, url in _URLS.items():
+        fresh = _parse_records(_fetch_html(url), url)
+        existing = _load_existing(ind_id)
+        merged = _merge(fresh, existing)
+        cache[ind_id] = merged
+        logger.info(
+            "TE MBA: %s — %d fresh + %d existing → %d total",
+            ind_id, len(fresh), len(existing), len(merged),
         )
-
-    article_url, release_date = result
-    logger.info("MBA: found article at %s (%s)", article_url, release_date)
-
-    article_html = _fetch_article_html(article_url)
-    parsed = _parse_article(article_html, release_date)
-    if parsed is None:
-        raise ValueError(f"MBA: could not parse purchase/refi index from {article_url}")
-
-    return {
-        "purchase": [{"date": parsed["date"], "value": parsed["purchase"]}] if parsed["purchase"] is not None else [],
-        "refi":     [{"date": parsed["date"], "value": parsed["refi"]}]     if parsed["refi"]     is not None else [],
-    }
+    return cache
 
 
 # ── Public API ────────────────────────────────────────────────────────────────
@@ -161,19 +177,13 @@ def fetch(indicator_id: str, _config: dict) -> dict | None:
     if _cache is None:
         _cache = _build_cache()
 
-    if indicator_id == "mba_purchase":
-        history = _cache["purchase"]
-    elif indicator_id == "mba_refi":
-        history = _cache["refi"]
-    else:
-        raise ValueError(f"MBA: unknown indicator {indicator_id!r}")
-
+    history = _cache.get(indicator_id, [])
     if not history:
-        raise ValueError(f"MBA: no data for {indicator_id}")
+        raise ValueError(f"TE MBA: no data for {indicator_id}")
 
     return {
         "current_value": history[0]["value"],
-        "previous_value": None,
+        "previous_value": history[1]["value"] if len(history) > 1 else None,
         "release_date": history[0]["date"],
         "data": history,
     }
