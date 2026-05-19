@@ -8,7 +8,7 @@
   "weight": 2,
   "frequency": "daily",
   "source_type": "fred",
-  "last_updated": "2026-05-19T06:18:46.685622+00:00",
+  "last_updated": "2026-05-19T09:27:49.906902+00:00",
   "current_value": 0.54,
   "previous_value": 0.5,
   "data": [
@@ -30418,5 +30418,6 @@
     "why_it_matters": "Tracks Fed rate expectations over the medium term. Often inverts before 10Y-3M and is more sensitive to forward rate expectations.\n",
     "scoring_rule": "Same bands as 10Y-3M. Phase 3."
   },
-  "score": null
+  "score": null,
+  "next_expected_release": null
 }

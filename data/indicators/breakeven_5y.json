@@ -8,7 +8,7 @@
   "weight": 1,
   "frequency": "daily",
   "source_type": "fred",
-  "last_updated": "2026-05-19T06:18:46.685622+00:00",
+  "last_updated": "2026-05-19T09:27:49.906902+00:00",
   "current_value": 2.69,
   "previous_value": 2.7,
   "data": [
@@ -10394,5 +10394,6 @@
     "why_it_matters": "Anchored expectations (<2.5%) suggest inflation is temporary and Fed can be patient. Unanchored expectations (>3%) signal persistent inflation and aggressive Fed response ahead.\n",
     "scoring_rule": "< 2.0% \u2192 +40 | 2.0-2.5% \u2192 +20 | 2.5-3.0% \u2192 -20 | 3.0-3.5% \u2192 -50 | > 3.5% \u2192 -80. Phase 3.\n"
   },
-  "score": null
+  "score": null,
+  "next_expected_release": null
 }

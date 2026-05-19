@@ -8,7 +8,7 @@
   "weight": 1,
   "frequency": "daily",
   "source_type": "fred",
-  "last_updated": "2026-05-19T06:18:46.685622+00:00",
+  "last_updated": "2026-05-19T09:27:49.906902+00:00",
   "current_value": 3.63,
   "previous_value": 3.63,
   "data": [
@@ -15170,5 +15170,6 @@
     "why_it_matters": "Level of rates vs neutral determines whether Fed is restrictive or accommodative. Real Fed Funds = DFF minus trailing 12mo CPI.\n",
     "scoring_rule": "Computed as spread vs neutral rate (r*). Phase 3."
   },
-  "score": null
+  "score": null,
+  "next_expected_release": null
 }

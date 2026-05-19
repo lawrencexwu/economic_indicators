@@ -8,7 +8,7 @@
   "weight": 2,
   "frequency": "daily",
   "source_type": "fred",
-  "last_updated": "2026-05-19T06:18:46.685622+00:00",
+  "last_updated": "2026-05-19T09:27:49.906902+00:00",
   "current_value": 0.93,
   "previous_value": 0.9,
   "data": [
@@ -30418,5 +30418,6 @@
     "why_it_matters": "Inversion reflects bond market expecting Fed cuts ahead, typically because growth is slowing. Lead time from inversion to recession: 6-24 months (median ~14). Equity peaks typically come 6-12 months after first inversion.\n",
     "scoring_rule": "> +200bp \u2192 +70 | +100 to +200 \u2192 +40 | +50 to +100 \u2192 +10 | 0 to +50 \u2192 -20 | -50 to 0 \u2192 -50 | -100 to -50 \u2192 -80 | < -100bp \u2192 -100 Special: if curve was inverted >6mo and now re-steepening to >0, score = -50 (re-steepening from inversion is a near-recession signal, not bullish).\n"
   },
-  "score": null
+  "score": null,
+  "next_expected_release": null
 }
