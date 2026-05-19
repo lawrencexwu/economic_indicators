@@ -30,7 +30,6 @@ export default function GlobalScoreStrip() {
     const page = buildPageResult(pageId, indicators);
     return {
       id: pageId,
-      name: PAGE_NAMES[pageId],
       score: page.score,
       color: zoneColor(page.zone),
       href: PAGE_HREFS[pageId],
@@ -38,84 +37,97 @@ export default function GlobalScoreStrip() {
   });
 
   return (
-    <div
+    <nav
+      aria-label="Page scores"
       style={{
         background: "rgba(10,14,26,0.97)",
         borderBottom: "1px solid var(--border)",
-        padding: "5px 16px",
+        height: 30,
         display: "flex",
         alignItems: "center",
-        gap: 4,
+        paddingInline: 16,
         overflowX: "auto",
+        // @ts-ignore — valid Firefox property
         scrollbarWidth: "none",
       }}
     >
-      <span
-        style={{
-          fontSize: 9,
-          textTransform: "uppercase",
-          letterSpacing: "0.12em",
-          color: "var(--muted)",
-          flexShrink: 0,
-          marginRight: 8,
-          whiteSpace: "nowrap",
-        }}
-      >
-        Pages
-      </span>
-      {scores.map(({ id, score, color, href }, i) => (
-        <a
-          key={id}
-          href={href}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 5,
-            textDecoration: "none",
-            flexShrink: 0,
-            padding: "3px 10px",
-            borderRadius: 20,
-            background: "transparent",
-            border: "1px solid transparent",
-          }}
-        >
-          <div
+      {scores.flatMap(({ id, score, color, href }, i) => {
+        const item = (
+          <a
+            key={id}
+            href={href}
             style={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: color,
-              boxShadow: `0 0 5px ${color}99`,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 5,
+              textDecoration: "none",
+              padding: "0 10px",
+              height: "100%",
+              cursor: "pointer",
               flexShrink: 0,
             }}
-          />
-          <span
-            style={{
-              fontSize: 11,
-              color: "var(--muted)",
-              whiteSpace: "nowrap",
-            }}
           >
-            {SHORT_NAMES[id]}
-          </span>
-          {score !== null && (
+            {/* Colored status dot */}
             <span
               style={{
-                fontFamily: "var(--font-mono), monospace",
+                display: "inline-block",
+                width: 7,
+                height: 7,
+                borderRadius: "50%",
+                background: color,
+                boxShadow: `0 0 4px ${color}aa`,
+                flexShrink: 0,
+              }}
+            />
+            {/* Page name */}
+            <span
+              style={{
                 fontSize: 11,
-                fontWeight: 700,
-                color,
+                color: "var(--muted)",
                 whiteSpace: "nowrap",
+                lineHeight: 1,
               }}
             >
-              {score > 0 ? `+${score}` : score}
+              {SHORT_NAMES[id]}
             </span>
-          )}
-          {i < scores.length - 1 && (
-            <span style={{ fontSize: 10, color: "var(--border)", marginLeft: 4 }}>│</span>
-          )}
-        </a>
-      ))}
-    </div>
+            {/* Score */}
+            {score !== null && (
+              <span
+                style={{
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color,
+                  whiteSpace: "nowrap",
+                  lineHeight: 1,
+                }}
+              >
+                {score > 0 ? `+${score}` : score}
+              </span>
+            )}
+          </a>
+        );
+
+        // Separator as a standalone element outside the link
+        if (i < scores.length - 1) {
+          return [
+            item,
+            <span
+              key={`sep-${i}`}
+              aria-hidden="true"
+              style={{
+                display: "inline-block",
+                width: 1,
+                height: 12,
+                background: "var(--border)",
+                flexShrink: 0,
+                alignSelf: "center",
+              }}
+            />,
+          ];
+        }
+        return [item];
+      })}
+    </nav>
   );
 }
