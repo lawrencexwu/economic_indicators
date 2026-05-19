@@ -3,7 +3,7 @@
 import React, { useState, Suspense } from "react";
 import type { ScoredIndicator } from "@/lib/types";
 import { zoneColor, formatValue, describeScore } from "@/lib/scoring";
-import { isStale } from "@/lib/data";
+import { isStale } from "@/lib/utils";
 import SparkLine from "./SparkLine";
 
 const DetailChart = React.lazy(() => import("./DetailChart"));
