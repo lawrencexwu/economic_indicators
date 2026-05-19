@@ -1,13 +1,8 @@
 {
-  "last_run": "2026-05-19T09:58:13.071482+00:00",
-  "n_succeeded": 1,
+  "last_run": "2026-05-19T10:09:51.334618+00:00",
+  "n_succeeded": 0,
   "n_failed": 0,
-  "n_skipped": 75,
+  "n_skipped": 76,
   "errors": [],
-  "indicators": {
-    "avg_weekly_hours_mfg": {
-      "status": "ok",
-      "last_updated": "2026-05-19T09:58:13.071482+00:00"
-    }
-  }
+  "indicators": {}
 }
