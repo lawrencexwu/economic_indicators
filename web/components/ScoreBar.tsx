@@ -111,7 +111,11 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
 
   if (href) {
     return (
-      <Link href={href} style={{ textDecoration: "none", display: "block" }}>
+      <Link
+        href={href}
+        className="score-bar-link"
+        style={{ textDecoration: "none", display: "block", borderRadius: 8, transition: "background 0.12s" }}
+      >
         {inner}
       </Link>
     );

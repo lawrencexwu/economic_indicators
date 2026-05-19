@@ -13,7 +13,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import type { ScoredIndicator } from "@/lib/types";
-import { zoneColor } from "@/lib/scoring";
+import { zoneColor, formatValue } from "@/lib/scoring";
 
 interface Props {
   ind: ScoredIndicator;
@@ -108,7 +108,7 @@ export default function DetailChart({ ind, height = 160 }: Props) {
             labelStyle={{ color: "var(--muted)", fontSize: 9 }}
             itemStyle={{ color }}
             formatter={(value) => {
-              if (typeof value === "number") return [value.toFixed(2), ind.name];
+              if (typeof value === "number") return [formatValue({ ...ind, current_value: value } as ScoredIndicator), ind.name];
               return [String(value), ind.name];
             }}
             labelFormatter={formatLabelDate}

@@ -4,12 +4,12 @@ import type { LevelTrendState, ZScoreBlock } from "@/lib/types";
 
 export function stateColor(state: LevelTrendState | undefined): string {
   switch (state) {
-    case "Strong":       return "#2dd47a";   // green
-    case "Recovering":   return "#5b9cf5";   // accent blue (turning-point positive)
-    case "Neutral":      return "#7a8499";   // muted
-    case "Peaking":      return "#f5a623";   // amber (turning-point caution)
-    case "Deteriorating":return "#e74c5c";   // red
-    default:             return "#7a8499";
+    case "Strong":       return "var(--green)";
+    case "Recovering":   return "var(--accent)";
+    case "Neutral":      return "var(--muted)";
+    case "Peaking":      return "var(--amber)";
+    case "Deteriorating":return "var(--red)";
+    default:             return "var(--muted)";
   }
 }
 

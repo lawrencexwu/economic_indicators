@@ -6,9 +6,9 @@ interface Props {
 }
 
 const SIGNAL_COLORS: Record<string, string> = {
-  BULL: "#4ade80",
-  NEUTRAL: "#f5a623",
-  BEAR: "#f87171",
+  BULL: "var(--green)",
+  NEUTRAL: "var(--amber)",
+  BEAR: "var(--red)",
 };
 
 const SIGNAL_LABELS: Record<string, string> = {
@@ -83,19 +83,19 @@ export default function EquityBiasPanel({ bias, compact = false }: Props) {
         >
           {pctBull > 0 && (
             <div
-              style={{ flex: pctBull, background: "#4ade80", minWidth: 2 }}
+              style={{ flex: pctBull, background: "var(--green)", minWidth: 2 }}
               title={`Bull: ${bull}`}
             />
           )}
           {pctNeutral > 0 && (
             <div
-              style={{ flex: pctNeutral, background: "#6b7280", minWidth: 2 }}
+              style={{ flex: pctNeutral, background: "var(--muted)", minWidth: 2, opacity: 0.5 }}
               title={`Neutral: ${neutral}`}
             />
           )}
           {pctBear > 0 && (
             <div
-              style={{ flex: pctBear, background: "#f87171", minWidth: 2 }}
+              style={{ flex: pctBear, background: "var(--red)", minWidth: 2 }}
               title={`Bear: ${bear}`}
             />
           )}
@@ -113,9 +113,9 @@ export default function EquityBiasPanel({ bias, compact = false }: Props) {
               fontFamily: "var(--font-mono), monospace",
             }}
           >
-            <span style={{ color: "#4ade80" }}>{bull} Bullish</span>
+            <span style={{ color: "var(--green)" }}>{bull} Bullish</span>
             <span>{neutral} Neutral</span>
-            <span style={{ color: "#f87171" }}>{bear} Bearish</span>
+            <span style={{ color: "var(--red)" }}>{bear} Bearish</span>
           </div>
         )}
       </div>

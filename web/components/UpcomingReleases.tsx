@@ -87,14 +87,18 @@ export default function UpcomingReleases({ indicators }: Props) {
                     marginLeft: "auto",
                     paddingLeft: 8,
                     flexShrink: 0,
-                    fontSize: 10,
+                    fontSize: 9,
                     fontWeight: 700,
-                    fontFamily: "var(--font-mono), monospace",
-                    color: priorityColor,
                     letterSpacing: "0.06em",
+                    color: priorityColor,
+                    background: `${priorityColor}18`,
+                    border: `1px solid ${priorityColor}40`,
+                    borderRadius: 3,
+                    padding: "1px 5px",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  [{priority}]
+                  {priority}
                 </span>
               </div>
             );

@@ -15,6 +15,7 @@ import WhatChangedFeed from "@/components/WhatChangedFeed";
 import UpcomingReleases from "@/components/UpcomingReleases";
 import StateBadge from "@/components/StateBadge";
 import EquityBiasPanel from "@/components/EquityBiasPanel";
+import SparkLine from "@/components/SparkLine";
 
 const PAGE_HREFS: Record<string, string> = {
   regime: "/regime",
@@ -101,7 +102,7 @@ export default function HomePage() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
       {/* Header row: Master Composite + Cycle Phase */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 16 }}>
         {/* Master Composite */}
         <div className="card" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, padding: "24px 32px" }}>
           <span className="label">Master Composite</span>
@@ -253,7 +254,7 @@ export default function HomePage() {
       </div>
 
       {/* Quick stats grid — 2 rows of 4 */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
+      <div className="grid grid-cols-2 sm:grid-cols-4" style={{ gap: 14 }}>
         {[
           { id: "yield_curve_10y3m", label: "10Y-3M Curve", unit: "%" },
           { id: "claims_4wma", label: "Claims 4wMA", format: (v: number) => `${(v / 1000).toFixed(0)}k` },
@@ -281,7 +282,13 @@ export default function HomePage() {
             <div
               key={id}
               className="card"
-              style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: 8 }}
+              style={{
+                padding: "16px 20px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+                borderLeft: `3px solid ${color}`,
+              }}
             >
               <span className="label">{label}</span>
               <span
@@ -295,14 +302,24 @@ export default function HomePage() {
               >
                 {displayVal}
               </span>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                {score !== null && (
-                  <span style={{ fontSize: 12, color: "var(--muted)" }}>
-                    Score: {score > 0 ? `+${score}` : score}
-                  </span>
-                )}
-                {ind?.level_trend_state && (
-                  <StateBadge state={ind.level_trend_state} size="sm" />
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  {score !== null && (
+                    <span style={{ fontSize: 12, color: "var(--muted)" }}>
+                      Score: {score > 0 ? `+${score}` : score}
+                    </span>
+                  )}
+                  {ind?.level_trend_state && (
+                    <StateBadge state={ind.level_trend_state} size="sm" />
+                  )}
+                </div>
+                {ind && ind.data.length >= 2 && (
+                  <SparkLine
+                    data={ind.data.slice(0, 24)}
+                    color={color}
+                    width={60}
+                    height={24}
+                  />
                 )}
               </div>
             </div>

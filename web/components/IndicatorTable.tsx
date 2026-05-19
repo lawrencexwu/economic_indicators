@@ -68,11 +68,12 @@ function formatForecastValue(v: number, ind: ScoredIndicator): string {
 function ForecastStrip({ ind }: { ind: ScoredIndicator }) {
   const fc = ind.forecast;
   if (!fc || fc.values.length === 0) return null;
+  const chipAccent = zoneColor(ind.zone);
   return (
     <div style={{ padding: "0 16px 12px" }}>
       <div
         style={{
-          fontSize: 10,
+          fontSize: 11,
           color: "var(--muted)",
           textTransform: "uppercase",
           letterSpacing: "0.08em",
@@ -86,13 +87,15 @@ function ForecastStrip({ ind }: { ind: ScoredIndicator }) {
           <div
             key={pt.date}
             style={{
-              background: "var(--border)",
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid var(--border)",
+              borderTop: `2px solid ${chipAccent}`,
               borderRadius: 5,
               padding: "5px 10px",
               minWidth: 76,
             }}
           >
-            <div style={{ fontSize: 9, color: "var(--muted)", marginBottom: 3, whiteSpace: "nowrap" }}>
+            <div style={{ fontSize: 10, color: "var(--muted)", marginBottom: 3, whiteSpace: "nowrap" }}>
               {formatForecastDate(pt.date, ind.frequency)}
             </div>
             <div
@@ -106,7 +109,7 @@ function ForecastStrip({ ind }: { ind: ScoredIndicator }) {
             >
               {formatForecastValue(pt.mean, ind)}
             </div>
-            <div style={{ fontSize: 9, color: "var(--muted)", marginTop: 3, whiteSpace: "nowrap" }}>
+            <div style={{ fontSize: 10, color: "var(--muted)", marginTop: 3, whiteSpace: "nowrap" }}>
               {formatForecastValue(pt.lo80, ind)}–{formatForecastValue(pt.hi80, ind)}
             </div>
           </div>
@@ -144,7 +147,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                 <th
                   key={h}
                   style={{
-                    padding: "6px 10px",
+                    padding: "8px 12px",
                     textAlign: "left",
                     fontSize: 10,
                     fontWeight: 600,
@@ -170,6 +173,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
               return (
                 <React.Fragment key={ind.id}>
                   <tr
+                    className="ind-row"
                     style={{
                       borderBottom: isExpanded ? "none" : "1px solid var(--border)",
                       background: isExpanded ? "var(--surface)" : "transparent",
@@ -313,7 +317,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                         <div style={{ padding: "16px 16px 0" }}>
                           <div
                             style={{
-                              fontSize: 10,
+                              fontSize: 11,
                               color: "var(--muted)",
                               textTransform: "uppercase",
                               letterSpacing: "0.08em",
@@ -347,7 +351,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                             <div style={{ padding: "0 16px 12px" }}>
                               <div
                                 style={{
-                                  fontSize: 10,
+                                  fontSize: 11,
                                   color: "var(--muted)",
                                   textTransform: "uppercase",
                                   letterSpacing: "0.08em",
@@ -387,7 +391,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                               }}
                             >
                               <StateBadge state={ind.level_trend_state} size="md" />
-                              <div style={{ fontSize: 11, color: "var(--muted)", lineHeight: 1.6 }}>
+                              <div style={{ fontSize: 12, color: "var(--text)", opacity: 0.7, lineHeight: 1.6 }}>
                                 {describeState(ind.level_trend_state, ind.zscore)}
                               </div>
                             </div>
@@ -410,7 +414,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                           <div>
                             <div
                               style={{
-                                fontSize: 10,
+                                fontSize: 11,
                                 color: "var(--muted)",
                                 textTransform: "uppercase",
                                 letterSpacing: "0.08em",
@@ -430,14 +434,14 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                             >
                               {formatValue(ind)}
                             </div>
-                            <div style={{ fontSize: 10, color: "var(--muted)", marginTop: 4 }}>
+                            <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 4 }}>
                               {formatDate(ind.last_updated)}
                               {ind.previous_value != null && (
                                 <> · prev {ind.previous_value.toFixed(1)}</>
                               )}
                             </div>
                             {ind.next_expected_release && (
-                              <div style={{ fontSize: 10, color: "var(--muted)", marginTop: 2 }}>
+                              <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>
                                 Next: {formatNextRelease(ind.next_expected_release)}
                               </div>
                             )}
@@ -446,14 +450,15 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                           {/* Col 2: Why? */}
                           <div
                             style={{
-                              background: "var(--border)",
+                              background: "rgba(255,255,255,0.04)",
                               borderRadius: 6,
                               padding: "10px 12px",
+                              borderLeft: `3px solid ${color}`,
                             }}
                           >
                             <div
                               style={{
-                                fontSize: 10,
+                                fontSize: 11,
                                 color: "var(--muted)",
                                 textTransform: "uppercase",
                                 letterSpacing: "0.08em",
@@ -468,7 +473,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                                 : "?"}
                               ?
                             </div>
-                            <div style={{ fontSize: 11, color: "var(--text)", lineHeight: 1.7 }}>
+                            <div style={{ fontSize: 12, color: "var(--text)", lineHeight: 1.7 }}>
                               {description ?? (
                                 <span style={{ color: "var(--muted)" }}>No score formula</span>
                               )}
@@ -479,7 +484,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                           <div>
                             <div
                               style={{
-                                fontSize: 10,
+                                fontSize: 11,
                                 color: "var(--muted)",
                                 textTransform: "uppercase",
                                 letterSpacing: "0.08em",
@@ -488,7 +493,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                             >
                               What it measures
                             </div>
-                            <div style={{ fontSize: 11, color: "var(--muted)", lineHeight: 1.6 }}>
+                            <div style={{ fontSize: 12, color: "var(--muted)", lineHeight: 1.6 }}>
                               {ind.metadata?.what_it_measures
                                 ? ind.metadata.what_it_measures.trim().slice(0, 150)
                                 : "—"}
@@ -518,8 +523,9 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
             <div
               key={ind.id}
               style={{
-                background: isExpanded ? "#111827" : "var(--surface)",
-                border: `1px solid ${isExpanded ? "#2a3a5c" : "var(--border)"}`,
+                background: "var(--surface)",
+                border: `1px solid ${isExpanded ? "rgba(91,156,245,0.25)" : "var(--border)"}`,
+                borderLeft: isExpanded ? `3px solid ${zoneColor(ind.zone)}` : "1px solid var(--border)",
                 borderRadius: 8,
                 overflow: "hidden",
               }}
@@ -545,7 +551,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                   <div style={{ fontWeight: 600, fontSize: 12, color: "var(--text)" }}>
                     {ind.name}
                     {stale && (
-                      <span style={{ marginLeft: 6, fontSize: 10, color: "#f5a623", fontWeight: 400 }}>
+                      <span style={{ marginLeft: 6, fontSize: 10, color: "var(--amber)", fontWeight: 400 }}>
                         ⚠ stale
                       </span>
                     )}
