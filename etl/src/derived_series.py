@@ -13,7 +13,7 @@ Called from main.py after the FRED fetch loop.
 
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 
 from .scoring import compute_zscore_block, get_level_trend_state
@@ -139,7 +139,8 @@ def _compute_interest_to_gdp(config: dict, now_utc: str) -> dict | None:
     for rec in interest["data"]:
         gdp_val = _find_gdp_for_date(rec["date"], gdp_y)
         if gdp_val and gdp_val > 0:
-            ratio = round(rec["value"] / gdp_val * 100, 2)
+            # FYOINT in millions → billions; GDP already in billions (SAAR)
+            ratio = round((rec["value"] / 1000) / gdp_val * 100, 2)
             records.append({"date": rec["date"], "value": ratio})
 
     if not records:
@@ -199,10 +200,10 @@ def _compute_primary_deficit(config: dict, now_utc: str) -> dict | None:
         intcost = interest_by_year.get(year) or interest_by_year.get(year - 1)
         gdp_val = _find_gdp_for_date(rec["date"], gdp_y)
         if intcost is not None and gdp_val and gdp_val > 0:
-            # Primary balance = total_balance + interest (add back interest to get ex-interest)
-            # FYFSD is surplus: negative means deficit. primary_surplus = FYFSD + FYOINT.
+            # FYFSD and FYOINT both in millions → divide by 1000 for billions; GDP in billions (SAAR)
+            # primary_surplus = FYFSD + FYOINT (add back interest to get ex-interest balance)
             # primary_deficit (positive = bad) = -(FYFSD + FYOINT)
-            primary_deficit = -(rec["value"] + intcost)
+            primary_deficit = -((rec["value"] + intcost) / 1000)
             pct = round(primary_deficit / gdp_val * 100, 2)
             records.append({"date": rec["date"], "value": pct})
 

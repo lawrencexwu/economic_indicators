@@ -1844,7 +1844,7 @@ indicators:
 
   - id: federal_receipts_src
     name: "Federal Receipts (source series)"
-    fred_ticker: "FYRENT"
+    fred_ticker: "FYFR"
     category: "fiscal"
     page: "internal"
     tier: 3
