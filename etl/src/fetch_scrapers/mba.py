@@ -80,6 +80,16 @@ def _parse_records(html: str, url: str) -> list[dict]:
     if act_idx is None:
         raise ValueError(f"TE MBA: no 'Actual' column — headers: {headers}")
 
+    # Debug: log first 5 data rows to see cell structure
+    all_rows = table.find_all("tr")
+    logger.info("TE MBA: table has %d rows total", len(all_rows))
+    for i, row in enumerate(all_rows[:6]):
+        cells = row.find_all("td")
+        ths = row.find_all("th")
+        logger.info("TE MBA: row[%d] — %d th, %d td: %s",
+                    i, len(ths), len(cells),
+                    [c.get_text(strip=True)[:30] for c in (ths or cells)])
+
     records: list[dict] = []
     for row in table.find_all("tr")[1:]:
         cells = row.find_all("td")
