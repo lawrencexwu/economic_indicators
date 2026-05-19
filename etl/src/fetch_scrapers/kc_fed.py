@@ -1,81 +1,78 @@
 """
-Kansas City Fed Manufacturing Survey scraper.
-Source: kansascityfed.org — composite index data.
+Kansas City Fed Tenth District Manufacturing Survey scraper.
+Source: kansascityfed.org — permanent historical Excel workbook (document ID 15886).
+The file is silently overwritten each month; we discover the current filename from
+the survey listing page and download it via pandas.
 """
 
 import logging
 import re
+import subprocess
 
-import requests
-from bs4 import BeautifulSoup
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-_BASE_URL = "https://www.kansascityfed.org/research/regional-surveys/manufacturing/"
-_UA = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-    "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/124.0.0.0 Safari/537.36"
-)
-_HEADERS = {"User-Agent": _UA, "Accept": "text/html,application/xhtml+xml,*/*;q=0.8"}
+_LISTING_URL = "https://www.kansascityfed.org/surveys/manufacturing-survey/"
+_BASE_URL = "https://www.kansascityfed.org"
+# Fallback: document container ID 15886 is stable; filename is updated monthly.
+# Update this URL when the fallback is hit and the ETL logs a warning.
+_FALLBACK_URL = "https://www.kansascityfed.org/documents/15886/2026Apr23historicalmfg.xlsx"
 
 _cache: list | None = None
 
 
+def _find_excel_url() -> str:
+    """Discover the current monthly Excel URL from the survey listing page.
+
+    Uses subprocess curl to bypass TLS fingerprint bot-protection that blocks
+    the Python requests library on kansascityfed.org.
+    """
+    try:
+        result = subprocess.run(
+            ["curl", "-sL", "--max-time", "20", "-A",
+             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+             _LISTING_URL],
+            capture_output=True, text=True, timeout=25,
+        )
+        if result.returncode == 0 and result.stdout:
+            m = re.search(r'href=["\'](/documents/\d+/[^"\']+\.xlsx)["\']',
+                          result.stdout, re.I)
+            if m:
+                return _BASE_URL + m.group(1)
+    except Exception as e:
+        logger.warning("KC Fed: listing page discovery failed (%s), using fallback URL", e)
+    logger.warning("KC Fed: using fallback URL — update _FALLBACK_URL if this 404s")
+    return _FALLBACK_URL
+
+
 def _fetch_history() -> list[dict]:
-    """Scrape composite index values from KC Fed manufacturing survey page."""
-    r = requests.get(_BASE_URL, headers=_HEADERS, timeout=20)
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "html.parser")
+    url = _find_excel_url()
+    logger.info("KC Fed: downloading Excel from %s", url)
+
+    df = pd.read_excel(url, sheet_name=0, engine="openpyxl", header=None)
+
+    # Row 2 = dates (columns 1+), Row 5 = Composite Index values
+    dates = df.iloc[2, 1:].tolist()
+    vals = df.iloc[5, 1:].tolist()
 
     history = []
-    tables = soup.find_all("table")
-    for table in tables:
-        rows = table.find_all("tr")
-        for row in rows:
-            cells = row.find_all(["td", "th"])
-            texts = [c.get_text(strip=True) for c in cells]
-            if len(texts) < 2:
-                continue
-            date_str = _parse_date(texts[0])
-            if date_str:
-                val = _parse_float(texts[1])
-                if val is not None:
-                    history.append({"date": date_str, "value": val})
+    for d, v in zip(dates, vals):
+        if pd.isna(d) or pd.isna(v):
+            continue
+        try:
+            date_str = pd.Timestamp(d).strftime("%Y-%m-01")
+            history.append({"date": date_str, "value": float(v)})
+        except (ValueError, TypeError):
+            continue
 
     history.sort(key=lambda x: x["date"], reverse=True)
     return history
 
 
-def _parse_date(s: str) -> str | None:
-    s = s.strip()
-    months = {"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,
-              "jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
-    m = re.match(r"(\d{4})-(\d{2})", s)
-    if m:
-        return f"{m.group(1)}-{m.group(2)}-01"
-    m = re.match(r"([A-Za-z]{3})[\s\-'](\d{2,4})", s)
-    if m:
-        mon = months.get(m.group(1).lower())
-        if mon:
-            yr = m.group(2)
-            year = int(yr) if len(yr) == 4 else (2000 + int(yr) if int(yr) < 50 else 1900 + int(yr))
-            return f"{year}-{mon:02d}-01"
-    return None
-
-
-def _parse_float(s: str) -> float | None:
-    s = s.strip().replace(",", "")
-    try:
-        return float(s)
-    except ValueError:
-        return None
-
-
 def fetch(indicator_id: str, _config: dict) -> dict | None:
     global _cache
     if _cache is None:
-        logger.info("KC Fed: fetching manufacturing survey data")
         _cache = _fetch_history()
 
     if not _cache:

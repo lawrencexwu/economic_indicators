@@ -26,7 +26,7 @@ from pathlib import Path
 import yaml
 
 from .fetch_fred import get_fred_client, fetch_series, series_to_records
-from .fetch_scrapers import ism, nahb, mba, nfib, challenger, cass, aar
+from .fetch_scrapers import ism, nahb, mba, nfib, challenger, cass, aar, richmond_fed, kc_fed, dallas_fed
 
 logger = logging.getLogger(__name__)
 
@@ -103,6 +103,9 @@ SCRAPER_MAP = {
     "challenger": challenger.fetch,
     "cass": cass.fetch,
     "aar": aar.fetch,
+    "richmond_fed": richmond_fed.fetch,
+    "kc_fed": kc_fed.fetch,
+    "dallas_fed": dallas_fed.fetch,
 }
 
 
