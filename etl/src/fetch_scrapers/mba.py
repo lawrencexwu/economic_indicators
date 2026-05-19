@@ -113,7 +113,15 @@ def _parse_article(html: str, release_date: str) -> dict | None:
     refi = _find_index("Refinance Index")
 
     if purchase is None and refi is None:
-        logger.warning("MBA: could not parse indices from article text (first 500): %s", text[:500])
+        logger.warning(
+            "MBA: could not parse indices. text length=%d, first 500: %s",
+            len(text), text[:500],
+        )
+        # Log any line containing 'index' or 'percent' to see what data is present
+        for line in text.splitlines():
+            l = line.strip().lower()
+            if ("index" in l or "percent" in l) and len(line.strip()) > 10:
+                logger.warning("MBA candidate line: %r", line.strip()[:200])
         return None
 
     return {"date": release_date, "purchase": purchase, "refi": refi}
