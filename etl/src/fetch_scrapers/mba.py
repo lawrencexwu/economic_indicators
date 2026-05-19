@@ -64,68 +64,37 @@ def _parse_records(html: str, url: str) -> list[dict]:
         logger.warning("TE MBA: no table at %s — page excerpt: %s", url, excerpt)
         raise ValueError(f"TE MBA: no table found at {url}")
 
-    headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
-    logger.info("TE MBA: columns = %s", headers)
-
-    def _col(keywords: list[str]) -> int | None:
-        for i, h in enumerate(headers):
-            if any(k in h for k in keywords):
-                return i
-        return None
-
-    cal_idx = _col(["calendar", "date", "release"])
-    ref_idx = _col(["reference", "period"])
-    act_idx = _col(["actual"])
-
-    if act_idx is None:
-        raise ValueError(f"TE MBA: no 'Actual' column — headers: {headers}")
-
-    # Debug: log first 5 data rows to see cell structure
-    all_rows = table.find_all("tr")
-    logger.info("TE MBA: table has %d rows total", len(all_rows))
-    for i, row in enumerate(all_rows[:6]):
-        cells = row.find_all("td")
-        ths = row.find_all("th")
-        logger.info("TE MBA: row[%d] — %d th, %d td: %s",
-                    i, len(ths), len(cells),
-                    [c.get_text(strip=True)[:30] for c in (ths or cells)])
+    # TE data rows have 8 cells; header has 7 (extra "indicator name" cell at index 2):
+    # [0] Calendar  [1] GMT  [2] IndicatorName  [3] Reference  [4] Actual  [5] Previous ...
+    CAL, REF, ACT = 0, 3, 4
 
     records: list[dict] = []
     for row in table.find_all("tr")[1:]:
         cells = row.find_all("td")
-        if not cells or act_idx >= len(cells):
+        if len(cells) <= ACT:
             continue
 
-        act_text = cells[act_idx].get_text(strip=True)
+        act_text = cells[ACT].get_text(strip=True)
         if not act_text:
             continue  # future release — no value yet
 
-        # Resolve date: prefer Reference (survey week) over Calendar (release date)
+        cal_text = cells[CAL].get_text(strip=True)
+        ref_text = cells[REF].get_text(strip=True)
+
         date_iso: str | None = None
+        if ref_text and "/" in ref_text:
+            try:
+                release_year = int(cal_text[:4]) if len(cal_text) >= 4 else datetime.now().year
+                mon_abbr, day = ref_text.split("/", 1)
+                dt = datetime.strptime(f"{mon_abbr} {day} {release_year}", "%b %d %Y")
+                cal_month = int(cal_text[5:7]) if len(cal_text) >= 7 else dt.month
+                if dt.month > cal_month and (dt.month - cal_month) > 6:
+                    dt = dt.replace(year=release_year - 1)
+                date_iso = dt.strftime("%Y-%m-%d")
+            except Exception as exc:
+                logger.debug("TE MBA: ref date parse failed %r / %r: %s", ref_text, cal_text, exc)
 
-        if ref_idx is not None and ref_idx < len(cells):
-            ref_text = cells[ref_idx].get_text(strip=True)
-            if ref_text and "/" in ref_text:
-                try:
-                    cal_text = (
-                        cells[cal_idx].get_text(strip=True)
-                        if cal_idx is not None and cal_idx < len(cells)
-                        else ""
-                    )
-                    release_year = int(cal_text[:4]) if len(cal_text) >= 4 else datetime.now().year
-                    mon_abbr, day = ref_text.split("/", 1)
-                    dt = datetime.strptime(f"{mon_abbr} {day} {release_year}", "%b %d %Y")
-                    # Handle Dec reference / Jan release year-rollover
-                    if cal_text:
-                        cal_month = int(cal_text[5:7])
-                        if dt.month > cal_month and (dt.month - cal_month) > 6:
-                            dt = dt.replace(year=release_year - 1)
-                    date_iso = dt.strftime("%Y-%m-%d")
-                except Exception as exc:
-                    logger.debug("TE MBA: ref date parse failed %r: %s", ref_text, exc)
-
-        if date_iso is None and cal_idx is not None and cal_idx < len(cells):
-            cal_text = cells[cal_idx].get_text(strip=True)
+        if date_iso is None:
             try:
                 date_iso = datetime.strptime(cal_text[:10], "%Y-%m-%d").strftime("%Y-%m-%d")
             except Exception:
