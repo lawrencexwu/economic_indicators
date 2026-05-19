@@ -87,6 +87,9 @@ def _fetch_article_html(url: str) -> str:
         stealth.apply_stealth_sync(ctx)
         page = ctx.new_page()
         page.goto(url, wait_until="networkidle", timeout=30000)
+        page.wait_for_timeout(2000)
+        # Scroll to bottom to trigger lazy-loaded article body sections
+        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         page.wait_for_timeout(3000)
         html = page.content()
         browser.close()
