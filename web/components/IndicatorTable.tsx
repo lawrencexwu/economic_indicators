@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, Suspense } from "react";
-import type { ScoredIndicator } from "@/lib/types";
+import type { ScoredIndicator, ForecastPoint } from "@/lib/types";
 import { zoneColor, formatValue, describeScore, getHistogramValues } from "@/lib/scoring";
 import { isStale } from "@/lib/utils";
 import SparkLine from "./SparkLine";
@@ -37,6 +37,79 @@ function formatNextRelease(iso: string | null | undefined): string {
 function makeHistFormatVal(transform: string | undefined): (v: number) => string {
   if (transform === "yoy") return (v) => `${(v * 100).toFixed(2)}%`;
   return (v) => v.toFixed(2);
+}
+
+function formatForecastDate(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    year: "2-digit",
+    timeZone: "UTC",
+  });
+}
+
+function formatForecastValue(v: number, ind: ScoredIndicator): string {
+  const id = ind.id;
+  if (["claims_4wma", "initial_claims", "continuing_claims"].includes(id)) {
+    return `${(v / 1000).toFixed(0)}k`;
+  }
+  const unit = ind.unit ?? "";
+  if (unit === "percent" || unit === "percent_yoy") return `${v.toFixed(1)}%`;
+  if (unit === "index") return v.toFixed(1);
+  if (unit === "billions") return v.toFixed(1);
+  if (unit === "millions") return v.toFixed(0);
+  if (unit === "thousands" || unit === "thousands_saar") return `${(v / 1000).toFixed(0)}k`;
+  return v.toFixed(1);
+}
+
+function ForecastStrip({ ind }: { ind: ScoredIndicator }) {
+  const fc = ind.forecast;
+  if (!fc || fc.values.length === 0) return null;
+  return (
+    <div style={{ padding: "0 16px 12px" }}>
+      <div
+        style={{
+          fontSize: 10,
+          color: "var(--muted)",
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          marginBottom: 6,
+        }}
+      >
+        {fc.horizon}-Period Outlook · {fc.model}
+      </div>
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+        {fc.values.map((pt: ForecastPoint) => (
+          <div
+            key={pt.date}
+            style={{
+              background: "var(--border)",
+              borderRadius: 5,
+              padding: "5px 10px",
+              minWidth: 76,
+            }}
+          >
+            <div style={{ fontSize: 9, color: "var(--muted)", marginBottom: 3, whiteSpace: "nowrap" }}>
+              {formatForecastDate(pt.date)}
+            </div>
+            <div
+              style={{
+                fontSize: 14,
+                fontWeight: 700,
+                fontFamily: "var(--font-geist-mono), monospace",
+                color: "var(--text)",
+                lineHeight: 1,
+              }}
+            >
+              {formatForecastValue(pt.mean, ind)}
+            </div>
+            <div style={{ fontSize: 9, color: "var(--muted)", marginTop: 3, whiteSpace: "nowrap" }}>
+              {formatForecastValue(pt.lo80, ind)}–{formatForecastValue(pt.hi80, ind)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default function IndicatorTable({ indicators, showSparkline = true }: Props) {
@@ -317,6 +390,9 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                           </div>
                         )}
 
+                        {/* Forecast strip */}
+                        <ForecastStrip ind={ind} />
+
                         {/* Bottom 3-column strip */}
                         <div
                           style={{
@@ -575,6 +651,11 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                       }}
                     >
                       {ind.metadata.what_it_measures.trim().slice(0, 150)}
+                    </div>
+                  )}
+                  {ind.forecast && ind.forecast.values.length > 0 && (
+                    <div style={{ marginTop: 8 }}>
+                      <ForecastStrip ind={ind} />
                     </div>
                   )}
                 </div>
