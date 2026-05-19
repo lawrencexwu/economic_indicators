@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -38,14 +39,22 @@ const CHART_THRESHOLDS: Record<string, [number, boolean]> = {
   ny_fed_recession_prob: [30, false],
 };
 
+function formatXTick(dateStr: string): string {
+  const year = new Date(dateStr).getFullYear();
+  return isNaN(year) ? "" : String(year);
+}
+
+function formatLabelDate(label: unknown): string {
+  return new Date(String(label)).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export default function DetailChart({ ind, height = 160 }: Props) {
-  const data = ind.data.slice(0, 60).reverse();
+  const data = useMemo(() => ind.data.slice(0, 60).reverse(), [ind.data]);
   const color = zoneColor(ind.zone);
   const tier = CHART_THRESHOLDS[ind.id];
-
-  const formatXTick = (dateStr: string) => {
-    return String(new Date(dateStr).getFullYear());
-  };
 
   return (
     <div style={{ width: "100%", height }}>
@@ -77,23 +86,16 @@ export default function DetailChart({ ind, height = 160 }: Props) {
             labelStyle={{ color: "var(--muted)", fontSize: 9 }}
             itemStyle={{ color }}
             formatter={(value) => {
-              if (typeof value === "number") {
-                return [value.toFixed(2), ind.name];
-              }
-              return value;
+              if (typeof value === "number") return [value.toFixed(2), ind.name];
+              return [String(value), ind.name];
             }}
-            labelFormatter={(label) =>
-              new Date(label as string).toLocaleDateString("en-US", {
-                month: "short",
-                year: "numeric",
-              })
-            }
+            labelFormatter={formatLabelDate}
           />
           {tier && (
             <>
               <ReferenceArea
-                y1={tier[1] ? undefined : tier[0]}
-                y2={tier[1] ? tier[0] : undefined}
+                y1={tier[1] ? tier[0] : undefined}
+                y2={tier[1] ? undefined : tier[0]}
                 fill="#e74c5c"
                 fillOpacity={0.06}
               />
