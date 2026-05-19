@@ -25,6 +25,7 @@ export interface Indicator {
   data: DataPoint[];
   metadata: IndicatorMetadata;
   score: number | null;
+  next_expected_release?: string | null;
 }
 
 export type ScoreZone = "strong_bull" | "bull" | "neutral" | "bear" | "strong_bear" | "na";
