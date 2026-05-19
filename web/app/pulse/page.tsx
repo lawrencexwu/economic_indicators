@@ -8,7 +8,7 @@ const CLUSTERS: Record<string, string[]> = {
   "Weekly Housing (Wed 7:00)": ["mba_purchase", "mba_refi"],
   "Weekly Rail (Wed)": ["aar_carloads"],
   "Weekly Bank Credit (Fri 16:15)": ["ci_loans", "total_loans"],
-  "Regional Fed Manufacturing": ["empire_state_mfg", "philly_fed_mfg"],
+  "Regional Fed Manufacturing": ["empire_state_mfg", "philly_fed_mfg", "richmond_fed_mfg", "kc_fed_mfg", "dallas_fed_mfg"],
   "Other Monthly": ["challenger_layoffs", "cass_freight"],
 };
 

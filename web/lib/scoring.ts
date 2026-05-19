@@ -691,6 +691,7 @@ const SCORING_MAP: Record<string, ScoringFn> = {
   philly_fed_mfg: scoreRegionalFed,
   richmond_fed_mfg: scoreRegionalFed,
   kc_fed_mfg: scoreRegionalFed,
+  dallas_fed_mfg: scoreRegionalFed,
   ci_loans: scoreLoanGrowth,
   total_loans: scoreLoanGrowth,
   mba_purchase: scoreMBA,
@@ -734,7 +735,7 @@ const SCORING_MAP: Record<string, ScoringFn> = {
   jolts_quits_rate: scoreJOLTSQuits,
   gdp_real: scoreGDPReal,
   gdp_growth_rate: scoreGDPGrowth,
-  // lei, consumer_confidence, richmond_fed, kc_fed: scrapers not yet implemented → null
+  // lei, consumer_confidence, richmond_fed, kc_fed, dallas_fed: scrapers not yet implemented → null
 };
 
 // ── Description map ───────────────────────────────────────────────────────────
@@ -887,6 +888,7 @@ const DESCRIPTION_MAP: Record<string, DescribeFn> = {
   philly_fed_mfg:          (ind) => describeZScore(ind, 36,  true,  "3yr"),
   richmond_fed_mfg:        (ind) => describeZScore(ind, 36,  true,  "3yr"),
   kc_fed_mfg:              (ind) => describeZScore(ind, 36,  true,  "3yr"),
+  dallas_fed_mfg:          (ind) => describeZScore(ind, 36,  true,  "3yr"),
   continuing_claims:       (ind) => describeZScore(ind, 156, false, "3yr"),
   unemp_longterm:          (ind) => describeZScore(ind, 36,  false, "3yr"),
   challenger_layoffs:      (ind) => describeZScore(ind, 12,  false, "1yr"),

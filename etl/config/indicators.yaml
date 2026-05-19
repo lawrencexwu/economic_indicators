@@ -668,6 +668,24 @@ indicators:
       why_it_matters: "Part of 5-Fed composite ISM nowcast. Not on FRED free tier — scraped from kansascityfed.org."
       scoring_rule: "Phase 3."
 
+  - id: dallas_fed_mfg
+    name: "Dallas Fed Manufacturing Index"
+    fred_ticker: null
+    category: "activity"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_last_monday"
+    source_type: "scraper"
+    scraper: "dallas_fed"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "Dallas Fed 11th District manufacturing composite (General Business Activity index)."
+      why_it_matters: "Part of 5-Fed composite ISM nowcast. Released last Monday of month — often the last regional Fed report before ISM."
+      scoring_rule: "Z-score vs trailing 36 months, higher is good."
+
   - id: ci_loans
     name: "Commercial & Industrial Loans"
     fred_ticker: "BUSLOANS"
@@ -1402,27 +1420,27 @@ indicators:
       scoring_rule: "Phase 3."
 
   - id: consumer_confidence
-    name: "Conference Board Consumer Confidence Index"
-    fred_ticker: null
+    name: "OECD Composite Consumer Confidence (US)"
+    fred_ticker: "USACSCICP02STSAM"
     category: "sentiment"
     page: "rotation"
     tier: 1
     weight: 3
     frequency: "monthly"
     release_pattern: "monthly_last_tuesday"
-    source_type: "scraper"
-    scraper: "conference_board"
+    source_type: "fred"
     history_years: 10
-    unit: "index"
-    data_note: "Conference Board pulled free FRED access ~2020. Scraper target: conference-board.org"
+    unit: "percentage balance"
+    data_note: "OECD Composite Consumer Confidence for US via FRED. Updated monthly. Captures same cyclical dynamics as CB CCI."
     metadata:
       what_it_measures: >
-        Conference Board Consumer Confidence Index. Monthly, last Tuesday 10:00 ET.
-        Surveys household assessments of current conditions and 6-month
-        expectations.
+        OECD Composite Consumer Confidence for the United States (USACSCICP02STSAM).
+        Monthly survey-based measure of household sentiment, expressed as percentage
+        balance (net positive minus negative responses). Tracks similar cyclical
+        turning points as the Conference Board CCI.
       why_it_matters: >
-        Baumohl #7. Expectations subindex leads spending. Sharp drops historically
-        precede risk-off moves. CCI < 80 has historically coincided with recession.
+        Baumohl #7 proxy. Expectations lead spending. Sharp drops historically
+        precede risk-off moves. Freely available on FRED, updated monthly.
       scoring_rule: "Level + MoM change. Phase 3."
 
   - id: umich_sentiment

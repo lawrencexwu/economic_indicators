@@ -103,10 +103,10 @@ patterns:
     indicators: [richmond_fed_mfg]
 
   monthly_last_monday:
-    description: "Last Monday of month (CFNAI)"
+    description: "Last Monday of month (CFNAI, Dallas Fed 10:30 ET)"
     freshness_hours: 24
     pattern: "last_monday"
-    indicators: [cfnai_ma3, cfnai]
+    indicators: [cfnai_ma3, cfnai, dallas_fed_mfg]
 
   monthly_last_tuesday:
     description: "Last Tuesday of month (Conference Board CCI, Case-Shiller)"
