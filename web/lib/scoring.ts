@@ -64,6 +64,46 @@ function threshold(value: number, tiers: Tier[]): number {
   return tiers[tiers.length - 1][1];
 }
 
+// ── describeScore helpers ─────────────────────────────────────────────────────
+
+function describeThresholdBand(value: number, tiers: Tier[]): string {
+  for (let i = 0; i < tiers.length; i++) {
+    const [thresh] = tiers[i];
+    if (thresh === -Infinity || value > thresh) {
+      const hi = i > 0 ? tiers[i - 1][0] : null;
+      if (hi === null) return `above ${thresh}`;
+      if (thresh === -Infinity) return `< ${hi}`;
+      return `${thresh}–${hi}`;
+    }
+  }
+  return "?";
+}
+
+function fmtScore(score: number | null): string {
+  if (score === null) return "?";
+  return score > 0 ? `+${score}` : String(score);
+}
+
+function fmtPct(pct: number): string {
+  return `${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%`;
+}
+
+function describeZScore(
+  ind: Indicator,
+  windowPeriods: number,
+  higherIsGood: boolean,
+  windowLabel: string
+): string | null {
+  if (ind.data.length < 4) return null;
+  const win = ind.data.slice(0, Math.min(ind.data.length, windowPeriods)).map((d) => d.value);
+  const mean = win.reduce((a, b) => a + b, 0) / win.length;
+  const std = Math.sqrt(win.reduce((acc, v) => acc + (v - mean) ** 2, 0) / win.length);
+  if (std === 0) return null;
+  const z = (ind.data[0].value - mean) / std;
+  const score = clamp(higherIsGood ? z * 33 : -z * 33);
+  return `Z-score: ${z >= 0 ? "+" : ""}${z.toFixed(1)}σ vs ${windowLabel} → ${fmtScore(score)}`;
+}
+
 // ── Per-indicator scoring functions ──────────────────────────────────────────
 
 function scoreYieldCurve(ind: Indicator): number | null {
@@ -685,6 +725,233 @@ const SCORING_MAP: Record<string, ScoringFn> = {
   gdp_growth_rate: scoreGDPGrowth,
   // lei, consumer_confidence, richmond_fed, kc_fed: scrapers not yet implemented → null
 };
+
+// ── Description map ───────────────────────────────────────────────────────────
+
+type DescribeFn = (ind: Indicator) => string | null;
+
+// Tier constants mirror those used in the scoring functions above.
+const ISM_TIERS: Tier[]          = [[55,70],[52,40],[50,10],[48,-20],[45,-50],[-Infinity,-80]];
+const ISM_CUST_INV_TIERS: Tier[] = [[55,-30],[50,-10],[45,10],[-Infinity,30]];
+const ISM_PRICES_TIERS: Tier[]   = [[70,-40],[60,-20],[50,0],[-Infinity,20]];
+const NAHB_INDEX_TIERS: Tier[]   = [[60,60],[50,30],[40,0],[30,-30],[20,-60],[-Infinity,-90]];
+const NAHB_TRAFFIC_TIERS: Tier[] = [[50,60],[40,20],[30,-20],[20,-50],[-Infinity,-80]];
+const YIELD_TIERS: Tier[]        = [[2.0,70],[1.0,40],[0.5,10],[0.0,-20],[-0.5,-50],[-1.0,-80],[-Infinity,-100]];
+const CFNAI_TIERS: Tier[]        = [[1.0,-30],[0.7,0],[0.2,60],[-0.7,20],[-1.5,-60],[-Infinity,-100]];
+const SAHM_TIERS: Tier[]         = [[0.75,-100],[0.50,-70],[0.35,-40],[0.20,0],[-Infinity,40]];
+const NYFED_TIERS: Tier[]        = [[50,-90],[30,-60],[15,-30],[5,0],[-Infinity,30]];
+const BREAKEVEN_TIERS: Tier[]    = [[3.5,-80],[3.0,-50],[2.5,-20],[2.0,20],[-Infinity,40]];
+const UNEMP_BASE_TIERS: Tier[]   = [[6.0,-30],[5.0,0],[4.5,20],[4.0,10],[3.5,-10],[-Infinity,-20]];
+const CPI_TIERS: Tier[]          = [[4.0,-80],[3.0,-50],[2.5,-20],[2.0,20],[-Infinity,60]];
+const CORE_PCE_TIERS: Tier[]     = [[3.5,-90],[3.0,-60],[2.5,-30],[2.3,0],[2.0,30],[-Infinity,60]];
+const PPI_TIERS: Tier[]          = [[8,-60],[4,-30],[2,0],[0,10],[-Infinity,20]];
+const AHE_ECI_TIERS: Tier[]      = [[5.0,-80],[4.0,-50],[3.5,-20],[3.0,20],[-Infinity,60]];
+const IP_TIERS: Tier[]           = [[3.0,50],[1.0,20],[0.0,0],[-2.0,-30],[-Infinity,-60]];
+const CAP_UTIL_TIERS: Tier[]     = [[82,-30],[80,-10],[78,0],[75,-10],[70,-30],[-Infinity,-50]];
+const DURABLE_TIERS: Tier[]      = [[10,50],[3,20],[0,0],[-5,-30],[-Infinity,-60]];
+const NFP_TIERS: Tier[]          = [[300_000,70],[200_000,40],[100_000,10],[50_000,-10],[0,-40],[-Infinity,-80]];
+const TEMP_HELP_TIERS: Tier[]    = [[5,50],[0,10],[-5,-30],[-Infinity,-70]];
+const HOUSING_YOY_TIERS: Tier[]  = [[20,60],[5,30],[0,0],[-10,-30],[-Infinity,-60]];
+const HOME_SALES_TIERS: Tier[]   = [[20,60],[5,30],[0,0],[-10,-30],[-Infinity,-60]];
+const CASE_SHILLER_TIERS: Tier[] = [[10,40],[5,20],[0,0],[-5,-30],[-Infinity,-60]];
+const RETAIL_TIERS: Tier[]       = [[1.5,60],[0.5,30],[0.0,0],[-0.5,-30],[-Infinity,-60]];
+const PCE_YOY_TIERS: Tier[]      = [[5,60],[2.5,30],[1.0,0],[0.0,-30],[-Infinity,-70]];
+const LOAN_TIERS: Tier[]         = [[8,30],[3,10],[0,-10],[-5,-40],[-Infinity,-70]];
+const CREDIT_TIERS: Tier[]       = [[10,-20],[5,20],[0,0],[-5,-30],[-Infinity,-60]];
+const NFIB_TIERS: Tier[]         = [[100,50],[98,20],[95,-10],[90,-30],[-Infinity,-60]];
+const INV_SALES_TIERS: Tier[]    = [[1.45,-50],[1.40,-25],[1.30,0],[-Infinity,30]];
+const JOLTS_QUITS_TIERS: Tier[]  = [[3.0,20],[2.5,0],[2.0,-20],[-Infinity,-50]];
+const GDP_GROWTH_TIERS: Tier[]   = [[3.0,50],[2.0,20],[1.0,0],[0.0,-30],[-Infinity,-80]];
+const FED_FUNDS_TIERS: Tier[]    = [[5.5,-70],[4.5,-40],[3.5,-20],[2.5,0],[1.5,30],[-Infinity,60]];
+const AAR_TIERS: Tier[]          = [[5,30],[0,10],[-2,-10],[-5,-30],[-Infinity,-60]];
+const CASS_TIERS: Tier[]         = [[5,30],[0,0],[-5,-30],[-Infinity,-60]];
+
+function describeLevel(v: number, tiers: Tier[], decimals = 1): string {
+  const band = describeThresholdBand(v, tiers);
+  const score = threshold(v, tiers);
+  return `Level: ${v.toFixed(decimals)} → ${band} → ${fmtScore(score)}`;
+}
+
+function describeYoY(ind: Indicator, periods: number, tiers: Tier[]): string | null {
+  const pct = yoy(ind.data, periods);
+  if (pct === null) return null;
+  const band = describeThresholdBand(pct, tiers);
+  const score = threshold(pct, tiers);
+  return `YoY: ${fmtPct(pct)} → ${band}% → ${fmtScore(score)}`;
+}
+
+function describeMoM(ind: Indicator, tiers: Tier[]): string | null {
+  const pct = mom(ind.data);
+  if (pct === null) return null;
+  const band = describeThresholdBand(pct, tiers);
+  const score = threshold(pct, tiers);
+  return `MoM: ${fmtPct(pct)} → ${band}% → ${fmtScore(score)}`;
+}
+
+function describeAnn3m(ind: Indicator, tiers: Tier[]): string | null {
+  const pct = ann3m(ind.data);
+  if (pct === null) return null;
+  const band = describeThresholdBand(pct, tiers);
+  const score = threshold(pct, tiers);
+  return `3m ann: ${fmtPct(pct)} → ${band}% → ${fmtScore(score)}`;
+}
+
+const DESCRIPTION_MAP: Record<string, DescribeFn> = {
+  // ── ISM-style level threshold ──────────────────────────────────────────────
+  ism_mfg:                 (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_TIERS),
+  ism_mfg_new_orders:      (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_TIERS),
+  ism_mfg_production:      (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_TIERS),
+  ism_mfg_employment:      (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_TIERS),
+  ism_services:            (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_TIERS),
+  ism_services_new_orders: (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_TIERS),
+  ism_mfg_customer_inv:    (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_CUST_INV_TIERS),
+  ism_mfg_prices_paid:     (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_PRICES_TIERS),
+  ism_services_prices_paid:(ind) => ind.current_value === null ? null : describeLevel(ind.current_value, ISM_PRICES_TIERS),
+  nahb_index:              (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, NAHB_INDEX_TIERS),
+  nahb_traffic:            (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, NAHB_TRAFFIC_TIERS),
+  yield_curve_10y3m:       (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, YIELD_TIERS, 2),
+  yield_curve_10y2y:       (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, YIELD_TIERS, 2),
+  cfnai_ma3:               (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, CFNAI_TIERS, 2),
+  cfnai:                   (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, CFNAI_TIERS, 2),
+  sahm_rule:               (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, SAHM_TIERS, 2),
+  ny_fed_recession_prob:   (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, NYFED_TIERS),
+  breakeven_5y:            (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, BREAKEVEN_TIERS, 2),
+  capacity_utilization:    (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, CAP_UTIL_TIERS),
+  nfib_optimism:           (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, NFIB_TIERS),
+  inventory_sales_ratio:   (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, INV_SALES_TIERS, 2),
+  jolts_quits_rate:        (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, JOLTS_QUITS_TIERS, 1),
+  gdp_growth_rate:         (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, GDP_GROWTH_TIERS),
+  fed_funds_rate:          (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, FED_FUNDS_TIERS, 2),
+  aar_carloads:            (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, AAR_TIERS),
+
+  // ── YoY % from level series ───────────────────────────────────────────────
+  cpi_core:                (ind) => describeYoY(ind, 12, CPI_TIERS),
+  cpi_headline:            (ind) => describeYoY(ind, 12, CPI_TIERS),
+  core_pce:                (ind) => describeYoY(ind, 12, CORE_PCE_TIERS),
+  pce_deflator:            (ind) => describeYoY(ind, 12, CORE_PCE_TIERS),
+  ppi_final_demand:        (ind) => describeYoY(ind, 12, PPI_TIERS),
+  ppi_crude_ex_food_energy:(ind) => describeYoY(ind, 12, PPI_TIERS),
+  eci:                     (ind) => describeYoY(ind, 4,  AHE_ECI_TIERS),
+  avg_hourly_earnings:     (ind) => describeYoY(ind, 12, AHE_ECI_TIERS),
+  industrial_production:   (ind) => describeYoY(ind, 12, IP_TIERS),
+  housing_permits_1f:      (ind) => describeYoY(ind, 12, HOUSING_YOY_TIERS),
+  housing_starts:          (ind) => describeYoY(ind, 12, HOUSING_YOY_TIERS),
+  housing_starts_1f:       (ind) => describeYoY(ind, 12, HOUSING_YOY_TIERS),
+  existing_home_sales:     (ind) => describeYoY(ind, 12, HOME_SALES_TIERS),
+  new_home_sales:          (ind) => describeYoY(ind, 12, HOME_SALES_TIERS),
+  case_shiller_hpi:        (ind) => describeYoY(ind, 12, CASE_SHILLER_TIERS),
+  consumer_credit:         (ind) => describeYoY(ind, 12, CREDIT_TIERS),
+  pce:                     (ind) => describeYoY(ind, 12, PCE_YOY_TIERS),
+  pce_real_durable:        (ind) => describeYoY(ind, 12, PCE_YOY_TIERS),
+  cass_freight:            (ind) => describeYoY(ind, 12, CASS_TIERS),
+  nfp_temp_help:           (ind) => describeYoY(ind, 12, TEMP_HELP_TIERS),
+  nfp_trucks:              (ind) => describeYoY(ind, 12, TEMP_HELP_TIERS),
+  ci_loans: (ind) => {
+    const pct52 = yoy(ind.data, 52);
+    const pct = pct52 !== null ? pct52 : yoy(ind.data, 12);
+    if (pct === null) return null;
+    return `YoY: ${fmtPct(pct)} → ${describeThresholdBand(pct, LOAN_TIERS)}% → ${fmtScore(threshold(pct, LOAN_TIERS))}`;
+  },
+  total_loans: (ind) => {
+    const pct52 = yoy(ind.data, 52);
+    const pct = pct52 !== null ? pct52 : yoy(ind.data, 12);
+    if (pct === null) return null;
+    return `YoY: ${fmtPct(pct)} → ${describeThresholdBand(pct, LOAN_TIERS)}% → ${fmtScore(threshold(pct, LOAN_TIERS))}`;
+  },
+
+  // ── MoM % ─────────────────────────────────────────────────────────────────
+  retail_sales: (ind) => describeMoM(ind, RETAIL_TIERS),
+
+  // ── 3-month annualized ────────────────────────────────────────────────────
+  durable_goods_orders:       (ind) => describeAnn3m(ind, DURABLE_TIERS),
+  core_capex_orders:          (ind) => describeAnn3m(ind, DURABLE_TIERS),
+  durable_goods_ex_transport: (ind) => describeAnn3m(ind, DURABLE_TIERS),
+  factory_orders:             (ind) => describeAnn3m(ind, DURABLE_TIERS),
+
+  // ── Z-score ───────────────────────────────────────────────────────────────
+  umich_sentiment:         (ind) => describeZScore(ind, 36,  true,  "3yr"),
+  mba_purchase:            (ind) => describeZScore(ind, 52,  true,  "1yr"),
+  mba_refi:                (ind) => describeZScore(ind, 52,  true,  "1yr"),
+  empire_state_mfg:        (ind) => describeZScore(ind, 36,  true,  "3yr"),
+  philly_fed_mfg:          (ind) => describeZScore(ind, 36,  true,  "3yr"),
+  richmond_fed_mfg:        (ind) => describeZScore(ind, 36,  true,  "3yr"),
+  kc_fed_mfg:              (ind) => describeZScore(ind, 36,  true,  "3yr"),
+  continuing_claims:       (ind) => describeZScore(ind, 156, false, "3yr"),
+  unemp_longterm:          (ind) => describeZScore(ind, 36,  false, "3yr"),
+  challenger_layoffs:      (ind) => describeZScore(ind, 12,  false, "1yr"),
+  jolts_openings:          (ind) => describeZScore(ind, 36,  true,  "3yr"),
+  business_inventories:    (ind) => describeZScore(ind, 36,  false, "3yr"),
+  labor_force_participation:(ind) => describeZScore(ind, 36, true,  "3yr"),
+
+  // claims_4wma uses z-score + momentum blend; show just the z-score component
+  claims_4wma: (ind) => {
+    if (!ind.data.length) return null;
+    const lookback = Math.min(ind.data.length, 156);
+    const win = ind.data.slice(0, lookback).map((d) => d.value);
+    const mean = win.reduce((a, b) => a + b, 0) / win.length;
+    const std = Math.sqrt(win.reduce((acc, v) => acc + (v - mean) ** 2, 0) / win.length);
+    if (std === 0) return null;
+    const z = (ind.data[0].value - mean) / std;
+    return `Z-score: ${z >= 0 ? "+" : ""}${z.toFixed(1)}σ vs 3yr → ${fmtScore(scoreClaims4wMA(ind))}`;
+  },
+  initial_claims: (ind) => {
+    if (!ind.data.length) return null;
+    const lookback = Math.min(ind.data.length, 156);
+    const win = ind.data.slice(0, lookback).map((d) => d.value);
+    const mean = win.reduce((a, b) => a + b, 0) / win.length;
+    const std = Math.sqrt(win.reduce((acc, v) => acc + (v - mean) ** 2, 0) / win.length);
+    if (std === 0) return null;
+    const z = (ind.data[0].value - mean) / std;
+    return `Z-score: ${z >= 0 ? "+" : ""}${z.toFixed(1)}σ vs 3yr → ${fmtScore(scoreClaims4wMA(ind))}`;
+  },
+
+  // ── Special cases ─────────────────────────────────────────────────────────
+
+  nfp_payrolls: (ind) => {
+    if (ind.data.length < 2) return null;
+    const change = ind.data[0].value - ind.data[1].value;
+    const sign = change >= 0 ? "+" : "";
+    const band = describeThresholdBand(change, NFP_TIERS);
+    return `MoM: ${sign}${Math.round(change / 1000)}k → ${band} → ${fmtScore(threshold(change, NFP_TIERS))}`;
+  },
+
+  gdp_real: (ind) => {
+    if (ind.data.length < 2) return null;
+    const curr = ind.data[0].value;
+    const prev = ind.data[1].value;
+    if (!prev) return null;
+    const annPct = ((curr / prev) ** 4 - 1) * 100;
+    const band = describeThresholdBand(annPct, GDP_GROWTH_TIERS);
+    return `QoQ ann: ${fmtPct(annPct)} → ${band}% → ${fmtScore(threshold(annPct, GDP_GROWTH_TIERS))}`;
+  },
+
+  unemployment_rate: (ind) => {
+    const v = ind.current_value;
+    if (v === null) return null;
+    const rising = ind.data.length >= 3 && ind.data[0].value > ind.data[2].value;
+    const base = threshold(v, UNEMP_BASE_TIERS);
+    const adj = rising ? -10 : 10;
+    return `Level: ${v.toFixed(1)}% → base ${fmtScore(base)} ${rising ? "↑rising" : "↓stable"} → ${fmtScore(clamp(base + adj))}`;
+  },
+  unemployment_u6: (ind) => {
+    const v = ind.current_value;
+    if (v === null) return null;
+    const rising = ind.data.length >= 3 && ind.data[0].value > ind.data[2].value;
+    const base = threshold(v, UNEMP_BASE_TIERS);
+    const adj = rising ? -10 : 10;
+    return `Level: ${v.toFixed(1)}% → base ${fmtScore(base)} ${rising ? "↑rising" : "↓stable"} → ${fmtScore(clamp(base + adj))}`;
+  },
+};
+
+export function describeScore(ind: Indicator): string | null {
+  const fn = DESCRIPTION_MAP[ind.id];
+  if (!fn) return null;
+  try {
+    return fn(ind);
+  } catch {
+    return null;
+  }
+}
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
