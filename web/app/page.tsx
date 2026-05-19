@@ -13,6 +13,7 @@ import type { Indicator, ScoredIndicator } from "@/lib/types";
 import WhatChangedFeed from "@/components/WhatChangedFeed";
 import UpcomingReleases from "@/components/UpcomingReleases";
 import StateBadge from "@/components/StateBadge";
+import EquityBiasPanel from "@/components/EquityBiasPanel";
 
 const PAGE_HREFS: Record<string, string> = {
   regime: "/regime",
@@ -20,6 +21,7 @@ const PAGE_HREFS: Record<string, string> = {
   pulse: "/pulse",
   cycle: "/cycle",
   rotation: "/rotation",
+  fiscal: "/fiscal",
 };
 
 const PAGE_INDICATOR_IDS: Record<string, string[]> = {
@@ -56,6 +58,11 @@ const PAGE_INDICATOR_IDS: Record<string, string[]> = {
     "retail_sales", "pce", "pce_real_durable",
     "consumer_confidence", "umich_sentiment", "consumer_credit",
   ],
+  fiscal: [
+    "debt_to_gdp", "interest_to_gdp", "interest_to_receipts",
+    "primary_deficit_pct", "fed_balance_to_gdp",
+    "tic_foreign_holdings", "dxy_index",
+  ],
 };
 
 export default function HomePage() {
@@ -68,7 +75,7 @@ export default function HomePage() {
   }
 
   const dashboard = buildDashboard(all, pageIndicators, lastUpdated);
-  const { masterScore, masterZone, cyclePhase, pages, verdict } = dashboard;
+  const { masterScore, masterZone, cyclePhase, pages, verdict, equityBias } = dashboard;
 
   const allScored: Record<string, ScoredIndicator | null> = {};
   for (const [id, ind] of Object.entries(all)) {
@@ -112,6 +119,9 @@ export default function HomePage() {
             >
               {masterLabel}
             </span>
+            <div style={{ marginTop: 8, width: "100%", maxWidth: 200 }}>
+              <EquityBiasPanel bias={equityBias} />
+            </div>
           </div>
         </div>
 

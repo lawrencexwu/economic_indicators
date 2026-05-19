@@ -1,9 +1,9 @@
-import type { Indicator, ScoredIndicator, PageResult, DashboardData, CyclePhase, ScoreZone } from "./types";
+import type { Indicator, ScoredIndicator, PageResult, DashboardData, CyclePhase, ScoreZone, EquitySignal, EquityBiasBreakdown } from "./types";
 import { computeScore, getScoreZone, zoneLabel } from "./scoring";
 
 // ── Page definitions ──────────────────────────────────────────────────────────
 
-export const PAGE_IDS = ["regime", "fed", "pulse", "cycle", "rotation"] as const;
+export const PAGE_IDS = ["regime", "fed", "pulse", "cycle", "rotation", "fiscal"] as const;
 
 export const PAGE_NAMES: Record<string, string> = {
   regime: "Regime / Recession Risk",
@@ -11,15 +11,17 @@ export const PAGE_NAMES: Record<string, string> = {
   pulse: "Growth Pulse",
   cycle: "Cycle & Earnings Momentum",
   rotation: "Sector Rotation",
+  fiscal: "Fiscal Dominance",
 };
 
 /** Master composite weights per page. */
 const PAGE_WEIGHTS: Record<string, number> = {
-  regime: 0.30,
-  fed: 0.25,
-  cycle: 0.20,
+  regime: 0.28,
+  fed: 0.22,
+  cycle: 0.18,
   pulse: 0.15,
   rotation: 0.10,
+  fiscal: 0.07,
 };
 
 // ── Scoring ────────────────────────────────────────────────────────────────────
@@ -57,6 +59,38 @@ export function buildPageResult(
     score,
     zone: getScoreZone(score),
     indicators: scored,
+    equityBias: buildEquityBiasBreakdown(scored),
+  };
+}
+
+// ── Equity Bias ───────────────────────────────────────────────────────────────
+
+export function zoneToEquitySignal(zone: ScoreZone): EquitySignal {
+  if (zone === "strong_bull" || zone === "bull") return "BULL";
+  if (zone === "strong_bear" || zone === "bear") return "BEAR";
+  return "NEUTRAL";
+}
+
+export function buildEquityBiasBreakdown(indicators: ScoredIndicator[]): EquityBiasBreakdown {
+  let bull = 0, neutral = 0, bear = 0;
+  for (const ind of indicators) {
+    if (ind.computed_score === null) continue;
+    const sig = zoneToEquitySignal(ind.zone);
+    if (sig === "BULL") bull++;
+    else if (sig === "BEAR") bear++;
+    else neutral++;
+  }
+  const total = bull + neutral + bear;
+  const signal: EquitySignal =
+    total === 0 ? "NEUTRAL" : bull > bear ? "BULL" : bear > bull ? "BEAR" : "NEUTRAL";
+  return {
+    bull,
+    neutral,
+    bear,
+    total,
+    signal,
+    pctBull: total > 0 ? Math.round((bull / total) * 100) : 0,
+    pctBear: total > 0 ? Math.round((bear / total) * 100) : 0,
   };
 }
 
@@ -202,6 +236,10 @@ export function buildDashboard(
   const cyclePhase = classifyCyclePhase(all);
   const verdict = generateVerdict(master, cyclePhase, pages);
 
+  // Aggregate equity bias across all pages
+  const allScored = Object.values(pages).flatMap((p) => p.indicators);
+  const equityBias = buildEquityBiasBreakdown(allScored);
+
   return {
     masterScore: master,
     masterZone: getScoreZone(master),
@@ -209,5 +247,6 @@ export function buildDashboard(
     pages,
     verdict,
     lastUpdated,
+    equityBias,
   };
 }

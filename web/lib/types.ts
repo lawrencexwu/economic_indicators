@@ -28,6 +28,22 @@ export interface ZScoreBlock {
   computed_at: string;
 }
 
+export interface ForecastPoint {
+  date: string;
+  mean: number;
+  lo80: number;
+  hi80: number;
+  lo95: number;
+  hi95: number;
+}
+
+export interface ForecastBlock {
+  model: string;
+  horizon: number;
+  values: ForecastPoint[];
+  computed_at: string;
+}
+
 export interface Indicator {
   id: string;
   name: string;
@@ -37,6 +53,7 @@ export interface Indicator {
   tier: number;
   weight: number;
   frequency: string;
+  unit?: string;
   source_type: string;
   last_updated?: string;
   current_value: number | null;
@@ -47,9 +64,22 @@ export interface Indicator {
   next_expected_release?: string | null;
   zscore?: ZScoreBlock | null;
   level_trend_state?: LevelTrendState;
+  forecast?: ForecastBlock | null;
 }
 
 export type ScoreZone = "strong_bull" | "bull" | "neutral" | "bear" | "strong_bear" | "na";
+
+export type EquitySignal = "BULL" | "NEUTRAL" | "BEAR";
+
+export interface EquityBiasBreakdown {
+  bull: number;
+  neutral: number;
+  bear: number;
+  total: number;
+  signal: EquitySignal;
+  pctBull: number;
+  pctBear: number;
+}
 
 export type CyclePhase =
   | "EARLY_EXPANSION"
@@ -69,6 +99,7 @@ export interface PageResult {
   score: number | null;
   zone: ScoreZone;
   indicators: ScoredIndicator[];
+  equityBias: EquityBiasBreakdown;
 }
 
 export interface DashboardData {
@@ -78,4 +109,5 @@ export interface DashboardData {
   pages: Record<string, PageResult>;
   verdict: string;
   lastUpdated: string;
+  equityBias: EquityBiasBreakdown;
 }

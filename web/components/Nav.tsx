@@ -10,6 +10,7 @@ const LINKS = [
   { href: "/pulse", label: "Pulse" },
   { href: "/cycle", label: "Cycle" },
   { href: "/rotation", label: "Rotation" },
+  { href: "/fiscal", label: "Fiscal" },
 ];
 
 export default function Nav() {
