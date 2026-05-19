@@ -51,6 +51,7 @@ export default function Nav() {
             <Link
               key={href}
               href={href}
+              aria-current={active ? "page" : undefined}
               style={{
                 padding: "6px 12px",
                 borderRadius: "6px",
