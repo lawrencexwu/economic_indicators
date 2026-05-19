@@ -28,6 +28,8 @@ import yaml
 from .fetch_fred import get_fred_client, fetch_series, series_to_records
 from .fetch_scrapers import ism, nahb, mba, nfib, challenger, cass, aar, richmond_fed, kc_fed, dallas_fed
 from .scoring import compute_zscore_block, get_level_trend_state
+from .derived_series import compute_all_derived
+from .forecast import compute_forecast
 
 logger = logging.getLogger(__name__)
 
@@ -279,6 +281,7 @@ def main() -> None:
                     "tier": ind["tier"],
                     "weight": ind["weight"],
                     "frequency": ind.get("frequency", "monthly"),
+                    "unit": ind.get("unit", ""),
                     "source_type": "fred",
                     "last_updated": now_utc,
                     "current_value": records[0]["value"] if records else None,
@@ -292,6 +295,7 @@ def main() -> None:
                 zscore = compute_zscore_block(ind, payload)
                 payload["zscore"] = zscore
                 payload["level_trend_state"] = get_level_trend_state(zscore)
+                payload["forecast"] = compute_forecast(ind, payload)
                 write_indicator(ind_id, payload)
                 logger.info(
                     f"✓  {ind_id}  ({ticker})  "
@@ -328,6 +332,7 @@ def main() -> None:
                     "tier": ind["tier"],
                     "weight": ind["weight"],
                     "frequency": ind.get("frequency", "monthly"),
+                    "unit": ind.get("unit", ""),
                     "source_type": "scraper",
                     "last_updated": now_utc,
                     "metadata": ind.get("metadata", {}),
@@ -339,6 +344,7 @@ def main() -> None:
                 zscore = compute_zscore_block(ind, payload)
                 payload["zscore"] = zscore
                 payload["level_trend_state"] = get_level_trend_state(zscore)
+                payload["forecast"] = compute_forecast(ind, payload)
                 write_indicator(ind_id, payload)
                 logger.info(
                     f"✓  {ind_id}  (scraped)  "
@@ -349,6 +355,10 @@ def main() -> None:
             except Exception as exc:
                 logger.error(f"✗  {ind_id}  (scraper={scraper_key}):  {exc}")
                 failed.append({"id": ind_id, "scraper": scraper_key, "error": str(exc)})
+
+        elif source == "derived":
+            # Handled after main loop by compute_all_derived()
+            pass
 
         else:
             logger.warning(f"⚠  {ind_id}  unknown source_type={source!r}, skipping")
@@ -377,6 +387,12 @@ def main() -> None:
             logger.warning(f"⚠  {ind_id}  zscore enrichment failed: {exc}")
     if zscore_updated:
         logger.info(f"Z-score enrichment: updated {zscore_updated} fresh indicators")
+
+    # ── Derived series computation ────────────────────────────────────────────
+    derived_ok, derived_fail = compute_all_derived(indicators, now_utc)
+    succeeded.extend(derived_ok)
+    for d_id in derived_fail:
+        failed.append({"id": d_id, "ticker": None, "error": "derived computation failed"})
 
     # ── Write manifest ────────────────────────────────────────────────────────
     manifest = {

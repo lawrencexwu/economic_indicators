@@ -1778,3 +1778,297 @@ indicators:
       what_it_measures: "Real GDP percentage change (annualized), from BEA. Used for direct scoring."
       why_it_matters: "Annualized growth rate is what's quoted in headlines. Two negative quarters = technical recession."
       scoring_rule: "Same bands as gdp_real. Phase 3."
+
+  # ═══════════════════════════════════════════════════════════════════
+  # PAGE 6 — FISCAL DOMINANCE
+  # ═══════════════════════════════════════════════════════════════════
+
+  # ── Internal source series (fetched from FRED, used to build derived indicators) ──
+
+  - id: gdp_nominal
+    name: "Nominal GDP (source series)"
+    fred_ticker: "GDP"
+    category: "fiscal"
+    page: "internal"
+    tier: 3
+    weight: 1
+    frequency: "quarterly"
+    release_pattern: "quarterly_advance"
+    source_type: "fred"
+    history_years: 30
+    unit: "billions"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: "Nominal GDP in billions, SAAR. Used as denominator for fiscal ratio computations."
+      why_it_matters: "Internal source series — not displayed on any page."
+      scoring_rule: "Not scored."
+
+  - id: federal_debt_src
+    name: "Gross Federal Debt (source series)"
+    fred_ticker: "GFDEBTN"
+    category: "fiscal"
+    page: "internal"
+    tier: 3
+    weight: 1
+    frequency: "quarterly"
+    release_pattern: "quarterly_advance"
+    source_type: "fred"
+    history_years: 30
+    unit: "millions"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: "Gross federal debt in millions. Source for debt_to_gdp derived series."
+      why_it_matters: "Internal source series — not displayed on any page."
+      scoring_rule: "Not scored."
+
+  - id: net_interest_src
+    name: "Federal Net Interest Outlays (source series)"
+    fred_ticker: "FYOINT"
+    category: "fiscal"
+    page: "internal"
+    tier: 3
+    weight: 1
+    frequency: "annual"
+    release_pattern: "quarterly_advance"
+    source_type: "fred"
+    history_years: 30
+    unit: "billions"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: "Annual federal net interest outlays in billions. Source for interest_to_gdp and interest_to_receipts."
+      why_it_matters: "Internal source series — not displayed on any page."
+      scoring_rule: "Not scored."
+
+  - id: federal_receipts_src
+    name: "Federal Receipts (source series)"
+    fred_ticker: "FYRENT"
+    category: "fiscal"
+    page: "internal"
+    tier: 3
+    weight: 1
+    frequency: "annual"
+    release_pattern: "quarterly_advance"
+    source_type: "fred"
+    history_years: 30
+    unit: "billions"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: "Annual federal receipts in billions. Source for interest_to_receipts."
+      why_it_matters: "Internal source series — not displayed on any page."
+      scoring_rule: "Not scored."
+
+  - id: federal_surplus_src
+    name: "Federal Surplus/Deficit (source series)"
+    fred_ticker: "FYFSD"
+    category: "fiscal"
+    page: "internal"
+    tier: 3
+    weight: 1
+    frequency: "annual"
+    release_pattern: "quarterly_advance"
+    source_type: "fred"
+    history_years: 30
+    unit: "billions"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: "Annual federal surplus or deficit in billions (negative = deficit). Source for primary_deficit_pct."
+      why_it_matters: "Internal source series — not displayed on any page."
+      scoring_rule: "Not scored."
+
+  - id: fed_balance_sheet
+    name: "Fed Total Assets (source series)"
+    fred_ticker: "WALCL"
+    category: "fiscal"
+    page: "internal"
+    tier: 3
+    weight: 1
+    frequency: "weekly"
+    release_pattern: "weekly_thursday"
+    source_type: "fred"
+    history_years: 15
+    unit: "millions"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: "Federal Reserve total assets (WALCL) in millions. Source for fed_balance_to_gdp derived series."
+      why_it_matters: "Internal source series — not displayed on any page."
+      scoring_rule: "Not scored."
+
+  # ── Directly fetched fiscal page indicators ──
+
+  - id: tic_foreign_holdings
+    name: "TIC Foreign Holdings of US Treasuries"
+    fred_ticker: "FDHBFRBN"
+    category: "fiscal"
+    page: "fiscal"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 15
+    unit: "billions"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: >
+        Foreign holdings of US Treasury securities (billions). Reported monthly
+        by the Treasury International Capital (TIC) system. Includes central banks,
+        sovereign wealth funds, and foreign investors.
+      why_it_matters: >
+        Measures foreign demand for US Treasuries. Declining foreign holdings can
+        signal reduced confidence in US fiscal trajectory, pushing yields higher.
+        12-month change direction is the key signal.
+      scoring_rule: "12m change: >+5% → +20 | 0 to +5% → +10 | -5 to 0% → -10 | -10 to -5% → -20 | <-10% → -40"
+
+  - id: dxy_index
+    name: "US Dollar Index (Trade-Weighted Broad)"
+    fred_ticker: "DTWEXBGS"
+    category: "fiscal"
+    page: "fiscal"
+    tier: 2
+    weight: 2
+    frequency: "weekly"
+    release_pattern: "weekly_thursday"
+    source_type: "fred"
+    history_years: 15
+    unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
+    metadata:
+      what_it_measures: >
+        Trade-weighted US dollar index (broad, goods & services). A rising dollar
+        tightens global financial conditions; a falling dollar is accommodative.
+      why_it_matters: >
+        Dollar strength reflects safe-haven demand and Fed policy relative to rest
+        of world. A strong dollar compresses EM earnings, commodity prices, and
+        US multinational revenues. 6-month trend is the primary signal.
+      scoring_rule: "6m change: >+5% → -30 | +2 to +5% → -15 | -2 to +2% → 0 | -5 to -2% → +15 | <-5% → +30"
+
+  # ── Derived fiscal indicators (computed by etl/src/derived_series.py) ──
+
+  - id: debt_to_gdp
+    name: "Federal Debt to GDP"
+    fred_ticker: null
+    category: "fiscal"
+    page: "fiscal"
+    tier: 2
+    weight: 2
+    frequency: "quarterly"
+    release_pattern: "quarterly_advance"
+    source_type: "derived"
+    history_years: 30
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        Gross federal debt (GFDEBTN) as a percent of nominal GDP. Quarterly.
+        Current trajectory: ~120%+ and rising.
+      why_it_matters: >
+        High debt/GDP constrains fiscal response to recessions, raises default risk
+        premium in Treasuries, and increases fiscal dominance risk — where fiscal
+        pressures override monetary policy. Above 100% enters danger zone.
+      scoring_rule: ">130% → -40 | 100-130% → -20 | 70-100% → 0 | <70% → +20"
+
+  - id: interest_to_gdp
+    name: "Net Interest Cost to GDP"
+    fred_ticker: null
+    category: "fiscal"
+    page: "fiscal"
+    tier: 2
+    weight: 2
+    frequency: "annual"
+    release_pattern: "quarterly_advance"
+    source_type: "derived"
+    history_years: 30
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        Federal net interest outlays (FYOINT) as a percent of nominal GDP.
+        Measures the carrying cost of the debt as a share of the economy.
+      why_it_matters: >
+        Interest costs above 3% of GDP have historically strained fiscal space.
+        At post-2022 rate levels, interest costs are approaching historical peaks.
+        This is the purest measure of fiscal dominance pressure.
+      scoring_rule: ">4% → -60 | 3-4% → -30 | 2-3% → -10 | <2% → +10"
+
+  - id: interest_to_receipts
+    name: "Net Interest Cost to Federal Receipts"
+    fred_ticker: null
+    category: "fiscal"
+    page: "fiscal"
+    tier: 2
+    weight: 2
+    frequency: "annual"
+    release_pattern: "quarterly_advance"
+    source_type: "derived"
+    history_years: 30
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        Federal net interest outlays as a percent of total federal receipts.
+        Shows what fraction of government revenue is consumed by debt service.
+      why_it_matters: >
+        When interest consumes >20% of receipts, discretionary fiscal policy is
+        severely constrained. This metric captures the crowding-out of spending
+        capacity more directly than debt/GDP.
+      scoring_rule: ">20% → -60 | 15-20% → -30 | 10-15% → -10 | <10% → +20"
+
+  - id: primary_deficit_pct
+    name: "Primary Deficit as % of GDP"
+    fred_ticker: null
+    category: "fiscal"
+    page: "fiscal"
+    tier: 2
+    weight: 2
+    frequency: "annual"
+    release_pattern: "quarterly_advance"
+    source_type: "derived"
+    history_years: 30
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        Primary budget balance (total balance + interest payments) as a percent
+        of GDP. Positive = primary deficit (spending > revenues excluding interest).
+        Computed from FYFSD + FYOINT as share of nominal GDP.
+      why_it_matters: >
+        Primary deficit shows whether the government is adding to or subtracting from
+        debt even before interest costs. A large primary deficit means the debt spiral
+        is self-reinforcing regardless of interest rates.
+      scoring_rule: ">5% → -40 | 3-5% → -20 | -3 to +3% → 0 | <-3% → +30"
+
+  - id: fed_balance_to_gdp
+    name: "Fed Balance Sheet to GDP"
+    fred_ticker: null
+    category: "fiscal"
+    page: "fiscal"
+    tier: 1
+    weight: 3
+    frequency: "weekly"
+    release_pattern: "weekly_thursday"
+    source_type: "derived"
+    history_years: 15
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        Federal Reserve total assets (WALCL) as a percent of nominal GDP.
+        Tracks QE expansion and QT contraction of the Fed balance sheet.
+      why_it_matters: >
+        A rising balance sheet (QE) is accommodative; a falling balance sheet (QT)
+        is restrictive. The year-over-year change in the ratio signals the direction
+        of monetary policy transmission independent of the fed funds rate.
+      scoring_rule: "YoY change: >+5pp → -30 | +2 to +5pp → -15 | -2 to +2pp → 0 | -5 to -2pp → +15 | <-5pp → +30"

@@ -24,6 +24,7 @@ _YOY_PERIODS: dict[str, int] = {
     "weekly": 52,
     "quarterly": 4,
     "monthly": 12,
+    "annual": 1,
 }
 
 # Trend lag periods per frequency (3-month equivalent)
@@ -32,6 +33,7 @@ _TREND_LAG: dict[str, int] = {
     "weekly": 13,
     "quarterly": 1,
     "monthly": 3,
+    "annual": 1,
 }
 
 # 10-year window size per frequency (number of data points)
@@ -40,6 +42,7 @@ _WINDOW_10Y: dict[str, int] = {
     "weekly": 520,
     "quarterly": 40,
     "monthly": 120,
+    "annual": 10,
 }
 
 
