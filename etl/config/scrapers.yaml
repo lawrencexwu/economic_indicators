@@ -1,0 +1,4 @@
+# Scraper targets and selectors. Populated in Phase 2.
+# Covers: ISM, NAHB, MBA, NFIB, Challenger, Cass, AAR
+
+scrapers: []  # placeholder — see Phase 2

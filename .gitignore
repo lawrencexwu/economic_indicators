@@ -1,0 +1,25 @@
+# Python / uv
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+etl/.venv/
+*.egg-info/
+
+# Env files (never commit real keys)
+.env.local
+etl/.env.local
+web/.env.local
+*.env.local
+
+# Node / Next.js
+web/node_modules/
+web/.next/
+web/out/
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/

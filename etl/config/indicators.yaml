@@ -1,0 +1,5 @@
+# Indicator metadata. Populated in Phase 2.
+# Each entry maps indicator ID → FRED ticker, tier, weight, frequency, release schedule.
+# Source: equity_indicators.md + dashboard_design.md
+
+indicators: []  # placeholder — see Phase 2

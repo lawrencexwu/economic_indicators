@@ -1,0 +1,4 @@
+# Release calendar patterns. Populated in Phase 2.
+# Used by orchestrator to decide whether to attempt a fetch.
+
+releases: []  # placeholder — see Phase 2
