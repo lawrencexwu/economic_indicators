@@ -39,7 +39,7 @@ patterns:
     freshness_hours: 24
     pattern: "first_friday"
     release_time_et: "08:30"
-    indicators: [nfp_payrolls, unemployment_rate, avg_hourly_earnings, nfp_temp_help, nfp_trucks, sahm_rule, unemp_longterm, labor_force_participation, unemployment_u6]
+    indicators: [nfp_payrolls, unemployment_rate, avg_hourly_earnings, avg_weekly_hours_mfg, nfp_temp_help, nfp_trucks, sahm_rule, unemp_longterm, labor_force_participation, unemployment_u6]
 
   monthly_1st_business_day:
     description: "First business day of month 10:00 ET (ISM Manufacturing)"

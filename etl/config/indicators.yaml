@@ -1211,6 +1211,23 @@ indicators:
       why_it_matters: "Companies cut temps before permanent workers. Temp employment leads overall payrolls by 2-3 months."
       scoring_rule: "YoY % change. Phase 3."
 
+  - id: avg_weekly_hours_mfg
+    name: "Avg Weekly Hours: Manufacturing"
+    fred_ticker: "AWHMAN"
+    category: "labor"
+    page: "cycle"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "hours"
+    metadata:
+      what_it_measures: "Average weekly hours worked by production/nonsupervisory employees in manufacturing. Part of the BLS Employment Situation report."
+      why_it_matters: "Firms cut hours before cutting headcount. Falling below 40h signals imminent layoffs; below 39.5h has historically coincided with recessions."
+      scoring_rule: "Z-score vs 36-month window."
+
   - id: nfp_trucks
     name: "NFP: Truck Transportation"
     fred_ticker: "CES4348400001"

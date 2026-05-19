@@ -720,6 +720,7 @@ const SCORING_MAP: Record<string, ScoringFn> = {
   nfp_payrolls: scoreNFP,
   nfp_temp_help: scoreTempHelp,
   nfp_trucks: scoreTempHelp,
+  avg_weekly_hours_mfg: scoreRegionalFed,
   housing_permits_1f: scoreHousingYoY,
   housing_starts: scoreHousingYoY,
   housing_starts_1f: scoreHousingYoY,
@@ -858,6 +859,7 @@ const DESCRIPTION_MAP: Record<string, DescribeFn> = {
   cass_freight:            (ind) => describeYoY(ind, 12, CASS_TIERS),
   nfp_temp_help:           (ind) => describeYoY(ind, 12, TEMP_HELP_TIERS),
   nfp_trucks:              (ind) => describeYoY(ind, 12, TEMP_HELP_TIERS),
+  avg_weekly_hours_mfg:    (ind) => describeZScore(ind, 36, true, "3yr"),
   ci_loans: (ind) => {
     const pct52 = yoy(ind.data, 52);
     const pct = pct52 !== null ? pct52 : yoy(ind.data, 12);

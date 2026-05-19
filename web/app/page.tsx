@@ -46,7 +46,7 @@ const PAGE_INDICATOR_IDS: Record<string, string[]> = {
     "industrial_production", "capacity_utilization",
     "durable_goods_orders", "core_capex_orders", "durable_goods_ex_transport",
     "factory_orders", "business_inventories", "inventory_sales_ratio",
-    "nfib_optimism", "nfp_payrolls", "nfp_temp_help",
+    "nfib_optimism", "nfp_payrolls", "nfp_temp_help", "avg_weekly_hours_mfg",
     "jolts_openings", "jolts_quits_rate", "gdp_real", "gdp_growth_rate",
   ],
   rotation: [

@@ -15,7 +15,7 @@ const CLUSTERS: Record<string, string[]> = {
   ],
   "Inventories": ["business_inventories", "inventory_sales_ratio"],
   "Small Business": ["nfib_optimism"],
-  "Employment": ["nfp_payrolls", "nfp_temp_help", "jolts_openings", "jolts_quits_rate"],
+  "Employment": ["nfp_payrolls", "nfp_temp_help", "avg_weekly_hours_mfg", "jolts_openings", "jolts_quits_rate"],
   "GDP": ["gdp_real", "gdp_growth_rate"],
 };
 
