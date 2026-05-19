@@ -1,0 +1,39 @@
+{
+  "id": "ism_mfg_customer_inv",
+  "name": "ISM Manufacturing Customer Inventories",
+  "fred_ticker": null,
+  "category": "activity",
+  "page": "cycle",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "ISM Manufacturing Customer Inventories subindex.",
+    "why_it_matters": "Inverted signal: low customer inventories (<45) with rising new orders is the most bullish ISM configuration \u2014 customers need to restock. This is how ISM cycle bottoms look.\n",
+    "scoring_rule": "Inverted: < 45 \u2192 +30 | 45-50 \u2192 +10 | 50-55 \u2192 -10 | > 55 \u2192 -30. Phase 3."
+  },
+  "score": null,
+  "current_value": 39.1,
+  "previous_value": 40.1,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 39.1
+    },
+    {
+      "date": "2026-03-01",
+      "value": 40.1
+    },
+    {
+      "date": "2026-02-01",
+      "value": 38.8
+    },
+    {
+      "date": "2026-01-01",
+      "value": 38.7
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "id": "challenger_layoffs",
+  "name": "Challenger Layoff Announcements",
+  "fred_ticker": null,
+  "category": "labor",
+  "page": "pulse",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "Monthly planned layoff announcements compiled by Challenger, Gray & Christmas. Released 1st Thursday of each month.\n",
+    "why_it_matters": "Forward-looking labor indicator. Surge in announced layoffs leads actual job losses by 1-3 months. Baumohl notes BLS Mass Layoffs discontinued 2013 \u2014 Challenger is the substitute.\n",
+    "scoring_rule": "YoY change + level vs trailing average. Phase 3."
+  },
+  "score": null,
+  "current_value": 83.387,
+  "previous_value": 60.62,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 83.387
+    },
+    {
+      "date": "2026-03-01",
+      "value": 60.62
+    },
+    {
+      "date": "2026-02-01",
+      "value": 48.307
+    },
+    {
+      "date": "2026-01-01",
+      "value": 108.435
+    },
+    {
+      "date": "2025-11-01",
+      "value": 71.321
+    },
+    {
+      "date": "2025-10-01",
+      "value": 153.074
+    },
+    {
+      "date": "2024-07-01",
+      "value": 25.885
+    },
+    {
+      "date": "2022-05-01",
+      "value": 0.817
+    },
+    {
+      "date": "2019-08-01",
+      "value": 10.0
+    },
+    {
+      "date": "2019-07-01",
+      "value": 3.737
+    },
+    {
+      "date": "2019-05-01",
+      "value": 12.635
+    },
+    {
+      "date": "2017-11-01",
+      "value": 35.038
+    },
+    {
+      "date": "2017-10-01",
+      "value": 29.831
+    },
+    {
+      "date": "2017-04-01",
+      "value": 11.669
+    },
+    {
+      "date": "2017-02-01",
+      "value": 11.889
+    },
+    {
+      "date": "2017-01-01",
+      "value": 20.103
+    },
+    {
+      "date": "2016-10-01",
+      "value": 30.74
+    },
+    {
+      "date": "2016-09-01",
+      "value": 7.296
+    },
+    {
+      "date": "2016-04-01",
+      "value": 19.759
+    },
+    {
+      "date": "2015-09-01",
+      "value": 100.0
+    },
+    {
+      "date": "2015-01-01",
+      "value": 4.859
+    },
+    {
+      "date": "2014-10-01",
+      "value": 6.509
+    },
+    {
+      "date": "2014-04-01",
+      "value": 6.993
+    },
+    {
+      "date": "2014-01-01",
+      "value": 11.394
+    },
+    {
+      "date": "2013-10-01",
+      "value": 4.2
+    },
+    {
+      "date": "2013-08-01",
+      "value": 4.663
+    }
+  ]
+}

@@ -1,5 +1,1593 @@
-# Indicator metadata. Populated in Phase 2.
-# Each entry maps indicator ID → FRED ticker, tier, weight, frequency, release schedule.
-# Source: equity_indicators.md + dashboard_design.md
+# Indicator metadata
+# Source: equity_indicators.md + dashboard_design.md (Baumohl 3rd ed.)
+#
+# tier:   1 = Baumohl top-10 most stock-sensitive (weight 3)
+#         2 = Baumohl leading indicators (weight 2)
+#         3 = Other influential (weight 1)
+# source_type: fred | scraper
+# history_years: 30 for recession indicators, 10 for others
 
-indicators: []  # placeholder — see Phase 2
+indicators:
+
+  # ═══════════════════════════════════════════════════════════════════
+  # PAGE 1 — REGIME / RECESSION RISK
+  # ═══════════════════════════════════════════════════════════════════
+
+  - id: yield_curve_10y3m
+    name: "Yield Curve (10Y minus 3M)"
+    fred_ticker: "T10Y3M"
+    category: "rates"
+    page: "regime"
+    tier: 2
+    weight: 2
+    frequency: "daily"
+    release_pattern: "daily"
+    source_type: "fred"
+    history_years: 30
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Spread between 10-year and 3-month Treasury yields.
+        The NY Fed's preferred recession predictor. Inversion (negative spread)
+        has preceded every US recession since 1969 with no false positives.
+      why_it_matters: >
+        Inversion reflects bond market expecting Fed cuts ahead, typically because
+        growth is slowing. Lead time from inversion to recession: 6-24 months
+        (median ~14). Equity peaks typically come 6-12 months after first inversion.
+      scoring_rule: >
+        > +200bp → +70 | +100 to +200 → +40 | +50 to +100 → +10 | 0 to +50 → -20
+        | -50 to 0 → -50 | -100 to -50 → -80 | < -100bp → -100
+        Special: if curve was inverted >6mo and now re-steepening to >0, score = -50
+        (re-steepening from inversion is a near-recession signal, not bullish).
+
+  - id: yield_curve_10y2y
+    name: "Yield Curve (10Y minus 2Y)"
+    fred_ticker: "T10Y2Y"
+    category: "rates"
+    page: "regime"
+    tier: 2
+    weight: 2
+    frequency: "daily"
+    release_pattern: "daily"
+    source_type: "fred"
+    history_years: 30
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Spread between 10-year and 2-year Treasury yields. Widely watched by
+        markets as the primary yield curve signal.
+      why_it_matters: >
+        Tracks Fed rate expectations over the medium term. Often inverts before
+        10Y-3M and is more sensitive to forward rate expectations.
+      scoring_rule: "Same bands as 10Y-3M. Phase 3."
+
+  - id: claims_4wma
+    name: "Initial Claims (4-week MA)"
+    fred_ticker: "IC4WSA"
+    category: "labor"
+    page: "regime"
+    tier: 1
+    weight: 3
+    frequency: "weekly"
+    release_pattern: "weekly_thursday"
+    source_type: "fred"
+    history_years: 30
+    unit: "thousands"
+    metadata:
+      what_it_measures: >
+        Four-week moving average of first-time unemployment insurance filings.
+        DOL. Weekly, Thursday 8:30 ET. Smooths weekly noise in raw claims.
+      why_it_matters: >
+        High-frequency labor market read. Rising claims = layoffs accelerating.
+        The 4-week MA is the most useful version; raw claims are too volatile.
+        Claims >350k historically associated with recession conditions.
+      scoring_rule: >
+        z = (current 4wMA - trailing 3y mean) / trailing 3y stddev
+        momentum = (current 4wMA - 4wMA 8 weeks ago) / 4wMA 8 weeks ago
+        raw_score = -50*z - 100*momentum (high & rising = bearish)
+        clamp to [-100, +100]
+
+  - id: initial_claims
+    name: "Initial Jobless Claims (weekly)"
+    fred_ticker: "ICSA"
+    category: "labor"
+    page: "pulse"
+    tier: 1
+    weight: 3
+    frequency: "weekly"
+    release_pattern: "weekly_thursday"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: >
+        Raw weekly initial unemployment insurance filings. DOL. Thursday 8:30 ET.
+      why_it_matters: >
+        Most timely labor market release. Volatile week-to-week; use 4wMA for
+        trend. Breakout above 300-350k is a recession warning sign.
+      scoring_rule: "Use 4wMA series (IC4WSA) for primary score. Phase 3."
+
+  - id: continuing_claims
+    name: "Continuing Claims"
+    fred_ticker: "CCSA"
+    category: "labor"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "weekly"
+    release_pattern: "weekly_thursday"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: >
+        Number of people currently receiving unemployment benefits (insured
+        unemployment). Released with a 1-week lag vs initial claims.
+      why_it_matters: >
+        Measures job-finding difficulty. Rising continuing claims while initial
+        claims stabilize = hard to find work once laid off.
+      scoring_rule: "Z-score with momentum, similar to IC4WSA. Phase 3."
+
+  - id: lei
+    name: "Conference Board Leading Economic Index (LEI)"
+    fred_ticker: null
+    category: "activity"
+    page: "regime"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_3rd_thursday"
+    source_type: "scraper"
+    scraper: "conference_board"
+    history_years: 10
+    data_note: "Conference Board pulled free FRED access ~2020. Requires CB subscription or scraping."
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Composite of 10 leading indicators from Conference Board. Monthly,
+        3rd Thursday. Components: ISM new orders, building permits, claims,
+        yield curve, stock prices, consumer expectations, among others.
+      why_it_matters: >
+        Six consecutive monthly declines in LEI (or LEI YoY below -4%) has
+        historically signaled recession. Captures broad leading information in
+        one number.
+      scoring_rule: >
+        Score based on YoY % change: > +3% → +60 | 0 to +3% → +20
+        | -2% to 0% → -20 | -4% to -2% → -50 | < -4% → -80. Phase 3.
+
+  - id: cfnai_ma3
+    name: "CFNAI 3-Month Moving Average"
+    fred_ticker: "CFNAIMA3"
+    category: "activity"
+    page: "regime"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_last_monday"
+    source_type: "fred"
+    history_years: 30
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Chicago Fed National Activity Index 3-month moving average. Composite
+        of 85 indicators. Designed so 0 = historical average growth, negative =
+        below-average growth.
+      why_it_matters: >
+        Value below -0.7 historically = recession risk rising. Below -1.5 =
+        recession likely underway. Above +0.7 = above-trend growth, watch for
+        inflation. Baumohl considers this the broadest single activity gauge.
+      scoring_rule: >
+        > +1.0 → -30 (overheating, late-cycle warning)
+        +0.7 to +1.0 → 0 (inflation acceleration risk)
+        +0.2 to +0.7 → +60 (healthy expansion)
+        -0.7 to +0.2 → +20 (neutral/slowing)
+        -1.5 to -0.7 → -60 (recession risk rising)
+        < -1.5 → -100 (recession underway)
+
+  - id: cfnai
+    name: "CFNAI (monthly)"
+    fred_ticker: "CFNAI"
+    category: "activity"
+    page: "regime"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_last_monday"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Chicago Fed National Activity Index, single-month reading. More volatile
+        than the 3-month MA; the MA3 is the primary signal.
+      why_it_matters: "Underlying data for CFNAI-MA3."
+      scoring_rule: "Use CFNAI-MA3 for primary scoring. Phase 3."
+
+  - id: sahm_rule
+    name: "Sahm Rule Recession Indicator"
+    fred_ticker: "SAHMREALTIME"
+    category: "labor"
+    page: "regime"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 30
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Difference between the 3-month moving average of the national unemployment
+        rate and its 12-month low. Developed by Claudia Sahm at the Fed.
+      why_it_matters: >
+        Threshold of 0.50 percentage points has triggered at the start of every
+        US recession since 1970 with no false positives. Real-time recession
+        indicator — no revisions or lags.
+      scoring_rule: >
+        < 0.20 → +40 | 0.20 to 0.35 → 0 | 0.35 to 0.50 → -40
+        | 0.50 to 0.75 → -70 | > 0.75 → -100. Phase 3.
+
+  - id: nahb_index
+    name: "NAHB Housing Market Index (composite)"
+    fred_ticker: null
+    category: "housing"
+    page: "regime"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_3rd_wednesday"
+    source_type: "scraper"
+    scraper: "nahb"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        National Association of Home Builders / Wells Fargo Housing Market Index.
+        Diffusion index: >50 = more builders view conditions as good than poor.
+      why_it_matters: >
+        Leads housing starts and permits. One of Baumohl's top leading indicators.
+        NAHB Traffic subindex (prospective buyer traffic) is the most
+        forward-looking component.
+      scoring_rule: >
+        > 60 → +60 | 50-60 → +30 | 40-50 → 0 | 30-40 → -30
+        | 20-30 → -60 | < 20 → -90. Phase 3.
+
+  - id: ny_fed_recession_prob
+    name: "Smoothed US Recession Probability"
+    fred_ticker: "RECPROUSM156N"
+    category: "rates"
+    page: "regime"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_variable"
+    source_type: "fred"
+    history_years: 30
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Smoothed U.S. Recession Probabilities from Piger-Chauvet dynamic factor
+        model. Values are probabilities (0-100) of being in a recession.
+      why_it_matters: >
+        Statistical recession probability that combines multiple economic signals
+        into a single probability estimate. Above 30% has historically been a
+        strong recession warning.
+      scoring_rule: >
+        < 5% → +30 | 5-15% → 0 | 15-30% → -30 | 30-50% → -60
+        | > 50% → -90. Phase 3.
+
+  - id: unemp_longterm
+    name: "Unemployed 15+ Weeks"
+    fred_ticker: "UEMP15OV"
+    category: "labor"
+    page: "regime"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: >
+        Number of persons unemployed 15 weeks and over. Measures structural
+        vs. frictional unemployment.
+      why_it_matters: >
+        Rising long-term unemployment signals labor market deterioration beyond
+        temporary layoffs. Lags the cycle but confirms trend.
+      scoring_rule: "Z-score vs 3-year trailing. Phase 3."
+
+  # ═══════════════════════════════════════════════════════════════════
+  # PAGE 2 — FED REACTION FUNCTION
+  # ═══════════════════════════════════════════════════════════════════
+
+  - id: cpi_core
+    name: "Core CPI YoY"
+    fred_ticker: "CPILFESL"
+    category: "inflation"
+    page: "fed"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Consumer Price Index for All Urban Consumers: All Items Less Food and
+        Energy. BLS. Monthly, mid-month 8:30 ET. Core excludes volatile F&E.
+      why_it_matters: >
+        Hot CPI = rate fear = equity drawdown (esp. duration/multiple-sensitive
+        names). Core CPI is the Fed's benchmark for underlying inflation; it
+        determines the pace of rate hikes/cuts.
+      scoring_rule: >
+        Score as YoY % change vs 2% target:
+        < 2.0% → +60 | 2.0-2.5% → +20 | 2.5-3.0% → -20
+        | 3.0-4.0% → -50 | > 4.0% → -80. Phase 3.
+
+  - id: cpi_headline
+    name: "CPI Headline YoY"
+    fred_ticker: "CPIAUCSL"
+    category: "inflation"
+    page: "fed"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Consumer Price Index for All Urban Consumers: All Items. BLS. Monthly.
+        Includes food and energy.
+      why_it_matters: >
+        Headline CPI drives real-income expectations and consumer sentiment.
+        Relevant for sectors like airlines and homebuilders where energy costs matter.
+      scoring_rule: "Same bands as core CPI. Phase 3."
+
+  - id: core_pce
+    name: "Core PCE Deflator YoY"
+    fred_ticker: "PCEPILFE"
+    category: "inflation"
+    page: "fed"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_end"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Personal Consumption Expenditures Price Index excluding Food and Energy.
+        BEA. Monthly, end-of-month 8:30 ET. The Fed's preferred inflation gauge.
+      why_it_matters: >
+        Core PCE drives Fed reaction function. The 2% target is specifically
+        for PCE, not CPI. Differences from CPI: PCE uses chain-weighting and
+        covers broader spending (not just out-of-pocket).
+      scoring_rule: >
+        < 2.0% → +60 | 2.0-2.3% → +30 | 2.3-2.5% → 0
+        | 2.5-3.0% → -30 | 3.0-3.5% → -60 | > 3.5% → -90. Phase 3.
+
+  - id: pce_deflator
+    name: "PCE Deflator"
+    fred_ticker: "PCEPI"
+    category: "inflation"
+    page: "fed"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_end"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "Headline PCE price index, including food and energy."
+      why_it_matters: "Context for core PCE; energy-driven spikes can affect inflation expectations."
+      scoring_rule: "Same bands as core PCE. Phase 3."
+
+  - id: ppi_final_demand
+    name: "PPI Final Demand"
+    fred_ticker: "PPIFIS"
+    category: "inflation"
+    page: "fed"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Producer Price Index for Final Demand. BLS. Monthly, day before or after
+        CPI. Measures wholesale/input inflation. Final demand goods most relevant.
+      why_it_matters: >
+        Pipeline pressure on margins. PPI leads CPI by ~3-6 months. Rising PPI
+        compresses margins before CPI catches up. Relevant for industrials/semis.
+      scoring_rule: "YoY change vs historical average. Phase 3."
+
+  - id: ppi_crude_ex_food_energy
+    name: "PPI Crude Goods ex-Food & Energy"
+    fred_ticker: "WPSID6112"
+    category: "inflation"
+    page: "fed"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Far-upstream price pressure: crude goods excluding food and energy.
+        Early-stage pipeline inflation indicator.
+      why_it_matters: >
+        Baumohl's Tier 2 leading indicator. Spikes here precede PPI Final Demand
+        moves by 3-6 months, which then lead CPI.
+      scoring_rule: "YoY change threshold. Phase 3."
+
+  - id: eci
+    name: "Employment Cost Index"
+    fred_ticker: "ECIWAG"
+    category: "labor"
+    page: "fed"
+    tier: 3
+    weight: 1
+    frequency: "quarterly"
+    release_pattern: "quarterly_end_month"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Quarterly measure of total compensation costs for civilian workers.
+        Fed's preferred wage gauge. Released end of January, April, July, October.
+      why_it_matters: >
+        Wages are the biggest input cost for services inflation. The Fed watches
+        ECI closely — if wage growth stays above ~3.5% annualized, services
+        inflation is hard to bring to 2%.
+      scoring_rule: >
+        Annualized: < 3.0% → +60 | 3.0-3.5% → +20 | 3.5-4.0% → -20
+        | 4.0-5.0% → -50 | > 5.0% → -80. Phase 3.
+
+  - id: breakeven_5y
+    name: "5-Year Breakeven Inflation"
+    fred_ticker: "T5YIE"
+    category: "rates"
+    page: "fed"
+    tier: 3
+    weight: 1
+    frequency: "daily"
+    release_pattern: "daily"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Market-implied 5-year inflation expectations derived from TIPS spread.
+        Measures what bond traders expect CPI to average over the next 5 years.
+      why_it_matters: >
+        Anchored expectations (<2.5%) suggest inflation is temporary and Fed can
+        be patient. Unanchored expectations (>3%) signal persistent inflation
+        and aggressive Fed response ahead.
+      scoring_rule: >
+        < 2.0% → +40 | 2.0-2.5% → +20 | 2.5-3.0% → -20
+        | 3.0-3.5% → -50 | > 3.5% → -80. Phase 3.
+
+  - id: unemployment_rate
+    name: "Unemployment Rate (U-3)"
+    fred_ticker: "UNRATE"
+    category: "labor"
+    page: "fed"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Bureau of Labor Statistics U-3 unemployment rate. Monthly, 1st Friday
+        8:30 ET. Standard definition: persons without jobs who actively sought
+        work in past 4 weeks.
+      why_it_matters: >
+        Strong NFP bullish for equities except when economy at capacity (then
+        rate-fear dominates). Unemployment below NAIRU (~4%) = Fed pressure.
+        Rising unemployment = growth concern but also potential for Fed cuts.
+      scoring_rule: >
+        Score depends on direction vs Fed mandate. Rising + above 4.5% = bullish
+        (cuts coming). Rising from low = early warning. Phase 3.
+
+  - id: unemployment_u6
+    name: "Unemployment Rate (U-6 Underemployment)"
+    fred_ticker: "U6RATE"
+    category: "labor"
+    page: "fed"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Broadest measure of labor underutilization: includes part-time for
+        economic reasons and marginally attached workers.
+      why_it_matters: >
+        Slack measure. High U-6 relative to U-3 signals underemployment.
+        Wide U-6 vs U-3 spread = more slack than headline suggests.
+      scoring_rule: "Phase 3."
+
+  - id: labor_force_participation
+    name: "Labor Force Participation Rate"
+    fred_ticker: "CIVPART"
+    category: "labor"
+    page: "fed"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: >
+        Share of civilian noninstitutional population that is employed or
+        actively seeking work.
+      why_it_matters: >
+        Low participation with low unemployment = tighter labor market than
+        headline suggests. Structural shifts (aging, post-COVID) complicate
+        the Fed's read on slack.
+      scoring_rule: "Phase 3."
+
+  - id: avg_hourly_earnings
+    name: "Average Hourly Earnings YoY"
+    fred_ticker: "AHETPI"
+    category: "labor"
+    page: "fed"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "dollars"
+    metadata:
+      what_it_measures: >
+        Average hourly earnings for all private employees. BLS, released with
+        NFP on 1st Friday. AHE YoY is the key wage inflation number.
+      why_it_matters: >
+        Wages drive services inflation. AHE above 3.5% YoY makes the Fed's
+        2% inflation target difficult. Baumohl Tier 1 component of NFP report.
+      scoring_rule: >
+        YoY: < 3.0% → +60 | 3.0-3.5% → +20 | 3.5-4.0% → -20
+        | 4.0-5.0% → -50 | > 5.0% → -80. Phase 3.
+
+  - id: fed_funds_rate
+    name: "Effective Federal Funds Rate"
+    fred_ticker: "DFF"
+    category: "rates"
+    page: "fed"
+    tier: 3
+    weight: 1
+    frequency: "daily"
+    release_pattern: "daily"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: "Effective overnight federal funds rate. Reflects actual FOMC policy stance."
+      why_it_matters: >
+        Level of rates vs neutral determines whether Fed is restrictive or
+        accommodative. Real Fed Funds = DFF minus trailing 12mo CPI.
+      scoring_rule: "Computed as spread vs neutral rate (r*). Phase 3."
+
+  # ═══════════════════════════════════════════════════════════════════
+  # PAGE 3 — GROWTH PULSE (HIGH-FREQUENCY)
+  # ═══════════════════════════════════════════════════════════════════
+
+  - id: empire_state_mfg
+    name: "Empire State Manufacturing Index"
+    fred_ticker: "GACDISA066MSFRBNY"
+    category: "activity"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_15th"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        NY Fed survey of manufacturing conditions. Diffusion index: >0 = expansion.
+        Monthly, ~15th at 8:30 ET. Leads ISM by one week.
+      why_it_matters: >
+        Regional Fed surveys are ISM nowcasts. Released before ISM, so markets
+        use them to forecast the national ISM print. Empire is the first out.
+      scoring_rule: "Phase 3."
+
+  - id: philly_fed_mfg
+    name: "Philadelphia Fed Business Outlook"
+    fred_ticker: "GACDFSA066MSFRBPHI"
+    category: "activity"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_3rd_thursday"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Philadelphia Fed manufacturing survey general business conditions. Monthly
+        3rd Thursday 8:30 ET. Diffusion index: >0 = expansion.
+      why_it_matters: "High correlation with ISM Mfg. Used in 5-Fed composite to nowcast ISM."
+      scoring_rule: "Phase 3."
+
+  - id: richmond_fed_mfg
+    name: "Richmond Fed Manufacturing Index"
+    fred_ticker: null
+    category: "activity"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_4th_tuesday"
+    source_type: "scraper"
+    scraper: "richmond_fed"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "Richmond Fed 5th District manufacturing composite index."
+      why_it_matters: "Part of 5-Fed composite ISM nowcast. Not on FRED free tier — scraped from richmondfed.org."
+      scoring_rule: "Phase 3."
+
+  - id: kc_fed_mfg
+    name: "Kansas City Fed Manufacturing Index"
+    fred_ticker: null
+    category: "activity"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_last_thursday"
+    source_type: "scraper"
+    scraper: "kc_fed"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "KC Fed 10th District manufacturing composite index."
+      why_it_matters: "Part of 5-Fed composite ISM nowcast. Not on FRED free tier — scraped from kansascityfed.org."
+      scoring_rule: "Phase 3."
+
+  - id: ci_loans
+    name: "Commercial & Industrial Loans"
+    fred_ticker: "BUSLOANS"
+    category: "credit"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "weekly"
+    release_pattern: "weekly_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "billions"
+    metadata:
+      what_it_measures: >
+        Commercial and industrial loans at all commercial banks (H.8 release).
+        Fed, weekly, Friday 16:15 ET. Measures business credit demand.
+      why_it_matters: >
+        C&I loan growth leads business investment. Contraction in C&I loans
+        has historically preceded recessions. Key for bank stocks.
+      scoring_rule: "YoY growth rate. Phase 3."
+
+  - id: total_loans
+    name: "Total Loans and Leases"
+    fred_ticker: "TOTLL"
+    category: "credit"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "weekly"
+    release_pattern: "weekly_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "billions"
+    metadata:
+      what_it_measures: "Total loans and leases at all commercial banks (H.8). Broad credit supply measure."
+      why_it_matters: "Broad financial system credit pulse. Slowing loan growth precedes economic softness."
+      scoring_rule: "YoY growth rate. Phase 3."
+
+  # ─── Scraper indicators — Growth Pulse ────────────────────────────
+
+  - id: mba_purchase
+    name: "MBA Mortgage Purchase Applications Index"
+    fred_ticker: null
+    category: "housing"
+    page: "pulse"
+    tier: 2
+    weight: 2
+    frequency: "weekly"
+    release_pattern: "weekly_wednesday"
+    source_type: "scraper"
+    scraper: "mba"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        MBA Weekly Mortgage Applications Survey — Purchase index. Mortgage
+        Bankers Association. Weekly Wednesday 7:00 ET. Measures mortgage
+        applications for home purchases.
+      why_it_matters: >
+        Real-time housing demand signal. Baumohl Tier 2. Leads housing starts
+        by ~3-6 months. One of the few housing indicators available weekly.
+      scoring_rule: "YoY change. Phase 3."
+
+  - id: mba_refi
+    name: "MBA Mortgage Refinance Applications Index"
+    fred_ticker: null
+    category: "housing"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "weekly"
+    release_pattern: "weekly_wednesday"
+    source_type: "scraper"
+    scraper: "mba"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "MBA refinance applications index. Sensitive to mortgage rate changes."
+      why_it_matters: "Refi activity affects household cash flow and consumer spending."
+      scoring_rule: "Phase 3."
+
+  - id: aar_carloads
+    name: "AAR Railroad Carloads YoY"
+    fred_ticker: null
+    category: "activity"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "weekly"
+    release_pattern: "weekly_wednesday"
+    source_type: "scraper"
+    scraper: "aar"
+    history_years: 5
+    unit: "percent_yoy"
+    metadata:
+      what_it_measures: >
+        Association of American Railroads weekly rail traffic report.
+        Carloads measure bulk freight: coal, grain, chemicals, autos, intermodal.
+      why_it_matters: >
+        Real-time goods economy pulse. Declining carloads = goods demand
+        contracting. Industrial bellwether used by Warren Buffett.
+      scoring_rule: "YoY % change threshold. Phase 3."
+
+  # ═══════════════════════════════════════════════════════════════════
+  # PAGE 4 — CYCLE & EARNINGS MOMENTUM
+  # ═══════════════════════════════════════════════════════════════════
+
+  # ─── ISM (scrapers) ────────────────────────────────────────────────
+
+  - id: ism_mfg
+    name: "ISM Manufacturing PMI"
+    fred_ticker: null
+    category: "activity"
+    page: "cycle"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_1st_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Diffusion index of new orders, production, employment, inventories,
+        prices. ISM. Monthly, 1st business day 10:00 ET. >50 = expansion.
+      why_it_matters: >
+        Baumohl's #2 most stock-sensitive indicator. New Orders subindex is
+        the most forward-looking component; leads headline by ~3 months.
+        ISM Mfg <48 for 3+ months historically signals earnings contraction.
+      scoring_rule: >
+        Headline: > 55 → +70 | 52-55 → +40 | 50-52 → +10 | 48-50 → -20
+        | 45-48 → -50 | < 45 → -80. New Orders weighted higher. Phase 3.
+
+  - id: ism_mfg_new_orders
+    name: "ISM Manufacturing New Orders"
+    fred_ticker: null
+    category: "activity"
+    page: "cycle"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_1st_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "ISM Manufacturing New Orders subindex. Most forward-looking PMI component."
+      why_it_matters: >
+        Baumohl Tier 2 (#13). Leads ISM headline by 3 months, leads earnings
+        by ~6 months. New Orders > 52 with inventory < 48 = strongest buy signal.
+      scoring_rule: "Same bands as ISM headline. Phase 3."
+
+  - id: ism_mfg_production
+    name: "ISM Manufacturing Production"
+    fred_ticker: null
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_1st_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "ISM Manufacturing Production subindex. Current output levels."
+      why_it_matters: "Confirms new orders signal. Divergence from new orders = inventory build/draw."
+      scoring_rule: "Phase 3."
+
+  - id: ism_mfg_employment
+    name: "ISM Manufacturing Employment"
+    fred_ticker: null
+    category: "labor"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_1st_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "ISM Manufacturing Employment subindex. Hiring/firing in manufacturing."
+      why_it_matters: "Leads BLS manufacturing employment. Below 50 = manufacturing contraction in labor."
+      scoring_rule: "Phase 3."
+
+  - id: ism_mfg_customer_inv
+    name: "ISM Manufacturing Customer Inventories"
+    fred_ticker: null
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_1st_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "ISM Manufacturing Customer Inventories subindex."
+      why_it_matters: >
+        Inverted signal: low customer inventories (<45) with rising new orders
+        is the most bullish ISM configuration — customers need to restock.
+        This is how ISM cycle bottoms look.
+      scoring_rule: "Inverted: < 45 → +30 | 45-50 → +10 | 50-55 → -10 | > 55 → -30. Phase 3."
+
+  - id: ism_mfg_prices_paid
+    name: "ISM Manufacturing Prices Paid"
+    fred_ticker: null
+    category: "inflation"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_1st_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "ISM Manufacturing Prices Paid subindex. Input cost pressures for manufacturers."
+      why_it_matters: >
+        Leads PPI by ~3 months. Watch the 60 threshold: above 60 historically
+        signals producer price pressures spreading. High prices + expanding
+        orders = margin squeeze for manufacturers.
+      scoring_rule: "< 50 → +20 | 50-60 → 0 | 60-70 → -20 | > 70 → -40. Phase 3."
+
+  - id: ism_services
+    name: "ISM Services PMI (Non-Manufacturing)"
+    fred_ticker: null
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_3rd_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        ISM Non-Manufacturing PMI covering services sector. Monthly, 3rd business
+        day 10:00 ET. >50 = expansion. Services >2/3 of US economy.
+      why_it_matters: >
+        Arguably should be Tier 1 today given services dominance. ISM Services
+        holding above 52 while Mfg contracts = split economy (soft landing).
+        ISM Services < 50 = broad-based contraction.
+      scoring_rule: "Same bands as ISM Mfg. Phase 3."
+
+  - id: ism_services_new_orders
+    name: "ISM Services New Orders"
+    fred_ticker: null
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_3rd_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "ISM Services New Orders subindex. Forward-looking services demand."
+      why_it_matters: "Leading component for services sector. Divergence from headline signals turning point."
+      scoring_rule: "Phase 3."
+
+  - id: ism_services_prices_paid
+    name: "ISM Services Prices Paid"
+    fred_ticker: null
+    category: "inflation"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_3rd_business_day"
+    source_type: "scraper"
+    scraper: "ism"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "ISM Services Prices Paid subindex. Input cost pressures in services."
+      why_it_matters: "Services inflation is wage-driven. Watch 60 threshold — above it signals persistent services CPI."
+      scoring_rule: "Phase 3."
+
+  # ─── Industrial Activity ───────────────────────────────────────────
+
+  - id: industrial_production
+    name: "Industrial Production Index"
+    fred_ticker: "INDPRO"
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Fed G.17 measure of real output from manufacturing, mining, and utilities.
+        Monthly ~mid-month. Manufacturing subindex most relevant for
+        semis/industrials.
+      why_it_matters: >
+        Measures the goods-producing sector. IP below its 12-month peak by >5%
+        is historically a recessionary signal.
+      scoring_rule: "YoY % change. Phase 3."
+
+  - id: capacity_utilization
+    name: "Capacity Utilization"
+    fred_ticker: "TCU"
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: "Total capacity utilization for all industries (Fed G.17)."
+      why_it_matters: >
+        Above 80% = capacity constraints → margin compression risk.
+        Below 78% (long-run average) = slack in the system, less inflation pressure.
+      scoring_rule: "70-78% → neutral | >82% → -30 (overheating) | <70% → -50 (deep contraction). Phase 3."
+
+  # ─── Capex & Orders ───────────────────────────────────────────────
+
+  - id: durable_goods_orders
+    name: "Durable Goods Orders (Total)"
+    fred_ticker: "DGORDER"
+    category: "activity"
+    page: "cycle"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_26th"
+    source_type: "fred"
+    history_years: 10
+    unit: "millions"
+    metadata:
+      what_it_measures: >
+        Advance Monthly Manufacturer's Report. New orders for manufactured
+        durable goods (expected lifespan > 3 years). Census, ~26th of month.
+      why_it_matters: >
+        Baumohl #9 most stock-sensitive. Core capex (nondefense ex-aircraft)
+        leads business investment and CapEx for industrials/semis.
+      scoring_rule: "MoM % change, 3-month trend. Phase 3."
+
+  - id: core_capex_orders
+    name: "Core Capex Orders (Nondefense Capital Goods ex-Aircraft)"
+    fred_ticker: "ACOGNO"
+    category: "activity"
+    page: "cycle"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_26th"
+    source_type: "fred"
+    history_years: 10
+    unit: "millions"
+    metadata:
+      what_it_measures: >
+        Manufacturers' New Orders: Nondefense Capital Goods Excluding Aircraft.
+        The "core capex" metric that feeds GDP nowcasts. Very forward-looking
+        for industrials/semis.
+      why_it_matters: >
+        Best leading indicator for business investment (capex). Rising 3+ months
+        = corporate confidence in earnings. Baumohl Tier 1 within Durable Goods.
+      scoring_rule: "3-month annualized trend. Phase 3."
+
+  - id: durable_goods_ex_transport
+    name: "Durable Goods Orders ex-Transportation & Defense"
+    fred_ticker: "ADXTNO"
+    category: "activity"
+    page: "cycle"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_26th"
+    source_type: "fred"
+    history_years: 10
+    unit: "millions"
+    metadata:
+      what_it_measures: "Durable goods orders excluding highly volatile transportation and defense orders."
+      why_it_matters: "Baumohl Tier 2 (#12). Cleaner signal than headline orders for underlying capex demand."
+      scoring_rule: "Phase 3."
+
+  - id: factory_orders
+    name: "Factory Orders (M3)"
+    fred_ticker: "AMTMNO"
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_1st_week"
+    source_type: "fred"
+    history_years: 10
+    unit: "millions"
+    metadata:
+      what_it_measures: >
+        Total new orders at manufacturing facilities (M3 survey), including
+        nondurable goods. Released ~week after durable goods advance report.
+      why_it_matters: "Full picture of manufacturing demand including nondurables."
+      scoring_rule: "Phase 3."
+
+  # ─── Inventories ──────────────────────────────────────────────────
+
+  - id: business_inventories
+    name: "Business Inventories"
+    fred_ticker: "BUSINV"
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "millions"
+    metadata:
+      what_it_measures: "Total business inventories (manufacturing, retail, wholesale). Census."
+      why_it_matters: "Rising inventory/sales ratio signals demand slowdown — companies sitting on unsold goods."
+      scoring_rule: "Phase 3."
+
+  - id: inventory_sales_ratio
+    name: "Inventory/Sales Ratio"
+    fred_ticker: "ISRATIO"
+    category: "activity"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "ratio"
+    metadata:
+      what_it_measures: >
+        Total business inventories to total business sales ratio. A ratio above
+        its historical range signals demand weakness.
+      why_it_matters: >
+        Inv/sales ratio > 1.45 historically = recession territory. Rising ratio
+        = companies cutting orders to work down excess stock.
+      scoring_rule: "Threshold vs historical: < 1.30 → +30 | 1.30-1.40 → 0 | > 1.45 → -50. Phase 3."
+
+  # ─── Small Business ───────────────────────────────────────────────
+
+  - id: nfib_optimism
+    name: "NFIB Small Business Optimism Index"
+    fred_ticker: null
+    category: "sentiment"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_2nd_tuesday"
+    source_type: "scraper"
+    scraper: "nfib"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        National Federation of Independent Business monthly survey of small
+        business conditions. 2nd Tuesday of month. Hiring plans subindex leads NFP.
+      why_it_matters: >
+        Small businesses employ ~50% of private sector workers. Hiring plans
+        subindex leads BLS payrolls by ~2-3 months. Below 98 (long-run average)
+        signals caution.
+      scoring_rule: "> 100 → +50 | 98-100 → +20 | 95-98 → -10 | 90-95 → -30 | < 90 → -60. Phase 3."
+
+  # ═══════════════════════════════════════════════════════════════════
+  # PAGE 5 — SECTOR ROTATION
+  # ═══════════════════════════════════════════════════════════════════
+
+  # ─── NFP (Labor — feeds Rotation and Fed pages) ────────────────────
+
+  - id: nfp_payrolls
+    name: "Non-Farm Payrolls (MoM change)"
+    fred_ticker: "PAYEMS"
+    category: "labor"
+    page: "cycle"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: >
+        BLS Employment Situation Report: net change in nonfarm payrolls. Monthly,
+        1st Friday 8:30 ET. Covers prior month employment.
+      why_it_matters: >
+        Baumohl's #1 most stock-sensitive indicator. Strong NFP = bullish
+        for equities except when economy at capacity (rate-fear dominates).
+        The single most market-moving monthly release.
+      scoring_rule: "MoM change vs trend. Phase 3."
+
+  - id: nfp_temp_help
+    name: "NFP: Temporary Help Services"
+    fred_ticker: "TEMPHELPS"
+    category: "labor"
+    page: "cycle"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: "Employment in temporary help services. Baumohl flags this as most cycle-sensitive within NFP."
+      why_it_matters: "Companies cut temps before permanent workers. Temp employment leads overall payrolls by 2-3 months."
+      scoring_rule: "YoY % change. Phase 3."
+
+  - id: nfp_trucks
+    name: "NFP: Truck Transportation"
+    fred_ticker: "CES4348400001"
+    category: "labor"
+    page: "rotation"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_first_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: "Employment in truck transportation. Baumohl Tier 2 (#20)."
+      why_it_matters: "Cycle-sensitive transport employment. Leads freight volumes."
+      scoring_rule: "Phase 3."
+
+  # ─── Housing (feeds Rotation) ──────────────────────────────────────
+
+  - id: housing_permits_1f
+    name: "Single-Family Housing Permits"
+    fred_ticker: "PERMIT1"
+    category: "housing"
+    page: "rotation"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_18th"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: >
+        New privately-owned housing units authorized by building permits:
+        1-unit structures. Census/HUD. Monthly ~18th 8:30 ET.
+      why_it_matters: >
+        Baumohl Tier 2 (#16). Most reliable housing leading indicator. Leads
+        starts by 3-6 months. Key for homebuilders, lumber, appliances.
+      scoring_rule: "YoY % change + level vs long-run. Phase 3."
+
+  - id: housing_starts
+    name: "Housing Starts (Total)"
+    fred_ticker: "HOUST"
+    category: "housing"
+    page: "rotation"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_18th"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: "Total new privately-owned housing starts. Census/HUD, monthly ~18th 8:30 ET."
+      why_it_matters: "Starts lag permits by 3-6 months. Rising starts = homebuilder, lumber, appliance demand."
+      scoring_rule: "Phase 3."
+
+  - id: housing_starts_1f
+    name: "Single-Family Housing Starts"
+    fred_ticker: "HOUST1F"
+    category: "housing"
+    page: "rotation"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_18th"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: "Single-family housing starts. More relevant for homebuilders than multi-family."
+      why_it_matters: "Single-family is the cyclically sensitive component. Multi-family is more urban/rental driven."
+      scoring_rule: "Phase 3."
+
+  - id: existing_home_sales
+    name: "Existing Home Sales"
+    fred_ticker: "EXHOSLUSM495S"
+    category: "housing"
+    page: "rotation"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_25th"
+    source_type: "fred"
+    history_years: 10
+    unit: "millions_saar"
+    metadata:
+      what_it_measures: "NAR existing home sales (seasonally adjusted annual rate). Monthly ~25th 10:00 ET."
+      why_it_matters: "Measures transaction volume of the resale market. Affects real estate commissions, mortgages."
+      scoring_rule: "Phase 3."
+
+  - id: new_home_sales
+    name: "New Home Sales"
+    fred_ticker: "HSN1F"
+    category: "housing"
+    page: "rotation"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_25th"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands_saar"
+    metadata:
+      what_it_measures: "Census new single-family home sales. Monthly ~25th 10:00 ET."
+      why_it_matters: "More timely than existing sales (signed contract vs. closed). New construction bellwether."
+      scoring_rule: "Phase 3."
+
+  - id: case_shiller_hpi
+    name: "S&P CoreLogic Case-Shiller HPI (National)"
+    fred_ticker: "CSUSHPISA"
+    category: "housing"
+    page: "rotation"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_last_tuesday"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: "S&P CoreLogic Case-Shiller U.S. National Home Price Index, seasonally adjusted."
+      why_it_matters: "Home price appreciation affects consumer net worth, spending, and mortgage credit quality."
+      scoring_rule: "Phase 3."
+
+  - id: nahb_traffic
+    name: "NAHB Prospective Buyer Traffic"
+    fred_ticker: null
+    category: "housing"
+    page: "rotation"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_3rd_wednesday"
+    source_type: "scraper"
+    scraper: "nahb"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        NAHB Housing Market Index sub-component: Traffic of Prospective Buyers.
+        Diffusion index: >50 = more traffic than expected.
+      why_it_matters: >
+        Most leading component of NAHB HMI. Leads starts and permits.
+        Baumohl Tier 2 (#18). Below 25 has historically preceded housing downturns.
+      scoring_rule: "> 50 → +60 | 40-50 → +20 | 30-40 → -20 | 20-30 → -50 | < 20 → -80. Phase 3."
+
+  # ─── Consumer ─────────────────────────────────────────────────────
+
+  - id: retail_sales
+    name: "Advance Retail Sales"
+    fred_ticker: "RSAFS"
+    category: "consumer"
+    page: "rotation"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "fred"
+    history_years: 10
+    unit: "millions"
+    metadata:
+      what_it_measures: >
+        Advance Monthly Retail and Food Services Sales. Census. Monthly ~mid-month
+        8:30 ET. Nominal sales including food services.
+      why_it_matters: >
+        Baumohl #6. Consumer demand pulse. The "control group" (ex-autos, gas,
+        food, building materials) feeds GDP nowcasts directly.
+      scoring_rule: "MoM + YoY change. Phase 3."
+
+  - id: pce
+    name: "Personal Consumption Expenditures"
+    fred_ticker: "PCE"
+    category: "consumer"
+    page: "rotation"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_end"
+    source_type: "fred"
+    history_years: 10
+    unit: "billions"
+    metadata:
+      what_it_measures: >
+        BEA personal consumption expenditures. Monthly, end-of-month 8:30 ET.
+        Broadest measure of consumer spending (goods + services).
+      why_it_matters: >
+        Baumohl #8. Real spending is the GDP backbone. Consumer is 70% of GDP.
+        Real PCE growth <1% annualized = recession territory.
+      scoring_rule: "Real YoY growth rate. Phase 3."
+
+  - id: pce_real_durable
+    name: "Real PCE: Durable Goods"
+    fred_ticker: "PCEDG"
+    category: "consumer"
+    page: "rotation"
+    tier: 2
+    weight: 2
+    frequency: "monthly"
+    release_pattern: "monthly_end"
+    source_type: "fred"
+    history_years: 10
+    unit: "billions"
+    metadata:
+      what_it_measures: "Real personal consumption expenditures in durable goods. BEA."
+      why_it_matters: "Baumohl Tier 2 (#15). Leads cyclical demand — consumer durables are postponable purchases."
+      scoring_rule: "Phase 3."
+
+  - id: consumer_confidence
+    name: "Conference Board Consumer Confidence Index"
+    fred_ticker: null
+    category: "sentiment"
+    page: "rotation"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_last_tuesday"
+    source_type: "scraper"
+    scraper: "conference_board"
+    history_years: 10
+    unit: "index"
+    data_note: "Conference Board pulled free FRED access ~2020. Scraper target: conference-board.org"
+    metadata:
+      what_it_measures: >
+        Conference Board Consumer Confidence Index. Monthly, last Tuesday 10:00 ET.
+        Surveys household assessments of current conditions and 6-month
+        expectations.
+      why_it_matters: >
+        Baumohl #7. Expectations subindex leads spending. Sharp drops historically
+        precede risk-off moves. CCI < 80 has historically coincided with recession.
+      scoring_rule: "Level + MoM change. Phase 3."
+
+  - id: umich_sentiment
+    name: "UMich Consumer Sentiment"
+    fred_ticker: "UMCSENT"
+    category: "sentiment"
+    page: "rotation"
+    tier: 1
+    weight: 3
+    frequency: "monthly"
+    release_pattern: "monthly_2nd_friday"
+    source_type: "fred"
+    history_years: 10
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        University of Michigan Consumer Sentiment Index. Preliminary mid-month,
+        final end-month. Surveys purchasing power and economic expectations.
+      why_it_matters: >
+        Baumohl #7. Expectations subindex leads spending. Widely market-moving
+        at release. Collapses in UMich sentiment historically precede recessions.
+      scoring_rule: "Z-score vs 3-year trailing + MoM momentum. Phase 3."
+
+  - id: consumer_credit
+    name: "Consumer Credit Outstanding"
+    fred_ticker: "TOTALSL"
+    category: "consumer"
+    page: "rotation"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_5th_business_day"
+    source_type: "fred"
+    history_years: 10
+    unit: "billions"
+    metadata:
+      what_it_measures: "Total consumer credit outstanding (revolving + non-revolving). Fed G.19."
+      why_it_matters: "Slowing consumer credit signals consumer stress or deleveraging. Leads retail sales."
+      scoring_rule: "Phase 3."
+
+  # ─── JOLTS ────────────────────────────────────────────────────────
+
+  - id: jolts_openings
+    name: "JOLTS: Job Openings"
+    fred_ticker: "JTSJOL"
+    category: "labor"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_variable"
+    source_type: "fred"
+    history_years: 10
+    unit: "thousands"
+    metadata:
+      what_it_measures: "BLS Job Openings and Labor Turnover Survey: job openings. Monthly, ~1 month lag."
+      why_it_matters: "Openings / unemployed ratio = tightness gauge. Openings falling = demand cooling."
+      scoring_rule: "Phase 3."
+
+  - id: jolts_quits_rate
+    name: "JOLTS: Quits Rate"
+    fred_ticker: "JTSQUR"
+    category: "labor"
+    page: "cycle"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_variable"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: "Quits rate from JOLTS. Workers voluntarily leaving jobs (%)."
+      why_it_matters: >
+        Best labor market tightness gauge. Workers only quit when they're
+        confident they'll find a better job. Quits rate >3% = very tight.
+        Falling quits rate = workers getting cautious.
+      scoring_rule: "> 3.0% → +20 | 2.5-3.0% → 0 | 2.0-2.5% → -20 | < 2.0% → -50. Phase 3."
+
+  # ─── Challenger (scraper) ─────────────────────────────────────────
+
+  - id: challenger_layoffs
+    name: "Challenger Layoff Announcements"
+    fred_ticker: null
+    category: "labor"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_1st_thursday"
+    source_type: "scraper"
+    scraper: "challenger"
+    history_years: 5
+    unit: "thousands"
+    metadata:
+      what_it_measures: >
+        Monthly planned layoff announcements compiled by Challenger, Gray &
+        Christmas. Released 1st Thursday of each month.
+      why_it_matters: >
+        Forward-looking labor indicator. Surge in announced layoffs leads actual
+        job losses by 1-3 months. Baumohl notes BLS Mass Layoffs discontinued
+        2013 — Challenger is the substitute.
+      scoring_rule: "YoY change + level vs trailing average. Phase 3."
+
+  # ─── Cass Freight (scraper) ───────────────────────────────────────
+
+  - id: cass_freight
+    name: "Cass Freight Index (Shipments)"
+    fred_ticker: null
+    category: "activity"
+    page: "pulse"
+    tier: 3
+    weight: 1
+    frequency: "monthly"
+    release_pattern: "monthly_mid"
+    source_type: "scraper"
+    scraper: "cass"
+    history_years: 5
+    unit: "index"
+    metadata:
+      what_it_measures: >
+        Cass Information Systems Freight Shipments Index. Monthly mid-month.
+        Measures freight transaction volumes (rail, truck, intermodal).
+      why_it_matters: >
+        Real-time truckload demand. Declining Cass freight = goods economy
+        contracting. Complement to AAR rail data.
+      scoring_rule: "YoY % change. Phase 3."
+
+  # ─── GDP ──────────────────────────────────────────────────────────
+
+  - id: gdp_real
+    name: "Real GDP (Advance Estimate)"
+    fred_ticker: "GDPC1"
+    category: "activity"
+    page: "cycle"
+    tier: 1
+    weight: 3
+    frequency: "quarterly"
+    release_pattern: "quarterly_advance"
+    source_type: "fred"
+    history_years: 10
+    unit: "billions"
+    metadata:
+      what_it_measures: >
+        Real Gross Domestic Product. BEA. Quarterly: Advance (~4 weeks after
+        quarter-end), Second (2 months), Third (3 months).
+      why_it_matters: >
+        Baumohl #10. Mostly priced in by release, but composition
+        (consumer vs. capex vs. inventory) drives sector rotation.
+        Negative real GDP for 2 quarters = technical recession.
+      scoring_rule: "Annualized growth rate: > 3% → +50 | 2-3% → +20 | 1-2% → 0 | 0-1% → -30 | <0% → -80. Phase 3."
+
+  - id: gdp_growth_rate
+    name: "Real GDP Growth Rate (QoQ annualized)"
+    fred_ticker: "A191RL1Q225SBEA"
+    category: "activity"
+    page: "cycle"
+    tier: 1
+    weight: 3
+    frequency: "quarterly"
+    release_pattern: "quarterly_advance"
+    source_type: "fred"
+    history_years: 10
+    unit: "percent"
+    metadata:
+      what_it_measures: "Real GDP percentage change (annualized), from BEA. Used for direct scoring."
+      why_it_matters: "Annualized growth rate is what's quoted in headlines. Two negative quarters = technical recession."
+      scoring_rule: "Same bands as gdp_real. Phase 3."

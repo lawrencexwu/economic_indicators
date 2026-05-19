@@ -1,0 +1,71 @@
+{
+  "id": "ism_services",
+  "name": "ISM Services PMI (Non-Manufacturing)",
+  "fred_ticker": null,
+  "category": "activity",
+  "page": "cycle",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "ISM Non-Manufacturing PMI covering services sector. Monthly, 3rd business day 10:00 ET. >50 = expansion. Services >2/3 of US economy.\n",
+    "why_it_matters": "Arguably should be Tier 1 today given services dominance. ISM Services holding above 52 while Mfg contracts = split economy (soft landing). ISM Services < 50 = broad-based contraction.\n",
+    "scoring_rule": "Same bands as ISM Mfg. Phase 3."
+  },
+  "score": null,
+  "current_value": 53.6,
+  "previous_value": 54.0,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 53.6
+    },
+    {
+      "date": "2026-03-01",
+      "value": 54.0
+    },
+    {
+      "date": "2026-02-01",
+      "value": 56.1
+    },
+    {
+      "date": "2026-01-01",
+      "value": 53.8
+    },
+    {
+      "date": "2025-12-01",
+      "value": 53.8
+    },
+    {
+      "date": "2025-11-01",
+      "value": 52.4
+    },
+    {
+      "date": "2025-10-01",
+      "value": 52.0
+    },
+    {
+      "date": "2025-09-01",
+      "value": 50.3
+    },
+    {
+      "date": "2025-08-01",
+      "value": 51.9
+    },
+    {
+      "date": "2025-07-01",
+      "value": 50.5
+    },
+    {
+      "date": "2025-06-01",
+      "value": 50.8
+    },
+    {
+      "date": "2025-05-01",
+      "value": 50.2
+    }
+  ]
+}

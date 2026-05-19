@@ -1,0 +1,71 @@
+{
+  "id": "ism_mfg",
+  "name": "ISM Manufacturing PMI",
+  "fred_ticker": null,
+  "category": "activity",
+  "page": "cycle",
+  "tier": 1,
+  "weight": 3,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "Diffusion index of new orders, production, employment, inventories, prices. ISM. Monthly, 1st business day 10:00 ET. >50 = expansion.\n",
+    "why_it_matters": "Baumohl's #2 most stock-sensitive indicator. New Orders subindex is the most forward-looking component; leads headline by ~3 months. ISM Mfg <48 for 3+ months historically signals earnings contraction.\n",
+    "scoring_rule": "Headline: > 55 \u2192 +70 | 52-55 \u2192 +40 | 50-52 \u2192 +10 | 48-50 \u2192 -20 | 45-48 \u2192 -50 | < 45 \u2192 -80. New Orders weighted higher. Phase 3.\n"
+  },
+  "score": null,
+  "current_value": 52.7,
+  "previous_value": 52.7,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 52.7
+    },
+    {
+      "date": "2026-03-01",
+      "value": 52.7
+    },
+    {
+      "date": "2026-02-01",
+      "value": 52.4
+    },
+    {
+      "date": "2026-01-01",
+      "value": 52.6
+    },
+    {
+      "date": "2025-12-01",
+      "value": 47.9
+    },
+    {
+      "date": "2025-11-01",
+      "value": 48.0
+    },
+    {
+      "date": "2025-10-01",
+      "value": 48.8
+    },
+    {
+      "date": "2025-09-01",
+      "value": 48.9
+    },
+    {
+      "date": "2025-08-01",
+      "value": 48.9
+    },
+    {
+      "date": "2025-07-01",
+      "value": 48.4
+    },
+    {
+      "date": "2025-06-01",
+      "value": 49.0
+    },
+    {
+      "date": "2025-05-01",
+      "value": 48.6
+    }
+  ]
+}

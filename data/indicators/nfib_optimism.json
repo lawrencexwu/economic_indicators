@@ -1,0 +1,31 @@
+{
+  "id": "nfib_optimism",
+  "name": "NFIB Small Business Optimism Index",
+  "fred_ticker": null,
+  "category": "sentiment",
+  "page": "cycle",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "National Federation of Independent Business monthly survey of small business conditions. 2nd Tuesday of month. Hiring plans subindex leads NFP.\n",
+    "why_it_matters": "Small businesses employ ~50% of private sector workers. Hiring plans subindex leads BLS payrolls by ~2-3 months. Below 98 (long-run average) signals caution.\n",
+    "scoring_rule": "> 100 \u2192 +50 | 98-100 \u2192 +20 | 95-98 \u2192 -10 | 90-95 \u2192 -30 | < 90 \u2192 -60. Phase 3."
+  },
+  "score": null,
+  "current_value": 95.9,
+  "previous_value": 95.8,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 95.9
+    },
+    {
+      "date": "2026-03-01",
+      "value": 95.8
+    }
+  ]
+}

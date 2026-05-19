@@ -1,0 +1,74 @@
+{
+  "id": "existing_home_sales",
+  "name": "Existing Home Sales",
+  "fred_ticker": "EXHOSLUSM495S",
+  "category": "housing",
+  "page": "rotation",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "fred",
+  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "current_value": 4020000.0,
+  "previous_value": 4010000.0,
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 4020000.0
+    },
+    {
+      "date": "2026-03-01",
+      "value": 4010000.0
+    },
+    {
+      "date": "2026-02-01",
+      "value": 4130000.0
+    },
+    {
+      "date": "2026-01-01",
+      "value": 4020000.0
+    },
+    {
+      "date": "2025-12-01",
+      "value": 4270000.0
+    },
+    {
+      "date": "2025-11-01",
+      "value": 4090000.0
+    },
+    {
+      "date": "2025-10-01",
+      "value": 4110000.0
+    },
+    {
+      "date": "2025-09-01",
+      "value": 4080000.0
+    },
+    {
+      "date": "2025-08-01",
+      "value": 4030000.0
+    },
+    {
+      "date": "2025-07-01",
+      "value": 4030000.0
+    },
+    {
+      "date": "2025-06-01",
+      "value": 3980000.0
+    },
+    {
+      "date": "2025-05-01",
+      "value": 4040000.0
+    },
+    {
+      "date": "2025-04-01",
+      "value": 4020000.0
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "NAR existing home sales (seasonally adjusted annual rate). Monthly ~25th 10:00 ET.",
+    "why_it_matters": "Measures transaction volume of the resale market. Affects real estate commissions, mortgages.",
+    "scoring_rule": "Phase 3."
+  },
+  "score": null
+}

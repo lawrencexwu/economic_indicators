@@ -1,0 +1,39 @@
+{
+  "id": "ism_services_new_orders",
+  "name": "ISM Services New Orders",
+  "fred_ticker": null,
+  "category": "activity",
+  "page": "cycle",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "ISM Services New Orders subindex. Forward-looking services demand.",
+    "why_it_matters": "Leading component for services sector. Divergence from headline signals turning point.",
+    "scoring_rule": "Phase 3."
+  },
+  "score": null,
+  "current_value": 53.5,
+  "previous_value": 60.6,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 53.5
+    },
+    {
+      "date": "2026-03-01",
+      "value": 60.6
+    },
+    {
+      "date": "2026-02-01",
+      "value": 58.6
+    },
+    {
+      "date": "2026-01-01",
+      "value": 53.1
+    }
+  ]
+}

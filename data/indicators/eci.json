@@ -1,0 +1,186 @@
+{
+  "id": "eci",
+  "name": "Employment Cost Index",
+  "fred_ticker": "ECIWAG",
+  "category": "labor",
+  "page": "fed",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "quarterly",
+  "source_type": "fred",
+  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "current_value": 177.498,
+  "previous_value": 176.233,
+  "data": [
+    {
+      "date": "2026-01-01",
+      "value": 177.498
+    },
+    {
+      "date": "2025-10-01",
+      "value": 176.233
+    },
+    {
+      "date": "2025-07-01",
+      "value": 174.948
+    },
+    {
+      "date": "2025-04-01",
+      "value": 173.563
+    },
+    {
+      "date": "2025-01-01",
+      "value": 171.8
+    },
+    {
+      "date": "2024-10-01",
+      "value": 170.5
+    },
+    {
+      "date": "2024-07-01",
+      "value": 168.9
+    },
+    {
+      "date": "2024-04-01",
+      "value": 167.6
+    },
+    {
+      "date": "2024-01-01",
+      "value": 166.2
+    },
+    {
+      "date": "2023-10-01",
+      "value": 164.4
+    },
+    {
+      "date": "2023-07-01",
+      "value": 162.8
+    },
+    {
+      "date": "2023-04-01",
+      "value": 161.1
+    },
+    {
+      "date": "2023-01-01",
+      "value": 159.4
+    },
+    {
+      "date": "2022-10-01",
+      "value": 157.6
+    },
+    {
+      "date": "2022-07-01",
+      "value": 155.8
+    },
+    {
+      "date": "2022-04-01",
+      "value": 154.0
+    },
+    {
+      "date": "2022-01-01",
+      "value": 151.7
+    },
+    {
+      "date": "2021-10-01",
+      "value": 149.9
+    },
+    {
+      "date": "2021-07-01",
+      "value": 148.0
+    },
+    {
+      "date": "2021-04-01",
+      "value": 145.8
+    },
+    {
+      "date": "2021-01-01",
+      "value": 144.5
+    },
+    {
+      "date": "2020-10-01",
+      "value": 142.8
+    },
+    {
+      "date": "2020-07-01",
+      "value": 141.6
+    },
+    {
+      "date": "2020-04-01",
+      "value": 140.8
+    },
+    {
+      "date": "2020-01-01",
+      "value": 140.3
+    },
+    {
+      "date": "2019-10-01",
+      "value": 138.9
+    },
+    {
+      "date": "2019-07-01",
+      "value": 137.9
+    },
+    {
+      "date": "2019-04-01",
+      "value": 136.8
+    },
+    {
+      "date": "2019-01-01",
+      "value": 135.8
+    },
+    {
+      "date": "2018-10-01",
+      "value": 134.9
+    },
+    {
+      "date": "2018-07-01",
+      "value": 133.9
+    },
+    {
+      "date": "2018-04-01",
+      "value": 132.8
+    },
+    {
+      "date": "2018-01-01",
+      "value": 132.0
+    },
+    {
+      "date": "2017-10-01",
+      "value": 130.8
+    },
+    {
+      "date": "2017-07-01",
+      "value": 129.9
+    },
+    {
+      "date": "2017-04-01",
+      "value": 129.0
+    },
+    {
+      "date": "2017-01-01",
+      "value": 128.2
+    },
+    {
+      "date": "2016-10-01",
+      "value": 127.3
+    },
+    {
+      "date": "2016-07-01",
+      "value": 126.6
+    },
+    {
+      "date": "2016-04-01",
+      "value": 126.0
+    },
+    {
+      "date": "2016-01-01",
+      "value": 125.1
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "Quarterly measure of total compensation costs for civilian workers. Fed's preferred wage gauge. Released end of January, April, July, October.\n",
+    "why_it_matters": "Wages are the biggest input cost for services inflation. The Fed watches ECI closely \u2014 if wage growth stays above ~3.5% annualized, services inflation is hard to bring to 2%.\n",
+    "scoring_rule": "Annualized: < 3.0% \u2192 +60 | 3.0-3.5% \u2192 +20 | 3.5-4.0% \u2192 -20 | 4.0-5.0% \u2192 -50 | > 5.0% \u2192 -80. Phase 3.\n"
+  },
+  "score": null
+}

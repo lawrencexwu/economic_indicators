@@ -1,0 +1,167 @@
+{
+  "id": "nahb_traffic",
+  "name": "NAHB Prospective Buyer Traffic",
+  "fred_ticker": null,
+  "category": "housing",
+  "page": "rotation",
+  "tier": 2,
+  "weight": 2,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "NAHB Housing Market Index sub-component: Traffic of Prospective Buyers. Diffusion index: >50 = more traffic than expected.\n",
+    "why_it_matters": "Most leading component of NAHB HMI. Leads starts and permits. Baumohl Tier 2 (#18). Below 25 has historically preceded housing downturns.\n",
+    "scoring_rule": "> 50 \u2192 +60 | 40-50 \u2192 +20 | 30-40 \u2192 -20 | 20-30 \u2192 -50 | < 20 \u2192 -80. Phase 3."
+  },
+  "score": null,
+  "current_value": 25.0,
+  "previous_value": 22.0,
+  "release_date": "2026-05-01",
+  "data": [
+    {
+      "date": "2026-05-01",
+      "value": 25.0
+    },
+    {
+      "date": "2026-04-01",
+      "value": 22.0
+    },
+    {
+      "date": "2026-03-01",
+      "value": 25.0
+    },
+    {
+      "date": "2026-02-01",
+      "value": 22.0
+    },
+    {
+      "date": "2026-01-01",
+      "value": 23.0
+    },
+    {
+      "date": "2025-12-01",
+      "value": 26.0
+    },
+    {
+      "date": "2025-11-01",
+      "value": 26.0
+    },
+    {
+      "date": "2025-09-01",
+      "value": 21.0
+    },
+    {
+      "date": "2025-08-01",
+      "value": 22.0
+    },
+    {
+      "date": "2025-07-01",
+      "value": 20.0
+    },
+    {
+      "date": "2025-06-01",
+      "value": 21.0
+    },
+    {
+      "date": "2025-04-01",
+      "value": 25.0
+    },
+    {
+      "date": "2025-01-01",
+      "value": 33.0
+    },
+    {
+      "date": "2024-12-01",
+      "value": 31.0
+    },
+    {
+      "date": "2024-11-01",
+      "value": 32.0
+    },
+    {
+      "date": "2024-10-01",
+      "value": 29.0
+    },
+    {
+      "date": "2024-09-01",
+      "value": 27.0
+    },
+    {
+      "date": "2024-08-01",
+      "value": 25.0
+    },
+    {
+      "date": "2024-07-01",
+      "value": 27.0
+    },
+    {
+      "date": "2024-06-01",
+      "value": 28.0
+    },
+    {
+      "date": "2024-05-01",
+      "value": 30.0
+    },
+    {
+      "date": "2024-04-01",
+      "value": 35.0
+    },
+    {
+      "date": "2023-12-01",
+      "value": 45.0
+    },
+    {
+      "date": "2023-05-01",
+      "value": 33.0
+    },
+    {
+      "date": "2023-04-01",
+      "value": 31.0
+    },
+    {
+      "date": "2023-03-01",
+      "value": 31.0
+    },
+    {
+      "date": "2022-12-01",
+      "value": 20.0
+    },
+    {
+      "date": "2022-12-01",
+      "value": 60.0
+    },
+    {
+      "date": "2022-11-01",
+      "value": 20.0
+    },
+    {
+      "date": "2022-10-01",
+      "value": 25.0
+    },
+    {
+      "date": "2022-09-01",
+      "value": 31.0
+    },
+    {
+      "date": "2022-08-01",
+      "value": 32.0
+    },
+    {
+      "date": "2022-07-01",
+      "value": 37.0
+    },
+    {
+      "date": "2022-05-01",
+      "value": 52.0
+    },
+    {
+      "date": "2022-02-01",
+      "value": 65.0
+    },
+    {
+      "date": "2022-01-01",
+      "value": 69.0
+    }
+  ]
+}

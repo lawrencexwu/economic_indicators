@@ -1,0 +1,39 @@
+{
+  "id": "ism_mfg_employment",
+  "name": "ISM Manufacturing Employment",
+  "fred_ticker": null,
+  "category": "labor",
+  "page": "cycle",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "ISM Manufacturing Employment subindex. Hiring/firing in manufacturing.",
+    "why_it_matters": "Leads BLS manufacturing employment. Below 50 = manufacturing contraction in labor.",
+    "scoring_rule": "Phase 3."
+  },
+  "score": null,
+  "current_value": 46.4,
+  "previous_value": 48.7,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 46.4
+    },
+    {
+      "date": "2026-03-01",
+      "value": 48.7
+    },
+    {
+      "date": "2026-02-01",
+      "value": 48.8
+    },
+    {
+      "date": "2026-01-01",
+      "value": 48.1
+    }
+  ]
+}

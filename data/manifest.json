@@ -1,8 +1,29 @@
 {
-  "last_run": null,
-  "n_succeeded": 0,
-  "n_failed": 0,
-  "n_skipped": 0,
-  "errors": [],
-  "indicators": {}
+  "last_run": "2026-05-19T05:27:44.553090+00:00",
+  "n_succeeded": 1,
+  "n_failed": 3,
+  "n_skipped": 70,
+  "errors": [
+    {
+      "id": "mba_purchase",
+      "scraper": "mba",
+      "error": "MBA: Cloudflare blocked access to mba.org. This may work in GitHub Actions with a different IP."
+    },
+    {
+      "id": "mba_refi",
+      "scraper": "mba",
+      "error": "MBA: Cloudflare blocked access to mba.org. This may work in GitHub Actions with a different IP."
+    },
+    {
+      "id": "aar_carloads",
+      "scraper": "aar",
+      "error": "AAR: article https://www.aar.org/news/aar-reports-weekly-rail-traffic-for-the-week-ending-may-9-2026/ returned 429 (1168 bytes). aar.org blocks direct article access from this IP (429/Cloudflare). This scraper may work in GitHub Actions with a different IP."
+    }
+  ],
+  "indicators": {
+    "cass_freight": {
+      "status": "ok",
+      "last_updated": "2026-05-19T05:27:44.553090+00:00"
+    }
+  }
 }

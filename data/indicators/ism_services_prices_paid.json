@@ -1,0 +1,39 @@
+{
+  "id": "ism_services_prices_paid",
+  "name": "ISM Services Prices Paid",
+  "fred_ticker": null,
+  "category": "inflation",
+  "page": "cycle",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "monthly",
+  "source_type": "scraper",
+  "last_updated": "2026-05-19T05:17:44.417898+00:00",
+  "metadata": {
+    "what_it_measures": "ISM Services Prices Paid subindex. Input cost pressures in services.",
+    "why_it_matters": "Services inflation is wage-driven. Watch 60 threshold \u2014 above it signals persistent services CPI.",
+    "scoring_rule": "Phase 3."
+  },
+  "score": null,
+  "current_value": 70.7,
+  "previous_value": 70.7,
+  "release_date": "2026-04-01",
+  "data": [
+    {
+      "date": "2026-04-01",
+      "value": 70.7
+    },
+    {
+      "date": "2026-03-01",
+      "value": 70.7
+    },
+    {
+      "date": "2026-02-01",
+      "value": 63.0
+    },
+    {
+      "date": "2026-01-01",
+      "value": 66.6
+    }
+  ]
+}

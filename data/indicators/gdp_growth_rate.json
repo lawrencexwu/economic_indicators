@@ -1,0 +1,186 @@
+{
+  "id": "gdp_growth_rate",
+  "name": "Real GDP Growth Rate (QoQ annualized)",
+  "fred_ticker": "A191RL1Q225SBEA",
+  "category": "activity",
+  "page": "cycle",
+  "tier": 1,
+  "weight": 3,
+  "frequency": "quarterly",
+  "source_type": "fred",
+  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "current_value": 2.0,
+  "previous_value": 0.5,
+  "data": [
+    {
+      "date": "2026-01-01",
+      "value": 2.0
+    },
+    {
+      "date": "2025-10-01",
+      "value": 0.5
+    },
+    {
+      "date": "2025-07-01",
+      "value": 4.4
+    },
+    {
+      "date": "2025-04-01",
+      "value": 3.8
+    },
+    {
+      "date": "2025-01-01",
+      "value": -0.6
+    },
+    {
+      "date": "2024-10-01",
+      "value": 1.9
+    },
+    {
+      "date": "2024-07-01",
+      "value": 3.3
+    },
+    {
+      "date": "2024-04-01",
+      "value": 3.6
+    },
+    {
+      "date": "2024-01-01",
+      "value": 0.8
+    },
+    {
+      "date": "2023-10-01",
+      "value": 3.4
+    },
+    {
+      "date": "2023-07-01",
+      "value": 4.7
+    },
+    {
+      "date": "2023-04-01",
+      "value": 2.5
+    },
+    {
+      "date": "2023-01-01",
+      "value": 2.9
+    },
+    {
+      "date": "2022-10-01",
+      "value": 2.8
+    },
+    {
+      "date": "2022-07-01",
+      "value": 2.9
+    },
+    {
+      "date": "2022-04-01",
+      "value": 0.6
+    },
+    {
+      "date": "2022-01-01",
+      "value": -1.0
+    },
+    {
+      "date": "2021-10-01",
+      "value": 7.0
+    },
+    {
+      "date": "2021-07-01",
+      "value": 3.3
+    },
+    {
+      "date": "2021-04-01",
+      "value": 7.0
+    },
+    {
+      "date": "2021-01-01",
+      "value": 5.7
+    },
+    {
+      "date": "2020-10-01",
+      "value": 4.6
+    },
+    {
+      "date": "2020-07-01",
+      "value": 34.9
+    },
+    {
+      "date": "2020-04-01",
+      "value": -28.0
+    },
+    {
+      "date": "2020-01-01",
+      "value": -5.2
+    },
+    {
+      "date": "2019-10-01",
+      "value": 2.8
+    },
+    {
+      "date": "2019-07-01",
+      "value": 4.8
+    },
+    {
+      "date": "2019-04-01",
+      "value": 3.4
+    },
+    {
+      "date": "2019-01-01",
+      "value": 2.5
+    },
+    {
+      "date": "2018-10-01",
+      "value": 0.6
+    },
+    {
+      "date": "2018-07-01",
+      "value": 2.5
+    },
+    {
+      "date": "2018-04-01",
+      "value": 2.1
+    },
+    {
+      "date": "2018-01-01",
+      "value": 3.3
+    },
+    {
+      "date": "2017-10-01",
+      "value": 4.6
+    },
+    {
+      "date": "2017-07-01",
+      "value": 3.2
+    },
+    {
+      "date": "2017-04-01",
+      "value": 2.3
+    },
+    {
+      "date": "2017-01-01",
+      "value": 2.0
+    },
+    {
+      "date": "2016-10-01",
+      "value": 2.2
+    },
+    {
+      "date": "2016-07-01",
+      "value": 2.9
+    },
+    {
+      "date": "2016-04-01",
+      "value": 1.3
+    },
+    {
+      "date": "2016-01-01",
+      "value": 2.3
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "Real GDP percentage change (annualized), from BEA. Used for direct scoring.",
+    "why_it_matters": "Annualized growth rate is what's quoted in headlines. Two negative quarters = technical recession.",
+    "scoring_rule": "Same bands as gdp_real. Phase 3."
+  },
+  "score": null
+}

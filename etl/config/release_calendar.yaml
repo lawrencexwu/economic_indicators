@@ -1,4 +1,168 @@
-# Release calendar patterns. Populated in Phase 2.
-# Used by orchestrator to decide whether to attempt a fetch.
+# Release calendar patterns
+# Used by orchestrator to:
+#   1. Compute next_expected_release for UI display
+#   2. Skip fetch if data is fresh and next release hasn't come yet
+#
+# freshness_hours: how old data must be before we even attempt a re-fetch
+#   (prevents hammering FRED/scrapers when data hasn't changed)
 
-releases: []  # placeholder — see Phase 2
+patterns:
+
+  daily:
+    description: "Updated every business day"
+    freshness_hours: 2
+    indicators: [yield_curve_10y3m, yield_curve_10y2y, breakeven_5y, fed_funds_rate]
+
+  weekly_thursday:
+    description: "Released every Thursday 8:30 ET (DOL claims)"
+    freshness_hours: 12
+    release_day: "thursday"
+    release_time_et: "08:30"
+    indicators: [claims_4wma, initial_claims, continuing_claims]
+
+  weekly_wednesday:
+    description: "Released every Wednesday (MBA mortgage apps 7:00 ET, AAR rail)"
+    freshness_hours: 12
+    release_day: "wednesday"
+    release_time_et: "07:00"
+    indicators: [mba_purchase, mba_refi, aar_carloads]
+
+  weekly_friday:
+    description: "Released every Friday (H.8 bank data 16:15 ET)"
+    freshness_hours: 12
+    release_day: "friday"
+    release_time_et: "16:15"
+    indicators: [ci_loans, total_loans]
+
+  monthly_first_friday:
+    description: "First Friday of month 8:30 ET (BLS Employment Situation)"
+    freshness_hours: 24
+    pattern: "first_friday"
+    release_time_et: "08:30"
+    indicators: [nfp_payrolls, unemployment_rate, avg_hourly_earnings, nfp_temp_help, nfp_trucks, sahm_rule, unemp_longterm, labor_force_participation, unemployment_u6]
+
+  monthly_1st_business_day:
+    description: "First business day of month 10:00 ET (ISM Manufacturing)"
+    freshness_hours: 24
+    pattern: "first_business_day"
+    release_time_et: "10:00"
+    indicators: [ism_mfg, ism_mfg_new_orders, ism_mfg_production, ism_mfg_employment, ism_mfg_customer_inv, ism_mfg_prices_paid]
+
+  monthly_3rd_business_day:
+    description: "Third business day of month 10:00 ET (ISM Services)"
+    freshness_hours: 24
+    pattern: "third_business_day"
+    release_time_et: "10:00"
+    indicators: [ism_services, ism_services_new_orders, ism_services_prices_paid]
+
+  monthly_1st_thursday:
+    description: "First Thursday of month (Challenger layoffs)"
+    freshness_hours: 24
+    pattern: "first_thursday"
+    indicators: [challenger_layoffs]
+
+  monthly_2nd_tuesday:
+    description: "Second Tuesday of month (NFIB)"
+    freshness_hours: 24
+    pattern: "second_tuesday"
+    indicators: [nfib_optimism]
+
+  monthly_2nd_friday:
+    description: "Second Friday preliminary / end-month final (UMich)"
+    freshness_hours: 24
+    pattern: "second_friday"
+    indicators: [umich_sentiment]
+
+  monthly_mid:
+    description: "Mid-month releases 8:30 ET (CPI, PPI, Retail Sales, IP)"
+    freshness_hours: 24
+    indicators: [cpi_core, cpi_headline, ppi_final_demand, retail_sales, industrial_production, capacity_utilization, business_inventories, case_shiller_hpi, cass_freight]
+
+  monthly_15th:
+    description: "Around 15th of month (Empire State 8:30 ET)"
+    freshness_hours: 24
+    release_time_et: "08:30"
+    indicators: [empire_state_mfg]
+
+  monthly_3rd_wednesday:
+    description: "Third Wednesday of month (NAHB)"
+    freshness_hours: 24
+    pattern: "third_wednesday"
+    indicators: [nahb_index, nahb_traffic]
+
+  monthly_3rd_thursday:
+    description: "Third Thursday of month (Philly Fed 8:30 ET, CB LEI)"
+    freshness_hours: 24
+    release_time_et: "08:30"
+    indicators: [philly_fed_mfg, lei]
+
+  monthly_4th_tuesday:
+    description: "Fourth Tuesday of month (Richmond Fed)"
+    freshness_hours: 24
+    pattern: "fourth_tuesday"
+    indicators: [richmond_fed_mfg]
+
+  monthly_last_monday:
+    description: "Last Monday of month (CFNAI)"
+    freshness_hours: 24
+    pattern: "last_monday"
+    indicators: [cfnai_ma3, cfnai]
+
+  monthly_last_tuesday:
+    description: "Last Tuesday of month (Conference Board CCI, Case-Shiller)"
+    freshness_hours: 24
+    pattern: "last_tuesday"
+    indicators: [consumer_confidence]
+
+  monthly_last_thursday:
+    description: "Last Thursday of month (KC Fed)"
+    freshness_hours: 24
+    pattern: "last_thursday"
+    indicators: [kc_fed_mfg]
+
+  monthly_18th:
+    description: "Around 18th of month 8:30 ET (Housing Starts, Permits)"
+    freshness_hours: 24
+    indicators: [housing_starts, housing_starts_1f, housing_permits_1f]
+
+  monthly_25th:
+    description: "Around 25th of month (Existing & New Home Sales 10:00 ET)"
+    freshness_hours: 24
+    release_time_et: "10:00"
+    indicators: [existing_home_sales, new_home_sales]
+
+  monthly_26th:
+    description: "Around 26th of month 8:30 ET (Durable Goods, Core Capex)"
+    freshness_hours: 24
+    release_time_et: "08:30"
+    indicators: [durable_goods_orders, core_capex_orders, durable_goods_ex_transport]
+
+  monthly_end:
+    description: "End of month 8:30 ET (PCE, Core PCE)"
+    freshness_hours: 24
+    indicators: [pce, pce_deflator, core_pce]
+
+  monthly_5th_business_day:
+    description: "5th business day of month (Consumer Credit)"
+    freshness_hours: 24
+    indicators: [consumer_credit]
+
+  monthly_1st_week:
+    description: "First week of month (Factory Orders)"
+    freshness_hours: 24
+    indicators: [factory_orders]
+
+  monthly_variable:
+    description: "Variable release date (JOLTS ~1mo lag, Recession Prob)"
+    freshness_hours: 24
+    indicators: [jolts_openings, jolts_quits_rate, ny_fed_recession_prob, inventory_sales_ratio]
+
+  quarterly_end_month:
+    description: "End of January, April, July, October (ECI)"
+    freshness_hours: 72
+    indicators: [eci]
+
+  quarterly_advance:
+    description: "~4 weeks after quarter-end (GDP advance estimate)"
+    freshness_hours: 72
+    indicators: [gdp_real, gdp_growth_rate]
