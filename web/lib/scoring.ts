@@ -741,6 +741,15 @@ const SCORING_MAP: Record<string, ScoringFn> = {
   gdp_real: scoreGDPReal,
   gdp_growth_rate: scoreGDPGrowth,
   // lei, consumer_confidence, richmond_fed, kc_fed, dallas_fed: scrapers not yet implemented → null
+
+  // ── Fiscal page ───────────────────────────────────────────────────────────
+  debt_to_gdp: scoreDebtToGDP,
+  interest_to_gdp: scoreInterestToGDP,
+  interest_to_receipts: scoreInterestToReceipts,
+  primary_deficit_pct: scorePrimaryDeficit,
+  fed_balance_to_gdp: scoreFedBalanceToGDP,
+  tic_foreign_holdings: scoreTICForeignHoldings,
+  dxy_index: scoreDXY,
 };
 
 // ── Description map ───────────────────────────────────────────────────────────
@@ -782,6 +791,84 @@ const GDP_GROWTH_TIERS: Tier[]   = [[3.0,50],[2.0,20],[1.0,0],[0.0,-30],[-Infini
 const FED_FUNDS_TIERS: Tier[]    = [[5.5,-70],[4.5,-40],[3.5,-20],[2.5,0],[1.5,30],[-Infinity,60]];
 const AAR_TIERS: Tier[]          = [[5,30],[0,10],[-2,-10],[-5,-30],[-Infinity,-60]];
 const CASS_TIERS: Tier[]         = [[5,30],[0,0],[-5,-30],[-Infinity,-60]];
+const DEBT_GDP_TIERS: Tier[]     = [[130,-40],[100,-20],[70,0],[-Infinity,20]];
+const INTEREST_GDP_TIERS: Tier[] = [[4,-60],[3,-30],[2,-10],[-Infinity,10]];
+const INTEREST_RCV_TIERS: Tier[] = [[20,-60],[15,-30],[10,-10],[-Infinity,20]];
+const PRIMARY_DEF_TIERS: Tier[]  = [[5,-40],[3,-20],[-3,0],[-Infinity,30]];
+
+// ── Fiscal scoring functions ──────────────────────────────────────────────────
+
+function scoreDebtToGDP(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  if (v > 130) return -40;
+  if (v > 100) return -20;
+  if (v > 70) return 0;
+  return 20;
+}
+
+function scoreInterestToGDP(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  if (v > 4) return -60;
+  if (v > 3) return -30;
+  if (v > 2) return -10;
+  return 10;
+}
+
+function scoreInterestToReceipts(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  if (v > 20) return -60;
+  if (v > 15) return -30;
+  if (v > 10) return -10;
+  return 20;
+}
+
+function scorePrimaryDeficit(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  if (v > 5) return -40;
+  if (v > 3) return -20;
+  if (v > -3) return 0;
+  return 30;
+}
+
+function scoreFedBalanceToGDP(ind: Indicator): number | null {
+  // Weekly data — use 52 weeks ≈ 1 year for YoY change in pp
+  if (ind.data.length < 52) return null;
+  const curr = ind.data[0].value;
+  const prev = ind.data[51].value;
+  if (!prev) return null;
+  const change = curr - prev; // pp change
+  if (change > 5) return -30;
+  if (change > 2) return -15;
+  if (change > -2) return 0;
+  if (change > -5) return 15;
+  return 30;
+}
+
+function scoreTICForeignHoldings(ind: Indicator): number | null {
+  // Monthly — use 12 months for YoY % change
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  if (pct > 5) return 20;
+  if (pct > 0) return 10;
+  if (pct > -5) return -10;
+  if (pct > -10) return -20;
+  return -40;
+}
+
+function scoreDXY(ind: Indicator): number | null {
+  // Weekly — use 26 weeks ≈ 6 months for % change
+  const pct = yoy(ind.data, 26);
+  if (pct === null) return null;
+  if (pct > 5) return -30;
+  if (pct > 2) return -15;
+  if (pct > -2) return 0;
+  if (pct > -5) return 15;
+  return 30;
+}
 
 function describeLevel(v: number, tiers: Tier[], decimals = 1): string {
   const band = describeThresholdBand(v, tiers);
@@ -960,6 +1047,36 @@ const DESCRIPTION_MAP: Record<string, DescribeFn> = {
     const adj = rising ? -10 : 10;
     return `Level: ${v.toFixed(1)}% → base ${fmtScore(base)} ${rising ? "↑rising" : "↓stable"} → ${fmtScore(clamp(base + adj))}`;
   },
+
+  // ── Fiscal ────────────────────────────────────────────────────────────────
+  debt_to_gdp: (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, DEBT_GDP_TIERS, 1),
+  interest_to_gdp: (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, INTEREST_GDP_TIERS, 2),
+  interest_to_receipts: (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, INTEREST_RCV_TIERS, 1),
+  primary_deficit_pct: (ind) => ind.current_value === null ? null : describeLevel(ind.current_value, PRIMARY_DEF_TIERS, 2),
+  fed_balance_to_gdp: (ind) => {
+    if (ind.data.length < 52) return null;
+    const curr = ind.data[0].value;
+    const prev = ind.data[51].value;
+    if (!prev) return null;
+    const change = curr - prev;
+    const sign = change >= 0 ? "+" : "";
+    const score = scoreFedBalanceToGDP(ind);
+    return `YoY Δ: ${sign}${change.toFixed(1)}pp (${curr.toFixed(1)}% of GDP) → ${fmtScore(score)}`;
+  },
+  tic_foreign_holdings: (ind) => {
+    const pct = yoy(ind.data, 12);
+    if (pct === null) return null;
+    const sign = pct >= 0 ? "+" : "";
+    const score = scoreTICForeignHoldings(ind);
+    return `YoY: ${sign}${fmtPct(pct)} → ${fmtScore(score)}`;
+  },
+  dxy_index: (ind) => {
+    const pct = yoy(ind.data, 26);
+    if (pct === null) return null;
+    const sign = pct >= 0 ? "+" : "";
+    const score = scoreDXY(ind);
+    return `6m change: ${sign}${fmtPct(pct)} → ${fmtScore(score)}`;
+  },
 };
 
 export function describeScore(ind: Indicator): string | null {
@@ -1074,6 +1191,45 @@ export function formatValue(ind: Indicator): string {
   }
   // Default: numeric with 1 decimal
   return v.toFixed(1);
+}
+
+// Mirrors etl/src/scoring.py transform logic so the histogram shows the same
+// values that were z-scored in the ETL.
+const YOY_PERIODS: Record<string, number> = {
+  daily: 252, weekly: 52, quarterly: 4, monthly: 12, annual: 1,
+};
+const WINDOW_10Y_PERIODS: Record<string, number> = {
+  daily: 2520, weekly: 520, quarterly: 40, monthly: 120, annual: 10,
+};
+
+/**
+ * Returns the array of transformed values used for z-scoring, windowed the
+ * same way the ETL does. Pass to IndicatorHistogram as `values`.
+ * Returns null when there is insufficient data.
+ */
+export function getHistogramValues(ind: Indicator): number[] | null {
+  if (!ind.zscore) return null;
+  const { transform, window } = ind.zscore;
+  const freq = ind.frequency ?? "monthly";
+  const raw = ind.data.map((d) => d.value).filter((v): v is number => v !== null && v !== undefined);
+  if (raw.length < 4) return null;
+
+  let level: number[];
+  if (transform === "yoy") {
+    const n = YOY_PERIODS[freq] ?? 12;
+    if (raw.length <= n) return null;
+    level = [];
+    for (let i = 0; i < raw.length - n; i++) {
+      const base = raw[i + n];
+      if (base !== 0) level.push(raw[i] / base - 1);
+    }
+    if (level.length < 4) return null;
+  } else {
+    level = raw;
+  }
+
+  const nWindow = window === "full" ? level.length : (WINDOW_10Y_PERIODS[freq] ?? 120);
+  return level.slice(0, Math.min(nWindow, level.length));
 }
 
 /** Format MoM or YoY delta for display next to value. */

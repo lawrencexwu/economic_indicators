@@ -27,5 +27,7 @@
       "date": "2026-05-01",
       "value": 928.6
     }
-  ]
+  ],
+  "zscore": null,
+  "level_trend_state": "Neutral"
 }

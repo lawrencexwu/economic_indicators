@@ -510,5 +510,17 @@
     "why_it_matters": "Best leading indicator for business investment (capex). Rising 3+ months = corporate confidence in earnings. Baumohl Tier 1 within Durable Goods.\n",
     "scoring_rule": "3-month annualized trend. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.066,
+    "level_mean": 0.038883,
+    "level_std": 0.106999,
+    "level_value_used": 0.045911,
+    "trend_z": 0.594,
+    "trend_value_used": 0.053128,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.981006+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

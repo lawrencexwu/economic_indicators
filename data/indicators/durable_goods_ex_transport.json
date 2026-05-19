@@ -510,5 +510,17 @@
     "why_it_matters": "Baumohl Tier 2 (#12). Cleaner signal than headline orders for underlying capex demand.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.467,
+    "level_mean": 0.042232,
+    "level_std": 0.073043,
+    "level_value_used": 0.07633,
+    "trend_z": 0.432,
+    "trend_value_used": 0.021592,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.989778+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

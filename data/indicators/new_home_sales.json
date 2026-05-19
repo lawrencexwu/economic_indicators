@@ -510,5 +510,17 @@
     "why_it_matters": "More timely than existing sales (signed contract vs. closed). New construction bellwether.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.007,
+    "level_mean": 0.034476,
+    "level_std": 0.173521,
+    "level_value_used": 0.033333,
+    "trend_z": 0.132,
+    "trend_value_used": 0.019406,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.051016+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

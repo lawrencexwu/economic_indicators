@@ -518,5 +518,17 @@
     "why_it_matters": "Regional Fed surveys are ISM nowcasts. Released before ISM, so markets use them to forecast the national ISM print. Empire is the first out.\n",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.964,
+    "level_mean": 3.8675,
+    "level_std": 16.320468,
+    "level_value_used": 19.6,
+    "trend_z": 0.701,
+    "trend_value_used": 12.5,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.993651+00:00"
+  },
+  "level_trend_state": "Strong"
 }

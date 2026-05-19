@@ -514,5 +514,17 @@
     "why_it_matters": "C&I loan growth leads business investment. Contraction in C&I loans has historically preceded recessions. Key for bank stocks.\n",
     "scoring_rule": "YoY growth rate. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.151,
+    "level_mean": 0.176279,
+    "level_std": 0.117456,
+    "level_value_used": 0.158537,
+    "trend_z": 1.489,
+    "trend_value_used": 0.144119,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.960453+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

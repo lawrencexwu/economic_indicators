@@ -510,5 +510,17 @@
     "why_it_matters": "Full picture of manufacturing demand including nondurables.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.215,
+    "level_mean": 0.040789,
+    "level_std": 0.091423,
+    "level_value_used": 0.021104,
+    "trend_z": -0.346,
+    "trend_value_used": -0.024172,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.995884+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

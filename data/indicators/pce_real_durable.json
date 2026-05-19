@@ -510,5 +510,17 @@
     "why_it_matters": "Baumohl Tier 2 (#15). Leads cyclical demand \u2014 consumer durables are postponable purchases.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.345,
+    "level_mean": 0.062092,
+    "level_std": 0.102149,
+    "level_value_used": 0.026867,
+    "trend_z": 0.252,
+    "trend_value_used": 0.029483,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.064202+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

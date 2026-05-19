@@ -510,5 +510,17 @@
     "why_it_matters": "Openings / unemployed ratio = tightness gauge. Openings falling = demand cooling.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.227,
+    "level_mean": 0.046131,
+    "level_std": 0.257267,
+    "level_value_used": -0.012371,
+    "trend_z": 0.53,
+    "trend_value_used": 0.089754,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.042057+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

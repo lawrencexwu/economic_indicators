@@ -510,5 +510,17 @@
     "why_it_matters": "Slowing consumer credit signals consumer stress or deleveraging. Leads retail sales.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.587,
+    "level_mean": 0.040429,
+    "level_std": 0.028866,
+    "level_value_used": 0.023475,
+    "trend_z": -0.401,
+    "trend_value_used": -0.007159,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.974981+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

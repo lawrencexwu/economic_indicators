@@ -510,5 +510,17 @@
     "why_it_matters": "Baumohl #7. Expectations subindex leads spending. Widely market-moving at release. Collapses in UMich sentiment historically precede recessions.\n",
     "scoring_rule": "Z-score vs 3-year trailing + MoM momentum. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -1.575,
+    "level_mean": 78.753333,
+    "level_std": 16.163518,
+    "level_value_used": 53.3,
+    "trend_z": 0.176,
+    "trend_value_used": 0.4,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.082312+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

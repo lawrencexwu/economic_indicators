@@ -123,5 +123,17 @@
       "date": "2013-08-01",
       "value": 4.663
     }
-  ]
+  ],
+  "zscore": {
+    "level_z": -0.275,
+    "level_mean": 3.227534,
+    "level_std": 5.199666,
+    "level_value_used": 1.795314,
+    "trend_z": -0.298,
+    "trend_value_used": -2.598657,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.959316+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

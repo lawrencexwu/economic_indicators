@@ -510,5 +510,17 @@
     "why_it_matters": "Baumohl Tier 2 (#16). Most reliable housing leading indicator. Leads starts by 3-6 months. Key for homebuilders, lumber, appliances.\n",
     "scoring_rule": "YoY % change + level vs long-run. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.668,
+    "level_mean": 0.031404,
+    "level_std": 0.165703,
+    "level_value_used": -0.079218,
+    "trend_z": 0.23,
+    "trend_value_used": 0.029983,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.024108+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

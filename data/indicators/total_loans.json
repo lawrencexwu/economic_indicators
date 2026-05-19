@@ -2178,5 +2178,17 @@
     "why_it_matters": "Broad financial system credit pulse. Slowing loan growth precedes economic softness.",
     "scoring_rule": "YoY growth rate. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.767,
+    "level_mean": 0.048086,
+    "level_std": 0.032095,
+    "level_value_used": 0.072691,
+    "trend_z": 0.238,
+    "trend_value_used": 0.005894,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.078278+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

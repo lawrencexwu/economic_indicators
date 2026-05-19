@@ -70,5 +70,7 @@
     "why_it_matters": "Measures transaction volume of the resale market. Affects real estate commissions, mortgages.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": null,
+  "level_trend_state": "Neutral"
 }

@@ -514,5 +514,17 @@
     "why_it_matters": "Companies cut temps before permanent workers. Temp employment leads overall payrolls by 2-3 months.",
     "scoring_rule": "YoY % change. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.057,
+    "level_mean": -0.01072,
+    "level_std": 0.1064,
+    "level_value_used": -0.016775,
+    "trend_z": 0.118,
+    "trend_value_used": 0.010437,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.054136+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

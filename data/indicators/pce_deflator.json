@@ -510,5 +510,17 @@
     "why_it_matters": "Context for core PCE; energy-driven spikes can affect inflation expectations.",
     "scoring_rule": "Same bands as core PCE. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.352,
+    "level_mean": 0.029,
+    "level_std": 0.016955,
+    "level_value_used": 0.034961,
+    "trend_z": 0.934,
+    "trend_value_used": 0.00618,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.062487+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

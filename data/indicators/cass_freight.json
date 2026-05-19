@@ -71,5 +71,7 @@
       "date": "2025-04-01",
       "value": 1.058
     }
-  ]
+  ],
+  "zscore": null,
+  "level_trend_state": "Neutral"
 }

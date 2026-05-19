@@ -182,5 +182,17 @@
     "why_it_matters": "Baumohl #10. Mostly priced in by release, but composition (consumer vs. capex vs. inventory) drives sector rotation. Negative real GDP for 2 quarters = technical recession.\n",
     "scoring_rule": "Annualized growth rate: > 3% \u2192 +50 | 2-3% \u2192 +20 | 1-2% \u2192 0 | 0-1% \u2192 -30 | <0% \u2192 -80. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.056,
+    "level_mean": 0.02512,
+    "level_std": 0.02645,
+    "level_value_used": 0.026597,
+    "trend_z": 0.223,
+    "trend_value_used": 0.006704,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.022993+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

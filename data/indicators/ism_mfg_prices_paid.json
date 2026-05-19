@@ -35,5 +35,17 @@
       "date": "2026-01-01",
       "value": 59.0
     }
-  ]
+  ],
+  "zscore": {
+    "level_z": 1.043,
+    "level_mean": 73.1,
+    "level_std": 11.028146,
+    "level_value_used": 84.6,
+    "trend_z": 0.0,
+    "trend_value_used": 25.6,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.038670+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

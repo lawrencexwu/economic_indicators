@@ -30419,5 +30419,17 @@
     "scoring_rule": "> +200bp \u2192 +70 | +100 to +200 \u2192 +40 | +50 to +100 \u2192 +10 | 0 to +50 \u2192 -20 | -50 to 0 \u2192 -50 | -100 to -50 \u2192 -80 | < -100bp \u2192 -100 Special: if curve was inverted >6mo and now re-steepening to >0, score = -50 (re-steepening from inversion is a near-recession signal, not bullish).\n"
   },
   "score": null,
-  "next_expected_release": null
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": -0.297,
+    "level_mean": 1.307595,
+    "level_std": 1.26954,
+    "level_value_used": 0.93,
+    "trend_z": 1.102,
+    "trend_value_used": 0.57,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.167504+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

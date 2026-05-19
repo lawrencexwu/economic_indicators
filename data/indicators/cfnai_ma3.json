@@ -1470,5 +1470,17 @@
     "why_it_matters": "Value below -0.7 historically = recession risk rising. Below -1.5 = recession likely underway. Above +0.7 = above-trend growth, watch for inflation. Baumohl considers this the broadest single activity gauge.\n",
     "scoring_rule": "> +1.0 \u2192 -30 (overheating, late-cycle warning) +0.7 to +1.0 \u2192 0 (inflation acceleration risk) +0.2 to +0.7 \u2192 +60 (healthy expansion) -0.7 to +0.2 \u2192 +20 (neutral/slowing) -1.5 to -0.7 \u2192 -60 (recession risk rising) < -1.5 \u2192 -100 (recession underway)\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.072,
+    "level_mean": -0.083168,
+    "level_std": 0.740633,
+    "level_value_used": -0.03,
+    "trend_z": 0.22,
+    "trend_value_used": 0.23,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.956721+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

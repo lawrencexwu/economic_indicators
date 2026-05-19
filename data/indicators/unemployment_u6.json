@@ -510,5 +510,17 @@
     "why_it_matters": "Slack measure. High U-6 relative to U-3 signals underemployment. Wide U-6 vs U-3 spread = more slack than headline suggests.\n",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.117,
+    "level_mean": 8.495833,
+    "level_std": 2.535045,
+    "level_value_used": 8.2,
+    "trend_z": 0.058,
+    "trend_value_used": 0.1,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.086703+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

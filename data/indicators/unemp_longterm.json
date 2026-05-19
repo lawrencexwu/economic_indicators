@@ -510,5 +510,17 @@
     "why_it_matters": "Rising long-term unemployment signals labor market deterioration beyond temporary layoffs. Lags the cycle but confirms trend.\n",
     "scoring_rule": "Z-score vs 3-year trailing. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.034,
+    "level_mean": 0.128247,
+    "level_std": 0.690701,
+    "level_value_used": 0.151853,
+    "trend_z": 0.081,
+    "trend_value_used": 0.056684,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.083882+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

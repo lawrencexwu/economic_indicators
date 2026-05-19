@@ -510,5 +510,17 @@
     "why_it_matters": "Underlying data for CFNAI-MA3.",
     "scoring_rule": "Use CFNAI-MA3 for primary scoring. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.065,
+    "level_mean": -0.074959,
+    "level_std": 1.912983,
+    "level_value_used": -0.2,
+    "trend_z": -0.063,
+    "trend_value_used": -0.18,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.954071+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

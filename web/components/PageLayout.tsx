@@ -1,6 +1,7 @@
 import { zoneColor, zoneLabel } from "@/lib/scoring";
 import type { PageResult } from "@/lib/types";
 import IndicatorTable from "./IndicatorTable";
+import EquityBiasPanel from "./EquityBiasPanel";
 
 interface Props {
   page: PageResult;
@@ -43,6 +44,9 @@ export default function PageLayout({ page, description, children }: Props) {
           </div>
           <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color, marginTop: 2 }}>
             {zoneLabel(page.zone)}
+          </div>
+          <div style={{ marginTop: 8 }}>
+            <EquityBiasPanel bias={page.equityBias} compact />
           </div>
         </div>
       </div>

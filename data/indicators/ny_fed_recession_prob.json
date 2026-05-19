@@ -1470,5 +1470,17 @@
     "why_it_matters": "Statistical recession probability that combines multiple economic signals into a single probability estimate. Above 30% has historically been a strong recession warning.\n",
     "scoring_rule": "< 5% \u2192 +30 | 5-15% \u2192 0 | 15-30% \u2192 -30 | 30-50% \u2192 -60 | > 50% \u2192 -90. Phase 3.\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.198,
+    "level_mean": 5.82595,
+    "level_std": 20.262671,
+    "level_value_used": 1.82,
+    "trend_z": 0.115,
+    "trend_value_used": 1.66,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.058150+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

@@ -510,5 +510,17 @@
     "why_it_matters": "Single-family is the cyclically sensitive component. Multi-family is more urban/rental driven.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.339,
+    "level_mean": 0.03163,
+    "level_std": 0.167961,
+    "level_value_used": 0.088608,
+    "trend_z": 1.225,
+    "trend_value_used": 0.207346,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.027328+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

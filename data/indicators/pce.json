@@ -510,5 +510,17 @@
     "why_it_matters": "Baumohl #8. Real spending is the GDP backbone. Consumer is 70% of GDP. Real PCE growth <1% annualized = recession territory.\n",
     "scoring_rule": "Real YoY growth rate. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.022,
+    "level_mean": 0.058024,
+    "level_std": 0.049087,
+    "level_value_used": 0.056931,
+    "trend_z": 0.227,
+    "trend_value_used": 0.011519,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.060835+00:00"
+  },
+  "level_trend_state": "Neutral"
 }
