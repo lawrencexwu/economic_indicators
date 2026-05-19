@@ -12,6 +12,7 @@ import ScoreBar from "@/components/ScoreBar";
 import type { Indicator, ScoredIndicator } from "@/lib/types";
 import WhatChangedFeed from "@/components/WhatChangedFeed";
 import UpcomingReleases from "@/components/UpcomingReleases";
+import StateBadge from "@/components/StateBadge";
 
 const PAGE_HREFS: Record<string, string> = {
   regime: "/regime",
@@ -242,11 +243,16 @@ export default function HomePage() {
               >
                 {displayVal}
               </span>
-              {score !== null && (
-                <span style={{ fontSize: 11, color: "var(--muted)" }}>
-                  Score: {score > 0 ? `+${score}` : score}
-                </span>
-              )}
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                {score !== null && (
+                  <span style={{ fontSize: 11, color: "var(--muted)" }}>
+                    Score: {score > 0 ? `+${score}` : score}
+                  </span>
+                )}
+                {ind?.level_trend_state && (
+                  <StateBadge state={ind.level_trend_state} size="sm" />
+                )}
+              </div>
             </div>
           );
         })}

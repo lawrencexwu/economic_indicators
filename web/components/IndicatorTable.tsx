@@ -5,6 +5,7 @@ import type { ScoredIndicator } from "@/lib/types";
 import { zoneColor, formatValue, describeScore, getHistogramValues } from "@/lib/scoring";
 import { isStale } from "@/lib/utils";
 import SparkLine from "./SparkLine";
+import StateBadge, { stateColor, describeState } from "./StateBadge";
 
 const DetailChart = React.lazy(() => import("./DetailChart"));
 const IndicatorHistogram = React.lazy(() => import("./IndicatorHistogram"));
@@ -53,7 +54,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
     if (e.key === "Escape") setExpandedId(null);
   }
 
-  const colCount = showSparkline ? 5 : 4;
+  const colCount = showSparkline ? 6 : 5;
 
   return (
     <>
@@ -62,7 +63,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--border)" }}>
-              {["Indicator", "Value", "Score", "Wt", ...(showSparkline ? ["Trend"] : [])].map((h) => (
+              {["Indicator", "Value", "Score", "State", "Wt", ...(showSparkline ? ["Trend"] : [])].map((h) => (
                 <th
                   key={h}
                   style={{
@@ -197,6 +198,11 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                         : "—"}
                     </td>
 
+                    {/* State */}
+                    <td style={{ padding: "8px 10px", whiteSpace: "nowrap" }}>
+                      <StateBadge state={ind.level_trend_state} size="sm" />
+                    </td>
+
                     {/* Weight */}
                     <td style={{ padding: "8px 10px", color: "var(--muted)", whiteSpace: "nowrap" }}>
                       ×{ind.weight}
@@ -288,6 +294,28 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                             </div>
                           );
                         })()}
+
+                        {/* State callout */}
+                        {ind.level_trend_state && ind.zscore && (
+                          <div style={{ padding: "0 16px 12px" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: 10,
+                                background: "var(--border)",
+                                borderRadius: 6,
+                                padding: "8px 12px",
+                                borderLeft: `3px solid ${stateColor(ind.level_trend_state)}`,
+                              }}
+                            >
+                              <StateBadge state={ind.level_trend_state} size="md" />
+                              <div style={{ fontSize: 11, color: "var(--muted)", lineHeight: 1.6 }}>
+                                {describeState(ind.level_trend_state, ind.zscore)}
+                              </div>
+                            </div>
+                          </div>
+                        )}
 
                         {/* Bottom 3-column strip */}
                         <div
