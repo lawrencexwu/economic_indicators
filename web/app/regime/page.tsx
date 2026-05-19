@@ -25,6 +25,9 @@ export default function RegimePage() {
   const probColor = nyFedProb !== null
     ? zoneColor(getScoreZone(nyFedProb > 30 ? -80 : nyFedProb > 15 ? -30 : nyFedProb > 5 ? 0 : 30))
     : "var(--muted)";
+  const probGlow = nyFedProb !== null
+    ? nyFedProb >= 30 ? "var(--glow-red)" : nyFedProb >= 15 ? "var(--glow-amber)" : "var(--glow-green)"
+    : "none";
 
   return (
     <PageLayout
@@ -58,9 +61,10 @@ export default function RegimePage() {
               style={{
                 fontSize: 40,
                 fontWeight: 700,
-                fontFamily: "var(--font-geist-mono), monospace",
+                fontFamily: "var(--font-mono), monospace",
                 color: probColor,
                 lineHeight: 1,
+                textShadow: probGlow,
               }}
             >
               {nyFedProb.toFixed(1)}%

@@ -62,7 +62,7 @@ export default function EquityBiasPanel({ bias, compact = false }: Props) {
             color,
             letterSpacing: "0.06em",
             textTransform: "uppercase",
-            fontFamily: "var(--font-geist-mono), monospace",
+            fontFamily: "var(--font-mono), monospace",
           }}
         >
           {SIGNAL_LABELS[signal]}
@@ -110,7 +110,7 @@ export default function EquityBiasPanel({ bias, compact = false }: Props) {
               marginTop: 4,
               fontSize: 10,
               color: "var(--muted)",
-              fontFamily: "var(--font-geist-mono), monospace",
+              fontFamily: "var(--font-mono), monospace",
             }}
           >
             <span style={{ color: "#4ade80" }}>{bull} Bullish</span>

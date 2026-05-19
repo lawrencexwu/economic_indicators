@@ -89,6 +89,14 @@ export default function HomePage() {
 
   const masterColor = zoneColor(masterZone);
   const masterLabel = zoneLabel(masterZone);
+  const GLOW_MAP: Record<string, string> = {
+    strong_bull: "var(--glow-green)",
+    bull:        "var(--glow-green)",
+    neutral:     "var(--glow-amber)",
+    bear:        "var(--glow-red)",
+    strong_bear: "var(--glow-red)",
+  };
+  const masterGlow = GLOW_MAP[masterZone] ?? "none";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
@@ -103,9 +111,10 @@ export default function HomePage() {
               style={{
                 fontSize: 48,
                 fontWeight: 700,
-                fontFamily: "var(--font-geist-mono), monospace",
+                fontFamily: "var(--font-mono), monospace",
                 color: masterColor,
                 lineHeight: 1,
+                textShadow: masterGlow,
               }}
             >
               {masterScore !== null ? (masterScore > 0 ? `+${masterScore}` : String(masterScore)) : "—"}
@@ -146,15 +155,16 @@ export default function HomePage() {
                   flex: 1,
                   padding: "16px",
                   borderRadius: 8,
-                  background: "var(--border)",
+                  background: `${masterColor}14`,
+                  border: `1px solid ${masterColor}33`,
                   marginTop: 8,
                 }}
               >
                 <span
                   style={{
-                    fontSize: 28,
+                    fontSize: 26,
                     fontWeight: 700,
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.04em",
                     color: "var(--text)",
                     textAlign: "center",
                   }}
@@ -278,7 +288,7 @@ export default function HomePage() {
                 style={{
                   fontSize: 28,
                   fontWeight: 700,
-                  fontFamily: "var(--font-geist-mono), monospace",
+                  fontFamily: "var(--font-mono), monospace",
                   color,
                   lineHeight: 1,
                 }}

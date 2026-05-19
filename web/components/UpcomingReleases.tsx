@@ -62,7 +62,7 @@ export default function UpcomingReleases({ indicators }: Props) {
               >
                 <span
                   style={{
-                    fontFamily: "var(--font-geist-mono), monospace",
+                    fontFamily: "var(--font-mono), monospace",
                     fontSize: 11,
                     color: isImminent ? "#f5a623" : "var(--muted)",
                     whiteSpace: "nowrap",
@@ -89,7 +89,7 @@ export default function UpcomingReleases({ indicators }: Props) {
                     flexShrink: 0,
                     fontSize: 10,
                     fontWeight: 700,
-                    fontFamily: "var(--font-geist-mono), monospace",
+                    fontFamily: "var(--font-mono), monospace",
                     color: priorityColor,
                     letterSpacing: "0.06em",
                   }}

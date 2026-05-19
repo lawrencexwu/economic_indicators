@@ -54,7 +54,7 @@ export default function ScoreGauge({ score, size = 200 }: Props) {
           strokeWidth={strokeW}
           strokeLinecap="round"
           strokeDasharray={`${filledLen} ${totalLen}`}
-          style={{ opacity: 0.85 }}
+          style={{ opacity: 0.9, filter: `drop-shadow(0 0 6px ${color})` }}
         />
       )}
 
@@ -69,6 +69,7 @@ export default function ScoreGauge({ score, size = 200 }: Props) {
             stroke="var(--text)"
             strokeWidth={size * 0.012}
             strokeLinecap="round"
+            style={{ filter: `drop-shadow(0 0 3px ${color})` }}
           />
           <circle cx={cx} cy={cy} r={size * 0.025} fill="var(--text)" />
         </>

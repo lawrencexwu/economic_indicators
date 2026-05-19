@@ -9,16 +9,31 @@ interface Props {
   children?: React.ReactNode;
 }
 
+const GLOW_MAP: Record<string, string> = {
+  strong_bull: "var(--glow-green)",
+  bull:        "var(--glow-green)",
+  neutral:     "var(--glow-amber)",
+  bear:        "var(--glow-red)",
+  strong_bear: "var(--glow-red)",
+};
+
 export default function PageLayout({ page, description, children }: Props) {
   const color = zoneColor(page.zone);
   const score = page.score;
+  const scoreGlow = GLOW_MAP[page.zone] ?? "none";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       {/* Page header */}
       <div
         className="card"
-        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "16px 24px",
+          borderLeft: `4px solid ${color}`,
+        }}
       >
         <div>
           <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: "var(--text)" }}>
@@ -35,9 +50,10 @@ export default function PageLayout({ page, description, children }: Props) {
             style={{
               fontSize: 40,
               fontWeight: 700,
-              fontFamily: "var(--font-geist-mono), monospace",
+              fontFamily: "var(--font-mono), monospace",
               color,
               lineHeight: 1,
+              textShadow: scoreGlow,
             }}
           >
             {score !== null ? (score > 0 ? `+${score}` : String(score)) : "—"}

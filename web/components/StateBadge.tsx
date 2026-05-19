@@ -52,7 +52,7 @@ export default function StateBadge({ state, size = "sm" }: BadgeProps) {
         display: "inline-block",
         fontSize,
         fontWeight: 600,
-        fontFamily: "var(--font-geist-mono), monospace",
+        fontFamily: "var(--font-mono), monospace",
         letterSpacing: "0.04em",
         color,
         border: `1px solid ${color}`,

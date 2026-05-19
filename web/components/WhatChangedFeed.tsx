@@ -70,7 +70,7 @@ export default function WhatChangedFeed({ indicators }: Props) {
                 </span>
                 <span
                   style={{
-                    fontFamily: "var(--font-geist-mono), monospace",
+                    fontFamily: "var(--font-mono), monospace",
                     color: "var(--muted)",
                     fontSize: 12,
                     whiteSpace: "nowrap",
@@ -82,7 +82,7 @@ export default function WhatChangedFeed({ indicators }: Props) {
                 </span>
                 <span
                   style={{
-                    fontFamily: "var(--font-geist-mono), monospace",
+                    fontFamily: "var(--font-mono), monospace",
                     color,
                     fontWeight: 700,
                     fontSize: 14,

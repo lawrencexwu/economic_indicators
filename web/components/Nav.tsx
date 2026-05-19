@@ -42,6 +42,7 @@ export default function Nav() {
             color: "var(--accent)",
             marginRight: "16px",
             textTransform: "uppercase",
+            textShadow: "var(--glow-accent)",
           }}
         >
           US MACRO
@@ -59,9 +60,10 @@ export default function Nav() {
                 fontSize: "13px",
                 fontWeight: active ? 600 : 400,
                 color: active ? "var(--text)" : "var(--muted)",
-                background: active ? "var(--border)" : "transparent",
+                background: active ? "rgba(91,156,245,0.10)" : "transparent",
                 textDecoration: "none",
                 transition: "color 0.15s, background 0.15s",
+                borderBottom: active ? "2px solid var(--accent)" : "2px solid transparent",
               }}
             >
               {label}

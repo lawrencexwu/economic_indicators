@@ -99,7 +99,7 @@ function ForecastStrip({ ind }: { ind: ScoredIndicator }) {
               style={{
                 fontSize: 14,
                 fontWeight: 700,
-                fontFamily: "var(--font-geist-mono), monospace",
+                fontFamily: "var(--font-mono), monospace",
                 color: "var(--text)",
                 lineHeight: 1,
               }}
@@ -213,7 +213,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                                   fontSize: 10,
                                   color: "#f5a623",
                                   fontWeight: 400,
-                                  fontFamily: "var(--font-geist-mono), monospace",
+                                  fontFamily: "var(--font-mono), monospace",
                                 }}
                               >
                                 ⚠ stale
@@ -244,7 +244,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                     <td
                       style={{
                         padding: "8px 10px",
-                        fontFamily: "var(--font-geist-mono), monospace",
+                        fontFamily: "var(--font-mono), monospace",
                         color: ind.current_value === null ? "var(--muted)" : "var(--text)",
                         whiteSpace: "nowrap",
                       }}
@@ -260,7 +260,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                     <td
                       style={{
                         padding: "8px 10px",
-                        fontFamily: "var(--font-geist-mono), monospace",
+                        fontFamily: "var(--font-mono), monospace",
                         color: score !== null ? color : "var(--muted)",
                         fontWeight: 600,
                         whiteSpace: "nowrap",
@@ -423,7 +423,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                               style={{
                                 fontSize: 32,
                                 fontWeight: 700,
-                                fontFamily: "var(--font-geist-mono), monospace",
+                                fontFamily: "var(--font-mono), monospace",
                                 color: score !== null ? color : "var(--muted)",
                                 lineHeight: 1,
                               }}
@@ -568,7 +568,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                       style={{
                         fontSize: 15,
                         fontWeight: 700,
-                        fontFamily: "var(--font-geist-mono), monospace",
+                        fontFamily: "var(--font-mono), monospace",
                         color: "var(--text)",
                         lineHeight: 1,
                       }}
@@ -580,7 +580,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                         fontSize: 11,
                         fontWeight: 700,
                         color: score !== null ? color : "var(--muted)",
-                        fontFamily: "var(--font-geist-mono), monospace",
+                        fontFamily: "var(--font-mono), monospace",
                       }}
                     >
                       {score !== null ? (score > 0 ? `+${score}` : String(score)) : "—"}

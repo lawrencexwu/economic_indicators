@@ -43,7 +43,7 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
         style={{
           width: 40,
           fontSize: 14,
-          fontFamily: "var(--font-geist-mono), monospace",
+          fontFamily: "var(--font-mono), monospace",
           textAlign: "right",
           color: score !== null ? color : "var(--muted)",
           flexShrink: 0,
@@ -57,7 +57,7 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
         style={{
           flex: 1,
           height: 12,
-          background: "var(--border)",
+          background: "rgba(255,255,255,0.06)",
           borderRadius: 6,
           position: "relative",
           overflow: "hidden",
@@ -83,9 +83,8 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
               left: score >= 0 ? "50%" : `${pct}%`,
               width: `${Math.abs(score) / 2}%`,
               height: "100%",
-              background: color,
+              background: `linear-gradient(${score >= 0 ? "90deg" : "270deg"}, ${color}99 0%, ${color} 100%)`,
               borderRadius: 4,
-              opacity: 0.85,
             }}
           />
         )}
