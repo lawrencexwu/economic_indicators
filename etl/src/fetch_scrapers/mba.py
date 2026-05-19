@@ -15,6 +15,8 @@ import requests
 from datetime import date, timedelta
 
 from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
+from playwright_stealth import Stealth
 
 logger = logging.getLogger(__name__)
 
@@ -77,11 +79,18 @@ def _find_article_url() -> tuple[str, str] | None:
 # ── Article parsing ───────────────────────────────────────────────────────────
 
 def _fetch_article_html(url: str) -> str:
-    session = requests.Session()
-    session.headers["User-Agent"] = _UA
-    resp = session.get(url, timeout=20)
-    resp.raise_for_status()
-    return resp.text
+    """Fetch a JS-rendered MBA article page using Playwright."""
+    stealth = Stealth()
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        ctx = browser.new_context(viewport={"width": 1280, "height": 800}, user_agent=_UA)
+        stealth.apply_stealth_sync(ctx)
+        page = ctx.new_page()
+        page.goto(url, wait_until="networkidle", timeout=30000)
+        page.wait_for_timeout(3000)
+        html = page.content()
+        browser.close()
+    return html
 
 
 def _parse_article(html: str, release_date: str) -> dict | None:
