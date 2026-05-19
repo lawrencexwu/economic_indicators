@@ -9,7 +9,9 @@ import {
 } from "@/lib/composites";
 import ScoreGauge from "@/components/ScoreGauge";
 import ScoreBar from "@/components/ScoreBar";
-import type { Indicator } from "@/lib/types";
+import type { Indicator, ScoredIndicator } from "@/lib/types";
+import WhatChangedFeed from "@/components/WhatChangedFeed";
+import UpcomingReleases from "@/components/UpcomingReleases";
 
 const PAGE_HREFS: Record<string, string> = {
   regime: "/regime",
@@ -66,6 +68,14 @@ export default function HomePage() {
 
   const dashboard = buildDashboard(all, pageIndicators, lastUpdated);
   const { masterScore, masterZone, cyclePhase, pages, verdict } = dashboard;
+
+  const allScored: Record<string, ScoredIndicator | null> = {};
+  for (const [id, ind] of Object.entries(all)) {
+    if (!ind) { allScored[id] = null; continue; }
+    const computed_score = computeScore(ind);
+    const zone = getScoreZone(computed_score);
+    allScored[id] = { ...ind, computed_score, zone };
+  }
 
   const masterColor = zoneColor(masterZone);
   const masterLabel = zoneLabel(masterZone);
@@ -182,6 +192,12 @@ export default function HomePage() {
         <p style={{ fontSize: 14, lineHeight: 1.7, color: "var(--text)", margin: 0 }}>
           {verdict}
         </p>
+      </div>
+
+      {/* What Changed + Upcoming Releases */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <WhatChangedFeed indicators={allScored} />
+        <UpcomingReleases indicators={allScored} />
       </div>
 
       {/* Quick stats grid */}
