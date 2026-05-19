@@ -44,11 +44,7 @@ export default function DetailChart({ ind, height = 160 }: Props) {
   const tier = CHART_THRESHOLDS[ind.id];
 
   const formatXTick = (dateStr: string) => {
-    const d = new Date(dateStr);
-    const thisYear = new Date().getFullYear();
-    return d.getFullYear() === thisYear
-      ? d.toLocaleDateString("en-US", { month: "short" })
-      : String(d.getFullYear());
+    return String(new Date(dateStr).getFullYear());
   };
 
   return (
