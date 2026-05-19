@@ -24,18 +24,17 @@ export default function PageLayout({ page, description, children }: Props) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-      {/* Page header */}
+      {/* Page header — stacks vertically on mobile, row on sm+ */}
       <div
-        className="card"
+        className="card flex flex-col sm:flex-row sm:items-center sm:justify-between"
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
           padding: "16px 24px",
           borderLeft: `4px solid ${color}`,
+          gap: 12,
         }}
       >
-        <div>
+        {/* Left: title + description */}
+        <div style={{ flex: 1, minWidth: 0 }}>
           <h1 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: "var(--text)" }}>
             {page.name}
           </h1>
@@ -45,7 +44,9 @@ export default function PageLayout({ page, description, children }: Props) {
             </p>
           )}
         </div>
-        <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 24 }}>
+
+        {/* Right: score + zone label + bias — left-aligned on mobile, right on sm+ */}
+        <div className="sm:text-right" style={{ flexShrink: 0 }}>
           <div
             style={{
               fontSize: 40,

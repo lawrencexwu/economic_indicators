@@ -616,20 +616,23 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
               {/* Expanded card content */}
               {isExpanded && (
                 <div style={{ padding: "10px 12px" }}>
-                  <Suspense
-                    fallback={
-                      <div style={{ height: 80, background: "var(--border)", borderRadius: 6 }} />
-                    }
-                  >
-                    <DetailChart ind={ind} height={80} />
-                  </Suspense>
+                  {/* overflow-x on the chart container prevents fixed-width SVG from breaking mobile layout */}
+                  <div style={{ overflowX: "auto" }}>
+                    <Suspense
+                      fallback={
+                        <div style={{ height: 80, background: "var(--border)", borderRadius: 6 }} />
+                      }
+                    >
+                      <DetailChart ind={ind} height={80} />
+                    </Suspense>
+                  </div>
                   {(() => {
                     const histVals = getHistogramValues(ind);
                     const zb = ind.zscore;
                     if (!histVals || !zb) return null;
                     const fmt = makeHistFormatVal(zb.transform);
                     return (
-                      <div style={{ marginTop: 8 }}>
+                      <div style={{ marginTop: 8, overflowX: "auto" }}>
                         <Suspense fallback={<div style={{ height: 80, background: "var(--border)", borderRadius: 4 }} />}>
                           <IndicatorHistogram
                             values={histVals}

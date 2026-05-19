@@ -82,6 +82,15 @@ body {
 .ind-row:hover { background: rgba(255, 255, 255, 0.02); }
 .score-bar-link:hover { background: rgba(255, 255, 255, 0.03); border-radius: 8px; }
 
+/* Cross-browser scrollbar hiding for horizontally-scrollable strips */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Label styles */
 .label {
   font-size: 10px;

@@ -39,6 +39,7 @@ export default function GlobalScoreStrip() {
   return (
     <nav
       aria-label="Page scores"
+      className="no-scrollbar"
       style={{
         background: "rgba(10,14,26,0.97)",
         borderBottom: "1px solid var(--border)",
@@ -47,8 +48,6 @@ export default function GlobalScoreStrip() {
         alignItems: "center",
         paddingInline: 16,
         overflowX: "auto",
-        // @ts-ignore — valid Firefox property
-        scrollbarWidth: "none",
       }}
     >
       {scores.flatMap(({ id, score, color, href }, i) => {
