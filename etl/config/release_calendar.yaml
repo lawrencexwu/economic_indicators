@@ -76,11 +76,13 @@ patterns:
   monthly_mid:
     description: "Mid-month releases 8:30 ET (CPI, PPI, Retail Sales, IP)"
     freshness_hours: 24
+    pattern: "approx_day_12"
     indicators: [cpi_core, cpi_headline, ppi_final_demand, retail_sales, industrial_production, capacity_utilization, business_inventories, case_shiller_hpi, cass_freight]
 
   monthly_15th:
     description: "Around 15th of month (Empire State 8:30 ET)"
     freshness_hours: 24
+    pattern: "approx_day_15"
     release_time_et: "08:30"
     indicators: [empire_state_mfg]
 
@@ -123,33 +125,39 @@ patterns:
   monthly_18th:
     description: "Around 18th of month 8:30 ET (Housing Starts, Permits)"
     freshness_hours: 24
+    pattern: "approx_day_18"
     indicators: [housing_starts, housing_starts_1f, housing_permits_1f]
 
   monthly_25th:
     description: "Around 25th of month (Existing & New Home Sales 10:00 ET)"
     freshness_hours: 24
+    pattern: "approx_day_25"
     release_time_et: "10:00"
     indicators: [existing_home_sales, new_home_sales]
 
   monthly_26th:
     description: "Around 26th of month 8:30 ET (Durable Goods, Core Capex)"
     freshness_hours: 24
+    pattern: "approx_day_26"
     release_time_et: "08:30"
     indicators: [durable_goods_orders, core_capex_orders, durable_goods_ex_transport]
 
   monthly_end:
     description: "End of month 8:30 ET (PCE, Core PCE)"
     freshness_hours: 24
+    pattern: "approx_day_28"
     indicators: [pce, pce_deflator, core_pce]
 
   monthly_5th_business_day:
     description: "5th business day of month (Consumer Credit)"
     freshness_hours: 24
+    pattern: "approx_day_8"
     indicators: [consumer_credit]
 
   monthly_1st_week:
     description: "First week of month (Factory Orders)"
     freshness_hours: 24
+    pattern: "approx_day_4"
     indicators: [factory_orders]
 
   monthly_variable:

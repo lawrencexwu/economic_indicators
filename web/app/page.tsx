@@ -8,6 +8,7 @@ import {
   CYCLE_PHASE_ASSETS,
   PAGE_IDS,
   PAGE_NAMES,
+  PAGE_INDICATOR_IDS,
 } from "@/lib/composites";
 import ScoreGauge from "@/components/ScoreGauge";
 import ScoreBar from "@/components/ScoreBar";
@@ -25,49 +26,6 @@ const PAGE_HREFS: Record<string, string> = {
   cycle: "/cycle",
   rotation: "/rotation",
   fiscal: "/fiscal",
-};
-
-const PAGE_INDICATOR_IDS: Record<string, string[]> = {
-  regime: [
-    "yield_curve_10y3m", "yield_curve_10y2y", "claims_4wma",
-    "lei", "cfnai_ma3", "sahm_rule", "nahb_index",
-    "ny_fed_recession_prob", "unemp_longterm",
-    "hy_credit_spread", "ig_credit_spread", "nfci",
-  ],
-  fed: [
-    "cpi_core", "cpi_headline", "core_pce", "pce_deflator",
-    "ppi_final_demand", "ppi_crude_ex_food_energy", "eci",
-    "breakeven_5y", "unemployment_rate", "unemployment_u6",
-    "labor_force_participation", "avg_hourly_earnings", "fed_funds_rate",
-    "tips_real_yield",
-  ],
-  pulse: [
-    "initial_claims", "continuing_claims", "mba_purchase", "mba_refi",
-    "aar_carloads", "ci_loans", "total_loans",
-    "empire_state_mfg", "philly_fed_mfg",
-    "challenger_layoffs", "cass_freight",
-  ],
-  cycle: [
-    "ism_mfg", "ism_mfg_new_orders", "ism_mfg_production",
-    "ism_mfg_employment", "ism_mfg_customer_inv", "ism_mfg_prices_paid",
-    "ism_services", "ism_services_new_orders", "ism_services_prices_paid",
-    "industrial_production", "capacity_utilization",
-    "durable_goods_orders", "core_capex_orders", "durable_goods_ex_transport",
-    "factory_orders", "business_inventories", "inventory_sales_ratio",
-    "nfib_optimism", "nfp_payrolls", "nfp_temp_help", "avg_weekly_hours_mfg",
-    "jolts_openings", "jolts_quits_rate", "gdp_real", "gdp_growth_rate",
-  ],
-  rotation: [
-    "nfp_trucks", "housing_permits_1f", "housing_starts", "housing_starts_1f",
-    "existing_home_sales", "new_home_sales", "case_shiller_hpi", "nahb_traffic",
-    "retail_sales", "pce", "pce_real_durable",
-    "consumer_confidence", "umich_sentiment", "consumer_credit",
-  ],
-  fiscal: [
-    "debt_to_gdp", "interest_to_gdp", "interest_to_receipts",
-    "primary_deficit_pct", "fed_balance_to_gdp",
-    "tic_foreign_holdings", "dxy_index",
-  ],
 };
 
 export default function HomePage() {
@@ -92,7 +50,6 @@ export default function HomePage() {
   }
 
   const masterColor = zoneColor(masterZone);
-  const masterLabel = zoneLabel(masterZone);
   const GLOW_MAP: Record<string, string> = {
     strong_bull: "var(--glow-green)",
     bull:        "var(--glow-green)",
@@ -102,39 +59,91 @@ export default function HomePage() {
   };
   const masterGlow = GLOW_MAP[masterZone] ?? "none";
 
+  // Page-level bull/bear split
+  const pageValues = Object.values(pages);
+  const pageBull = pageValues.filter(p => p.score !== null && p.score >= 20).length;
+  const pageBear = pageValues.filter(p => p.score !== null && p.score <= -20).length;
+  const pageNeutral = pageValues.filter(p => p.score !== null && p.score > -20 && p.score < 20).length;
+
+  // Key Risk: most bearish high-weight indicator
+  const keyRisk = Object.values(allScored)
+    .filter((ind): ind is ScoredIndicator =>
+      !!ind && ind.computed_score !== null && (ind.weight ?? 1) >= 2 && ind.computed_score < 0
+    )
+    .sort((a, b) => (a.computed_score ?? 0) - (b.computed_score ?? 0))[0] ?? null;
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      {/* Key Risk banner */}
+      {keyRisk && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "10px 20px",
+            borderRadius: 8,
+            border: "1px solid rgba(231,76,92,0.35)",
+            background: "rgba(231,76,92,0.06)",
+            borderLeft: "4px solid #e74c5c",
+          }}
+        >
+          <span style={{ fontSize: 14, flexShrink: 0 }}>⚠</span>
+          <span
+            style={{
+              fontSize: 10,
+              color: "#e74c5c",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              flexShrink: 0,
+              whiteSpace: "nowrap",
+            }}
+          >
+            Key Risk
+          </span>
+          <span style={{ flex: 1, fontSize: 14, color: "var(--text)", fontWeight: 500 }}>
+            {keyRisk.name}
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: 20,
+              fontWeight: 700,
+              color: "#e74c5c",
+              flexShrink: 0,
+            }}
+          >
+            {keyRisk.computed_score}
+          </span>
+        </div>
+      )}
+
       {/* Header row: Master Composite + Cycle Phase */}
       <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 16 }}>
         {/* Master Composite */}
         <div className="card" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, padding: "24px 32px" }}>
           <span className="label">Master Composite</span>
           <ScoreGauge score={masterScore} size={200} />
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, marginTop: -8 }}>
-            <span
-              style={{
-                fontSize: 48,
-                fontWeight: 700,
-                fontFamily: "var(--font-mono), monospace",
-                color: masterColor,
-                lineHeight: 1,
-                textShadow: masterGlow,
-              }}
-            >
-              {masterScore !== null ? (masterScore > 0 ? `+${masterScore}` : String(masterScore)) : "—"}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, marginTop: -8 }}>
+            {/* Page-level bull/bear split instead of single score */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontFamily: "var(--font-mono), monospace", fontSize: 22, fontWeight: 700, color: "#2ecc71" }}>
+                {pageBull}↑
+              </span>
+              <span style={{ fontSize: 16, color: "var(--muted)" }}>·</span>
+              <span style={{ fontFamily: "var(--font-mono), monospace", fontSize: 22, fontWeight: 700, color: "#f5a623" }}>
+                {pageNeutral}≈
+              </span>
+              <span style={{ fontSize: 16, color: "var(--muted)" }}>·</span>
+              <span style={{ fontFamily: "var(--font-mono), monospace", fontSize: 22, fontWeight: 700, color: "#e74c5c" }}>
+                {pageBear}↓
+              </span>
+            </div>
+            <span style={{ fontSize: 10, color: "var(--muted)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              Bull · Neutral · Bear pages
             </span>
-            <span
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                color: masterColor,
-                textTransform: "uppercase",
-              }}
-            >
-              {masterLabel}
-            </span>
-            <div style={{ marginTop: 10, width: "100%", maxWidth: 240, textAlign: "center" }}>
+            <div style={{ marginTop: 6, width: "100%", maxWidth: 240, textAlign: "center" }}>
               <span className="label" style={{ display: "block", marginBottom: 4, fontSize: 9 }}>
                 Indicator Bias
               </span>
@@ -185,11 +194,11 @@ export default function HomePage() {
                   <div style={{ marginTop: 12, borderTop: "1px solid var(--border)", paddingTop: 12, width: "100%" }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                       <div>
-                        <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--green, #2ecc71)", marginBottom: 6, fontWeight: 700 }}>Favor</div>
+                        <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "#2ecc71", marginBottom: 6, fontWeight: 700 }}>Favor</div>
                         {a.favor.map(item => <div key={item} style={{ fontSize: 11, color: "var(--text)", lineHeight: 1.6 }}>• {item}</div>)}
                       </div>
                       <div>
-                        <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--red, #e74c5c)", marginBottom: 6, fontWeight: 700 }}>Avoid</div>
+                        <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "#e74c5c", marginBottom: 6, fontWeight: 700 }}>Avoid</div>
                         {a.avoid.map(item => <div key={item} style={{ fontSize: 11, color: "var(--muted)", lineHeight: 1.6 }}>• {item}</div>)}
                       </div>
                     </div>
@@ -257,16 +266,34 @@ export default function HomePage() {
               </p>
             </div>
           )}
-          <div style={{ borderTop: "1px solid var(--border)", paddingTop: 14 }}>
-            <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted)", marginBottom: 6 }}>
-              Positioning
-            </div>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: masterColor, margin: 0, fontWeight: 600 }}>
-              {verdictParts.tilt}
-            </p>
-          </div>
         </div>
       </div>
+
+      {/* Positioning Tilt — prominent standalone card */}
+      {verdictParts.tilt && (
+        <div
+          className="card"
+          style={{
+            padding: "20px 24px",
+            borderLeft: `4px solid ${masterColor}`,
+            background: `${masterColor}0d`,
+          }}
+        >
+          <span className="label" style={{ display: "block", marginBottom: 10 }}>Positioning Tilt</span>
+          <p
+            style={{
+              fontSize: 22,
+              fontWeight: 700,
+              color: masterColor,
+              margin: 0,
+              lineHeight: 1.4,
+              textShadow: masterGlow,
+            }}
+          >
+            {verdictParts.tilt}
+          </p>
+        </div>
+      )}
 
       {/* What Changed + Upcoming Releases */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -274,7 +301,7 @@ export default function HomePage() {
         <UpcomingReleases indicators={allScored} />
       </div>
 
-      {/* Quick stats grid — 2 rows of 4 */}
+      {/* Quick stats grid — 2 rows of 4, with momentum arrows */}
       <div className="grid grid-cols-2 sm:grid-cols-4" style={{ gap: 14 }}>
         {[
           { id: "yield_curve_10y3m", label: "10Y-3M Curve", unit: "%" },
@@ -291,6 +318,7 @@ export default function HomePage() {
           const zone = getScoreZone(score);
           const color = zoneColor(zone);
           const v = ind?.current_value;
+          const prev = ind?.previous_value;
           const displayVal = v !== null && v !== undefined
             ? format
               ? format(v)
@@ -298,6 +326,10 @@ export default function HomePage() {
               ? `${v.toFixed(2)}${unit}`
               : v.toFixed(1)
             : "—";
+          const arrow =
+            v !== null && v !== undefined && prev !== null && prev !== undefined
+              ? v > prev ? "▲" : v < prev ? "▼" : null
+              : null;
 
           return (
             <div
@@ -312,17 +344,31 @@ export default function HomePage() {
               }}
             >
               <span className="label">{label}</span>
-              <span
-                style={{
-                  fontSize: 28,
-                  fontWeight: 700,
-                  fontFamily: "var(--font-mono), monospace",
-                  color,
-                  lineHeight: 1,
-                }}
-              >
-                {displayVal}
-              </span>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+                <span
+                  style={{
+                    fontSize: 28,
+                    fontWeight: 700,
+                    fontFamily: "var(--font-mono), monospace",
+                    color,
+                    lineHeight: 1,
+                  }}
+                >
+                  {displayVal}
+                </span>
+                {arrow && (
+                  <span
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color,
+                      opacity: 0.85,
+                    }}
+                  >
+                    {arrow}
+                  </span>
+                )}
+              </div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   {score !== null && (

@@ -179,6 +179,17 @@ _PATTERN_BDAY: dict[str, int] = {
     "first_business_day": 1,
     "third_business_day": 3,
 }
+# Approximate fixed day-of-month releases (mid-month, end-month, etc.)
+_PATTERN_APPROX_DAY: dict[str, int] = {
+    "approx_day_4":  4,
+    "approx_day_8":  8,
+    "approx_day_12": 12,
+    "approx_day_15": 15,
+    "approx_day_18": 18,
+    "approx_day_25": 25,
+    "approx_day_26": 26,
+    "approx_day_28": 28,
+}
 
 
 def compute_next_release(indicator_id: str, calendar_patterns: dict) -> str | None:
@@ -204,7 +215,7 @@ def compute_next_release(indicator_id: str, calendar_patterns: dict) -> str | No
     # Monthly patterns have a pattern key
     pattern = entry.get("pattern")
     if not pattern:
-        return None  # daily / mid-month approximations -> not computable
+        return None  # daily -> not useful to show
 
     year, month = now.year, now.month
     for attempt in range(2):
@@ -218,6 +229,10 @@ def compute_next_release(indicator_id: str, calendar_patterns: dict) -> str | No
             d = _last_weekday(y, m, _PATTERN_LAST_WD[pattern])
         elif pattern in _PATTERN_BDAY:
             d = _nth_bday(y, m, _PATTERN_BDAY[pattern])
+        elif pattern in _PATTERN_APPROX_DAY:
+            target_day = _PATTERN_APPROX_DAY[pattern]
+            last_day = cal.monthrange(y, m)[1]
+            d = _Date(y, m, min(target_day, last_day))
         else:
             return None
 
@@ -257,6 +272,12 @@ def main() -> None:
         # ── Freshness skip ────────────────────────────────────────────
         if is_fresh(existing, max_age):
             logger.info(f"⏭  {ind_id}  (fresh, skipping)")
+            # Always refresh next_expected_release so the UI shows current dates
+            if existing:
+                next_rel = compute_next_release(ind_id, calendar)
+                if existing.get("next_expected_release") != next_rel:
+                    existing["next_expected_release"] = next_rel
+                    write_indicator(ind_id, existing)
             skipped.append(ind_id)
             continue
 

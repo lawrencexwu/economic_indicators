@@ -25,5 +25,6 @@
     }
   ],
   "zscore": null,
-  "level_trend_state": "Neutral"
+  "level_trend_state": "Neutral",
+  "next_expected_release": "2026-05-20T00:00:00+00:00"
 }

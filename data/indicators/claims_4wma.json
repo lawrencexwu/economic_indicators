@@ -6364,7 +6364,8 @@
     "trend_value_used": -16500.0,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-05-19T14:53:36.388188+00:00"
+    "computed_at": "2026-05-19T15:26:46.793921+00:00"
   },
-  "level_trend_state": "Neutral"
+  "level_trend_state": "Neutral",
+  "next_expected_release": "2026-05-21T00:00:00+00:00"
 }

@@ -13,12 +13,14 @@ export default function UpcomingReleases({ indicators }: Props) {
       (ind): ind is ScoredIndicator => !!ind && typeof ind.next_expected_release === "string"
     )
     .filter((ind) => new Date(ind.next_expected_release!).getTime() > now)
-    .sort(
-      (a, b) =>
-        new Date(a.next_expected_release!).getTime() -
-        new Date(b.next_expected_release!).getTime()
-    )
-    .slice(0, 5);
+    // Deduplicate by date+weight bucket (avoid showing 5 variations of the same release)
+    .sort((a, b) => {
+      const wa = a.weight ?? 1;
+      const wb = b.weight ?? 1;
+      if (wb !== wa) return wb - wa; // HIGH IMPACT first
+      return new Date(a.next_expected_release!).getTime() - new Date(b.next_expected_release!).getTime();
+    })
+    .slice(0, 8);
 
   return (
     <div className="card">

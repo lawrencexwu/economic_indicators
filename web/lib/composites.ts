@@ -14,6 +14,49 @@ export const PAGE_NAMES: Record<string, string> = {
   fiscal: "Fiscal Dominance",
 };
 
+export const PAGE_INDICATOR_IDS: Record<string, string[]> = {
+  regime: [
+    "yield_curve_10y3m", "yield_curve_10y2y", "claims_4wma",
+    "lei", "cfnai_ma3", "sahm_rule", "nahb_index",
+    "ny_fed_recession_prob", "unemp_longterm",
+    "hy_credit_spread", "ig_credit_spread", "nfci",
+  ],
+  fed: [
+    "cpi_core", "cpi_headline", "core_pce", "pce_deflator",
+    "ppi_final_demand", "ppi_crude_ex_food_energy", "eci",
+    "breakeven_5y", "unemployment_rate", "unemployment_u6",
+    "labor_force_participation", "avg_hourly_earnings", "fed_funds_rate",
+    "tips_real_yield",
+  ],
+  pulse: [
+    "initial_claims", "continuing_claims", "mba_purchase", "mba_refi",
+    "aar_carloads", "ci_loans", "total_loans",
+    "empire_state_mfg", "philly_fed_mfg",
+    "challenger_layoffs", "cass_freight",
+  ],
+  cycle: [
+    "ism_mfg", "ism_mfg_new_orders", "ism_mfg_production",
+    "ism_mfg_employment", "ism_mfg_customer_inv", "ism_mfg_prices_paid",
+    "ism_services", "ism_services_new_orders", "ism_services_prices_paid",
+    "industrial_production", "capacity_utilization",
+    "durable_goods_orders", "core_capex_orders", "durable_goods_ex_transport",
+    "factory_orders", "business_inventories", "inventory_sales_ratio",
+    "nfib_optimism", "nfp_payrolls", "nfp_temp_help", "avg_weekly_hours_mfg",
+    "jolts_openings", "jolts_quits_rate", "gdp_real", "gdp_growth_rate",
+  ],
+  rotation: [
+    "nfp_trucks", "housing_permits_1f", "housing_starts", "housing_starts_1f",
+    "existing_home_sales", "new_home_sales", "case_shiller_hpi", "nahb_traffic",
+    "retail_sales", "pce", "pce_real_durable",
+    "consumer_confidence", "umich_sentiment", "consumer_credit",
+  ],
+  fiscal: [
+    "debt_to_gdp", "interest_to_gdp", "interest_to_receipts",
+    "primary_deficit_pct", "fed_balance_to_gdp",
+    "tic_foreign_holdings", "dxy_index",
+  ],
+};
+
 /** Master composite weights per page. */
 const PAGE_WEIGHTS: Record<string, number> = {
   regime: 0.28,

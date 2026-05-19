@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fira_Sans, Fira_Code } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import GlobalScoreStrip from "@/components/GlobalScoreStrip";
 
 const firaSans = Fira_Sans({
   variable: "--font-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col" style={{ background: "var(--bg)", color: "var(--text)" }}>
         <Nav />
+        <GlobalScoreStrip />
         <main className="flex-1 max-w-screen-xl mx-auto w-full px-4 py-6">
           {children}
         </main>

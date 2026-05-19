@@ -520,7 +520,8 @@
     "trend_value_used": 0.201618,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-05-19T14:53:36.460236+00:00"
+    "computed_at": "2026-05-19T15:26:46.900408+00:00"
   },
-  "level_trend_state": "Strong"
+  "level_trend_state": "Strong",
+  "next_expected_release": "2026-06-18T00:00:00+00:00"
 }

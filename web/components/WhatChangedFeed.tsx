@@ -12,6 +12,15 @@ interface ChangedItem {
   delta: number;
 }
 
+function relativeTime(dateStr: string | undefined): string {
+  if (!dateStr) return "";
+  const diff = Math.round((Date.now() - new Date(dateStr).getTime()) / 86400000);
+  if (diff === 0) return "today";
+  if (diff === 1) return "yesterday";
+  if (diff <= 7) return `${diff}d ago`;
+  return `${Math.round(diff / 7)}w ago`;
+}
+
 export default function WhatChangedFeed({ indicators }: Props) {
   const changed: ChangedItem[] = [];
 
@@ -44,6 +53,7 @@ export default function WhatChangedFeed({ indicators }: Props) {
           {rows.map(({ ind, currentScore, previousScore, delta }) => {
             const color = zoneColor(getScoreZone(currentScore));
             const arrow = delta > 0 ? "↑" : "↓";
+            const when = relativeTime(ind.data[0]?.date);
             return (
               <div
                 key={ind.id}
@@ -68,6 +78,11 @@ export default function WhatChangedFeed({ indicators }: Props) {
                 >
                   {ind.name}
                 </span>
+                {when && (
+                  <span style={{ fontSize: 10, color: "var(--muted)", whiteSpace: "nowrap", flexShrink: 0 }}>
+                    {when}
+                  </span>
+                )}
                 <span
                   style={{
                     fontFamily: "var(--font-mono), monospace",
