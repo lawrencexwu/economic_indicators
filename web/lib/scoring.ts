@@ -1,0 +1,799 @@
+import type { DataPoint, Indicator, ScoreZone } from "./types";
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function clamp(v: number, lo = -100, hi = 100): number {
+  return Math.max(lo, Math.min(hi, Math.round(v)));
+}
+
+/** YoY % change from a level series (data sorted newest-first). */
+function yoy(data: DataPoint[], periodsBack: number): number | null {
+  if (data.length <= periodsBack) return null;
+  const current = data[0].value;
+  const prior = data[periodsBack].value;
+  if (!prior) return null;
+  return ((current - prior) / Math.abs(prior)) * 100;
+}
+
+/** MoM % change from a level series (data sorted newest-first). */
+function mom(data: DataPoint[]): number | null {
+  if (data.length < 2) return null;
+  const curr = data[0].value;
+  const prev = data[1].value;
+  if (!prev) return null;
+  return ((curr - prev) / Math.abs(prev)) * 100;
+}
+
+/** 3-month annualized % change. */
+function ann3m(data: DataPoint[]): number | null {
+  if (data.length < 4) return null;
+  const curr = data[0].value;
+  const prior3m = data[3].value;
+  if (!prior3m) return null;
+  return ((curr / prior3m) ** 4 - 1) * 100;
+}
+
+/**
+ * Z-score of current value vs trailing window (data sorted newest-first).
+ * Returns score where +1 std = +33, clamped to ±100.
+ * higherIsGood: if true, z>0 → positive score; if false, inverted.
+ */
+function zScore(
+  data: DataPoint[],
+  windowPeriods: number,
+  higherIsGood: boolean
+): number | null {
+  if (data.length < 4) return null;
+  const window = data.slice(0, Math.min(data.length, windowPeriods)).map((d) => d.value);
+  const mean = window.reduce((a, b) => a + b, 0) / window.length;
+  const std = Math.sqrt(window.reduce((acc, v) => acc + (v - mean) ** 2, 0) / window.length);
+  if (std === 0) return 0;
+  const z = (data[0].value - mean) / std;
+  const raw = higherIsGood ? z * 33 : -z * 33;
+  return clamp(raw);
+}
+
+// ── Threshold helpers ─────────────────────────────────────────────────────────
+
+type Tier = [number, number]; // [threshold, score] — evaluated top-to-bottom
+
+function threshold(value: number, tiers: Tier[]): number {
+  for (const [thresh, score] of tiers) {
+    if (value > thresh) return score;
+  }
+  return tiers[tiers.length - 1][1];
+}
+
+// ── Per-indicator scoring functions ──────────────────────────────────────────
+
+function scoreYieldCurve(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  // Value is in percent (e.g. 0.93 = 93bps)
+  return threshold(v, [
+    [2.0, 70],
+    [1.0, 40],
+    [0.5, 10],
+    [0.0, -20],
+    [-0.5, -50],
+    [-1.0, -80],
+    [-Infinity, -100],
+  ]);
+}
+
+function scoreClaims4wMA(ind: Indicator): number | null {
+  const { data } = ind;
+  if (!data.length) return null;
+  const current = data[0].value;
+  const lookback = Math.min(data.length, 156); // ~3 years weekly
+  const window = data.slice(0, lookback).map((d) => d.value);
+  const mean = window.reduce((a, b) => a + b, 0) / window.length;
+  const std = Math.sqrt(window.reduce((acc, v) => acc + (v - mean) ** 2, 0) / window.length);
+  const z = std > 0 ? (current - mean) / std : 0;
+  const prior8w = data[Math.min(8, data.length - 1)].value;
+  const momentum = prior8w > 0 ? (current - prior8w) / prior8w : 0;
+  return clamp(-50 * z - 100 * momentum);
+}
+
+function scoreCFNAI(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [1.0, -30],
+    [0.7, 0],
+    [0.2, 60],
+    [-0.7, 20],
+    [-1.5, -60],
+    [-Infinity, -100],
+  ]);
+}
+
+function scoreSahm(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [0.75, -100],
+    [0.50, -70],
+    [0.35, -40],
+    [0.20, 0],
+    [-Infinity, 40],
+  ]);
+}
+
+function scoreNYFedRecessionProb(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [50, -90],
+    [30, -60],
+    [15, -30],
+    [5, 0],
+    [-Infinity, 30],
+  ]);
+}
+
+function scoreNAHBIndex(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [60, 60],
+    [50, 30],
+    [40, 0],
+    [30, -30],
+    [20, -60],
+    [-Infinity, -90],
+  ]);
+}
+
+function scoreNAHBTraffic(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [50, 60],
+    [40, 20],
+    [30, -20],
+    [20, -50],
+    [-Infinity, -80],
+  ]);
+}
+
+/** CPI / headline PCE YoY scoring (scale: % YoY from level series). */
+function scoreCPIYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [4.0, -80],
+    [3.0, -50],
+    [2.5, -20],
+    [2.0, 20],
+    [-Infinity, 60],
+  ]);
+}
+
+/** Core PCE YoY — Fed's preferred gauge, tighter bands. */
+function scoreCorePCEYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [3.5, -90],
+    [3.0, -60],
+    [2.5, -30],
+    [2.3, 0],
+    [2.0, 30],
+    [-Infinity, 60],
+  ]);
+}
+
+/** ECI — quarterly, look back 4 quarters for YoY. */
+function scoreECI(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 4);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [5.0, -80],
+    [4.0, -50],
+    [3.5, -20],
+    [3.0, 20],
+    [-Infinity, 60],
+  ]);
+}
+
+/** 5-year breakeven inflation (already in %, direct). */
+function scoreBreakeven5y(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [3.5, -80],
+    [3.0, -50],
+    [2.5, -20],
+    [2.0, 20],
+    [-Infinity, 40],
+  ]);
+}
+
+/** Unemployment rate — needs context (level + direction). */
+function scoreUnemploymentRate(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  // Direction: is unemployment rising?
+  const rising =
+    ind.data.length >= 3 &&
+    ind.data[0].value > ind.data[2].value;
+  // Base score from level (higher = more slack = dovish Fed = mild bull)
+  const base = threshold(v, [
+    [6.0, -30], // recession territory
+    [5.0, 0],
+    [4.5, 20],
+    [4.0, 10],
+    [3.5, -10], // overheating concern
+    [-Infinity, -20],
+  ]);
+  // If rising, add bearish tilt (growth slowing)
+  const adj = rising ? -10 : 10;
+  return clamp(base + adj);
+}
+
+/** Average hourly earnings — YoY from level. */
+function scoreAHEYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [5.0, -80],
+    [4.0, -50],
+    [3.5, -20],
+    [3.0, 20],
+    [-Infinity, 60],
+  ]);
+}
+
+/** ISM headline (Mfg and Services). */
+function scoreISM(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [55, 70],
+    [52, 40],
+    [50, 10],
+    [48, -20],
+    [45, -50],
+    [-Infinity, -80],
+  ]);
+}
+
+/** ISM Customer Inventories — inverted (low = customers need to restock). */
+function scoreISMCustomerInv(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [55, -30],
+    [50, -10],
+    [45, 10],
+    [-Infinity, 30],
+  ]);
+}
+
+/** ISM Prices Paid — high prices = bearish. */
+function scoreISMPricesPaid(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [70, -40],
+    [60, -20],
+    [50, 0],
+    [-Infinity, 20],
+  ]);
+}
+
+/** NFIB Small Business Optimism. */
+function scoreNFIB(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [100, 50],
+    [98, 20],
+    [95, -10],
+    [90, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** Inventory / Sales ratio — higher = more bearish (inventory glut). */
+function scoreInventorySalesRatio(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [1.45, -50],
+    [1.40, -25],
+    [1.30, 0],
+    [-Infinity, 30],
+  ]);
+}
+
+/** JOLTS Quits Rate — high quits = tight labor market = bullish short-term. */
+function scoreJOLTSQuits(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [3.0, 20],
+    [2.5, 0],
+    [2.0, -20],
+    [-Infinity, -50],
+  ]);
+}
+
+/** Real GDP annualized growth (A191RL1Q225SBEA already in %). */
+function scoreGDPGrowth(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [3.0, 50],
+    [2.0, 20],
+    [1.0, 0],
+    [0.0, -30],
+    [-Infinity, -80],
+  ]);
+}
+
+/** Real GDP level (GDPC1) — compute annualized QoQ growth rate. */
+function scoreGDPReal(ind: Indicator): number | null {
+  if (ind.data.length < 2) return null;
+  const curr = ind.data[0].value;
+  const prev = ind.data[1].value;
+  if (!prev) return null;
+  const annualizedPct = ((curr / prev) ** 4 - 1) * 100;
+  return threshold(annualizedPct, [
+    [3.0, 50],
+    [2.0, 20],
+    [1.0, 0],
+    [0.0, -30],
+    [-Infinity, -80],
+  ]);
+}
+
+/** Industrial Production — YoY from index level. */
+function scoreIndustrialProduction(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [3.0, 50],
+    [1.0, 20],
+    [0.0, 0],
+    [-2.0, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** Capacity Utilization — already in %, use level directly. */
+function scoreCapacityUtilization(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [82, -30], // overheating
+    [80, -10],
+    [78, 0], // long-run average
+    [75, -10],
+    [70, -30],
+    [-Infinity, -50],
+  ]);
+}
+
+/** Durable Goods / Core Capex — 3-month annualized trend from level. */
+function scoreDurableGoods(ind: Indicator): number | null {
+  const pct = ann3m(ind.data);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [10, 50],
+    [3, 20],
+    [0, 0],
+    [-5, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** NFP payrolls — MoM absolute change (level series in persons). */
+function scoreNFP(ind: Indicator): number | null {
+  if (ind.data.length < 2) return null;
+  const change = ind.data[0].value - ind.data[1].value;
+  // change in raw counts; 200k+ = good, <50k = warning, negative = bad
+  return threshold(change, [
+    [300_000, 70],
+    [200_000, 40],
+    [100_000, 10],
+    [50_000, -10],
+    [0, -40],
+    [-Infinity, -80],
+  ]);
+}
+
+/** Temp help employment — YoY % (leads full NFP by 2-3 months). */
+function scoreTempHelp(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [5, 50],
+    [0, 10],
+    [-5, -30],
+    [-Infinity, -70],
+  ]);
+}
+
+/** C&I Loans and Total Loans — YoY growth from level. */
+function scoreLoanGrowth(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 52); // weekly, look back 52 weeks
+  if (pct === null) {
+    const pct12 = yoy(ind.data, 12);
+    if (pct12 === null) return null;
+    return threshold(pct12, [
+      [8, 30],
+      [3, 10],
+      [0, -10],
+      [-5, -40],
+      [-Infinity, -70],
+    ]);
+  }
+  return threshold(pct, [
+    [8, 30],
+    [3, 10],
+    [0, -10],
+    [-5, -40],
+    [-Infinity, -70],
+  ]);
+}
+
+/** Retail Sales MoM % change. */
+function scoreRetailSales(ind: Indicator): number | null {
+  const pct = mom(ind.data);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [1.5, 60],
+    [0.5, 30],
+    [0.0, 0],
+    [-0.5, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** PCE / Real durable PCE — YoY growth from level. */
+function scorePCEYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [5, 60],
+    [2.5, 30],
+    [1.0, 0],
+    [0.0, -30],
+    [-Infinity, -70],
+  ]);
+}
+
+/** UMich Sentiment — z-score vs 3-year trailing + direction. */
+function scoreUMich(ind: Indicator): number | null {
+  return zScore(ind.data, 36, true);
+}
+
+/** Housing Permits / Starts — YoY % from level. */
+function scoreHousingYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [20, 60],
+    [5, 30],
+    [0, 0],
+    [-10, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** Continuing Claims — z-score (higher = more bearish). */
+function scoreContinuingClaims(ind: Indicator): number | null {
+  return zScore(ind.data, 156, false);
+}
+
+/** Long-term unemployment (15+ weeks) — z-score, higher is bearish. */
+function scoreUnempLongterm(ind: Indicator): number | null {
+  return zScore(ind.data, 36, false);
+}
+
+/** PPI YoY from level. */
+function scorePPIYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  // High PPI = margin pressure = mildly bearish for equities
+  return threshold(pct, [
+    [8, -60],
+    [4, -30],
+    [2, 0],
+    [0, 10],
+    [-Infinity, 20],
+  ]);
+}
+
+/** Regional Fed surveys (Empire, Philly) — z-score. */
+function scoreRegionalFed(ind: Indicator): number | null {
+  return zScore(ind.data, 36, true);
+}
+
+/** Case-Shiller HPI YoY. */
+function scoreCaseShillerYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [10, 40],
+    [5, 20],
+    [0, 0],
+    [-5, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** Challenger layoffs — YoY change, higher = more bearish. */
+function scoreChallenger(ind: Indicator): number | null {
+  // Use z-score vs trailing (value in thousands)
+  return zScore(ind.data, 12, false);
+}
+
+/** Cass Freight — YoY from index level. */
+function scoreCassFreight(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [5, 30],
+    [0, 0],
+    [-5, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** AAR Carloads — value is already YoY % change. */
+function scoreAARCarloads(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  return threshold(v, [
+    [5, 30],
+    [0, 10],
+    [-2, -10],
+    [-5, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** MBA Purchase/Refi — z-score (higher = more demand = bullish housing). */
+function scoreMBA(ind: Indicator): number | null {
+  return zScore(ind.data, 52, true);
+}
+
+/** Fed Funds rate — score vs neutral rate (~2.5-3.0%). */
+function scoreFedFunds(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null) return null;
+  // Real neutral rate ~2.5%; restrictive above, accommodative below
+  return threshold(v, [
+    [5.5, -70], // very restrictive
+    [4.5, -40],
+    [3.5, -20],
+    [2.5, 0],  // near neutral
+    [1.5, 30],
+    [-Infinity, 60], // very accommodative
+  ]);
+}
+
+/** Consumer credit outstanding — YoY growth (higher = stronger demand, but
+ *  too high = overleveraging). Mildly directional. */
+function scoreConsumerCredit(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [10, -20], // overleveraging risk
+    [5, 20],
+    [0, 0],
+    [-5, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+/** Existing / New Home Sales — YoY from level. */
+function scoreHomeSalesYoY(ind: Indicator): number | null {
+  const pct = yoy(ind.data, 12);
+  if (pct === null) return null;
+  return threshold(pct, [
+    [20, 60],
+    [5, 30],
+    [0, 0],
+    [-10, -30],
+    [-Infinity, -60],
+  ]);
+}
+
+// ── Dispatch map ──────────────────────────────────────────────────────────────
+
+type ScoringFn = (ind: Indicator) => number | null;
+
+const SCORING_MAP: Record<string, ScoringFn> = {
+  yield_curve_10y3m: scoreYieldCurve,
+  yield_curve_10y2y: scoreYieldCurve,
+  claims_4wma: scoreClaims4wMA,
+  initial_claims: scoreClaims4wMA, // similar z-score approach
+  continuing_claims: scoreContinuingClaims,
+  cfnai_ma3: scoreCFNAI,
+  cfnai: scoreCFNAI,
+  sahm_rule: scoreSahm,
+  ny_fed_recession_prob: scoreNYFedRecessionProb,
+  nahb_index: scoreNAHBIndex,
+  nahb_traffic: scoreNAHBTraffic,
+  unemp_longterm: scoreUnempLongterm,
+  cpi_core: scoreCPIYoY,
+  cpi_headline: scoreCPIYoY,
+  core_pce: scoreCorePCEYoY,
+  pce_deflator: scoreCorePCEYoY,
+  ppi_final_demand: scorePPIYoY,
+  ppi_crude_ex_food_energy: scorePPIYoY,
+  eci: scoreECI,
+  breakeven_5y: scoreBreakeven5y,
+  unemployment_rate: scoreUnemploymentRate,
+  unemployment_u6: scoreUnemploymentRate,
+  labor_force_participation: (ind) => {
+    // Higher participation = more labor supply = dovish (mild bull)
+    return zScore(ind.data, 36, true);
+  },
+  avg_hourly_earnings: scoreAHEYoY,
+  fed_funds_rate: scoreFedFunds,
+  empire_state_mfg: scoreRegionalFed,
+  philly_fed_mfg: scoreRegionalFed,
+  richmond_fed_mfg: scoreRegionalFed,
+  kc_fed_mfg: scoreRegionalFed,
+  ci_loans: scoreLoanGrowth,
+  total_loans: scoreLoanGrowth,
+  mba_purchase: scoreMBA,
+  mba_refi: scoreMBA,
+  aar_carloads: scoreAARCarloads,
+  challenger_layoffs: scoreChallenger,
+  cass_freight: scoreCassFreight,
+  ism_mfg: scoreISM,
+  ism_mfg_new_orders: scoreISM,
+  ism_mfg_production: scoreISM,
+  ism_mfg_employment: scoreISM,
+  ism_mfg_customer_inv: scoreISMCustomerInv,
+  ism_mfg_prices_paid: scoreISMPricesPaid,
+  ism_services: scoreISM,
+  ism_services_new_orders: scoreISM,
+  ism_services_prices_paid: scoreISMPricesPaid,
+  industrial_production: scoreIndustrialProduction,
+  capacity_utilization: scoreCapacityUtilization,
+  durable_goods_orders: scoreDurableGoods,
+  core_capex_orders: scoreDurableGoods,
+  durable_goods_ex_transport: scoreDurableGoods,
+  factory_orders: scoreDurableGoods,
+  business_inventories: (ind) => zScore(ind.data, 36, false), // higher inventory = mildly bearish
+  inventory_sales_ratio: scoreInventorySalesRatio,
+  nfib_optimism: scoreNFIB,
+  nfp_payrolls: scoreNFP,
+  nfp_temp_help: scoreTempHelp,
+  nfp_trucks: scoreTempHelp,
+  housing_permits_1f: scoreHousingYoY,
+  housing_starts: scoreHousingYoY,
+  housing_starts_1f: scoreHousingYoY,
+  existing_home_sales: scoreHomeSalesYoY,
+  new_home_sales: scoreHomeSalesYoY,
+  case_shiller_hpi: scoreCaseShillerYoY,
+  retail_sales: scoreRetailSales,
+  pce: scorePCEYoY,
+  pce_real_durable: scorePCEYoY,
+  umich_sentiment: scoreUMich,
+  consumer_credit: scoreConsumerCredit,
+  jolts_openings: (ind) => zScore(ind.data, 36, true), // higher openings = tight market = mildly bull
+  jolts_quits_rate: scoreJOLTSQuits,
+  gdp_real: scoreGDPReal,
+  gdp_growth_rate: scoreGDPGrowth,
+  // lei, consumer_confidence, richmond_fed, kc_fed: scrapers not yet implemented → null
+};
+
+// ── Public API ────────────────────────────────────────────────────────────────
+
+export function computeScore(ind: Indicator): number | null {
+  const fn = SCORING_MAP[ind.id];
+  if (!fn) return null;
+  try {
+    return fn(ind);
+  } catch {
+    return null;
+  }
+}
+
+export function getScoreZone(score: number | null): ScoreZone {
+  if (score === null) return "na";
+  if (score >= 60) return "strong_bull";
+  if (score >= 20) return "bull";
+  if (score >= -20) return "neutral";
+  if (score >= -60) return "bear";
+  return "strong_bear";
+}
+
+export function zoneColor(zone: ScoreZone): string {
+  switch (zone) {
+    case "strong_bull": return "#16a155";
+    case "bull": return "#2dd47a";
+    case "neutral": return "#f5a623";
+    case "bear": return "#e74c5c";
+    case "strong_bear": return "#c0392b";
+    default: return "#7a8499";
+  }
+}
+
+export function zoneClass(zone: ScoreZone): string {
+  switch (zone) {
+    case "strong_bull": return "zone-strong-bull";
+    case "bull": return "zone-bull";
+    case "neutral": return "zone-neutral";
+    case "bear": return "zone-bear";
+    case "strong_bear": return "zone-strong-bear";
+    default: return "zone-na";
+  }
+}
+
+export function zoneLabel(zone: ScoreZone): string {
+  switch (zone) {
+    case "strong_bull": return "STRONG BULL";
+    case "bull": return "BULL";
+    case "neutral": return "NEUTRAL";
+    case "bear": return "BEAR";
+    case "strong_bear": return "STRONG BEAR";
+    default: return "N/A";
+  }
+}
+
+/** Format indicator value for display. */
+export function formatValue(ind: Indicator): string {
+  const v = ind.current_value;
+  if (v === null) return "—";
+  const id = ind.id;
+  // Rates / spreads — show in %
+  if (
+    ["yield_curve_10y3m", "yield_curve_10y2y", "breakeven_5y", "fed_funds_rate",
+     "unemployment_rate", "unemployment_u6", "labor_force_participation",
+     "jolts_quits_rate"].includes(id)
+  ) {
+    return `${v.toFixed(2)}%`;
+  }
+  // Claims — raw count → "204k"
+  if (["claims_4wma", "initial_claims"].includes(id)) {
+    return `${(v / 1000).toFixed(1)}k`;
+  }
+  // Sahm rule
+  if (id === "sahm_rule") return v.toFixed(2);
+  // CFNAI
+  if (id.startsWith("cfnai")) return v.toFixed(2);
+  // NY Fed recession prob
+  if (id === "ny_fed_recession_prob") return `${v.toFixed(1)}%`;
+  // ISM / NAHB / NFIB — index values 0-100
+  if (id.startsWith("ism_") || id.startsWith("nahb_") || id === "nfib_optimism") {
+    return v.toFixed(1);
+  }
+  // GDP growth — already %
+  if (id === "gdp_growth_rate") return `${v.toFixed(1)}%`;
+  // Capacity utilization
+  if (id === "capacity_utilization") return `${v.toFixed(1)}%`;
+  // Challenger — thousands
+  if (id === "challenger_layoffs") return `${v.toFixed(1)}k`;
+  // AAR — already YoY%
+  if (id === "aar_carloads") return `${v.toFixed(1)}%`;
+  // Default: numeric with 1 decimal
+  return v.toFixed(1);
+}
+
+/** Format MoM or YoY delta for display next to value. */
+export function formatDelta(ind: Indicator): string {
+  if (!ind.data || ind.data.length < 2) return "";
+  const curr = ind.data[0].value;
+  const prev = ind.data[1].value;
+  const diff = curr - prev;
+  const sign = diff > 0 ? "+" : "";
+  // For rates and spreads
+  const id = ind.id;
+  if (
+    ["yield_curve_10y3m", "yield_curve_10y2y", "breakeven_5y", "fed_funds_rate",
+     "unemployment_rate", "unemployment_u6", "labor_force_participation",
+     "jolts_quits_rate"].includes(id)
+  ) {
+    return `${sign}${diff.toFixed(2)}pp`;
+  }
+  return "";
+}
