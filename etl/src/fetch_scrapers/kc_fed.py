@@ -1,13 +1,15 @@
 """
 Kansas City Fed Tenth District Manufacturing Survey scraper.
-Source: kansascityfed.org — permanent historical Excel workbook (document ID 15886).
-The file is silently overwritten each month; we discover the current filename from
-the survey listing page and download it via pandas.
+Source: kansascityfed.org — permanent historical Excel workbook.
+The file gets a new document ID and filename each month. We discover the current URL
+from the survey listing page, cache it in etl/state/kc_fed_excel_url.txt (committed
+to git by CI), and fall back to the cached URL when discovery fails.
 """
 
 import logging
 import re
 import subprocess
+from pathlib import Path
 
 import pandas as pd
 
@@ -15,18 +17,34 @@ logger = logging.getLogger(__name__)
 
 _LISTING_URL = "https://www.kansascityfed.org/surveys/manufacturing-survey/"
 _BASE_URL = "https://www.kansascityfed.org"
-# Fallback: document container ID 15886 is stable; filename is updated monthly.
-# Update this URL when the fallback is hit and the ETL logs a warning.
-_FALLBACK_URL = "https://www.kansascityfed.org/documents/15886/2026Apr23historicalmfg.xlsx"
+_STATE_FILE = Path(__file__).parent.parent.parent / "state" / "kc_fed_excel_url.txt"
+# Last-resort hardcoded fallback — updated by CI whenever discovery succeeds.
+_BUILTIN_FALLBACK = "https://www.kansascityfed.org/documents/15886/2026Apr23historicalmfg.xlsx"
 
 _cache: list | None = None
 
 
-def _find_excel_url() -> str:
-    """Discover the current monthly Excel URL from the survey listing page.
+def _read_cached_url() -> str | None:
+    try:
+        url = _STATE_FILE.read_text().strip()
+        return url if url else None
+    except OSError:
+        return None
 
-    Uses subprocess curl to bypass TLS fingerprint bot-protection that blocks
-    the Python requests library on kansascityfed.org.
+
+def _write_cached_url(url: str) -> None:
+    try:
+        _STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        _STATE_FILE.write_text(url + "\n")
+    except OSError as e:
+        logger.warning("KC Fed: could not write state file (%s)", e)
+
+
+def _discover_url() -> str | None:
+    """Try to scrape the survey listing page for the current Excel URL.
+
+    Uses subprocess curl — the KC Fed listing page blocks Python requests via
+    TLS fingerprinting but responds normally to the system curl binary.
     """
     try:
         result = subprocess.run(
@@ -41,9 +59,32 @@ def _find_excel_url() -> str:
             if m:
                 return _BASE_URL + m.group(1)
     except Exception as e:
-        logger.warning("KC Fed: listing page discovery failed (%s), using fallback URL", e)
-    logger.warning("KC Fed: using fallback URL — update _FALLBACK_URL if this 404s")
-    return _FALLBACK_URL
+        logger.debug("KC Fed: curl discovery failed: %s", e)
+    return None
+
+
+def _find_excel_url() -> str:
+    """Return the current Excel URL, updating the state cache when possible."""
+    discovered = _discover_url()
+
+    if discovered:
+        cached = _read_cached_url()
+        if discovered != cached:
+            logger.info("KC Fed: new Excel URL discovered, updating cache: %s", discovered)
+            _write_cached_url(discovered)
+        return discovered
+
+    # Discovery failed — fall back to cached state, then built-in constant.
+    cached = _read_cached_url()
+    if cached:
+        logger.info("KC Fed: discovery failed, using cached URL: %s", cached)
+        return cached
+
+    logger.warning(
+        "KC Fed: discovery and cache both failed, using built-in fallback. "
+        "Update _BUILTIN_FALLBACK in kc_fed.py if this 404s."
+    )
+    return _BUILTIN_FALLBACK
 
 
 def _fetch_history() -> list[dict]:
