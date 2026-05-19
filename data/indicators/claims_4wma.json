@@ -7,8 +7,9 @@
   "tier": 1,
   "weight": 3,
   "frequency": "weekly",
+  "unit": "thousands",
   "source_type": "fred",
-  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "last_updated": "2026-05-19T16:13:31.979752+00:00",
   "current_value": 203750.0,
   "previous_value": 203000.0,
   "data": [
@@ -6355,6 +6356,7 @@
     "scoring_rule": "z = (current 4wMA - trailing 3y mean) / trailing 3y stddev momentum = (current 4wMA - 4wMA 8 weeks ago) / 4wMA 8 weeks ago raw_score = -50*z - 100*momentum (high & rising = bearish) clamp to [-100, +100]\n"
   },
   "score": null,
+  "next_expected_release": "2026-05-21T00:00:00+00:00",
   "zscore": {
     "level_z": -0.522,
     "level_mean": 362111.584596,
@@ -6364,8 +6366,46 @@
     "trend_value_used": -16500.0,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-05-19T15:26:46.793921+00:00"
+    "computed_at": "2026-05-19T16:13:32.399472+00:00"
   },
   "level_trend_state": "Neutral",
-  "next_expected_release": "2026-05-21T00:00:00+00:00"
+  "forecast": {
+    "model": "SeasonalNaive",
+    "horizon": 4,
+    "values": [
+      {
+        "date": "2026-05-17",
+        "mean": 229500.0,
+        "lo80": -314494.0578,
+        "hi80": 773494.0578,
+        "lo95": -602467.1168,
+        "hi95": 1061467.1168
+      },
+      {
+        "date": "2026-05-24",
+        "mean": 228750.0,
+        "lo80": -315244.0578,
+        "hi80": 772744.0578,
+        "lo95": -603217.1168,
+        "hi95": 1060717.1168
+      },
+      {
+        "date": "2026-05-31",
+        "mean": 232750.0,
+        "lo80": -311244.0578,
+        "hi80": 776744.0578,
+        "lo95": -599217.1168,
+        "hi95": 1064717.1168
+      },
+      {
+        "date": "2026-06-07",
+        "mean": 237750.0,
+        "lo80": -306244.0578,
+        "hi80": 781744.0578,
+        "lo95": -594217.1168,
+        "hi95": 1069717.1168
+      }
+    ],
+    "computed_at": "2026-05-19T16:13:32.425000+00:00"
+  }
 }
