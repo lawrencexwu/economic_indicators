@@ -1076,6 +1076,45 @@ export function formatValue(ind: Indicator): string {
   return v.toFixed(1);
 }
 
+// Mirrors etl/src/scoring.py transform logic so the histogram shows the same
+// values that were z-scored in the ETL.
+const YOY_PERIODS: Record<string, number> = {
+  daily: 252, weekly: 52, quarterly: 4, monthly: 12,
+};
+const WINDOW_10Y_PERIODS: Record<string, number> = {
+  daily: 2520, weekly: 520, quarterly: 40, monthly: 120,
+};
+
+/**
+ * Returns the array of transformed values used for z-scoring, windowed the
+ * same way the ETL does. Pass to IndicatorHistogram as `values`.
+ * Returns null when there is insufficient data.
+ */
+export function getHistogramValues(ind: Indicator): number[] | null {
+  if (!ind.zscore) return null;
+  const { transform, window } = ind.zscore;
+  const freq = ind.frequency ?? "monthly";
+  const raw = ind.data.map((d) => d.value).filter((v): v is number => v !== null && v !== undefined);
+  if (raw.length < 4) return null;
+
+  let level: number[];
+  if (transform === "yoy") {
+    const n = YOY_PERIODS[freq] ?? 12;
+    if (raw.length <= n) return null;
+    level = [];
+    for (let i = 0; i < raw.length - n; i++) {
+      const base = raw[i + n];
+      if (base !== 0) level.push(raw[i] / base - 1);
+    }
+    if (level.length < 4) return null;
+  } else {
+    level = raw;
+  }
+
+  const nWindow = window === "full" ? level.length : (WINDOW_10Y_PERIODS[freq] ?? 120);
+  return level.slice(0, Math.min(nWindow, level.length));
+}
+
 /** Format MoM or YoY delta for display next to value. */
 export function formatDelta(ind: Indicator): string {
   if (!ind.data || ind.data.length < 2) return "";

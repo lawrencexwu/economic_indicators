@@ -2,11 +2,12 @@
 
 import React, { useState, Suspense } from "react";
 import type { ScoredIndicator } from "@/lib/types";
-import { zoneColor, formatValue, describeScore } from "@/lib/scoring";
+import { zoneColor, formatValue, describeScore, getHistogramValues } from "@/lib/scoring";
 import { isStale } from "@/lib/utils";
 import SparkLine from "./SparkLine";
 
 const DetailChart = React.lazy(() => import("./DetailChart"));
+const IndicatorHistogram = React.lazy(() => import("./IndicatorHistogram"));
 
 interface Props {
   indicators: ScoredIndicator[];
@@ -30,6 +31,11 @@ function formatNextRelease(iso: string | null | undefined): string {
     day: "numeric",
     timeZone: "Asia/Taipei",
   });
+}
+
+function makeHistFormatVal(transform: string | undefined): (v: number) => string {
+  if (transform === "yoy") return (v) => `${(v * 100).toFixed(2)}%`;
+  return (v) => v.toFixed(2);
 }
 
 export default function IndicatorTable({ indicators, showSparkline = true }: Props) {
@@ -248,6 +254,41 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                           </Suspense>
                         </div>
 
+                        {/* Distribution histogram */}
+                        {(() => {
+                          const histVals = getHistogramValues(ind);
+                          const zb = ind.zscore;
+                          if (!histVals || !zb) return null;
+                          const fmt = makeHistFormatVal(zb.transform);
+                          return (
+                            <div style={{ padding: "0 16px 12px" }}>
+                              <div
+                                style={{
+                                  fontSize: 10,
+                                  color: "var(--muted)",
+                                  textTransform: "uppercase",
+                                  letterSpacing: "0.08em",
+                                  marginBottom: 6,
+                                }}
+                              >
+                                Distribution · {zb.window === "full" ? "Full history" : "10-year window"}
+                              </div>
+                              <Suspense fallback={<div style={{ height: 88, background: "var(--border)", borderRadius: 4 }} />}>
+                                <IndicatorHistogram
+                                  values={histVals}
+                                  currentValue={zb.level_value_used}
+                                  mean={zb.level_mean}
+                                  std={zb.level_std}
+                                  levelZ={zb.level_z}
+                                  formatVal={fmt}
+                                  width={280}
+                                  height={72}
+                                />
+                              </Suspense>
+                            </div>
+                          );
+                        })()}
+
                         {/* Bottom 3-column strip */}
                         <div
                           style={{
@@ -453,6 +494,28 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                   >
                     <DetailChart ind={ind} height={80} />
                   </Suspense>
+                  {(() => {
+                    const histVals = getHistogramValues(ind);
+                    const zb = ind.zscore;
+                    if (!histVals || !zb) return null;
+                    const fmt = makeHistFormatVal(zb.transform);
+                    return (
+                      <div style={{ marginTop: 8 }}>
+                        <Suspense fallback={<div style={{ height: 72, background: "var(--border)", borderRadius: 4 }} />}>
+                          <IndicatorHistogram
+                            values={histVals}
+                            currentValue={zb.level_value_used}
+                            mean={zb.level_mean}
+                            std={zb.level_std}
+                            levelZ={zb.level_z}
+                            formatVal={fmt}
+                            width={260}
+                            height={64}
+                          />
+                        </Suspense>
+                      </div>
+                    );
+                  })()}
                   {description && (
                     <div
                       style={{
