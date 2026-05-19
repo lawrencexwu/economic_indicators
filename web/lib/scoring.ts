@@ -109,6 +109,17 @@ function describeZScore(
 function scoreYieldCurve(ind: Indicator): number | null {
   const v = ind.current_value;
   if (v === null) return null;
+
+  // Re-steepening from inversion: curve just crossed above 0 after being
+  // negative for 6+ months. Historically a near-recession signal, not bullish.
+  if (v > 0 && ind.data.length >= 2) {
+    const sixMonthsAgo = new Date(Date.now() - 180 * 24 * 60 * 60 * 1000);
+    const priorWindow = ind.data.slice(1).filter((d) => new Date(d.date) >= sixMonthsAgo);
+    if (priorWindow.length >= 20 && priorWindow.every((d) => d.value < 0)) {
+      return -50;
+    }
+  }
+
   // Value is in percent (e.g. 0.93 = 93bps)
   return threshold(v, [
     [2.0, 70],
