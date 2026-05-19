@@ -34,6 +34,9 @@ export default function UpcomingReleases({ indicators }: Props) {
           {upcoming.map((ind) => {
             const releaseMs = new Date(ind.next_expected_release!).getTime();
             const isImminent = releaseMs - now < MS_24H;
+            const weight = ind.weight ?? 1;
+            const priority = weight >= 3 ? "HIGH" : weight >= 2 ? "MED" : "LOW";
+            const priorityColor = weight >= 3 ? "#e74c5c" : weight >= 2 ? "#f5a623" : "var(--muted)";
             const dateLabel = new Date(ind.next_expected_release!).toLocaleDateString("en-US", {
               weekday: "short",
               month: "short",
@@ -77,6 +80,20 @@ export default function UpcomingReleases({ indicators }: Props) {
                   }}
                 >
                   {ind.name}
+                </span>
+                <span
+                  style={{
+                    marginLeft: "auto",
+                    paddingLeft: 8,
+                    flexShrink: 0,
+                    fontSize: 10,
+                    fontWeight: 700,
+                    fontFamily: "var(--font-geist-mono), monospace",
+                    color: priorityColor,
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  [{priority}]
                 </span>
               </div>
             );
