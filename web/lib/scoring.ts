@@ -607,9 +607,13 @@ function scoreAARCarloads(ind: Indicator): number | null {
   ]);
 }
 
-/** MBA Purchase/Refi — z-score (higher = more demand = bullish housing). */
+/** MBA Purchase/Refi — z-score (higher = more demand = bullish housing).
+ *  Falls back to WoW direction (±20) when history is too thin for z-score. */
 function scoreMBA(ind: Indicator): number | null {
-  return zScore(ind.data, 52, true);
+  if (ind.data.length >= 4) return zScore(ind.data, 52, true);
+  const m = mom(ind.data);
+  if (m === null) return null;
+  return clamp(m > 0 ? 20 : -20);
 }
 
 /** Fed Funds rate — score vs neutral rate (~2.5-3.0%). */
@@ -1057,6 +1061,17 @@ export function formatValue(ind: Indicator): string {
   if (id === "challenger_layoffs") return `${v.toFixed(1)}k`;
   // AAR — already YoY%
   if (id === "aar_carloads") return `${v.toFixed(1)}%`;
+  // CPI / PCE deflators / PPI / AHE / ECI — store FRED index levels; show YoY % instead
+  if (["cpi_core", "cpi_headline", "core_pce", "pce_deflator",
+       "ppi_final_demand", "ppi_crude_ex_food_energy",
+       "avg_hourly_earnings", "pce", "pce_real_durable"].includes(id)) {
+    const pct = yoy(ind.data, 12);
+    return pct !== null ? `${pct.toFixed(1)}%` : `${v.toFixed(1)}`;
+  }
+  if (id === "eci") {
+    const pct = yoy(ind.data, 4);
+    return pct !== null ? `${pct.toFixed(1)}%` : `${v.toFixed(1)}`;
+  }
   // Default: numeric with 1 decimal
   return v.toFixed(1);
 }
