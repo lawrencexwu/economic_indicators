@@ -5,6 +5,7 @@ import {
   generateVerdictParts,
   CYCLE_PHASE_LABELS,
   CYCLE_PHASE_DESCRIPTIONS,
+  CYCLE_PHASE_ASSETS,
   PAGE_IDS,
   PAGE_NAMES,
 } from "@/lib/composites";
@@ -31,12 +32,14 @@ const PAGE_INDICATOR_IDS: Record<string, string[]> = {
     "yield_curve_10y3m", "yield_curve_10y2y", "claims_4wma",
     "lei", "cfnai_ma3", "sahm_rule", "nahb_index",
     "ny_fed_recession_prob", "unemp_longterm",
+    "hy_credit_spread", "ig_credit_spread", "nfci",
   ],
   fed: [
     "cpi_core", "cpi_headline", "core_pce", "pce_deflator",
     "ppi_final_demand", "ppi_crude_ex_food_energy", "eci",
     "breakeven_5y", "unemployment_rate", "unemployment_u6",
     "labor_force_participation", "avg_hourly_earnings", "fed_funds_rate",
+    "tips_real_yield",
   ],
   pulse: [
     "initial_claims", "continuing_claims", "mba_purchase", "mba_refi",
@@ -176,6 +179,24 @@ export default function HomePage() {
               <p style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.6, margin: 0, fontWeight: 600, textAlign: "center" }}>
                 {CYCLE_PHASE_DESCRIPTIONS[cyclePhase]}
               </p>
+              {CYCLE_PHASE_ASSETS[cyclePhase] && (() => {
+                const a = CYCLE_PHASE_ASSETS[cyclePhase];
+                return (
+                  <div style={{ marginTop: 12, borderTop: "1px solid var(--border)", paddingTop: 12, width: "100%" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                      <div>
+                        <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--green, #2ecc71)", marginBottom: 6, fontWeight: 700 }}>Favor</div>
+                        {a.favor.map(item => <div key={item} style={{ fontSize: 11, color: "var(--text)", lineHeight: 1.6 }}>• {item}</div>)}
+                      </div>
+                      <div>
+                        <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--red, #e74c5c)", marginBottom: 6, fontWeight: 700 }}>Avoid</div>
+                        {a.avoid.map(item => <div key={item} style={{ fontSize: 11, color: "var(--muted)", lineHeight: 1.6 }}>• {item}</div>)}
+                      </div>
+                    </div>
+                    <p style={{ fontSize: 11, color: "var(--muted)", marginTop: 10, marginBottom: 0, fontStyle: "italic" }}>{a.theme}</p>
+                  </div>
+                );
+              })()}
             </>
           ) : (
             <span style={{ color: "var(--muted)", fontSize: 14 }}>Insufficient data</span>

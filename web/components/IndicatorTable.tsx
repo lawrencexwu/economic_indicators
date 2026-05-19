@@ -134,7 +134,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
     if (e.key === "Escape") setExpandedId(null);
   }
 
-  const colCount = showSparkline ? 6 : 5;
+  const colCount = showSparkline ? 7 : 6;
 
   return (
     <>
@@ -143,7 +143,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr style={{ borderBottom: "1px solid var(--border)" }}>
-              {["Indicator", "Value", "Score", "State", "Wt", ...(showSparkline ? ["Trend"] : [])].map((h) => (
+              {["Indicator", "Value", "Score", "State", "Wt", "Contrib", ...(showSparkline ? ["Trend"] : [])].map((h) => (
                 <th
                   key={h}
                   style={{
@@ -288,6 +288,21 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                     <td style={{ padding: "8px 10px", color: "var(--muted)", whiteSpace: "nowrap" }}>
                       ×{ind.weight}
                     </td>
+
+                    {/* Contrib */}
+                    {(() => {
+                      const contrib = score !== null ? Math.round(score * (ind.weight ?? 1)) : null;
+                      return (
+                        <td style={{
+                          padding: "8px 12px", textAlign: "right",
+                          fontFamily: "var(--font-mono), monospace", fontSize: 12,
+                          color: contrib === null ? "var(--muted)" : contrib > 0 ? "var(--green, #2ecc71)" : contrib < 0 ? "var(--red, #e74c5c)" : "var(--muted)",
+                          whiteSpace: "nowrap",
+                        }}>
+                          {contrib === null ? "—" : contrib > 0 ? `+${contrib}` : String(contrib)}
+                        </td>
+                      );
+                    })()}
 
                     {/* Sparkline */}
                     {showSparkline && (

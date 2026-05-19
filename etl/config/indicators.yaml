@@ -2072,3 +2072,102 @@ indicators:
         is restrictive. The year-over-year change in the ratio signals the direction
         of monetary policy transmission independent of the fed funds rate.
       scoring_rule: "YoY change: >+5pp → -30 | +2 to +5pp → -15 | -2 to +2pp → 0 | -5 to -2pp → +15 | <-5pp → +30"
+
+  # ── Financial Conditions / Credit ────────────────────────────────────────────
+  - id: hy_credit_spread
+    name: "HY Credit Spread (ICE BofA OAS)"
+    fred_ticker: "BAMLH0A0HYM2"
+    category: "credit"
+    page: "regime"
+    tier: 2
+    weight: 2
+    frequency: "daily"
+    release_pattern: "daily"
+    source_type: "fred"
+    history_years: 15
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        ICE BofA US High Yield Index Option-Adjusted Spread. Daily from FRED.
+        Measures the yield premium of HY bonds over comparable Treasuries.
+      why_it_matters: >
+        Credit spreads are a real-time risk barometer. HY OAS widens before
+        equity drawdowns — credit is often the "canary" signal. Below 3% =
+        complacent/risk-on. Above 5% = stress. Above 8% = crisis.
+      scoring_rule: "< 3.0% → +60 | 3.0-4.0% → +20 | 4.0-5.0% → -20 | 5.0-6.5% → -60 | > 6.5% → -100"
+
+  - id: ig_credit_spread
+    name: "IG Credit Spread (ICE BofA OAS)"
+    fred_ticker: "BAMLC0A0CM"
+    category: "credit"
+    page: "regime"
+    tier: 2
+    weight: 2
+    frequency: "daily"
+    release_pattern: "daily"
+    source_type: "fred"
+    history_years: 15
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        ICE BofA US Corporate Index Option-Adjusted Spread. Daily from FRED.
+        Premium of investment-grade corporate bonds over Treasuries.
+      why_it_matters: >
+        IG spreads represent institutional risk appetite. Widening IG spreads
+        signal flight-to-quality even before IG defaults rise. Lead equity
+        drawdowns by 2-4 weeks. Normal range: 0.8-1.5%. Stress: above 2.5%.
+      scoring_rule: "< 0.8% → +60 | 0.8-1.2% → +20 | 1.2-1.8% → -20 | 1.8-2.5% → -60 | > 2.5% → -100"
+
+  - id: nfci
+    name: "Chicago Fed National Financial Conditions Index"
+    fred_ticker: "NFCI"
+    category: "credit"
+    page: "regime"
+    tier: 2
+    weight: 2
+    frequency: "weekly"
+    release_pattern: "weekly_friday"
+    source_type: "fred"
+    history_years: 15
+    unit: "index"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        Chicago Fed NFCI: composite of 105 indicators of US financial conditions
+        across money, debt, equity, and traditional/shadow banking. Released
+        Fridays. 0 = historical average, positive = tighter, negative = looser.
+      why_it_matters: >
+        Single best summary of whether financial conditions are tightening or
+        easing. NFCI rising above 0 for 3+ weeks historically precedes slowing
+        growth. More comprehensive than spreads or yield curve alone.
+      scoring_rule: "< -0.5 → +60 | -0.5 to -0.1 → +20 | -0.1 to +0.1 → 0 | +0.1 to +0.5 → -30 | +0.5 to +1.0 → -60 | > +1.0 → -100"
+
+  - id: tips_real_yield
+    name: "10Y TIPS Real Yield"
+    fred_ticker: "DFII10"
+    category: "rates"
+    page: "fed"
+    tier: 2
+    weight: 2
+    frequency: "daily"
+    release_pattern: "daily"
+    source_type: "fred"
+    history_years: 15
+    unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
+    metadata:
+      what_it_measures: >
+        10-Year Treasury Inflation-Protected Securities yield. The real
+        (inflation-adjusted) cost of capital. Daily from FRED. Unlike nominal
+        yields, TIPS isolate the real rate component from inflation expectations.
+      why_it_matters: >
+        Real rates are the true discount rate for equity valuations. Rising real
+        rates compress P/E multiples mechanically. Above 1.5-2%, equity multiples
+        face structural headwind regardless of nominal rates.
+      scoring_rule: "< 0.0% → +80 | 0.0-0.5% → +40 | 0.5-1.0% → +10 | 1.0-1.5% → -20 | 1.5-2.0% → -50 | > 2.0% → -80"

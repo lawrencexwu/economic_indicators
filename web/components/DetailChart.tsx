@@ -37,6 +37,10 @@ const CHART_THRESHOLDS: Record<string, [number, boolean]> = {
   sahm_rule:           [0.5, false],
   cfnai_ma3:           [0,  true],
   ny_fed_recession_prob: [30, false],
+  hy_credit_spread:      [5.0, false],
+  ig_credit_spread:      [2.5, false],
+  nfci:                  [0,   false],
+  tips_real_yield:       [2.0, false],
 };
 
 function formatLabelDate(label: unknown): string {

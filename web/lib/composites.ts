@@ -148,6 +148,36 @@ export const CYCLE_PHASE_DESCRIPTIONS: Record<CyclePhase, string> = {
   RECOVERY: "Emerging from trough. Early cyclicals and credit lead.",
 };
 
+export interface AssetClassMap { favor: string[]; avoid: string[]; theme: string; }
+
+export const CYCLE_PHASE_ASSETS: Record<CyclePhase, AssetClassMap> = {
+  EARLY_EXPANSION: {
+    favor: ["Cyclicals (materials, industrials, discretionary)", "Small caps", "Value", "EM equities", "High-yield credit", "Commodities"],
+    avoid: ["Utilities", "Staples", "Long-duration bonds", "Cash drag"],
+    theme: "Re-acceleration. Cyclicals and credit lead. Inflation still contained.",
+  },
+  MID_EXPANSION: {
+    favor: ["Growth & tech", "Financials", "Broad equity (all sectors)", "Investment-grade credit"],
+    avoid: ["Over-concentration in any single sector", "Excessive defensives"],
+    theme: "Broad participation. Stay pro-risk with quality as the anchor.",
+  },
+  LATE_CYCLE: {
+    favor: ["Healthcare", "Utilities", "Consumer staples", "Investment-grade credit", "Long duration (rates peaking)", "Energy"],
+    avoid: ["High-beta cyclicals", "Small caps", "High-yield credit", "EM equities"],
+    theme: "Quality over beta. Reduce cyclical exposure; add duration as rates peak.",
+  },
+  RECESSION: {
+    favor: ["Cash", "Short-duration Treasuries", "Healthcare", "Utilities", "Staples", "High-quality credit"],
+    avoid: ["Cyclicals", "Small caps", "EM equities", "High-yield credit", "Equities broadly"],
+    theme: "Capital preservation. Cash and quality above all.",
+  },
+  RECOVERY: {
+    favor: ["Early cyclicals (materials, discretionary)", "High-yield credit", "REITs", "EM equities", "Small caps"],
+    avoid: ["Long-duration bonds (rates starting to rise)", "Cash drag", "Defensives lagging"],
+    theme: "Lead the re-acceleration. Credit and early cyclicals before data confirms.",
+  },
+};
+
 // ── Master Composite ──────────────────────────────────────────────────────────
 
 export function masterComposite(pages: Record<string, PageResult>): number | null {

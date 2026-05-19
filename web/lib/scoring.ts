@@ -658,6 +658,50 @@ function scoreHomeSalesYoY(ind: Indicator): number | null {
   ]);
 }
 
+// ── Credit / Financial Conditions ────────────────────────────────────────────
+
+function scoreHYSpread(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null || v === undefined) return null;
+  if (v < 3.0) return 60;
+  if (v < 4.0) return 20;
+  if (v < 5.0) return -20;
+  if (v < 6.5) return -60;
+  return -100;
+}
+
+function scoreIGSpread(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null || v === undefined) return null;
+  if (v < 0.8) return 60;
+  if (v < 1.2) return 20;
+  if (v < 1.8) return -20;
+  if (v < 2.5) return -60;
+  return -100;
+}
+
+function scoreNFCI(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null || v === undefined) return null;
+  if (v < -0.5) return 60;
+  if (v < -0.1) return 20;
+  if (v < 0.1) return 0;
+  if (v < 0.5) return -30;
+  if (v < 1.0) return -60;
+  return -100;
+}
+
+function scoreTIPSRealYield(ind: Indicator): number | null {
+  const v = ind.current_value;
+  if (v === null || v === undefined) return null;
+  if (v < 0.0) return 80;
+  if (v < 0.5) return 40;
+  if (v < 1.0) return 10;
+  if (v < 1.5) return -20;
+  if (v < 2.0) return -50;
+  return -80;
+}
+
 // ── Dispatch map ──────────────────────────────────────────────────────────────
 
 type ScoringFn = (ind: Indicator) => number | null;
@@ -750,6 +794,12 @@ const SCORING_MAP: Record<string, ScoringFn> = {
   fed_balance_to_gdp: scoreFedBalanceToGDP,
   tic_foreign_holdings: scoreTICForeignHoldings,
   dxy_index: scoreDXY,
+
+  // ── Credit / Financial Conditions ─────────────────────────────────────────
+  hy_credit_spread: scoreHYSpread,
+  ig_credit_spread: scoreIGSpread,
+  nfci: scoreNFCI,
+  tips_real_yield: scoreTIPSRealYield,
 };
 
 // ── Description map ───────────────────────────────────────────────────────────
@@ -1189,6 +1239,12 @@ export function formatValue(ind: Indicator): string {
     const pct = yoy(ind.data, 4);
     return pct !== null ? `${pct.toFixed(1)}%` : `${v.toFixed(1)}`;
   }
+  // Credit spreads and TIPS real yield — show as %
+  if (["hy_credit_spread", "ig_credit_spread", "tips_real_yield"].includes(id)) {
+    return `${v.toFixed(2)}%`;
+  }
+  // NFCI — 3-decimal index
+  if (id === "nfci") return v.toFixed(3);
   // Default: numeric with 1 decimal
   return v.toFixed(1);
 }

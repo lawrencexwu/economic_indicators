@@ -14,6 +14,9 @@ const INDICATOR_IDS = [
   "nahb_index",
   "ny_fed_recession_prob",
   "unemp_longterm",
+  "hy_credit_spread",
+  "ig_credit_spread",
+  "nfci",
 ];
 
 export default function RegimePage() {
