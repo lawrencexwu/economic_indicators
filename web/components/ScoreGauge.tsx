@@ -35,7 +35,7 @@ export default function ScoreGauge({ score, size = 200 }: Props) {
   const ny = cy - r * Math.sin(angleRad);
 
   return (
-    <svg width={size} height={size * 0.58} viewBox={`0 0 ${size} ${size * 0.58}`}>
+    <svg width={size} height={size * 0.65} viewBox={`0 0 ${size} ${size * 0.65}`}>
       {/* Background track */}
       <path
         d={arcPath}
@@ -74,20 +74,20 @@ export default function ScoreGauge({ score, size = 200 }: Props) {
         </>
       )}
 
-      {/* End labels */}
+      {/* End labels — positioned below arc endpoints, inside the taller viewBox */}
       <text
-        x={lx - strokeW / 2}
-        y={cy + strokeW}
-        fontSize={size * 0.055}
+        x={lx}
+        y={cy + strokeW * 1.6}
+        fontSize={size * 0.058}
         fill="var(--muted)"
         textAnchor="middle"
       >
         -100
       </text>
       <text
-        x={rx + strokeW / 2}
-        y={cy + strokeW}
-        fontSize={size * 0.055}
+        x={rx}
+        y={cy + strokeW * 1.6}
+        fontSize={size * 0.058}
         fill="var(--muted)"
         textAnchor="middle"
       >

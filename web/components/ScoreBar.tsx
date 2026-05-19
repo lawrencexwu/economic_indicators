@@ -20,14 +20,14 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
         display: "flex",
         alignItems: "center",
         gap: 12,
-        padding: "8px 0",
+        padding: "10px 0",
       }}
     >
       {/* Label */}
       <span
         style={{
-          width: 180,
-          fontSize: 13,
+          width: 210,
+          fontSize: 14,
           color: "var(--text)",
           flexShrink: 0,
           whiteSpace: "nowrap",
@@ -41,8 +41,8 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
       {/* Score number */}
       <span
         style={{
-          width: 36,
-          fontSize: 13,
+          width: 40,
+          fontSize: 14,
           fontFamily: "var(--font-geist-mono), monospace",
           textAlign: "right",
           color: score !== null ? color : "var(--muted)",
@@ -56,9 +56,9 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
       <div
         style={{
           flex: 1,
-          height: 8,
+          height: 12,
           background: "var(--border)",
-          borderRadius: 4,
+          borderRadius: 6,
           position: "relative",
           overflow: "hidden",
         }}
@@ -95,8 +95,8 @@ export default function ScoreBar({ label, score, href, showZoneLabel = false }: 
       {showZoneLabel && (
         <span
           style={{
-            width: 80,
-            fontSize: 10,
+            width: 90,
+            fontSize: 11,
             fontWeight: 600,
             letterSpacing: "0.06em",
             color,

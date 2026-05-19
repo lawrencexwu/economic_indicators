@@ -28,7 +28,7 @@ export default function EquityBiasPanel({ bias, compact = false }: Props) {
     <div
       style={{
         display: "flex",
-        alignItems: compact ? "center" : "flex-start",
+        alignItems: "center",
         flexDirection: compact ? "row" : "column",
         gap: compact ? 12 : 8,
       }}
@@ -113,9 +113,9 @@ export default function EquityBiasPanel({ bias, compact = false }: Props) {
               fontFamily: "var(--font-geist-mono), monospace",
             }}
           >
-            <span style={{ color: "#4ade80" }}>{bull} bull</span>
-            <span>{neutral} neutral</span>
-            <span style={{ color: "#f87171" }}>{bear} bear</span>
+            <span style={{ color: "#4ade80" }}>{bull} Bullish</span>
+            <span>{neutral} Neutral</span>
+            <span style={{ color: "#f87171" }}>{bear} Bearish</span>
           </div>
         )}
       </div>

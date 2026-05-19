@@ -22,9 +22,10 @@ export default function UpcomingReleases({ indicators }: Props) {
 
   return (
     <div className="card">
-      <span className="label" style={{ display: "block", marginBottom: 10 }}>
-        Upcoming Releases
-      </span>
+      <div style={{ marginBottom: 10 }}>
+        <span className="label" style={{ display: "block" }}>Upcoming Releases</span>
+        <span style={{ fontSize: 10, color: "var(--muted)" }}>Impact = expected market-moving significance</span>
+      </div>
       {upcoming.length === 0 ? (
         <p style={{ fontSize: 13, color: "var(--muted)", margin: 0 }}>
           No scheduled releases available.
@@ -35,7 +36,7 @@ export default function UpcomingReleases({ indicators }: Props) {
             const releaseMs = new Date(ind.next_expected_release!).getTime();
             const isImminent = releaseMs - now < MS_24H;
             const weight = ind.weight ?? 1;
-            const priority = weight >= 3 ? "HIGH" : weight >= 2 ? "MED" : "LOW";
+            const priority = weight >= 3 ? "HIGH IMPACT" : weight >= 2 ? "MID IMPACT" : "LOW IMPACT";
             const priorityColor = weight >= 3 ? "#e74c5c" : weight >= 2 ? "#f5a623" : "var(--muted)";
             const dateLabel = new Date(ind.next_expected_release!).toLocaleDateString("en-US", {
               weekday: "short",

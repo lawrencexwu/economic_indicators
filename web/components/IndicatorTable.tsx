@@ -39,12 +39,16 @@ function makeHistFormatVal(transform: string | undefined): (v: number) => string
   return (v) => v.toFixed(2);
 }
 
-function formatForecastDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-US", {
-    month: "short",
-    year: "2-digit",
-    timeZone: "UTC",
-  });
+function formatForecastDate(iso: string, freq?: string): string {
+  const d = new Date(iso);
+  if (freq === "daily" || freq === "weekly") {
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+  }
+  if (freq === "quarterly") {
+    const q = Math.floor(d.getUTCMonth() / 3) + 1;
+    return `Q${q} '${String(d.getUTCFullYear()).slice(2)}`;
+  }
+  return d.toLocaleDateString("en-US", { month: "short", year: "2-digit", timeZone: "UTC" });
 }
 
 function formatForecastValue(v: number, ind: ScoredIndicator): string {
@@ -89,7 +93,7 @@ function ForecastStrip({ ind }: { ind: ScoredIndicator }) {
             }}
           >
             <div style={{ fontSize: 9, color: "var(--muted)", marginBottom: 3, whiteSpace: "nowrap" }}>
-              {formatForecastDate(pt.date)}
+              {formatForecastDate(pt.date, ind.frequency)}
             </div>
             <div
               style={{
@@ -352,7 +356,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                               >
                                 Distribution · {zb.window === "full" ? "Full history" : "10-year window"}
                               </div>
-                              <Suspense fallback={<div style={{ height: 88, background: "var(--border)", borderRadius: 4 }} />}>
+                              <Suspense fallback={<div style={{ height: 108, background: "var(--border)", borderRadius: 4 }} />}>
                                 <IndicatorHistogram
                                   values={histVals}
                                   currentValue={zb.level_value_used}
@@ -360,8 +364,8 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                                   std={zb.level_std}
                                   levelZ={zb.level_z}
                                   formatVal={fmt}
-                                  width={280}
-                                  height={72}
+                                  width={520}
+                                  height={96}
                                 />
                               </Suspense>
                             </div>
@@ -605,7 +609,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                     const fmt = makeHistFormatVal(zb.transform);
                     return (
                       <div style={{ marginTop: 8 }}>
-                        <Suspense fallback={<div style={{ height: 72, background: "var(--border)", borderRadius: 4 }} />}>
+                        <Suspense fallback={<div style={{ height: 80, background: "var(--border)", borderRadius: 4 }} />}>
                           <IndicatorHistogram
                             values={histVals}
                             currentValue={zb.level_value_used}
@@ -613,8 +617,8 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                             std={zb.level_std}
                             levelZ={zb.level_z}
                             formatVal={fmt}
-                            width={260}
-                            height={64}
+                            width={360}
+                            height={80}
                           />
                         </Suspense>
                       </div>

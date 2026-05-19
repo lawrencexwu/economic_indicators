@@ -66,8 +66,8 @@ export default function IndicatorHistogram({
   std,
   levelZ,
   formatVal = (v) => v.toFixed(2),
-  width = 200,
-  height = 72,
+  width = 480,
+  height = 96,
 }: Props) {
   const [hoveredBin, setHoveredBin] = useState<number | null>(null);
 
@@ -102,7 +102,7 @@ export default function IndicatorHistogram({
   const hovered = hoveredBin !== null ? bins[hoveredBin] : null;
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <div style={{ position: "relative" }}>
         {/* Hover tooltip */}
         {hovered && (
@@ -128,9 +128,8 @@ export default function IndicatorHistogram({
         )}
 
         <svg
-          width={width}
-          height={height}
-          style={{ display: "block", overflow: "visible" }}
+          viewBox={`0 0 ${width} ${height}`}
+          style={{ display: "block", overflow: "visible", width: "100%", maxWidth: width, height: "auto" }}
           onMouseLeave={() => setHoveredBin(null)}
         >
           {/* ±2σ band (red, behind bars) */}
@@ -184,13 +183,13 @@ export default function IndicatorHistogram({
       </div>
 
       {/* Caption */}
-      <div style={{ fontSize: 9, color: "var(--muted)", lineHeight: 1.5, marginTop: 2 }}>
-        <div>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "var(--muted)", lineHeight: 1.6, marginTop: 4, flexWrap: "wrap", gap: 4 }}>
+        <span>
           <span style={{ color: "#5b9cf5" }}>Current: {formatVal(currentValue)}</span>
-          {" "}
-          <span style={{ color: "var(--muted)" }}>(z = {levelZ > 0 ? `+${levelZ.toFixed(2)}` : levelZ.toFixed(2)}, {currentPct}th pct)</span>
-        </div>
-        <div>Range: {formatVal(domainMin)} to {formatVal(domainMax)}</div>
+          {" · "}
+          <span>z = {levelZ > 0 ? `+${levelZ.toFixed(2)}` : levelZ.toFixed(2)} · {currentPct}th percentile</span>
+        </span>
+        <span>Range: {formatVal(domainMin)} – {formatVal(domainMax)}</span>
       </div>
     </div>
   );

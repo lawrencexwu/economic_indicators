@@ -51,12 +51,12 @@ export default function WhatChangedFeed({ indicators }: Props) {
                   display: "flex",
                   alignItems: "center",
                   gap: 8,
-                  fontSize: 13,
-                  padding: "4px 0",
+                  fontSize: 14,
+                  padding: "7px 0",
                   borderBottom: "1px solid var(--border)",
                 }}
               >
-                <span style={{ color, fontSize: 14, width: 14, flexShrink: 0 }}>{arrow}</span>
+                <span style={{ color, fontSize: 16, width: 16, flexShrink: 0 }}>{arrow}</span>
                 <span
                   style={{
                     flex: 1,
@@ -72,7 +72,7 @@ export default function WhatChangedFeed({ indicators }: Props) {
                   style={{
                     fontFamily: "var(--font-geist-mono), monospace",
                     color: "var(--muted)",
-                    fontSize: 11,
+                    fontSize: 12,
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -85,9 +85,9 @@ export default function WhatChangedFeed({ indicators }: Props) {
                     fontFamily: "var(--font-geist-mono), monospace",
                     color,
                     fontWeight: 700,
-                    fontSize: 12,
+                    fontSize: 14,
                     whiteSpace: "nowrap",
-                    minWidth: 36,
+                    minWidth: 40,
                     textAlign: "right",
                   }}
                 >

@@ -2,6 +2,7 @@ import { loadAllIndicators, getLastUpdated } from "@/lib/data";
 import { computeScore, getScoreZone, zoneColor, zoneLabel } from "@/lib/scoring";
 import {
   buildDashboard,
+  generateVerdictParts,
   CYCLE_PHASE_LABELS,
   CYCLE_PHASE_DESCRIPTIONS,
   PAGE_IDS,
@@ -75,7 +76,8 @@ export default function HomePage() {
   }
 
   const dashboard = buildDashboard(all, pageIndicators, lastUpdated);
-  const { masterScore, masterZone, cyclePhase, pages, verdict, equityBias } = dashboard;
+  const { masterScore, masterZone, cyclePhase, pages, equityBias } = dashboard;
+  const verdictParts = generateVerdictParts(masterScore, cyclePhase, pages);
 
   const allScored: Record<string, ScoredIndicator | null> = {};
   for (const [id, ind] of Object.entries(all)) {
@@ -119,7 +121,10 @@ export default function HomePage() {
             >
               {masterLabel}
             </span>
-            <div style={{ marginTop: 8, width: "100%", maxWidth: 200 }}>
+            <div style={{ marginTop: 10, width: "100%", maxWidth: 240, textAlign: "center" }}>
+              <span className="label" style={{ display: "block", marginBottom: 4, fontSize: 9 }}>
+                Indicator Bias
+              </span>
               <EquityBiasPanel bias={equityBias} />
             </div>
           </div>
@@ -157,7 +162,7 @@ export default function HomePage() {
                   {CYCLE_PHASE_LABELS[cyclePhase]}
                 </span>
               </div>
-              <p style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.6, margin: 0, fontWeight: 600, textAlign: "center" }}>
                 {CYCLE_PHASE_DESCRIPTIONS[cyclePhase]}
               </p>
             </>
@@ -171,6 +176,7 @@ export default function HomePage() {
               borderTop: "1px solid var(--border)",
               fontSize: 11,
               color: "var(--muted)",
+              textAlign: "right",
             }}
           >
             Updated: {lastUpdated} ET
@@ -199,10 +205,35 @@ export default function HomePage() {
 
       {/* Verdict */}
       <div className="card">
-        <span className="label" style={{ display: "block", marginBottom: 10 }}>Verdict</span>
-        <p style={{ fontSize: 14, lineHeight: 1.7, color: "var(--text)", margin: 0 }}>
-          {verdict}
-        </p>
+        <span className="label" style={{ display: "block", marginBottom: 16 }}>Market Verdict</span>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div>
+            <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted)", marginBottom: 6 }}>
+              Cycle Assessment
+            </div>
+            <p style={{ fontSize: 15, lineHeight: 1.7, color: "var(--text)", margin: 0 }}>
+              {verdictParts.assessment}
+            </p>
+          </div>
+          {verdictParts.fedText && (
+            <div>
+              <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted)", marginBottom: 6 }}>
+                Fed Stance
+              </div>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: "var(--text)", margin: 0 }}>
+                {verdictParts.fedText}
+              </p>
+            </div>
+          )}
+          <div style={{ borderTop: "1px solid var(--border)", paddingTop: 14 }}>
+            <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted)", marginBottom: 6 }}>
+              Positioning
+            </div>
+            <p style={{ fontSize: 15, lineHeight: 1.7, color: masterColor, margin: 0, fontWeight: 600 }}>
+              {verdictParts.tilt}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* What Changed + Upcoming Releases */}
@@ -211,8 +242,8 @@ export default function HomePage() {
         <UpcomingReleases indicators={allScored} />
       </div>
 
-      {/* Quick stats grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12 }}>
+      {/* Quick stats grid — 2 rows of 4 */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }}>
         {[
           { id: "yield_curve_10y3m", label: "10Y-3M Curve", unit: "%" },
           { id: "claims_4wma", label: "Claims 4wMA", format: (v: number) => `${(v / 1000).toFixed(0)}k` },
@@ -240,22 +271,23 @@ export default function HomePage() {
             <div
               key={id}
               className="card"
-              style={{ padding: "12px 16px", display: "flex", flexDirection: "column", gap: 6 }}
+              style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: 8 }}
             >
               <span className="label">{label}</span>
               <span
                 style={{
-                  fontSize: 22,
+                  fontSize: 28,
                   fontWeight: 700,
                   fontFamily: "var(--font-geist-mono), monospace",
                   color,
+                  lineHeight: 1,
                 }}
               >
                 {displayVal}
               </span>
-              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 {score !== null && (
-                  <span style={{ fontSize: 11, color: "var(--muted)" }}>
+                  <span style={{ fontSize: 12, color: "var(--muted)" }}>
                     Score: {score > 0 ? `+${score}` : score}
                   </span>
                 )}

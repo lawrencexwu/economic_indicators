@@ -165,58 +165,71 @@ export function masterComposite(pages: Record<string, PageResult>): number | nul
 
 // ── Verdict ───────────────────────────────────────────────────────────────────
 
+export interface VerdictParts {
+  assessment: string;
+  fedText: string;
+  tilt: string;
+}
+
+export function generateVerdictParts(
+  masterScore: number | null,
+  cyclePhase: CyclePhase | null,
+  pages: Record<string, PageResult>
+): VerdictParts {
+  if (masterScore === null) {
+    return { assessment: "Insufficient data to generate assessment.", fedText: "", tilt: "" };
+  }
+
+  const fedScore = pages["fed"]?.score ?? null;
+
+  let assessment = "";
+  if (cyclePhase === "RECESSION") {
+    assessment = "Recession underway. Broad economic contraction is confirmed. Capital preservation is the priority — avoid speculative exposure and prefer cash, Treasuries, and high-quality credit.";
+  } else if (cyclePhase === "RECOVERY") {
+    assessment = "Recovery phase. Economic conditions are improving from a cyclical trough. Early cyclicals and credit spreads typically lead — position ahead of the re-acceleration.";
+  } else if (cyclePhase === "EARLY_EXPANSION") {
+    assessment = "Early expansion. Growth is re-accelerating with inflation still contained. Historically the strongest phase for risk assets — cyclicals and value tend to lead.";
+  } else if (cyclePhase === "MID_EXPANSION") {
+    assessment = "Mid-cycle expansion. Fundamentals are broadly supportive with balanced growth and manageable inflation. Broad market participation is typical — stay pro-risk but avoid over-concentration.";
+  } else if (cyclePhase === "LATE_CYCLE") {
+    assessment = "Late-cycle. Growth is decelerating and recession risk is rising. Quality over cyclicality — reduce beta exposure and watch credit spreads as the leading warning.";
+  } else {
+    assessment = "Cycle phase is unclear. Mixed signals across leading indicators make a firm regime call difficult. Maintain a balanced posture until signals clarify.";
+  }
+
+  let fedText = "";
+  if (fedScore !== null) {
+    if (fedScore > 30) {
+      fedText = "Fed is in accommodative territory. Rate cuts are underway or priced in — supportive for equity multiples, duration, and credit. Tailwind for risk assets.";
+    } else if (fedScore > -20) {
+      fedText = "Fed is in a neutral stance. Inflation progress has been made but policy remains data-dependent. No clear rate catalyst in either direction — watch CPI and PCE closely.";
+    } else {
+      fedText = "Fed remains restrictive. Elevated rates continue to weigh on equity multiples, housing, and credit. Headwind persists until inflation durably returns to target.";
+    }
+  }
+
+  let tilt = "";
+  if (masterScore >= 40) {
+    tilt = "OFFENSE — Overweight cyclicals and growth. Underweight defensives and cash. Max risk-on positioning justified by the composite reading.";
+  } else if (masterScore >= 10) {
+    tilt = "PRO-RISK LEAN — Balanced with a tilt toward cyclicals. Selective exposure to growth assets; keep quality as the anchor. Monitor for late-cycle deterioration.";
+  } else if (masterScore >= -10) {
+    tilt = "NEUTRAL — High quality across equities and fixed income. Balanced duration. Avoid speculative positioning until the composite moves decisively in either direction.";
+  } else if (masterScore >= -40) {
+    tilt = "DEFENSIVE — Quality over beta. Reduce cyclical exposure. Prefer defensives, investment-grade credit, and shorter duration until conditions improve.";
+  } else {
+    tilt = "CAPITAL PRESERVATION — Strong defensive posture warranted. Prioritize cash, short-duration Treasuries, and high-quality credit. Avoid high-beta and speculative assets.";
+  }
+
+  return { assessment, fedText, tilt };
+}
+
 export function generateVerdict(
   masterScore: number | null,
   cyclePhase: CyclePhase | null,
   pages: Record<string, PageResult>
 ): string {
-  if (masterScore === null) return "Insufficient data to generate assessment.";
-
-  const fedScore = pages["fed"]?.score ?? null;
-  const regimeScore = pages["regime"]?.score ?? null;
-
-  // Assessment
-  let assessment = "";
-  if (cyclePhase === "RECESSION") {
-    assessment = "Recession underway. Broad economic contraction signals extreme caution.";
-  } else if (cyclePhase === "RECOVERY") {
-    assessment = "Recovery phase. Economic conditions improving from a trough.";
-  } else if (cyclePhase === "EARLY_EXPANSION") {
-    assessment = "Early expansion. Growth re-accelerating with limited inflation pressure.";
-  } else if (cyclePhase === "MID_EXPANSION") {
-    assessment = "Mid-cycle expansion. Fundamentals broadly supportive.";
-  } else if (cyclePhase === "LATE_CYCLE") {
-    assessment = "Late-cycle. Recession risk rising as growth decelerates.";
-  } else {
-    assessment = "Cycle phase unclear. Mixed signals across leading indicators.";
-  }
-
-  // Fed commentary
-  let fedText = "";
-  if (fedScore !== null) {
-    if (fedScore > 30) {
-      fedText = "Fed in accommodative mode — supportive for duration and equity multiples.";
-    } else if (fedScore > -20) {
-      fedText = "Fed neutral. Inflation progress made but policy remains data-dependent.";
-    } else {
-      fedText = "Fed in restrictive territory. Elevated rates weigh on multiples and credit.";
-    }
-  }
-
-  // Positioning tilt
-  let tilt = "";
-  if (masterScore >= 40) {
-    tilt = "Tilt: Offense. Cyclicals and growth over defensives.";
-  } else if (masterScore >= 10) {
-    tilt = "Tilt: Balanced with pro-risk lean. Selective cyclicals.";
-  } else if (masterScore >= -10) {
-    tilt = "Tilt: Neutral. High quality, balanced duration.";
-  } else if (masterScore >= -40) {
-    tilt = "Tilt: Defensive. Quality over speculative. Reduce cyclical exposure.";
-  } else {
-    tilt = "Tilt: Defensive. Capital preservation priority. High quality, short duration.";
-  }
-
+  const { assessment, fedText, tilt } = generateVerdictParts(masterScore, cyclePhase, pages);
   return [assessment, fedText, tilt].filter(Boolean).join(" ");
 }
 

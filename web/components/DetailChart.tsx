@@ -39,26 +39,42 @@ const CHART_THRESHOLDS: Record<string, [number, boolean]> = {
   ny_fed_recession_prob: [30, false],
 };
 
-function formatXTick(dateStr: string): string {
-  const year = new Date(dateStr).getFullYear();
-  return isNaN(year) ? "" : String(year);
-}
-
 function formatLabelDate(label: unknown): string {
   return new Date(String(label)).toLocaleDateString("en-US", {
     month: "short",
+    day: "numeric",
     year: "numeric",
   });
 }
 
 export default function DetailChart({ ind, height = 160 }: Props) {
   const SLICE_BY_FREQ: Record<string, number> = {
-    weekly:    260,  // 52 weeks × 5 years
+    daily:     1260, // 252 × 5 years
+    weekly:    260,  // 52 × 5 years
     monthly:   60,   // 12 months × 5 years
     quarterly: 20,   // 4 quarters × 5 years
   };
   const sliceCount = SLICE_BY_FREQ[ind.frequency] ?? 60;
   const data = useMemo(() => ind.data.slice(0, sliceCount).reverse(), [ind.data, sliceCount]);
+
+  // Determine date range to pick an appropriate x-axis label format
+  const yearSpan = useMemo(() => {
+    if (data.length < 2) return 5;
+    const ms = new Date(data[data.length - 1].date).getTime() - new Date(data[0].date).getTime();
+    return ms / (365.25 * 24 * 60 * 60 * 1000);
+  }, [data]);
+
+  const formatXTick = useMemo(() => (dateStr: string): string => {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return "";
+    if (yearSpan <= 1) {
+      return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    }
+    if (yearSpan <= 3) {
+      return d.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+    }
+    return String(d.getFullYear());
+  }, [yearSpan]);
   const color = zoneColor(ind.zone);
   const tier = CHART_THRESHOLDS[ind.id];
 
