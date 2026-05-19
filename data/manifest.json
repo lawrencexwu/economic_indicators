@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-05-19T07:01:37.061108+00:00",
+  "last_run": "2026-05-19T07:21:08.199217+00:00",
   "n_succeeded": 0,
   "n_failed": 2,
   "n_skipped": 72,
@@ -7,12 +7,12 @@
     {
       "id": "mba_purchase",
       "scraper": "mba",
-      "error": "MBA: could not parse purchase/refi index from https://www.mba.org/news-and-research/newsroom/news/2026/05/13/mortgage-applications-increase-in-latest-mba-weekly-survey"
+      "error": "TE MBA: no data for mba_purchase"
     },
     {
       "id": "mba_refi",
       "scraper": "mba",
-      "error": "MBA: could not parse purchase/refi index from https://www.mba.org/news-and-research/newsroom/news/2026/05/13/mortgage-applications-increase-in-latest-mba-weekly-survey"
+      "error": "TE MBA: no data for mba_refi"
     }
   ],
   "indicators": {}
