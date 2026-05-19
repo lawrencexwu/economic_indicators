@@ -1,0 +1,170 @@
+{
+  "id": "interest_to_receipts",
+  "name": "Net Interest Cost to Federal Receipts",
+  "fred_ticker": null,
+  "category": "fiscal",
+  "page": "fiscal",
+  "tier": 2,
+  "weight": 2,
+  "frequency": "annual",
+  "source_type": "derived",
+  "last_updated": "2026-05-19T12:14:25.739927+00:00",
+  "current_value": 18.53,
+  "previous_value": 17.88,
+  "data": [
+    {
+      "date": "2025-09-30",
+      "value": 18.53
+    },
+    {
+      "date": "2024-09-30",
+      "value": 17.88
+    },
+    {
+      "date": "2023-09-30",
+      "value": 14.82
+    },
+    {
+      "date": "2022-09-30",
+      "value": 9.72
+    },
+    {
+      "date": "2021-09-30",
+      "value": 8.71
+    },
+    {
+      "date": "2020-09-30",
+      "value": 10.1
+    },
+    {
+      "date": "2019-09-30",
+      "value": 10.83
+    },
+    {
+      "date": "2018-09-30",
+      "value": 9.76
+    },
+    {
+      "date": "2017-09-30",
+      "value": 7.92
+    },
+    {
+      "date": "2016-09-30",
+      "value": 7.35
+    },
+    {
+      "date": "2015-09-30",
+      "value": 6.87
+    },
+    {
+      "date": "2014-09-30",
+      "value": 7.58
+    },
+    {
+      "date": "2013-09-30",
+      "value": 7.96
+    },
+    {
+      "date": "2012-09-30",
+      "value": 9.0
+    },
+    {
+      "date": "2011-09-30",
+      "value": 9.98
+    },
+    {
+      "date": "2010-09-30",
+      "value": 9.07
+    },
+    {
+      "date": "2009-09-30",
+      "value": 8.88
+    },
+    {
+      "date": "2008-09-30",
+      "value": 10.01
+    },
+    {
+      "date": "2007-09-30",
+      "value": 9.23
+    },
+    {
+      "date": "2006-09-30",
+      "value": 9.41
+    },
+    {
+      "date": "2005-09-30",
+      "value": 8.54
+    },
+    {
+      "date": "2004-09-30",
+      "value": 8.52
+    },
+    {
+      "date": "2003-09-30",
+      "value": 8.59
+    },
+    {
+      "date": "2002-09-30",
+      "value": 9.22
+    },
+    {
+      "date": "2001-09-30",
+      "value": 10.35
+    },
+    {
+      "date": "2000-09-30",
+      "value": 11.01
+    },
+    {
+      "date": "1999-09-30",
+      "value": 12.57
+    },
+    {
+      "date": "1998-09-30",
+      "value": 14.0
+    },
+    {
+      "date": "1997-09-30",
+      "value": 15.45
+    },
+    {
+      "date": "1996-09-30",
+      "value": 16.59
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "Federal net interest outlays as a percent of total federal receipts. Shows what fraction of government revenue is consumed by debt service.\n",
+    "why_it_matters": "When interest consumes >20% of receipts, discretionary fiscal policy is severely constrained. This metric captures the crowding-out of spending capacity more directly than debt/GDP.\n",
+    "scoring_rule": ">20% \u2192 -60 | 15-20% \u2192 -30 | 10-15% \u2192 -10 | <10% \u2192 +20"
+  },
+  "score": null,
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": 2.51,
+    "level_mean": 10.615,
+    "level_std": 3.152783,
+    "level_value_used": 18.53,
+    "trend_z": 0.397,
+    "trend_value_used": 0.65,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T12:14:26.529873+00:00"
+  },
+  "level_trend_state": "Neutral",
+  "forecast": {
+    "model": "Naive",
+    "horizon": 1,
+    "values": [
+      {
+        "date": "2027-01-01",
+        "mean": 18.53,
+        "lo80": 16.6776,
+        "hi80": 20.3824,
+        "lo95": 15.6969,
+        "hi95": 21.3631
+      }
+    ],
+    "computed_at": "2026-05-19T12:14:26.534386+00:00"
+  }
+}

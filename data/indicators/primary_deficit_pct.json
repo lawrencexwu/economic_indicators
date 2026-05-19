@@ -1,0 +1,170 @@
+{
+  "id": "primary_deficit_pct",
+  "name": "Primary Deficit as % of GDP",
+  "fred_ticker": null,
+  "category": "fiscal",
+  "page": "fiscal",
+  "tier": 2,
+  "weight": 2,
+  "frequency": "annual",
+  "source_type": "derived",
+  "last_updated": "2026-05-19T12:14:25.739927+00:00",
+  "current_value": 2.56,
+  "previous_value": 3.14,
+  "data": [
+    {
+      "date": "2025-09-30",
+      "value": 2.56
+    },
+    {
+      "date": "2024-09-30",
+      "value": 3.14
+    },
+    {
+      "date": "2023-09-30",
+      "value": 3.62
+    },
+    {
+      "date": "2022-09-30",
+      "value": 3.36
+    },
+    {
+      "date": "2021-09-30",
+      "value": 9.76
+    },
+    {
+      "date": "2020-09-30",
+      "value": 12.45
+    },
+    {
+      "date": "2019-09-30",
+      "value": 2.77
+    },
+    {
+      "date": "2018-09-30",
+      "value": 2.17
+    },
+    {
+      "date": "2017-09-30",
+      "value": 2.01
+    },
+    {
+      "date": "2016-09-30",
+      "value": 1.81
+    },
+    {
+      "date": "2015-09-30",
+      "value": 1.19
+    },
+    {
+      "date": "2014-09-30",
+      "value": 1.43
+    },
+    {
+      "date": "2013-09-30",
+      "value": 2.67
+    },
+    {
+      "date": "2012-09-30",
+      "value": 5.21
+    },
+    {
+      "date": "2011-09-30",
+      "value": 6.75
+    },
+    {
+      "date": "2010-09-30",
+      "value": 7.17
+    },
+    {
+      "date": "2009-09-30",
+      "value": 8.37
+    },
+    {
+      "date": "2008-09-30",
+      "value": 1.41
+    },
+    {
+      "date": "2007-09-30",
+      "value": -0.52
+    },
+    {
+      "date": "2006-09-30",
+      "value": 0.15
+    },
+    {
+      "date": "2005-09-30",
+      "value": 1.01
+    },
+    {
+      "date": "2004-09-30",
+      "value": 2.02
+    },
+    {
+      "date": "2003-09-30",
+      "value": 1.91
+    },
+    {
+      "date": "2002-09-30",
+      "value": -0.12
+    },
+    {
+      "date": "2001-09-30",
+      "value": -3.14
+    },
+    {
+      "date": "2000-09-30",
+      "value": -4.4
+    },
+    {
+      "date": "1999-09-30",
+      "value": -3.59
+    },
+    {
+      "date": "1998-09-30",
+      "value": -3.34
+    },
+    {
+      "date": "1997-09-30",
+      "value": -2.53
+    },
+    {
+      "date": "1996-09-30",
+      "value": -1.62
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "Primary budget balance (total balance + interest payments) as a percent of GDP. Positive = primary deficit (spending > revenues excluding interest). Computed from FYFSD + FYOINT as share of nominal GDP.\n",
+    "why_it_matters": "Primary deficit shows whether the government is adding to or subtracting from debt even before interest costs. A large primary deficit means the debt spiral is self-reinforcing regardless of interest rates.\n",
+    "scoring_rule": ">5% \u2192 -40 | 3-5% \u2192 -20 | -3 to +3% \u2192 0 | <-3% \u2192 +30"
+  },
+  "score": null,
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": 0.111,
+    "level_mean": 2.122667,
+    "level_std": 3.955305,
+    "level_value_used": 2.56,
+    "trend_z": -0.255,
+    "trend_value_used": -0.58,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T12:14:26.535586+00:00"
+  },
+  "level_trend_state": "Neutral",
+  "forecast": {
+    "model": "Naive",
+    "horizon": 1,
+    "values": [
+      {
+        "date": "2027-01-01",
+        "mean": 2.56,
+        "lo80": -1.0239,
+        "hi80": 6.1439,
+        "lo95": -2.9211,
+        "hi95": 8.0411
+      }
+    ],
+    "computed_at": "2026-05-19T12:14:26.539973+00:00"
+  }
+}

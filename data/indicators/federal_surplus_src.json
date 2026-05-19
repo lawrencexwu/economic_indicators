@@ -1,0 +1,171 @@
+{
+  "id": "federal_surplus_src",
+  "name": "Federal Surplus/Deficit (source series)",
+  "fred_ticker": "FYFSD",
+  "category": "fiscal",
+  "page": "internal",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "annual",
+  "unit": "billions",
+  "source_type": "fred",
+  "last_updated": "2026-05-19T12:10:31.977351+00:00",
+  "current_value": -1774684.0,
+  "previous_value": -1815377.0,
+  "data": [
+    {
+      "date": "2025-09-30",
+      "value": -1774684.0
+    },
+    {
+      "date": "2024-09-30",
+      "value": -1815377.0
+    },
+    {
+      "date": "2023-09-30",
+      "value": -1687467.0
+    },
+    {
+      "date": "2022-09-30",
+      "value": -1374171.0
+    },
+    {
+      "date": "2021-09-30",
+      "value": -2773594.0
+    },
+    {
+      "date": "2020-09-30",
+      "value": -3095653.0
+    },
+    {
+      "date": "2019-09-30",
+      "value": -983588.0
+    },
+    {
+      "date": "2018-09-30",
+      "value": -779074.0
+    },
+    {
+      "date": "2017-09-30",
+      "value": -665450.0
+    },
+    {
+      "date": "2016-09-30",
+      "value": -584650.0
+    },
+    {
+      "date": "2015-09-30",
+      "value": -441960.0
+    },
+    {
+      "date": "2014-09-30",
+      "value": -484793.0
+    },
+    {
+      "date": "2013-09-30",
+      "value": -679775.0
+    },
+    {
+      "date": "2012-09-30",
+      "value": -1076573.0
+    },
+    {
+      "date": "2011-09-30",
+      "value": -1299599.0
+    },
+    {
+      "date": "2010-09-30",
+      "value": -1294373.0
+    },
+    {
+      "date": "2009-09-30",
+      "value": -1412688.0
+    },
+    {
+      "date": "2008-09-30",
+      "value": -458553.0
+    },
+    {
+      "date": "2007-09-30",
+      "value": -160701.0
+    },
+    {
+      "date": "2006-09-30",
+      "value": -248181.0
+    },
+    {
+      "date": "2005-09-30",
+      "value": -318346.0
+    },
+    {
+      "date": "2004-09-30",
+      "value": -412727.0
+    },
+    {
+      "date": "2003-09-30",
+      "value": -377585.0
+    },
+    {
+      "date": "2002-09-30",
+      "value": -157758.0
+    },
+    {
+      "date": "2001-09-30",
+      "value": 128236.0
+    },
+    {
+      "date": "2000-09-30",
+      "value": 236241.0
+    },
+    {
+      "date": "1999-09-30",
+      "value": 125610.0
+    },
+    {
+      "date": "1998-09-30",
+      "value": 69270.0
+    },
+    {
+      "date": "1997-09-30",
+      "value": -21884.0
+    },
+    {
+      "date": "1996-09-30",
+      "value": -107431.0
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "Annual federal surplus or deficit in billions (negative = deficit). Source for primary_deficit_pct.",
+    "why_it_matters": "Internal source series \u2014 not displayed on any page.",
+    "scoring_rule": "Not scored."
+  },
+  "score": null,
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": -0.257,
+    "level_mean": -1553370.8,
+    "level_std": 861930.101049,
+    "level_value_used": -1774684.0,
+    "trend_z": 0.204,
+    "trend_value_used": 40693.0,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T12:14:26.483846+00:00"
+  },
+  "level_trend_state": "Neutral",
+  "forecast": {
+    "model": "Naive",
+    "horizon": 1,
+    "values": [
+      {
+        "date": "2027-01-01",
+        "mean": -1774684.0,
+        "lo80": -2455169.1981,
+        "hi80": -1094198.8019,
+        "lo95": -2815396.3024,
+        "hi95": -733971.6976
+      }
+    ],
+    "computed_at": "2026-05-19T12:10:38.687268+00:00"
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "id": "tic_foreign_holdings",
+  "name": "TIC Foreign Holdings of US Treasuries",
+  "fred_ticker": "FDHBFRBN",
+  "category": "fiscal",
+  "page": "fiscal",
+  "tier": 2,
+  "weight": 2,
+  "frequency": "monthly",
+  "unit": "billions",
+  "source_type": "fred",
+  "last_updated": "2026-05-19T12:10:31.977351+00:00",
+  "current_value": 4528.348,
+  "previous_value": 4509.521,
+  "data": [
+    {
+      "date": "2025-10-01",
+      "value": 4528.348
+    },
+    {
+      "date": "2025-07-01",
+      "value": 4509.521
+    },
+    {
+      "date": "2025-04-01",
+      "value": 4532.664
+    },
+    {
+      "date": "2025-01-01",
+      "value": 4556.362
+    },
+    {
+      "date": "2024-10-01",
+      "value": 4629.269
+    },
+    {
+      "date": "2024-07-01",
+      "value": 4713.975
+    },
+    {
+      "date": "2024-04-01",
+      "value": 4813.84
+    },
+    {
+      "date": "2024-01-01",
+      "value": 4991.26
+    },
+    {
+      "date": "2023-10-01",
+      "value": 5238.936
+    },
+    {
+      "date": "2023-07-01",
+      "value": 5352.361
+    },
+    {
+      "date": "2023-04-01",
+      "value": 5522.478
+    },
+    {
+      "date": "2023-01-01",
+      "value": 5713.249
+    },
+    {
+      "date": "2022-10-01",
+      "value": 5944.675
+    },
+    {
+      "date": "2022-07-01",
+      "value": 6097.085
+    },
+    {
+      "date": "2022-04-01",
+      "value": 6216.801
+    },
+    {
+      "date": "2022-01-01",
+      "value": 6254.966
+    },
+    {
+      "date": "2021-10-01",
+      "value": 6141.499
+    },
+    {
+      "date": "2021-07-01",
+      "value": 5911.599
+    },
+    {
+      "date": "2021-04-01",
+      "value": 5644.351
+    },
+    {
+      "date": "2021-01-01",
+      "value": 5401.362
+    },
+    {
+      "date": "2020-10-01",
+      "value": 5127.835
+    },
+    {
+      "date": "2020-07-01",
+      "value": 4872.973
+    },
+    {
+      "date": "2020-04-01",
+      "value": 4615.353
+    },
+    {
+      "date": "2020-01-01",
+      "value": 3559.553
+    },
+    {
+      "date": "2019-10-01",
+      "value": 2637.32
+    },
+    {
+      "date": "2019-07-01",
+      "value": 2436.438
+    },
+    {
+      "date": "2019-04-01",
+      "value": 2452.784
+    },
+    {
+      "date": "2019-01-01",
+      "value": 2536.673
+    },
+    {
+      "date": "2018-10-01",
+      "value": 2594.652
+    },
+    {
+      "date": "2018-07-01",
+      "value": 2697.86
+    },
+    {
+      "date": "2018-04-01",
+      "value": 2772.949
+    },
+    {
+      "date": "2018-01-01",
+      "value": 2828.463
+    },
+    {
+      "date": "2017-10-01",
+      "value": 2858.136
+    },
+    {
+      "date": "2017-07-01",
+      "value": 2867.555
+    },
+    {
+      "date": "2017-04-01",
+      "value": 2864.091
+    },
+    {
+      "date": "2017-01-01",
+      "value": 2859.131
+    },
+    {
+      "date": "2016-10-01",
+      "value": 2843.7
+    },
+    {
+      "date": "2016-07-01",
+      "value": 2830.1
+    },
+    {
+      "date": "2016-04-01",
+      "value": 2819.1
+    },
+    {
+      "date": "2016-01-01",
+      "value": 2815.3
+    },
+    {
+      "date": "2015-10-01",
+      "value": 2810.1
+    },
+    {
+      "date": "2015-07-01",
+      "value": 2802.1
+    },
+    {
+      "date": "2015-04-01",
+      "value": 2798.5
+    },
+    {
+      "date": "2015-01-01",
+      "value": 2797.5
+    },
+    {
+      "date": "2014-10-01",
+      "value": 2793.4
+    },
+    {
+      "date": "2014-07-01",
+      "value": 2767.3
+    },
+    {
+      "date": "2014-04-01",
+      "value": 2705.9
+    },
+    {
+      "date": "2014-01-01",
+      "value": 2614.6
+    },
+    {
+      "date": "2013-10-01",
+      "value": 2208.8
+    },
+    {
+      "date": "2013-07-01",
+      "value": 2072.3
+    },
+    {
+      "date": "2013-04-01",
+      "value": 1936.6
+    },
+    {
+      "date": "2013-01-01",
+      "value": 1796.0
+    },
+    {
+      "date": "2012-10-01",
+      "value": 1666.1
+    },
+    {
+      "date": "2012-07-01",
+      "value": 1645.3
+    },
+    {
+      "date": "2012-04-01",
+      "value": 1659.9
+    },
+    {
+      "date": "2012-01-01",
+      "value": 1661.1
+    },
+    {
+      "date": "2011-10-01",
+      "value": 1663.4
+    },
+    {
+      "date": "2011-07-01",
+      "value": 1664.7
+    },
+    {
+      "date": "2011-04-01",
+      "value": 1619.5
+    },
+    {
+      "date": "2011-01-01",
+      "value": 1340.4
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "Foreign holdings of US Treasury securities (billions). Reported monthly by the Treasury International Capital (TIC) system. Includes central banks, sovereign wealth funds, and foreign investors.\n",
+    "why_it_matters": "Measures foreign demand for US Treasuries. Declining foreign holdings can signal reduced confidence in US fiscal trajectory, pushing yields higher. 12-month change direction is the key signal.\n",
+    "scoring_rule": "12m change: >+5% \u2192 +20 | 0 to +5% \u2192 +10 | -5 to 0% \u2192 -10 | -10 to -5% \u2192 -20 | <-10% \u2192 -40"
+  },
+  "score": null,
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": 0.668,
+    "level_mean": 3527.13445,
+    "level_std": 1499.071368,
+    "level_value_used": 4528.348,
+    "trend_z": -0.316,
+    "trend_value_used": -28.014,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T12:14:26.489224+00:00"
+  },
+  "level_trend_state": "Neutral",
+  "forecast": {
+    "model": "SeasonalNaive",
+    "horizon": 3,
+    "values": [
+      {
+        "date": "2025-11-01",
+        "mean": 5713.249,
+        "lo80": 3546.104,
+        "hi80": 7880.394,
+        "lo95": 2398.8867,
+        "hi95": 9027.6113
+      },
+      {
+        "date": "2025-12-01",
+        "mean": 5522.478,
+        "lo80": 3355.333,
+        "hi80": 7689.623,
+        "lo95": 2208.1157,
+        "hi95": 8836.8403
+      },
+      {
+        "date": "2026-01-01",
+        "mean": 5352.361,
+        "lo80": 3185.216,
+        "hi80": 7519.506,
+        "lo95": 2037.9987,
+        "hi95": 8666.7233
+      }
+    ],
+    "computed_at": "2026-05-19T12:10:39.616282+00:00"
+  }
+}

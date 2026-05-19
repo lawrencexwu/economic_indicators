@@ -1,0 +1,171 @@
+{
+  "id": "federal_receipts_src",
+  "name": "Federal Receipts (source series)",
+  "fred_ticker": "FYFR",
+  "category": "fiscal",
+  "page": "internal",
+  "tier": 3,
+  "weight": 1,
+  "frequency": "annual",
+  "unit": "billions",
+  "source_type": "fred",
+  "last_updated": "2026-05-19T12:14:25.739927+00:00",
+  "current_value": 5236421.0,
+  "previous_value": 4919884.0,
+  "data": [
+    {
+      "date": "2025-09-30",
+      "value": 5236421.0
+    },
+    {
+      "date": "2024-09-30",
+      "value": 4919884.0
+    },
+    {
+      "date": "2023-09-30",
+      "value": 4440948.0
+    },
+    {
+      "date": "2022-09-30",
+      "value": 4897339.0
+    },
+    {
+      "date": "2021-09-30",
+      "value": 4047111.0
+    },
+    {
+      "date": "2020-09-30",
+      "value": 3421164.0
+    },
+    {
+      "date": "2019-09-30",
+      "value": 3463364.0
+    },
+    {
+      "date": "2018-09-30",
+      "value": 3329907.0
+    },
+    {
+      "date": "2017-09-30",
+      "value": 3316184.0
+    },
+    {
+      "date": "2016-09-30",
+      "value": 3267965.0
+    },
+    {
+      "date": "2015-09-30",
+      "value": 3249890.0
+    },
+    {
+      "date": "2014-09-30",
+      "value": 3021491.0
+    },
+    {
+      "date": "2013-09-30",
+      "value": 2775106.0
+    },
+    {
+      "date": "2012-09-30",
+      "value": 2449990.0
+    },
+    {
+      "date": "2011-09-30",
+      "value": 2303466.0
+    },
+    {
+      "date": "2010-09-30",
+      "value": 2162706.0
+    },
+    {
+      "date": "2009-09-30",
+      "value": 2104989.0
+    },
+    {
+      "date": "2008-09-30",
+      "value": 2523991.0
+    },
+    {
+      "date": "2007-09-30",
+      "value": 2567985.0
+    },
+    {
+      "date": "2006-09-30",
+      "value": 2406869.0
+    },
+    {
+      "date": "2005-09-30",
+      "value": 2153611.0
+    },
+    {
+      "date": "2004-09-30",
+      "value": 1880114.0
+    },
+    {
+      "date": "2003-09-30",
+      "value": 1782314.0
+    },
+    {
+      "date": "2002-09-30",
+      "value": 1853136.0
+    },
+    {
+      "date": "2001-09-30",
+      "value": 1991082.0
+    },
+    {
+      "date": "2000-09-30",
+      "value": 2025191.0
+    },
+    {
+      "date": "1999-09-30",
+      "value": 1827452.0
+    },
+    {
+      "date": "1998-09-30",
+      "value": 1721728.0
+    },
+    {
+      "date": "1997-09-30",
+      "value": 1579232.0
+    },
+    {
+      "date": "1996-09-30",
+      "value": 1453053.0
+    }
+  ],
+  "metadata": {
+    "what_it_measures": "Annual federal receipts in billions. Source for interest_to_receipts.",
+    "why_it_matters": "Internal source series \u2014 not displayed on any page.",
+    "scoring_rule": "Not scored."
+  },
+  "score": null,
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": 1.546,
+    "level_mean": 4034028.7,
+    "level_std": 777513.794628,
+    "level_value_used": 5236421.0,
+    "trend_z": 0.313,
+    "trend_value_used": 316537.0,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T12:14:26.217508+00:00"
+  },
+  "level_trend_state": "Neutral",
+  "forecast": {
+    "model": "Naive",
+    "horizon": 1,
+    "values": [
+      {
+        "date": "2027-01-01",
+        "mean": 5236421.0,
+        "lo80": 4867604.1919,
+        "hi80": 5605237.8081,
+        "lo95": 4672364.3672,
+        "hi95": 5800477.6328
+      }
+    ],
+    "computed_at": "2026-05-19T12:14:26.251248+00:00"
+  }
+}
