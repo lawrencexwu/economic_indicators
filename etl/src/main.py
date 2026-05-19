@@ -15,10 +15,12 @@ After all indicators:
   - Write data/manifest.json with timestamps + error list
 """
 
+import calendar as cal
 import json
 import logging
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from datetime import date as _Date
 from pathlib import Path
 
 import yaml
@@ -104,6 +106,122 @@ SCRAPER_MAP = {
 }
 
 
+# ─── Next-release computation ─────────────────────────────────────────────────
+
+_WEEKDAY = {
+    "monday": 0, "tuesday": 1, "wednesday": 2,
+    "thursday": 3, "friday": 4,
+}
+
+
+def _next_weekday(reference: datetime, target_wd: int) -> datetime:
+    """Return next UTC midnight for target_wd weekday (always future, never today)."""
+    days_ahead = (target_wd - reference.weekday()) % 7
+    if days_ahead == 0:
+        days_ahead = 7
+    d = (reference + timedelta(days=days_ahead)).date()
+    return datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
+
+
+def _nth_weekday(year: int, month: int, wd: int, n: int) -> _Date:
+    """Return the nth occurrence of weekday wd in year/month. n is 1-based."""
+    first = _Date(year, month, 1)
+    delta = (wd - first.weekday()) % 7
+    return _Date(year, month, 1 + delta + (n - 1) * 7)
+
+
+def _last_weekday(year: int, month: int, wd: int) -> _Date:
+    """Return the last occurrence of weekday wd in year/month."""
+    _, last_day = cal.monthrange(year, month)
+    last = _Date(year, month, last_day)
+    delta = (last.weekday() - wd) % 7
+    return last - timedelta(days=delta)
+
+
+def _nth_bday(year: int, month: int, n: int) -> _Date:
+    """Return the nth business day (Mon-Fri) in year/month."""
+    count = 0
+    d = _Date(year, month, 1)
+    _, last_day = cal.monthrange(year, month)
+    while d.day <= last_day:
+        if d.weekday() < 5:
+            count += 1
+            if count == n:
+                return d
+        d += timedelta(days=1)
+    return _Date(year, month, last_day)
+
+
+def _advance_month(year: int, month: int) -> tuple[int, int]:
+    return (year + 1, 1) if month == 12 else (year, month + 1)
+
+
+_PATTERN_NTH_WD: dict[str, tuple[int, int]] = {
+    "first_friday":    (4, 1),
+    "first_thursday":  (3, 1),
+    "second_tuesday":  (1, 2),
+    "second_friday":   (4, 2),
+    "third_wednesday": (2, 3),
+    "fourth_tuesday":  (1, 4),
+}
+_PATTERN_LAST_WD: dict[str, int] = {
+    "last_monday":   0,
+    "last_tuesday":  1,
+    "last_thursday": 3,
+}
+_PATTERN_BDAY: dict[str, int] = {
+    "first_business_day": 1,
+    "third_business_day": 3,
+}
+
+
+def compute_next_release(indicator_id: str, calendar_patterns: dict) -> str | None:
+    """Return ISO8601 UTC string of the next expected release, or None if unknown."""
+    now = datetime.now(timezone.utc)
+
+    entry = None
+    for pattern_data in calendar_patterns.values():
+        if indicator_id in pattern_data.get("indicators", []):
+            entry = pattern_data
+            break
+    if entry is None:
+        return None
+
+    # Weekly patterns have a release_day key
+    release_day = entry.get("release_day")
+    if release_day:
+        target_wd = _WEEKDAY.get(release_day)
+        if target_wd is None:
+            return None
+        return _next_weekday(now, target_wd).isoformat()
+
+    # Monthly patterns have a pattern key
+    pattern = entry.get("pattern")
+    if not pattern:
+        return None  # daily / mid-month approximations -> not computable
+
+    year, month = now.year, now.month
+    for attempt in range(2):
+        y, m = (year, month) if attempt == 0 else _advance_month(year, month)
+        d: _Date | None = None
+
+        if pattern in _PATTERN_NTH_WD:
+            wd, n = _PATTERN_NTH_WD[pattern]
+            d = _nth_weekday(y, m, wd, n)
+        elif pattern in _PATTERN_LAST_WD:
+            d = _last_weekday(y, m, _PATTERN_LAST_WD[pattern])
+        elif pattern in _PATTERN_BDAY:
+            d = _nth_bday(y, m, _PATTERN_BDAY[pattern])
+        else:
+            return None
+
+        dt = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
+        if dt > now:
+            return dt.isoformat()
+
+    return None
+
+
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -166,6 +284,7 @@ def main() -> None:
                     "score": None,
                 }
 
+                payload["next_expected_release"] = compute_next_release(ind_id, calendar)
                 write_indicator(ind_id, payload)
                 logger.info(
                     f"✓  {ind_id}  ({ticker})  "
@@ -209,6 +328,7 @@ def main() -> None:
                     **scraped,
                 }
 
+                payload["next_expected_release"] = compute_next_release(ind_id, calendar)
                 write_indicator(ind_id, payload)
                 logger.info(
                     f"✓  {ind_id}  (scraped)  "
