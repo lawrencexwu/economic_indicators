@@ -397,7 +397,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                     {ind.name}
                     {stale && (
                       <span style={{ marginLeft: 6, fontSize: 10, color: "#f5a623", fontWeight: 400 }}>
-                        ⚠
+                        ⚠ stale
                       </span>
                     )}
                   </div>

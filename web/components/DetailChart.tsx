@@ -52,7 +52,13 @@ function formatLabelDate(label: unknown): string {
 }
 
 export default function DetailChart({ ind, height = 160 }: Props) {
-  const data = useMemo(() => ind.data.slice(0, 60).reverse(), [ind.data]);
+  const SLICE_BY_FREQ: Record<string, number> = {
+    weekly:    260,  // 52 weeks × 5 years
+    monthly:   60,   // 12 months × 5 years
+    quarterly: 20,   // 4 quarters × 5 years
+  };
+  const sliceCount = SLICE_BY_FREQ[ind.frequency] ?? 60;
+  const data = useMemo(() => ind.data.slice(0, sliceCount).reverse(), [ind.data, sliceCount]);
   const color = zoneColor(ind.zone);
   const tier = CHART_THRESHOLDS[ind.id];
 
