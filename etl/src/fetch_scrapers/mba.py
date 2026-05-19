@@ -70,7 +70,11 @@ def _candidate_dates() -> list[date]:
 def _press_release_url_from_newsroom(html: str) -> str | None:
     """Scrape the newsroom listing page for the latest weekly survey URL."""
     soup = BeautifulSoup(html, "html.parser")
-    for a in soup.find_all("a", href=True):
+    all_links = soup.find_all("a", href=True)
+    logger.info("MBA: newsroom HTML length=%d, total <a> tags=%d", len(html), len(all_links))
+    for a in all_links[:60]:  # log first 60 links for debug
+        logger.info("MBA link: %r → %s", a.get_text(strip=True)[:80], a["href"][:100])
+    for a in all_links:
         text = a.get_text(strip=True).lower()
         href = a["href"]
         if href.startswith("/"):
