@@ -10395,5 +10395,17 @@
     "scoring_rule": "< 2.0% \u2192 +40 | 2.0-2.5% \u2192 +20 | 2.5-3.0% \u2192 -20 | 3.0-3.5% \u2192 -50 | > 3.5% \u2192 -80. Phase 3.\n"
   },
   "score": null,
-  "next_expected_release": null
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": 1.22,
+    "level_mean": 2.07127,
+    "level_std": 0.507283,
+    "level_value_used": 2.69,
+    "trend_z": 0.722,
+    "trend_value_used": 0.27,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.933784+00:00"
+  },
+  "level_trend_state": "Strong"
 }

@@ -514,5 +514,17 @@
     "why_it_matters": "Measures the goods-producing sector. IP below its 12-month peak by >5% is historically a recessionary signal.\n",
     "scoring_rule": "YoY % change. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.235,
+    "level_mean": 0.003864,
+    "level_std": 0.041206,
+    "level_value_used": 0.013531,
+    "trend_z": -0.021,
+    "trend_value_used": -0.00055,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.028810+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

@@ -510,5 +510,17 @@
     "why_it_matters": "Starts lag permits by 3-6 months. Rising starts = homebuilder, lumber, appliance demand.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.577,
+    "level_mean": 0.025262,
+    "level_std": 0.144306,
+    "level_value_used": 0.108487,
+    "trend_z": 1.045,
+    "trend_value_used": 0.201618,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.025756+00:00"
+  },
+  "level_trend_state": "Strong"
 }

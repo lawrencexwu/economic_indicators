@@ -514,5 +514,17 @@
     "why_it_matters": "Pipeline pressure on margins. PPI leads CPI by ~3-6 months. Rising PPI compresses margins before CPI catches up. Relevant for industrials/semis.\n",
     "scoring_rule": "YoY change vs historical average. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.844,
+    "level_mean": 0.034733,
+    "level_std": 0.029775,
+    "level_value_used": 0.059876,
+    "trend_z": 2.024,
+    "trend_value_used": 0.029736,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.069263+00:00"
+  },
+  "level_trend_state": "Strong"
 }

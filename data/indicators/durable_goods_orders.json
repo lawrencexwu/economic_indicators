@@ -510,5 +510,17 @@
     "why_it_matters": "Baumohl #9 most stock-sensitive. Core capex (nondefense ex-aircraft) leads business investment and CapEx for industrials/semis.\n",
     "scoring_rule": "MoM % change, 3-month trend. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.365,
+    "level_mean": 0.043942,
+    "level_std": 0.097055,
+    "level_value_used": 0.00852,
+    "trend_z": -1.012,
+    "trend_value_used": -0.097425,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.991201+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

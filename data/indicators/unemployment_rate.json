@@ -510,5 +510,17 @@
     "why_it_matters": "Strong NFP bullish for equities except when economy at capacity (then rate-fear dominates). Unemployment below NAIRU (~4%) = Fed pressure. Rising unemployment = growth concern but also potential for Fed cuts.\n",
     "scoring_rule": "Score depends on direction vs Fed mandate. Rising + above 4.5% = bullish (cuts coming). Rising from low = early warning. Phase 3.\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.155,
+    "level_mean": 4.5675,
+    "level_std": 1.723547,
+    "level_value_used": 4.3,
+    "trend_z": 0.008,
+    "trend_value_used": 0.0,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.085354+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

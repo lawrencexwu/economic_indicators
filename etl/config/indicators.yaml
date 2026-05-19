@@ -25,6 +25,8 @@ indicators:
     source_type: "fred"
     history_years: 30
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Spread between 10-year and 3-month Treasury yields.
@@ -52,6 +54,8 @@ indicators:
     source_type: "fred"
     history_years: 30
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Spread between 10-year and 2-year Treasury yields. Widely watched by
@@ -73,6 +77,8 @@ indicators:
     source_type: "fred"
     history_years: 30
     unit: "thousands"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Four-week moving average of first-time unemployment insurance filings.
@@ -99,6 +105,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Raw weekly initial unemployment insurance filings. DOL. Thursday 8:30 ET.
@@ -119,6 +127,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Number of people currently receiving unemployment benefits (insured
@@ -142,6 +152,8 @@ indicators:
     history_years: 10
     data_note: "Conference Board pulled free FRED access ~2020. Requires CB subscription or scraping."
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Composite of 10 leading indicators from Conference Board. Monthly,
@@ -167,6 +179,8 @@ indicators:
     source_type: "fred"
     history_years: 30
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Chicago Fed National Activity Index 3-month moving average. Composite
@@ -196,6 +210,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Chicago Fed National Activity Index, single-month reading. More volatile
@@ -215,6 +231,8 @@ indicators:
     source_type: "fred"
     history_years: 30
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Difference between the 3-month moving average of the national unemployment
@@ -240,6 +258,8 @@ indicators:
     scraper: "nahb"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         National Association of Home Builders / Wells Fargo Housing Market Index.
@@ -264,6 +284,8 @@ indicators:
     source_type: "fred"
     history_years: 30
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "full"
     metadata:
       what_it_measures: >
         Smoothed U.S. Recession Probabilities from Piger-Chauvet dynamic factor
@@ -288,6 +310,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Number of persons unemployed 15 weeks and over. Measures structural
@@ -313,6 +337,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Consumer Price Index for All Urban Consumers: All Items Less Food and
@@ -338,6 +364,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Consumer Price Index for All Urban Consumers: All Items. BLS. Monthly.
@@ -359,6 +387,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Personal Consumption Expenditures Price Index excluding Food and Energy.
@@ -383,6 +413,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Headline PCE price index, including food and energy."
       why_it_matters: "Context for core PCE; energy-driven spikes can affect inflation expectations."
@@ -400,6 +432,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Producer Price Index for Final Demand. BLS. Monthly, day before or after
@@ -421,6 +455,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Far-upstream price pressure: crude goods excluding food and energy.
@@ -442,6 +478,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Quarterly measure of total compensation costs for civilian workers.
@@ -466,6 +504,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Market-implied 5-year inflation expectations derived from TIPS spread.
@@ -490,6 +530,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Bureau of Labor Statistics U-3 unemployment rate. Monthly, 1st Friday
@@ -515,6 +557,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Broadest measure of labor underutilization: includes part-time for
@@ -536,6 +580,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Share of civilian noninstitutional population that is employed or
@@ -558,6 +604,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "dollars"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Average hourly earnings for all private employees. BLS, released with
@@ -581,6 +629,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Effective overnight federal funds rate. Reflects actual FOMC policy stance."
       why_it_matters: >
@@ -604,6 +654,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         NY Fed survey of manufacturing conditions. Diffusion index: >0 = expansion.
@@ -625,6 +677,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Philadelphia Fed manufacturing survey general business conditions. Monthly
@@ -645,6 +699,8 @@ indicators:
     scraper: "richmond_fed"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Richmond Fed 5th District manufacturing composite index."
       why_it_matters: "Part of 5-Fed composite ISM nowcast. Not on FRED free tier — scraped from richmondfed.org."
@@ -663,6 +719,8 @@ indicators:
     scraper: "kc_fed"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "KC Fed 10th District manufacturing composite index."
       why_it_matters: "Part of 5-Fed composite ISM nowcast. Not on FRED free tier — scraped from kansascityfed.org."
@@ -681,6 +739,8 @@ indicators:
     scraper: "dallas_fed"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Dallas Fed 11th District manufacturing composite (General Business Activity index)."
       why_it_matters: "Part of 5-Fed composite ISM nowcast. Released last Monday of month — often the last regional Fed report before ISM."
@@ -698,6 +758,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "billions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Commercial and industrial loans at all commercial banks (H.8 release).
@@ -719,6 +781,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "billions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Total loans and leases at all commercial banks (H.8). Broad credit supply measure."
       why_it_matters: "Broad financial system credit pulse. Slowing loan growth precedes economic softness."
@@ -739,6 +803,8 @@ indicators:
     scraper: "mba"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         MBA Weekly Mortgage Applications Survey — Purchase index. Mortgage
@@ -762,6 +828,8 @@ indicators:
     scraper: "mba"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "MBA refinance applications index. Sensitive to mortgage rate changes."
       why_it_matters: "Refi activity affects household cash flow and consumer spending."
@@ -780,6 +848,8 @@ indicators:
     scraper: "aar"
     history_years: 5
     unit: "percent_yoy"
+    zscore_transform: "raw"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Association of American Railroads weekly rail traffic report.
@@ -808,6 +878,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Diffusion index of new orders, production, employment, inventories,
@@ -833,6 +905,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "ISM Manufacturing New Orders subindex. Most forward-looking PMI component."
       why_it_matters: >
@@ -853,6 +927,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "ISM Manufacturing Production subindex. Current output levels."
       why_it_matters: "Confirms new orders signal. Divergence from new orders = inventory build/draw."
@@ -871,6 +947,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "ISM Manufacturing Employment subindex. Hiring/firing in manufacturing."
       why_it_matters: "Leads BLS manufacturing employment. Below 50 = manufacturing contraction in labor."
@@ -889,6 +967,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "ISM Manufacturing Customer Inventories subindex."
       why_it_matters: >
@@ -910,6 +990,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "ISM Manufacturing Prices Paid subindex. Input cost pressures for manufacturers."
       why_it_matters: >
@@ -931,6 +1013,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         ISM Non-Manufacturing PMI covering services sector. Monthly, 3rd business
@@ -954,6 +1038,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "ISM Services New Orders subindex. Forward-looking services demand."
       why_it_matters: "Leading component for services sector. Divergence from headline signals turning point."
@@ -972,6 +1058,8 @@ indicators:
     scraper: "ism"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "ISM Services Prices Paid subindex. Input cost pressures in services."
       why_it_matters: "Services inflation is wage-driven. Watch 60 threshold — above it signals persistent services CPI."
@@ -991,6 +1079,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Fed G.17 measure of real output from manufacturing, mining, and utilities.
@@ -1013,6 +1103,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Total capacity utilization for all industries (Fed G.17)."
       why_it_matters: >
@@ -1034,6 +1126,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "millions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Advance Monthly Manufacturer's Report. New orders for manufactured
@@ -1055,6 +1149,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "millions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Manufacturers' New Orders: Nondefense Capital Goods Excluding Aircraft.
@@ -1077,6 +1173,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "millions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Durable goods orders excluding highly volatile transportation and defense orders."
       why_it_matters: "Baumohl Tier 2 (#12). Cleaner signal than headline orders for underlying capex demand."
@@ -1094,6 +1192,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "millions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Total new orders at manufacturing facilities (M3 survey), including
@@ -1115,6 +1215,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "millions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Total business inventories (manufacturing, retail, wholesale). Census."
       why_it_matters: "Rising inventory/sales ratio signals demand slowdown — companies sitting on unsold goods."
@@ -1132,6 +1234,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "ratio"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Total business inventories to total business sales ratio. A ratio above
@@ -1156,6 +1260,8 @@ indicators:
     scraper: "nfib"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         National Federation of Independent Business monthly survey of small
@@ -1184,6 +1290,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         BLS Employment Situation Report: net change in nonfarm payrolls. Monthly,
@@ -1206,6 +1314,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Employment in temporary help services. Baumohl flags this as most cycle-sensitive within NFP."
       why_it_matters: "Companies cut temps before permanent workers. Temp employment leads overall payrolls by 2-3 months."
@@ -1223,6 +1333,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "hours"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Average weekly hours worked by production/nonsupervisory employees in manufacturing. Part of the BLS Employment Situation report."
       why_it_matters: "Firms cut hours before cutting headcount. Falling below 40h signals imminent layoffs; below 39.5h has historically coincided with recessions."
@@ -1240,6 +1352,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Employment in truck transportation. Baumohl Tier 2 (#20)."
       why_it_matters: "Cycle-sensitive transport employment. Leads freight volumes."
@@ -1259,6 +1373,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         New privately-owned housing units authorized by building permits:
@@ -1280,6 +1396,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Total new privately-owned housing starts. Census/HUD, monthly ~18th 8:30 ET."
       why_it_matters: "Starts lag permits by 3-6 months. Rising starts = homebuilder, lumber, appliance demand."
@@ -1297,6 +1415,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Single-family housing starts. More relevant for homebuilders than multi-family."
       why_it_matters: "Single-family is the cyclically sensitive component. Multi-family is more urban/rental driven."
@@ -1314,6 +1434,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "millions_saar"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "NAR existing home sales (seasonally adjusted annual rate). Monthly ~25th 10:00 ET."
       why_it_matters: "Measures transaction volume of the resale market. Affects real estate commissions, mortgages."
@@ -1331,6 +1453,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands_saar"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Census new single-family home sales. Monthly ~25th 10:00 ET."
       why_it_matters: "More timely than existing sales (signed contract vs. closed). New construction bellwether."
@@ -1348,6 +1472,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "S&P CoreLogic Case-Shiller U.S. National Home Price Index, seasonally adjusted."
       why_it_matters: "Home price appreciation affects consumer net worth, spending, and mortgage credit quality."
@@ -1366,6 +1492,8 @@ indicators:
     scraper: "nahb"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         NAHB Housing Market Index sub-component: Traffic of Prospective Buyers.
@@ -1389,6 +1517,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "millions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Advance Monthly Retail and Food Services Sales. Census. Monthly ~mid-month
@@ -1410,6 +1540,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "billions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         BEA personal consumption expenditures. Monthly, end-of-month 8:30 ET.
@@ -1431,6 +1563,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "billions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Real personal consumption expenditures in durable goods. BEA."
       why_it_matters: "Baumohl Tier 2 (#15). Leads cyclical demand — consumer durables are postponable purchases."
@@ -1448,6 +1582,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percentage balance"
+    zscore_transform: "level"
+    zscore_window: "10y"
     data_note: "OECD Composite Consumer Confidence for US via FRED. Updated monthly. Captures same cyclical dynamics as CB CCI."
     metadata:
       what_it_measures: >
@@ -1472,6 +1608,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "index"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         University of Michigan Consumer Sentiment Index. Preliminary mid-month,
@@ -1493,6 +1631,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "billions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Total consumer credit outstanding (revolving + non-revolving). Fed G.19."
       why_it_matters: "Slowing consumer credit signals consumer stress or deleveraging. Leads retail sales."
@@ -1512,6 +1652,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "BLS Job Openings and Labor Turnover Survey: job openings. Monthly, ~1 month lag."
       why_it_matters: "Openings / unemployed ratio = tightness gauge. Openings falling = demand cooling."
@@ -1529,6 +1671,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "level"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Quits rate from JOLTS. Workers voluntarily leaving jobs (%)."
       why_it_matters: >
@@ -1552,6 +1696,8 @@ indicators:
     scraper: "challenger"
     history_years: 5
     unit: "thousands"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Monthly planned layoff announcements compiled by Challenger, Gray &
@@ -1577,6 +1723,8 @@ indicators:
     scraper: "cass"
     history_years: 5
     unit: "index"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Cass Information Systems Freight Shipments Index. Monthly mid-month.
@@ -1600,6 +1748,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "billions"
+    zscore_transform: "yoy"
+    zscore_window: "10y"
     metadata:
       what_it_measures: >
         Real Gross Domestic Product. BEA. Quarterly: Advance (~4 weeks after
@@ -1622,6 +1772,8 @@ indicators:
     source_type: "fred"
     history_years: 10
     unit: "percent"
+    zscore_transform: "raw"
+    zscore_window: "10y"
     metadata:
       what_it_measures: "Real GDP percentage change (annualized), from BEA. Used for direct scoring."
       why_it_matters: "Annualized growth rate is what's quoted in headlines. Two negative quarters = technical recession."

@@ -506,5 +506,17 @@
     "why_it_matters": "Home price appreciation affects consumer net worth, spending, and mortgage credit quality.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -1.114,
+    "level_mean": 0.068796,
+    "level_std": 0.055795,
+    "level_value_used": 0.006614,
+    "trend_z": -0.208,
+    "trend_value_used": -0.0062,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.950806+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

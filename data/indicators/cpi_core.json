@@ -510,5 +510,17 @@
     "why_it_matters": "Hot CPI = rate fear = equity drawdown (esp. duration/multiple-sensitive names). Core CPI is the Fed's benchmark for underlying inflation; it determines the pace of rate hikes/cuts.\n",
     "scoring_rule": "Score as YoY % change vs 2% target: < 2.0% \u2192 +60 | 2.0-2.5% \u2192 +20 | 2.5-3.0% \u2192 -20 | 3.0-4.0% \u2192 -50 | > 4.0% \u2192 -80. Phase 3.\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.134,
+    "level_mean": 0.031888,
+    "level_std": 0.014913,
+    "level_value_used": 0.029884,
+    "trend_z": 0.036,
+    "trend_value_used": 0.000391,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.984098+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

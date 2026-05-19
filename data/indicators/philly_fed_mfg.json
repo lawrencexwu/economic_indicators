@@ -514,5 +514,17 @@
     "why_it_matters": "High correlation with ISM Mfg. Used in 5-Fed composite to nowcast ISM.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.913,
+    "level_mean": 10.341667,
+    "level_std": 17.918539,
+    "level_value_used": 26.7,
+    "trend_z": 0.687,
+    "trend_value_used": 14.1,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.065995+00:00"
+  },
+  "level_trend_state": "Strong"
 }

@@ -510,5 +510,17 @@
     "why_it_matters": "Best labor market tightness gauge. Workers only quit when they're confident they'll find a better job. Quits rate >3% = very tight. Falling quits rate = workers getting cautious.\n",
     "scoring_rule": "> 3.0% \u2192 +20 | 2.5-3.0% \u2192 0 | 2.0-2.5% \u2192 -20 | < 2.0% \u2192 -50. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.982,
+    "level_mean": 2.28,
+    "level_std": 0.285092,
+    "level_value_used": 2.0,
+    "trend_z": 0.01,
+    "trend_value_used": 0.0,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.043612+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

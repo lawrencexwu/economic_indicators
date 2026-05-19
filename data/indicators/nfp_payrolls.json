@@ -514,5 +514,17 @@
     "why_it_matters": "Baumohl's #1 most stock-sensitive indicator. Strong NFP = bullish for equities except when economy at capacity (rate-fear dominates). The single most market-moving monthly release.\n",
     "scoring_rule": "MoM change vs trend. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.26,
+    "level_mean": 0.010724,
+    "level_std": 0.035099,
+    "level_value_used": 0.001584,
+    "trend_z": -0.001,
+    "trend_value_used": -0.000463,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.052760+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

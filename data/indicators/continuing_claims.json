@@ -2178,5 +2178,17 @@
     "why_it_matters": "Measures job-finding difficulty. Rising continuing claims while initial claims stabilize = hard to find work once laid off.\n",
     "scoring_rule": "Z-score with momentum, similar to IC4WSA. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.305,
+    "level_mean": 2796288.461538,
+    "level_std": 3325976.81502,
+    "level_value_used": 1782000.0,
+    "trend_z": -0.022,
+    "trend_value_used": -77000.0,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.977242+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

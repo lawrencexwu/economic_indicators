@@ -67,5 +67,17 @@
       "date": "2025-05-01",
       "value": 48.6
     }
-  ]
+  ],
+  "zscore": {
+    "level_z": 1.383,
+    "level_mean": 49.908333,
+    "level_std": 2.017856,
+    "level_value_used": 52.7,
+    "trend_z": -0.52,
+    "trend_value_used": 0.1,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.035744+00:00"
+  },
+  "level_trend_state": "Peaking"
 }

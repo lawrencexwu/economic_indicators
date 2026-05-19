@@ -514,5 +514,17 @@
     "why_it_matters": "Above 80% = capacity constraints \u2192 margin compression risk. Below 78% (long-run average) = slack in the system, less inflation pressure.\n",
     "scoring_rule": "70-78% \u2192 neutral | >82% \u2192 -30 (overheating) | <70% \u2192 -50 (deep contraction). Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.214,
+    "level_mean": 76.611764,
+    "level_std": 2.301517,
+    "level_value_used": 76.1194,
+    "trend_z": 0.256,
+    "trend_value_used": 0.5536,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.948948+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

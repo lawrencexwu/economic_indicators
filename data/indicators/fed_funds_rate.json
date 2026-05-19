@@ -15171,5 +15171,17 @@
     "scoring_rule": "Computed as spread vs neutral rate (r*). Phase 3."
   },
   "score": null,
-  "next_expected_release": null
+  "next_expected_release": null,
+  "zscore": {
+    "level_z": 0.426,
+    "level_mean": 2.738984,
+    "level_std": 2.094011,
+    "level_value_used": 3.63,
+    "trend_z": -0.094,
+    "trend_value_used": -0.01,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.004153+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

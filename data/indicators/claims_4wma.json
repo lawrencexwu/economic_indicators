@@ -6354,5 +6354,17 @@
     "why_it_matters": "High-frequency labor market read. Rising claims = layoffs accelerating. The 4-week MA is the most useful version; raw claims are too volatile. Claims >350k historically associated with recession conditions.\n",
     "scoring_rule": "z = (current 4wMA - trailing 3y mean) / trailing 3y stddev momentum = (current 4wMA - 4wMA 8 weeks ago) / 4wMA 8 weeks ago raw_score = -50*z - 100*momentum (high & rising = bearish) clamp to [-100, +100]\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.522,
+    "level_mean": 362111.584596,
+    "level_std": 303310.720449,
+    "level_value_used": 203750.0,
+    "trend_z": -0.043,
+    "trend_value_used": -16500.0,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.965079+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

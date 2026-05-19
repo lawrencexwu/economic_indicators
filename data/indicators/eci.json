@@ -182,5 +182,17 @@
     "why_it_matters": "Wages are the biggest input cost for services inflation. The Fed watches ECI closely \u2014 if wage growth stays above ~3.5% annualized, services inflation is hard to bring to 2%.\n",
     "scoring_rule": "Annualized: < 3.0% \u2192 +60 | 3.0-3.5% \u2192 +20 | 3.5-4.0% \u2192 -20 | 4.0-5.0% \u2192 -50 | > 5.0% \u2192 -80. Phase 3.\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.352,
+    "level_mean": 0.036324,
+    "level_std": 0.008977,
+    "level_value_used": 0.033166,
+    "trend_z": -0.228,
+    "trend_value_used": -0.000458,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.992300+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

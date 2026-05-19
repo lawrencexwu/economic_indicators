@@ -510,5 +510,17 @@
     "why_it_matters": "Inv/sales ratio > 1.45 historically = recession territory. Rising ratio = companies cutting orders to work down excess stock.\n",
     "scoring_rule": "Threshold vs historical: < 1.30 \u2192 +30 | 1.30-1.40 \u2192 0 | > 1.45 \u2192 -50. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -1.092,
+    "level_mean": 1.383,
+    "level_std": 0.057681,
+    "level_value_used": 1.32,
+    "trend_z": -0.681,
+    "trend_value_used": -0.04,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.034575+00:00"
+  },
+  "level_trend_state": "Deteriorating"
 }

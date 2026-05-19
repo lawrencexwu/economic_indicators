@@ -9,6 +9,25 @@ export interface IndicatorMetadata {
   scoring_rule?: string;
 }
 
+export type LevelTrendState =
+  | "Strong"
+  | "Peaking"
+  | "Neutral"
+  | "Recovering"
+  | "Deteriorating";
+
+export interface ZScoreBlock {
+  level_z: number;
+  level_mean: number;
+  level_std: number;
+  level_value_used: number;
+  trend_z: number;
+  trend_value_used: number | null;
+  window: "10y" | "full";
+  transform: "level" | "yoy" | "raw";
+  computed_at: string;
+}
+
 export interface Indicator {
   id: string;
   name: string;
@@ -26,6 +45,8 @@ export interface Indicator {
   metadata: IndicatorMetadata;
   score: number | null;
   next_expected_release?: string | null;
+  zscore?: ZScoreBlock | null;
+  level_trend_state?: LevelTrendState;
 }
 
 export type ScoreZone = "strong_bull" | "bull" | "neutral" | "bear" | "strong_bear" | "na";

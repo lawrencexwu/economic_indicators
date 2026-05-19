@@ -514,5 +514,17 @@
     "why_it_matters": "Baumohl #7 proxy. Expectations lead spending. Sharp drops historically precede risk-off moves. Freely available on FRED, updated monthly.\n",
     "scoring_rule": "Level + MoM change. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -1.751,
+    "level_mean": 84.38268,
+    "level_std": 17.5914,
+    "level_value_used": 53.582,
+    "trend_z": -0.761,
+    "trend_value_used": -7.10122,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:17.973495+00:00"
+  },
+  "level_trend_state": "Deteriorating"
 }

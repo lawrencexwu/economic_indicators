@@ -182,5 +182,17 @@
     "why_it_matters": "Annualized growth rate is what's quoted in headlines. Two negative quarters = technical recession.",
     "scoring_rule": "Same bands as gdp_real. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.095,
+    "level_mean": 2.7075,
+    "level_std": 7.436962,
+    "level_value_used": 2.0,
+    "trend_z": 0.125,
+    "trend_value_used": 1.5,
+    "window": "10y",
+    "transform": "raw",
+    "computed_at": "2026-05-19T11:18:18.021964+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

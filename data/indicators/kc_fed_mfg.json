@@ -1212,5 +1212,17 @@
       "value": -16.0
     }
   ],
-  "next_expected_release": "2026-05-28T00:00:00+00:00"
+  "next_expected_release": "2026-05-28T00:00:00+00:00",
+  "zscore": {
+    "level_z": 0.305,
+    "level_mean": 6.291667,
+    "level_std": 12.146442,
+    "level_value_used": 10.0,
+    "trend_z": 1.111,
+    "trend_value_used": 10.0,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.045253+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

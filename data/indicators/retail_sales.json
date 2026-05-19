@@ -514,5 +514,17 @@
     "why_it_matters": "Baumohl #6. Consumer demand pulse. The \"control group\" (ex-autos, gas, food, building materials) feeds GDP nowcasts directly.\n",
     "scoring_rule": "MoM + YoY change. Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.109,
+    "level_mean": 0.056331,
+    "level_std": 0.069595,
+    "level_value_used": 0.048735,
+    "trend_z": 0.208,
+    "trend_value_used": 0.016056,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.071075+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

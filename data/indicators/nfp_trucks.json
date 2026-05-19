@@ -514,5 +514,17 @@
     "why_it_matters": "Cycle-sensitive transport employment. Leads freight volumes.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.536,
+    "level_mean": 0.002263,
+    "level_std": 0.030487,
+    "level_value_used": -0.014088,
+    "trend_z": 0.266,
+    "trend_value_used": 0.00433,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:18.055478+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

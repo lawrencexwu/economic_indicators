@@ -510,5 +510,17 @@
     "why_it_matters": "Rising inventory/sales ratio signals demand slowdown \u2014 companies sitting on unsold goods.",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.391,
+    "level_mean": 0.043827,
+    "level_std": 0.060385,
+    "level_value_used": 0.020229,
+    "trend_z": 0.22,
+    "trend_value_used": 0.005694,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.947161+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

@@ -510,5 +510,17 @@
     "why_it_matters": "Core PCE drives Fed reaction function. The 2% target is specifically for PCE, not CPI. Differences from CPI: PCE uses chain-weighting and covers broader spending (not just out-of-pocket).\n",
     "scoring_rule": "< 2.0% \u2192 +60 | 2.0-2.3% \u2192 +30 | 2.3-2.5% \u2192 0 | 2.5-3.0% \u2192 -30 | 3.0-3.5% \u2192 -60 | > 3.5% \u2192 -90. Phase 3.\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": 0.284,
+    "level_mean": 0.028218,
+    "level_std": 0.013401,
+    "level_value_used": 0.032028,
+    "trend_z": 0.433,
+    "trend_value_used": 0.002316,
+    "window": "10y",
+    "transform": "yoy",
+    "computed_at": "2026-05-19T11:18:17.982442+00:00"
+  },
+  "level_trend_state": "Neutral"
 }

@@ -510,5 +510,17 @@
     "why_it_matters": "Low participation with low unemployment = tighter labor market than headline suggests. Structural shifts (aging, post-COVID) complicate the Fed's read on slack.\n",
     "scoring_rule": "Phase 3."
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -1.198,
+    "level_mean": 62.465833,
+    "level_std": 0.555718,
+    "level_value_used": 61.8,
+    "trend_z": -0.597,
+    "trend_value_used": -0.3,
+    "window": "10y",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.047562+00:00"
+  },
+  "level_trend_state": "Deteriorating"
 }

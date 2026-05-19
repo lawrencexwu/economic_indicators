@@ -1470,5 +1470,17 @@
     "why_it_matters": "Threshold of 0.50 percentage points has triggered at the start of every US recession since 1970 with no false positives. Real-time recession indicator \u2014 no revisions or lags.\n",
     "scoring_rule": "< 0.20 \u2192 +40 | 0.20 to 0.35 \u2192 0 | 0.35 to 0.50 \u2192 -40 | 0.50 to 0.75 \u2192 -70 | > 0.75 \u2192 -100. Phase 3.\n"
   },
-  "score": null
+  "score": null,
+  "zscore": {
+    "level_z": -0.244,
+    "level_mean": 0.415179,
+    "level_std": 1.170196,
+    "level_value_used": 0.13,
+    "trend_z": -0.196,
+    "trend_value_used": -0.17,
+    "window": "full",
+    "transform": "level",
+    "computed_at": "2026-05-19T11:18:18.074639+00:00"
+  },
+  "level_trend_state": "Neutral"
 }
