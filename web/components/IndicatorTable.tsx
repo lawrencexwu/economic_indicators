@@ -283,7 +283,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                             </div>
                             <div style={{ fontSize: 10, color: "var(--muted)", marginTop: 4 }}>
                               {formatDate(ind.last_updated)}
-                              {ind.previous_value !== null && (
+                              {ind.previous_value != null && (
                                 <> · prev {ind.previous_value.toFixed(1)}</>
                               )}
                             </div>
@@ -315,7 +315,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                               {score !== null
                                 ? score > 0
                                   ? `+${score}`
-                                  : score
+                                  : String(score)
                                 : "?"}
                               ?
                             </div>
@@ -468,7 +468,7 @@ export default function IndicatorTable({ indicators, showSparkline = true }: Pro
                     >
                       <span style={{ color: "var(--muted)" }}>Why </span>
                       <span style={{ color, fontWeight: 700 }}>
-                        {score !== null ? (score > 0 ? `+${score}` : score) : "?"}
+                        {score !== null ? (score > 0 ? `+${score}` : String(score)) : "?"}
                       </span>
                       <span style={{ color: "var(--muted)" }}>? </span>
                       {description}
