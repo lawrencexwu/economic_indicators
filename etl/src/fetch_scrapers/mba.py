@@ -72,8 +72,11 @@ def _press_release_url_from_newsroom(html: str) -> str | None:
     soup = BeautifulSoup(html, "html.parser")
     all_links = soup.find_all("a", href=True)
     logger.info("MBA: newsroom HTML length=%d, total <a> tags=%d", len(html), len(all_links))
-    for a in all_links[:60]:  # log first 60 links for debug
-        logger.info("MBA link: %r → %s", a.get_text(strip=True)[:80], a["href"][:100])
+    # Log only links whose href contains /news/ — these are the article candidates
+    for a in all_links:
+        href = a["href"]
+        if "/news/" in href and "/news-and-research/newsroom/news" not in href:
+            logger.info("MBA news-href: %r → %s", a.get_text(strip=True)[:100], href[:120])
     for a in all_links:
         text = a.get_text(strip=True).lower()
         href = a["href"]
