@@ -41,8 +41,11 @@ export default function GlobalScoreStrip() {
       aria-label="Page scores"
       className="no-scrollbar"
       style={{
+        position: "sticky",
+        top: 48,
+        zIndex: 49,
         background: "rgba(10,14,26,0.97)",
-        borderBottom: "1px solid var(--border)",
+        borderBottom: "1px solid #1e2c44",
         height: 30,
         display: "flex",
         alignItems: "center",
@@ -82,7 +85,7 @@ export default function GlobalScoreStrip() {
             <span
               style={{
                 fontSize: 11,
-                color: "var(--muted)",
+                color: "#7a8499",
                 whiteSpace: "nowrap",
                 lineHeight: 1,
               }}
@@ -118,7 +121,7 @@ export default function GlobalScoreStrip() {
                 display: "inline-block",
                 width: 1,
                 height: 12,
-                background: "var(--border)",
+                background: "#1e2c44",
                 flexShrink: 0,
                 alignSelf: "center",
               }}

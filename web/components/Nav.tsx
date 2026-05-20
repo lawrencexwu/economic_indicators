@@ -19,12 +19,14 @@ export default function Nav() {
   return (
     <nav
       style={{
-        background: "var(--surface)",
-        borderBottom: "1px solid var(--border)",
-        overflow: "hidden", // prevent page-level horizontal scroll on mobile
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        background: "#0d1428",
+        borderBottom: "1px solid #1e2c44",
+        overflow: "hidden",
       }}
     >
-      {/* Inner row: scrollable on small screens, hidden scrollbar */}
       <div
         className="no-scrollbar"
         style={{
@@ -43,10 +45,10 @@ export default function Nav() {
             fontWeight: 700,
             fontSize: 13,
             letterSpacing: "0.12em",
-            color: "var(--accent)",
+            color: "#5b9cf5",
             marginRight: 16,
             textTransform: "uppercase",
-            textShadow: "var(--glow-accent)",
+            textShadow: "0 0 16px rgba(91,156,245,0.40)",
             whiteSpace: "nowrap",
             flexShrink: 0,
           }}
@@ -61,7 +63,6 @@ export default function Nav() {
               href={href}
               aria-current={active ? "page" : undefined}
               style={{
-                // Full nav height = 48px touch target (meets 44pt minimum)
                 height: 48,
                 display: "inline-flex",
                 alignItems: "center",
@@ -69,11 +70,11 @@ export default function Nav() {
                 borderRadius: 6,
                 fontSize: 13,
                 fontWeight: active ? 600 : 400,
-                color: active ? "var(--text)" : "var(--muted)",
+                color: active ? "#e8eef5" : "#7a8499",
                 background: active ? "rgba(91,156,245,0.10)" : "transparent",
                 textDecoration: "none",
                 transition: "color 0.15s, background 0.15s",
-                borderBottom: active ? "2px solid var(--accent)" : "2px solid transparent",
+                borderBottom: active ? "2px solid #5b9cf5" : "2px solid transparent",
                 whiteSpace: "nowrap",
                 flexShrink: 0,
               }}
