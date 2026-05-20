@@ -9,7 +9,7 @@
   "frequency": "weekly",
   "unit": "percent_yoy",
   "source_type": "scraper",
-  "last_updated": "2026-05-20T09:27:09.482598+00:00",
+  "last_updated": "2026-05-20T21:27:56.107187+00:00",
   "metadata": {
     "what_it_measures": "Association of American Railroads weekly rail traffic report. Carloads measure bulk freight: coal, grain, chemicals, autos, intermodal.\n",
     "why_it_matters": "Real-time goods economy pulse. Declining carloads = goods demand contracting. Industrial bellwether used by Warren Buffett.\n",
