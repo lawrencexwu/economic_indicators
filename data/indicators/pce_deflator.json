@@ -7,8 +7,9 @@
   "tier": 1,
   "weight": 3,
   "frequency": "monthly",
+  "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "last_updated": "2026-05-20T09:27:09.482598+00:00",
   "current_value": 130.344,
   "previous_value": 129.484,
   "data": [
@@ -511,6 +512,7 @@
     "scoring_rule": "Same bands as core PCE. Phase 3."
   },
   "score": null,
+  "next_expected_release": "2026-05-28T00:00:00+00:00",
   "zscore": {
     "level_z": 0.352,
     "level_mean": 0.029,
@@ -520,8 +522,38 @@
     "trend_value_used": 0.00618,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-05-19T22:03:30.346824+00:00"
+    "computed_at": "2026-05-20T09:27:39.033590+00:00"
   },
   "level_trend_state": "Neutral",
-  "next_expected_release": "2026-05-28T00:00:00+00:00"
+  "forecast": {
+    "model": "SeasonalNaive",
+    "horizon": 3,
+    "values": [
+      {
+        "date": "2026-04-01",
+        "mean": 126.15,
+        "lo80": 121.3961,
+        "hi80": 130.9039,
+        "lo95": 118.8795,
+        "hi95": 133.4205
+      },
+      {
+        "date": "2026-05-01",
+        "mean": 126.38,
+        "lo80": 121.6261,
+        "hi80": 131.1339,
+        "lo95": 119.1095,
+        "hi95": 133.6505
+      },
+      {
+        "date": "2026-06-01",
+        "mean": 126.743,
+        "lo80": 121.9891,
+        "hi80": 131.4969,
+        "lo95": 119.4725,
+        "hi95": 134.0135
+      }
+    ],
+    "computed_at": "2026-05-20T09:27:39.041316+00:00"
+  }
 }

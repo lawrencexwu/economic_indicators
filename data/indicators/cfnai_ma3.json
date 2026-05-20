@@ -7,8 +7,9 @@
   "tier": 3,
   "weight": 1,
   "frequency": "monthly",
+  "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "last_updated": "2026-05-20T09:27:09.482598+00:00",
   "current_value": -0.03,
   "previous_value": 0.03,
   "data": [
@@ -1471,6 +1472,7 @@
     "scoring_rule": "> +1.0 \u2192 -30 (overheating, late-cycle warning) +0.7 to +1.0 \u2192 0 (inflation acceleration risk) +0.2 to +0.7 \u2192 +60 (healthy expansion) -0.7 to +0.2 \u2192 +20 (neutral/slowing) -1.5 to -0.7 \u2192 -60 (recession risk rising) < -1.5 \u2192 -100 (recession underway)\n"
   },
   "score": null,
+  "next_expected_release": "2026-05-25T00:00:00+00:00",
   "zscore": {
     "level_z": 0.072,
     "level_mean": -0.083168,
@@ -1480,8 +1482,38 @@
     "trend_value_used": 0.23,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-05-19T22:03:30.335413+00:00"
+    "computed_at": "2026-05-20T09:27:13.198738+00:00"
   },
   "level_trend_state": "Neutral",
-  "next_expected_release": "2026-05-25T00:00:00+00:00"
+  "forecast": {
+    "model": "SeasonalNaive",
+    "horizon": 3,
+    "values": [
+      {
+        "date": "2026-04-01",
+        "mean": 0.06,
+        "lo80": -1.2697,
+        "hi80": 1.3897,
+        "lo95": -1.9735,
+        "hi95": 2.0935
+      },
+      {
+        "date": "2026-05-01",
+        "mean": -0.17,
+        "lo80": -1.4997,
+        "hi80": 1.1597,
+        "lo95": -2.2035,
+        "hi95": 1.8635
+      },
+      {
+        "date": "2026-06-01",
+        "mean": -0.24,
+        "lo80": -1.5697,
+        "hi80": 1.0897,
+        "lo95": -2.2735,
+        "hi95": 1.7935
+      }
+    ],
+    "computed_at": "2026-05-20T09:27:13.207429+00:00"
+  }
 }

@@ -7,8 +7,9 @@
   "tier": 1,
   "weight": 3,
   "frequency": "monthly",
+  "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "last_updated": "2026-05-20T09:27:09.482598+00:00",
   "current_value": 332.407,
   "previous_value": 330.293,
   "data": [
@@ -511,6 +512,7 @@
     "scoring_rule": "Same bands as core CPI. Phase 3."
   },
   "score": null,
+  "next_expected_release": "2026-06-12T00:00:00+00:00",
   "zscore": {
     "level_z": 0.287,
     "level_mean": 0.033513,
@@ -520,8 +522,38 @@
     "trend_value_used": 0.011183,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-05-19T22:03:30.344940+00:00"
+    "computed_at": "2026-05-20T09:27:36.258825+00:00"
   },
   "level_trend_state": "Neutral",
-  "next_expected_release": "2026-06-12T00:00:00+00:00"
+  "forecast": {
+    "model": "SeasonalNaive",
+    "horizon": 3,
+    "values": [
+      {
+        "date": "2026-05-01",
+        "mean": 320.302,
+        "lo80": 306.4659,
+        "hi80": 334.1381,
+        "lo95": 299.1416,
+        "hi95": 341.4624
+      },
+      {
+        "date": "2026-06-01",
+        "mean": 320.62,
+        "lo80": 306.7839,
+        "hi80": 334.4561,
+        "lo95": 299.4596,
+        "hi95": 341.7804
+      },
+      {
+        "date": "2026-07-01",
+        "mean": 321.435,
+        "lo80": 307.5989,
+        "hi80": 335.2711,
+        "lo95": 300.2746,
+        "hi95": 342.5954
+      }
+    ],
+    "computed_at": "2026-05-20T09:27:36.265929+00:00"
+  }
 }
