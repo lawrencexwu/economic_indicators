@@ -19,9 +19,12 @@ export default function Nav() {
   return (
     <nav
       style={{
-        position: "sticky",
+        position: "fixed",
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 50,
+        height: 48,
         background: "#0d1428",
         borderBottom: "1px solid #1e2c44",
         overflow: "hidden",

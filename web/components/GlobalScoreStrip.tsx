@@ -41,8 +41,10 @@ export default function GlobalScoreStrip() {
       aria-label="Page scores"
       className="no-scrollbar"
       style={{
-        position: "sticky",
+        position: "fixed",
         top: 48,
+        left: 0,
+        right: 0,
         zIndex: 49,
         background: "rgba(10,14,26,0.97)",
         borderBottom: "1px solid #1e2c44",
