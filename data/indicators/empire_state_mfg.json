@@ -530,7 +530,7 @@
     "trend_value_used": 12.5,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-05-20T21:28:03.492107+00:00"
+    "computed_at": "2026-05-20T23:02:07.706852+00:00"
   },
   "level_trend_state": "Strong",
   "forecast": {
