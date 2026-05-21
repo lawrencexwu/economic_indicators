@@ -9,7 +9,7 @@
   "frequency": "weekly",
   "unit": "thousands",
   "source_type": "fred",
-  "last_updated": "2026-05-20T21:27:56.107187+00:00",
+  "last_updated": "2026-05-21T09:35:59.849489+00:00",
   "current_value": 203750.0,
   "previous_value": 203000.0,
   "data": [
@@ -6356,7 +6356,7 @@
     "scoring_rule": "z = (current 4wMA - trailing 3y mean) / trailing 3y stddev momentum = (current 4wMA - 4wMA 8 weeks ago) / 4wMA 8 weeks ago raw_score = -50*z - 100*momentum (high & rising = bearish) clamp to [-100, +100]\n"
   },
   "score": null,
-  "next_expected_release": "2026-05-21T00:00:00+00:00",
+  "next_expected_release": "2026-05-28T00:00:00+00:00",
   "zscore": {
     "level_z": -0.522,
     "level_mean": 362111.584596,
@@ -6366,7 +6366,7 @@
     "trend_value_used": -16500.0,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-05-20T23:02:07.642017+00:00"
+    "computed_at": "2026-05-21T09:36:02.196968+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -6406,6 +6406,6 @@
         "hi95": 1069717.1168
       }
     ],
-    "computed_at": "2026-05-20T21:27:59.373941+00:00"
+    "computed_at": "2026-05-21T09:36:02.220703+00:00"
   }
 }

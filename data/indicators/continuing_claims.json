@@ -9,7 +9,7 @@
   "frequency": "weekly",
   "unit": "thousands",
   "source_type": "fred",
-  "last_updated": "2026-05-20T21:27:56.107187+00:00",
+  "last_updated": "2026-05-21T09:35:59.849489+00:00",
   "current_value": 1782000.0,
   "previous_value": 1758000.0,
   "data": [
@@ -2180,7 +2180,7 @@
     "scoring_rule": "Z-score with momentum, similar to IC4WSA. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-05-21T00:00:00+00:00",
+  "next_expected_release": "2026-05-28T00:00:00+00:00",
   "zscore": {
     "level_z": -0.305,
     "level_mean": 2796288.461538,
@@ -2190,7 +2190,7 @@
     "trend_value_used": -77000.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-05-20T23:02:07.650459+00:00"
+    "computed_at": "2026-05-21T09:36:03.407442+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -2230,6 +2230,6 @@
         "hi95": 11465899.267
       }
     ],
-    "computed_at": "2026-05-20T21:27:59.978904+00:00"
+    "computed_at": "2026-05-21T09:36:03.418162+00:00"
   }
 }
