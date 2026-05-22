@@ -7,8 +7,9 @@
   "tier": 1,
   "weight": 3,
   "frequency": "quarterly",
+  "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-05-19T04:06:22.931900+00:00",
+  "last_updated": "2026-05-22T08:57:36.419930+00:00",
   "current_value": 2.0,
   "previous_value": 0.5,
   "data": [
@@ -183,6 +184,7 @@
     "scoring_rule": "Same bands as gdp_real. Phase 3."
   },
   "score": null,
+  "next_expected_release": null,
   "zscore": {
     "level_z": -0.095,
     "level_mean": 2.7075,
@@ -192,7 +194,30 @@
     "trend_value_used": 1.5,
     "window": "10y",
     "transform": "raw",
-    "computed_at": "2026-05-21T22:08:38.692849+00:00"
+    "computed_at": "2026-05-22T08:57:38.943472+00:00"
   },
-  "level_trend_state": "Neutral"
+  "level_trend_state": "Neutral",
+  "forecast": {
+    "model": "SeasonalNaive",
+    "horizon": 2,
+    "values": [
+      {
+        "date": "2026-04-01",
+        "mean": 3.8,
+        "lo80": -10.3145,
+        "hi80": 17.9145,
+        "lo95": -17.7863,
+        "hi95": 25.3863
+      },
+      {
+        "date": "2026-07-01",
+        "mean": 4.4,
+        "lo80": -9.7145,
+        "hi80": 18.5145,
+        "lo95": -17.1863,
+        "hi95": 25.9863
+      }
+    ],
+    "computed_at": "2026-05-22T08:57:38.949905+00:00"
+  }
 }
