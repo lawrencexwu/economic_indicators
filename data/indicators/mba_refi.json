@@ -9,17 +9,21 @@
   "frequency": "weekly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-05-27T09:40:53.903232+00:00",
+  "last_updated": "2026-05-27T23:06:38.052881+00:00",
   "metadata": {
     "what_it_measures": "MBA refinance applications index. Sensitive to mortgage rate changes.",
     "why_it_matters": "Refi activity affects household cash flow and consumer spending.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 920.2,
-  "previous_value": 921.1,
-  "release_date": "2026-05-15",
+  "current_value": 753.7,
+  "previous_value": 920.2,
+  "release_date": "2026-05-22",
   "data": [
+    {
+      "date": "2026-05-22",
+      "value": 753.7
+    },
     {
       "date": "2026-05-15",
       "value": 920.2
