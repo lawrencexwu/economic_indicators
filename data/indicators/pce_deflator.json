@@ -512,7 +512,7 @@
     "scoring_rule": "Same bands as core PCE. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-05-28T00:00:00+00:00",
+  "next_expected_release": "2026-06-28T00:00:00+00:00",
   "zscore": {
     "level_z": 0.352,
     "level_mean": 0.029,
@@ -522,7 +522,7 @@
     "trend_value_used": 0.00618,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-05-27T23:07:09.429327+00:00"
+    "computed_at": "2026-05-28T09:57:56.573496+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
