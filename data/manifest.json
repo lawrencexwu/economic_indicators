@@ -1,45 +1,29 @@
 {
-  "last_run": "2026-05-28T21:48:01.810833+00:00",
-  "n_succeeded": 9,
+  "last_run": "2026-05-28T23:04:43.874191+00:00",
+  "n_succeeded": 5,
   "n_failed": 0,
-  "n_skipped": 89,
+  "n_skipped": 93,
   "errors": [],
   "indicators": {
-    "yield_curve_10y3m": {
-      "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
-    },
-    "yield_curve_10y2y": {
-      "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
-    },
-    "breakeven_5y": {
-      "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
-    },
-    "fed_funds_rate": {
-      "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
-    },
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
+      "last_updated": "2026-05-28T23:04:43.874191+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
+      "last_updated": "2026-05-28T23:04:43.874191+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
+      "last_updated": "2026-05-28T23:04:43.874191+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
+      "last_updated": "2026-05-28T23:04:43.874191+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-05-28T21:48:01.810833+00:00"
+      "last_updated": "2026-05-28T23:04:43.874191+00:00"
     }
   }
 }
