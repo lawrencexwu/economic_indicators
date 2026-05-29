@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-05-27T23:06:38.052881+00:00",
+  "last_updated": "2026-05-29T09:49:12.907256+00:00",
   "metadata": {
     "what_it_measures": "Diffusion index of new orders, production, employment, inventories, prices. ISM. Monthly, 1st business day 10:00 ET. >50 = expansion.\n",
     "why_it_matters": "Baumohl's #2 most stock-sensitive indicator. New Orders subindex is the most forward-looking component; leads headline by ~3 months. ISM Mfg <48 for 3+ months historically signals earnings contraction.\n",
@@ -79,7 +79,7 @@
     "trend_value_used": 0.1,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-05-28T23:04:44.074700+00:00"
+    "computed_at": "2026-05-29T09:50:19.546221+00:00"
   },
   "level_trend_state": "Peaking",
   "forecast": {
@@ -111,6 +111,6 @@
         "hi95": 57.6777
       }
     ],
-    "computed_at": "2026-05-27T23:07:45.424097+00:00"
+    "computed_at": "2026-05-29T09:50:19.552973+00:00"
   }
 }

@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-05-27T23:06:38.052881+00:00",
+  "last_updated": "2026-05-29T09:49:12.907256+00:00",
   "metadata": {
     "what_it_measures": "Cass Information Systems Freight Shipments Index. Monthly mid-month. Measures freight transaction volumes (rail, truck, intermodal).\n",
     "why_it_matters": "Real-time truckload demand. Declining Cass freight = goods economy contracting. Complement to AAR rail data.\n",
@@ -27,84 +27,10 @@
     {
       "date": "2026-03-01",
       "value": 1.007
-    },
-    {
-      "date": "2026-02-01",
-      "value": 0.978
-    },
-    {
-      "date": "2026-01-01",
-      "value": 0.886
-    },
-    {
-      "date": "2025-12-01",
-      "value": 0.932
-    },
-    {
-      "date": "2025-11-01",
-      "value": 1.004
-    },
-    {
-      "date": "2025-10-01",
-      "value": 0.997
-    },
-    {
-      "date": "2025-09-01",
-      "value": 1.042
-    },
-    {
-      "date": "2025-08-01",
-      "value": 1.017
-    },
-    {
-      "date": "2025-07-01",
-      "value": 1.033
-    },
-    {
-      "date": "2025-06-01",
-      "value": 1.052
-    },
-    {
-      "date": "2025-05-01",
-      "value": 1.054
-    },
-    {
-      "date": "2025-04-01",
-      "value": 1.058
     }
   ],
   "next_expected_release": "2026-06-12T00:00:00+00:00",
   "zscore": null,
   "level_trend_state": "Neutral",
-  "forecast": {
-    "model": "Naive",
-    "horizon": 3,
-    "values": [
-      {
-        "date": "2026-05-01",
-        "mean": 1.011,
-        "lo80": 0.9587,
-        "hi80": 1.0633,
-        "lo95": 0.9311,
-        "hi95": 1.0909
-      },
-      {
-        "date": "2026-06-01",
-        "mean": 1.011,
-        "lo80": 0.9371,
-        "hi80": 1.0849,
-        "lo95": 0.898,
-        "hi95": 1.124
-      },
-      {
-        "date": "2026-07-01",
-        "mean": 1.011,
-        "lo80": 0.9205,
-        "hi80": 1.1015,
-        "lo95": 0.8726,
-        "hi95": 1.1494
-      }
-    ],
-    "computed_at": "2026-05-27T23:08:37.597369+00:00"
-  }
+  "forecast": null
 }

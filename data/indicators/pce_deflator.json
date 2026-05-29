@@ -9,21 +9,25 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-05-27T23:06:38.052881+00:00",
-  "current_value": 130.344,
-  "previous_value": 129.484,
+  "last_updated": "2026-05-29T09:49:12.907256+00:00",
+  "current_value": 130.902,
+  "previous_value": 130.381,
   "data": [
     {
+      "date": "2026-04-01",
+      "value": 130.902
+    },
+    {
       "date": "2026-03-01",
-      "value": 130.344
+      "value": 130.381
     },
     {
       "date": "2026-02-01",
-      "value": 129.484
+      "value": 129.52
     },
     {
       "date": "2026-01-01",
-      "value": 129.0
+      "value": 129.002
     },
     {
       "date": "2025-12-01",
@@ -514,46 +518,46 @@
   "score": null,
   "next_expected_release": "2026-06-28T00:00:00+00:00",
   "zscore": {
-    "level_z": 0.352,
-    "level_mean": 0.029,
-    "level_std": 0.016955,
-    "level_value_used": 0.034961,
-    "trend_z": 0.934,
-    "trend_value_used": 0.00618,
+    "level_z": 0.508,
+    "level_mean": 0.029083,
+    "level_std": 0.0169,
+    "level_value_used": 0.037669,
+    "trend_z": 1.374,
+    "trend_value_used": 0.009085,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-05-28T23:04:44.022018+00:00"
+    "computed_at": "2026-05-29T09:49:42.948498+00:00"
   },
-  "level_trend_state": "Neutral",
+  "level_trend_state": "Strong",
   "forecast": {
     "model": "SeasonalNaive",
     "horizon": 3,
     "values": [
       {
-        "date": "2026-04-01",
-        "mean": 126.15,
-        "lo80": 121.3961,
-        "hi80": 130.9039,
-        "lo95": 118.8795,
-        "hi95": 133.4205
-      },
-      {
         "date": "2026-05-01",
         "mean": 126.38,
-        "lo80": 121.6261,
-        "hi80": 131.1339,
-        "lo95": 119.1095,
-        "hi95": 133.6505
+        "lo80": 121.6116,
+        "hi80": 131.1484,
+        "lo95": 119.0873,
+        "hi95": 133.6727
       },
       {
         "date": "2026-06-01",
         "mean": 126.743,
-        "lo80": 121.9891,
-        "hi80": 131.4969,
-        "lo95": 119.4725,
-        "hi95": 134.0135
+        "lo80": 121.9746,
+        "hi80": 131.5114,
+        "lo95": 119.4503,
+        "hi95": 134.0357
+      },
+      {
+        "date": "2026-07-01",
+        "mean": 126.96,
+        "lo80": 122.1916,
+        "hi80": 131.7284,
+        "lo95": 119.6673,
+        "hi95": 134.2527
       }
     ],
-    "computed_at": "2026-05-27T23:07:09.436438+00:00"
+    "computed_at": "2026-05-29T09:49:42.955768+00:00"
   }
 }
