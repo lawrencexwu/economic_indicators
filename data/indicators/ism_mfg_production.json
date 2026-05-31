@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-05-29T09:49:12.907256+00:00",
+  "last_updated": "2026-05-31T08:42:00.173337+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing Production subindex. Current output levels.",
     "why_it_matters": "Confirms new orders signal. Divergence from new orders = inventory build/draw.",
@@ -47,7 +47,7 @@
     "trend_value_used": -2.5,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-05-30T08:25:25.608115+00:00"
+    "computed_at": "2026-05-31T08:43:04.993729+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
