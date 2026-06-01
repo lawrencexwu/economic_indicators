@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-05-31T08:42:00.173337+00:00",
+  "last_updated": "2026-06-01T21:56:40.484764+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing Prices Paid subindex. Input cost pressures for manufacturers.",
     "why_it_matters": "Leads PPI by ~3 months. Watch the 60 threshold: above 60 historically signals producer price pressures spreading. High prices + expanding orders = margin squeeze for manufacturers.\n",
     "scoring_rule": "< 50 \u2192 +20 | 50-60 \u2192 0 | 60-70 \u2192 -20 | > 70 \u2192 -40. Phase 3."
   },
   "score": null,
-  "current_value": 84.6,
-  "previous_value": 78.3,
-  "release_date": "2026-04-01",
+  "current_value": 82.1,
+  "previous_value": 84.6,
+  "release_date": "2026-05-01",
   "data": [
+    {
+      "date": "2026-05-01",
+      "value": 82.1
+    },
     {
       "date": "2026-04-01",
       "value": 84.6
@@ -31,23 +35,19 @@
     {
       "date": "2026-02-01",
       "value": 70.5
-    },
-    {
-      "date": "2026-01-01",
-      "value": 59.0
     }
   ],
-  "next_expected_release": "2026-06-01T00:00:00+00:00",
+  "next_expected_release": "2026-07-01T00:00:00+00:00",
   "zscore": {
-    "level_z": 1.043,
-    "level_mean": 73.1,
-    "level_std": 11.028146,
-    "level_value_used": 84.6,
+    "level_z": 0.524,
+    "level_mean": 78.875,
+    "level_std": 6.154876,
+    "level_value_used": 82.1,
     "trend_z": 0.0,
-    "trend_value_used": 25.6,
+    "trend_value_used": 11.6,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-05-31T08:43:04.995209+00:00"
+    "computed_at": "2026-06-01T21:57:44.290145+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
