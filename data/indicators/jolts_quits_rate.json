@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-06-02T10:18:01.138028+00:00",
-  "current_value": 2.0,
-  "previous_value": 1.9,
+  "last_updated": "2026-06-03T22:56:28.864131+00:00",
+  "current_value": 1.9,
+  "previous_value": 2.0,
   "data": [
+    {
+      "date": "2026-04-01",
+      "value": 1.9
+    },
     {
       "date": "2026-03-01",
       "value": 2.0
@@ -514,46 +518,46 @@
   "score": null,
   "next_expected_release": null,
   "zscore": {
-    "level_z": -0.982,
-    "level_mean": 2.28,
-    "level_std": 0.285092,
-    "level_value_used": 2.0,
-    "trend_z": 0.01,
-    "trend_value_used": 0.0,
+    "level_z": -1.319,
+    "level_mean": 2.278333,
+    "level_std": 0.286733,
+    "level_value_used": 1.9,
+    "trend_z": -0.556,
+    "trend_value_used": -0.1,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-06-03T20:44:24.892579+00:00"
+    "computed_at": "2026-06-03T22:57:46.392251+00:00"
   },
-  "level_trend_state": "Neutral",
+  "level_trend_state": "Deteriorating",
   "forecast": {
     "model": "SeasonalNaive",
     "horizon": 3,
     "values": [
       {
-        "date": "2026-04-01",
-        "mean": 2.0,
-        "lo80": 1.5701,
-        "hi80": 2.4299,
-        "lo95": 1.3425,
-        "hi95": 2.6575
-      },
-      {
         "date": "2026-05-01",
         "mean": 2.1,
-        "lo80": 1.6701,
-        "hi80": 2.5299,
-        "lo95": 1.4425,
-        "hi95": 2.7575
+        "lo80": 1.6719,
+        "hi80": 2.5281,
+        "lo95": 1.4452,
+        "hi95": 2.7548
       },
       {
         "date": "2026-06-01",
         "mean": 2.1,
-        "lo80": 1.6701,
-        "hi80": 2.5299,
-        "lo95": 1.4425,
-        "hi95": 2.7575
+        "lo80": 1.6719,
+        "hi80": 2.5281,
+        "lo95": 1.4452,
+        "hi95": 2.7548
+      },
+      {
+        "date": "2026-07-01",
+        "mean": 2.0,
+        "lo80": 1.5719,
+        "hi80": 2.4281,
+        "lo95": 1.3452,
+        "hi95": 2.6548
       }
     ],
-    "computed_at": "2026-06-02T10:18:08.191641+00:00"
+    "computed_at": "2026-06-03T22:57:46.399774+00:00"
   }
 }
