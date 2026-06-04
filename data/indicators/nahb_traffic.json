@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-03T22:56:28.864131+00:00",
+  "last_updated": "2026-06-04T22:59:05.317734+00:00",
   "metadata": {
     "what_it_measures": "NAHB Housing Market Index sub-component: Traffic of Prospective Buyers. Diffusion index: >50 = more traffic than expected.\n",
     "why_it_matters": "Most leading component of NAHB HMI. Leads starts and permits. Baumohl Tier 2 (#18). Below 25 has historically preceded housing downturns.\n",
@@ -175,7 +175,7 @@
     "trend_value_used": 3.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-06-04T21:20:42.277281+00:00"
+    "computed_at": "2026-06-04T23:00:49.480091+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -207,6 +207,6 @@
         "hi95": 46.7274
       }
     ],
-    "computed_at": "2026-06-03T22:57:44.955730+00:00"
+    "computed_at": "2026-06-04T23:00:49.485825+00:00"
   }
 }

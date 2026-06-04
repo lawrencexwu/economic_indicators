@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "thousands",
   "source_type": "scraper",
-  "last_updated": "2026-06-03T22:56:28.864131+00:00",
+  "last_updated": "2026-06-04T22:59:05.317734+00:00",
   "metadata": {
     "what_it_measures": "Monthly planned layoff announcements compiled by Challenger, Gray & Christmas. Released 1st Thursday of each month.\n",
     "why_it_matters": "Forward-looking labor indicator. Surge in announced layoffs leads actual job losses by 1-3 months. Baumohl notes BLS Mass Layoffs discontinued 2013 \u2014 Challenger is the substitute.\n",
     "scoring_rule": "YoY change + level vs trailing average. Phase 3."
   },
   "score": null,
-  "current_value": 83.387,
-  "previous_value": 60.62,
-  "release_date": "2026-04-01",
+  "current_value": 97.006,
+  "previous_value": 83.387,
+  "release_date": "2026-05-01",
   "data": [
+    {
+      "date": "2026-05-01",
+      "value": 97.006
+    },
     {
       "date": "2026-04-01",
       "value": 83.387
@@ -127,15 +131,15 @@
   ],
   "next_expected_release": "2026-07-02T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.275,
-    "level_mean": 3.227534,
-    "level_std": 5.199666,
-    "level_value_used": 1.795314,
-    "trend_z": -0.298,
-    "trend_value_used": -2.598657,
+    "level_z": -0.271,
+    "level_mean": 3.130271,
+    "level_std": 5.024664,
+    "level_value_used": 1.768594,
+    "trend_z": -0.139,
+    "trend_value_used": -1.294574,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-06-04T21:20:42.286692+00:00"
+    "computed_at": "2026-06-04T23:01:35.298353+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -143,30 +147,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-05-01",
-        "mean": 35.038,
-        "lo80": -40.3896,
-        "hi80": 110.4656,
-        "lo95": -80.3185,
-        "hi95": 150.3945
-      },
-      {
         "date": "2026-06-01",
         "mean": 12.635,
-        "lo80": -62.7926,
-        "hi80": 88.0626,
-        "lo95": -102.7215,
-        "hi95": 127.9915
+        "lo80": -63.0649,
+        "hi80": 88.3349,
+        "lo95": -103.1381,
+        "hi95": 128.4081
       },
       {
         "date": "2026-07-01",
         "mean": 3.737,
-        "lo80": -71.6906,
-        "hi80": 79.1646,
-        "lo95": -111.6195,
-        "hi95": 119.0935
+        "lo80": -71.9629,
+        "hi80": 79.4369,
+        "lo95": -112.0361,
+        "hi95": 119.5101
+      },
+      {
+        "date": "2026-08-01",
+        "mean": 10.0,
+        "lo80": -65.6999,
+        "hi80": 85.6999,
+        "lo95": -105.7731,
+        "hi95": 125.7731
       }
     ],
-    "computed_at": "2026-06-03T22:58:20.963125+00:00"
+    "computed_at": "2026-06-04T23:01:35.306344+00:00"
   }
 }
