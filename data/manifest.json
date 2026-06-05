@@ -1,8 +1,8 @@
 {
-  "last_run": "2026-06-05T15:45:27.994474+00:00",
-  "n_succeeded": 11,
+  "last_run": "2026-06-05T17:43:52.833948+00:00",
+  "n_succeeded": 16,
   "n_failed": 1,
-  "n_skipped": 86,
+  "n_skipped": 81,
   "errors": [
     {
       "id": "aar_carloads",
@@ -11,49 +11,69 @@
     }
   ],
   "indicators": {
-    "yield_curve_10y3m": {
+    "core_pce": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
-    "yield_curve_10y2y": {
+    "ppi_final_demand": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
-    "continuing_claims": {
+    "empire_state_mfg": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
-    "breakeven_5y": {
+    "durable_goods_orders": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
-    "fed_funds_rate": {
+    "core_capex_orders": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
-    "total_loans": {
+    "business_inventories": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
+    },
+    "inventory_sales_ratio": {
+      "status": "ok",
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
+    },
+    "new_home_sales": {
+      "status": "ok",
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
+    },
+    "pce_real_durable": {
+      "status": "ok",
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
+    },
+    "net_interest_src": {
+      "status": "ok",
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
+    },
+    "federal_surplus_src": {
+      "status": "ok",
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-06-05T15:45:27.994474+00:00"
+      "last_updated": "2026-06-05T17:43:52.833948+00:00"
     }
   }
 }
