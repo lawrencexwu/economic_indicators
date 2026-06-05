@@ -516,7 +516,7 @@
     "scoring_rule": "MoM change vs trend. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-06-05T00:00:00+00:00",
+  "next_expected_release": "2026-07-03T00:00:00+00:00",
   "zscore": {
     "level_z": -0.26,
     "level_mean": 0.010724,
@@ -526,7 +526,7 @@
     "trend_value_used": -0.000463,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-06-04T23:00:32.199787+00:00"
+    "computed_at": "2026-06-05T09:41:12.861670+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {

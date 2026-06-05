@@ -1472,7 +1472,7 @@
     "scoring_rule": "< 0.20 \u2192 +40 | 0.20 to 0.35 \u2192 0 | 0.35 to 0.50 \u2192 -40 | 0.50 to 0.75 \u2192 -70 | > 0.75 \u2192 -100. Phase 3.\n"
   },
   "score": null,
-  "next_expected_release": "2026-06-05T00:00:00+00:00",
+  "next_expected_release": "2026-07-03T00:00:00+00:00",
   "zscore": {
     "level_z": -0.244,
     "level_mean": 0.415179,
@@ -1482,7 +1482,7 @@
     "trend_value_used": -0.17,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-06-04T23:06:43.452055+00:00"
+    "computed_at": "2026-06-05T09:41:12.823308+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {

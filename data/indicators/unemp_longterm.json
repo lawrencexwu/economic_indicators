@@ -512,7 +512,7 @@
     "scoring_rule": "Z-score vs 3-year trailing. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-06-05T00:00:00+00:00",
+  "next_expected_release": "2026-07-03T00:00:00+00:00",
   "zscore": {
     "level_z": 0.034,
     "level_mean": 0.128247,
@@ -522,7 +522,7 @@
     "trend_value_used": 0.056684,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-06-04T22:59:34.430087+00:00"
+    "computed_at": "2026-06-05T09:41:12.828066+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {

@@ -516,7 +516,7 @@
     "scoring_rule": "YoY % change. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-06-05T00:00:00+00:00",
+  "next_expected_release": "2026-07-03T00:00:00+00:00",
   "zscore": {
     "level_z": -0.057,
     "level_mean": -0.01072,
@@ -526,7 +526,7 @@
     "trend_value_used": 0.010437,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-06-04T23:00:38.679568+00:00"
+    "computed_at": "2026-06-05T09:41:12.862778+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {

@@ -516,7 +516,7 @@
     "scoring_rule": "YoY: < 3.0% \u2192 +60 | 3.0-3.5% \u2192 +20 | 3.5-4.0% \u2192 -20 | 4.0-5.0% \u2192 -50 | > 5.0% \u2192 -80. Phase 3.\n"
   },
   "score": null,
-  "next_expected_release": "2026-06-05T00:00:00+00:00",
+  "next_expected_release": "2026-07-03T00:00:00+00:00",
   "zscore": {
     "level_z": -0.434,
     "level_mean": 0.042412,
@@ -526,7 +526,7 @@
     "trend_value_used": -0.000682,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-06-04T23:06:43.474281+00:00"
+    "computed_at": "2026-06-05T09:41:12.839344+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
