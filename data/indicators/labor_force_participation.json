@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-06-04T22:59:05.317734+00:00",
+  "last_updated": "2026-06-06T08:30:30.356195+00:00",
   "current_value": 61.8,
-  "previous_value": 61.9,
+  "previous_value": 61.8,
   "data": [
+    {
+      "date": "2026-05-01",
+      "value": 61.8
+    },
     {
       "date": "2026-04-01",
       "value": 61.8
@@ -514,46 +518,46 @@
   "score": null,
   "next_expected_release": "2026-07-03T00:00:00+00:00",
   "zscore": {
-    "level_z": -1.198,
-    "level_mean": 62.465833,
-    "level_std": 0.555718,
+    "level_z": -1.178,
+    "level_mean": 62.456667,
+    "level_std": 0.557566,
     "level_value_used": 61.8,
-    "trend_z": -0.597,
-    "trend_value_used": -0.3,
+    "trend_z": -0.374,
+    "trend_value_used": -0.2,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-06-05T22:53:49.418890+00:00"
+    "computed_at": "2026-06-06T08:31:01.822175+00:00"
   },
-  "level_trend_state": "Deteriorating",
+  "level_trend_state": "Neutral",
   "forecast": {
     "model": "SeasonalNaive",
     "horizon": 3,
     "values": [
       {
-        "date": "2026-05-01",
-        "mean": 62.6,
-        "lo80": 61.7138,
-        "hi80": 63.4862,
-        "lo95": 61.2446,
-        "hi95": 63.9554
-      },
-      {
         "date": "2026-06-01",
         "mean": 62.4,
-        "lo80": 61.5138,
-        "hi80": 63.2862,
-        "lo95": 61.0446,
-        "hi95": 63.7554
+        "lo80": 61.5124,
+        "hi80": 63.2876,
+        "lo95": 61.0426,
+        "hi95": 63.7574
       },
       {
         "date": "2026-07-01",
         "mean": 62.3,
-        "lo80": 61.4138,
-        "hi80": 63.1862,
-        "lo95": 60.9446,
-        "hi95": 63.6554
+        "lo80": 61.4124,
+        "hi80": 63.1876,
+        "lo95": 60.9426,
+        "hi95": 63.6574
+      },
+      {
+        "date": "2026-08-01",
+        "mean": 62.2,
+        "lo80": 61.3124,
+        "hi80": 63.0876,
+        "lo95": 60.8426,
+        "hi95": 63.5574
       }
     ],
-    "computed_at": "2026-06-04T22:59:35.714076+00:00"
+    "computed_at": "2026-06-06T08:31:01.829333+00:00"
   }
 }
