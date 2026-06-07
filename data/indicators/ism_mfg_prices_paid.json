@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-06T08:30:30.356195+00:00",
+  "last_updated": "2026-06-07T08:52:39.989985+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing Prices Paid subindex. Input cost pressures for manufacturers.",
     "why_it_matters": "Leads PPI by ~3 months. Watch the 60 threshold: above 60 historically signals producer price pressures spreading. High prices + expanding orders = margin squeeze for manufacturers.\n",
@@ -47,7 +47,7 @@
     "trend_value_used": 11.6,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-06-06T08:31:35.686253+00:00"
+    "computed_at": "2026-06-07T08:53:48.989190+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
