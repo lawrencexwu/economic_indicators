@@ -8,7 +8,7 @@
   "weight": 3,
   "frequency": "weekly",
   "source_type": "derived",
-  "last_updated": "2026-06-08T23:05:22.589957+00:00",
+  "last_updated": "2026-06-09T09:37:13.921754+00:00",
   "current_value": 21.09,
   "previous_value": 21.07,
   "data": [
@@ -3249,7 +3249,7 @@
     "trend_value_used": 0.26,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-06-08T23:05:25.055025+00:00"
+    "computed_at": "2026-06-09T09:37:18.014465+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -3289,6 +3289,6 @@
         "hi95": 30.5902
       }
     ],
-    "computed_at": "2026-06-08T23:05:25.068070+00:00"
+    "computed_at": "2026-06-09T09:37:18.027631+00:00"
   }
 }
