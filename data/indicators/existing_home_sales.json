@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "millions_saar",
   "source_type": "fred",
-  "last_updated": "2026-06-09T15:48:15.567580+00:00",
+  "last_updated": "2026-06-10T16:29:38.373780+00:00",
   "current_value": 4170000.0,
   "previous_value": 4040000.0,
   "data": [
@@ -104,6 +104,6 @@
         "hi95": 4548405.0443
       }
     ],
-    "computed_at": "2026-06-09T15:49:39.461318+00:00"
+    "computed_at": "2026-06-10T16:31:23.164636+00:00"
   }
 }
