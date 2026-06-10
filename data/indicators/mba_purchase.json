@@ -9,17 +9,21 @@
   "frequency": "weekly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-10T09:54:03.197925+00:00",
+  "last_updated": "2026-06-10T23:16:52.972869+00:00",
   "metadata": {
     "what_it_measures": "MBA Weekly Mortgage Applications Survey \u2014 Purchase index. Mortgage Bankers Association. Weekly Wednesday 7:00 ET. Measures mortgage applications for home purchases.\n",
     "why_it_matters": "Real-time housing demand signal. Baumohl Tier 2. Leads housing starts by ~3-6 months. One of the few housing indicators available weekly.\n",
     "scoring_rule": "YoY change. Phase 3."
   },
   "score": null,
-  "current_value": 164.8,
-  "previous_value": 169.7,
-  "release_date": "2026-05-29",
+  "current_value": 176.9,
+  "previous_value": 164.8,
+  "release_date": "2026-06-05",
   "data": [
+    {
+      "date": "2026-06-05",
+      "value": 176.9
+    },
     {
       "date": "2026-05-29",
       "value": 164.8
@@ -44,5 +48,43 @@
   "next_expected_release": "2026-06-17T00:00:00+00:00",
   "zscore": null,
   "level_trend_state": "Neutral",
-  "forecast": null
+  "forecast": {
+    "model": "Naive",
+    "horizon": 4,
+    "values": [
+      {
+        "date": "2026-06-14",
+        "mean": 176.9,
+        "lo80": 167.5217,
+        "hi80": 186.2783,
+        "lo95": 162.5571,
+        "hi95": 191.2429
+      },
+      {
+        "date": "2026-06-21",
+        "mean": 176.9,
+        "lo80": 163.6371,
+        "hi80": 190.1629,
+        "lo95": 156.6161,
+        "hi95": 197.1839
+      },
+      {
+        "date": "2026-06-28",
+        "mean": 176.9,
+        "lo80": 160.6563,
+        "hi80": 193.1437,
+        "lo95": 152.0574,
+        "hi95": 201.7426
+      },
+      {
+        "date": "2026-07-05",
+        "mean": 176.9,
+        "lo80": 158.1434,
+        "hi80": 195.6566,
+        "lo95": 148.2143,
+        "hi95": 205.5857
+      }
+    ],
+    "computed_at": "2026-06-10T23:16:55.973759+00:00"
+  }
 }

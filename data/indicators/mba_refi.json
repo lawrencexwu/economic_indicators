@@ -9,17 +9,21 @@
   "frequency": "weekly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-10T09:54:03.197925+00:00",
+  "last_updated": "2026-06-10T23:16:52.972869+00:00",
   "metadata": {
     "what_it_measures": "MBA refinance applications index. Sensitive to mortgage rate changes.",
     "why_it_matters": "Refi activity affects household cash flow and consumer spending.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 736.2,
-  "previous_value": 753.7,
-  "release_date": "2026-05-29",
+  "current_value": 848.7,
+  "previous_value": 736.2,
+  "release_date": "2026-06-05",
   "data": [
+    {
+      "date": "2026-06-05",
+      "value": 848.7
+    },
     {
       "date": "2026-05-29",
       "value": 736.2
@@ -44,5 +48,43 @@
   "next_expected_release": "2026-06-17T00:00:00+00:00",
   "zscore": null,
   "level_trend_state": "Neutral",
-  "forecast": null
+  "forecast": {
+    "model": "Naive",
+    "horizon": 4,
+    "values": [
+      {
+        "date": "2026-06-14",
+        "mean": 848.7,
+        "lo80": 733.0165,
+        "hi80": 964.3835,
+        "lo95": 671.7774,
+        "hi95": 1025.6226
+      },
+      {
+        "date": "2026-06-21",
+        "mean": 848.7,
+        "lo80": 685.0989,
+        "hi80": 1012.3011,
+        "lo95": 598.4937,
+        "hi95": 1098.9063
+      },
+      {
+        "date": "2026-06-28",
+        "mean": 848.7,
+        "lo80": 648.3304,
+        "hi80": 1049.0696,
+        "lo95": 542.2611,
+        "hi95": 1155.1389
+      },
+      {
+        "date": "2026-07-05",
+        "mean": 848.7,
+        "lo80": 617.3331,
+        "hi80": 1080.0669,
+        "lo95": 494.8549,
+        "hi95": 1202.5451
+      }
+    ],
+    "computed_at": "2026-06-10T23:16:55.980645+00:00"
+  }
 }
