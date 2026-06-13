@@ -1,8 +1,8 @@
 {
-  "last_run": "2026-06-12T22:21:06.693569+00:00",
-  "n_succeeded": 12,
+  "last_run": "2026-06-13T08:54:13.109812+00:00",
+  "n_succeeded": 9,
   "n_failed": 1,
-  "n_skipped": 85,
+  "n_skipped": 88,
   "errors": [
     {
       "id": "aar_carloads",
@@ -11,53 +11,41 @@
     }
   ],
   "indicators": {
-    "claims_4wma": {
+    "yield_curve_10y3m": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
-    "initial_claims": {
+    "yield_curve_10y2y": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
-    "continuing_claims": {
+    "breakeven_5y": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
-    "ci_loans": {
+    "fed_funds_rate": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
-    },
-    "total_loans": {
-      "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
-    },
-    "mba_purchase": {
-      "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
-    },
-    "mba_refi": {
-      "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-06-12T22:21:06.693569+00:00"
+      "last_updated": "2026-06-13T08:54:13.109812+00:00"
     }
   }
 }
