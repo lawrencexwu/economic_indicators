@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "thousands",
   "source_type": "scraper",
-  "last_updated": "2026-06-12T20:57:50.466298+00:00",
+  "last_updated": "2026-06-14T09:29:12.444045+00:00",
   "metadata": {
     "what_it_measures": "Monthly planned layoff announcements compiled by Challenger, Gray & Christmas. Released 1st Thursday of each month.\n",
     "why_it_matters": "Forward-looking labor indicator. Surge in announced layoffs leads actual job losses by 1-3 months. Baumohl notes BLS Mass Layoffs discontinued 2013 \u2014 Challenger is the substitute.\n",
@@ -131,7 +131,7 @@
     "trend_value_used": 6.741667,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-06-13T08:54:15.569257+00:00"
+    "computed_at": "2026-06-14T09:30:45.157511+00:00"
   },
   "level_trend_state": "Strong",
   "forecast": {
@@ -163,6 +163,6 @@
         "hi95": 105.2637
       }
     ],
-    "computed_at": "2026-06-12T20:59:33.628180+00:00"
+    "computed_at": "2026-06-14T09:30:45.164717+00:00"
   }
 }
