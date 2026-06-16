@@ -9,20 +9,20 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-15T11:58:18.695301+00:00",
+  "last_updated": "2026-06-16T17:52:41.085193+00:00",
   "metadata": {
     "what_it_measures": "Cass Information Systems Freight Shipments Index. Monthly mid-month. Measures freight transaction volumes (rail, truck, intermodal).\n",
     "why_it_matters": "Real-time truckload demand. Declining Cass freight = goods economy contracting. Complement to AAR rail data.\n",
     "scoring_rule": "YoY % change. Phase 3."
   },
   "score": null,
-  "current_value": 1.014,
+  "current_value": 1.041,
   "previous_value": 1.011,
   "release_date": "2026-05-01",
   "data": [
     {
       "date": "2026-05-01",
-      "value": 1.014
+      "value": 1.041
     },
     {
       "date": "2026-04-01",
