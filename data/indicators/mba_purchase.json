@@ -9,7 +9,7 @@
   "frequency": "weekly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-15T11:58:18.695301+00:00",
+  "last_updated": "2026-06-16T11:05:51.570492+00:00",
   "metadata": {
     "what_it_measures": "MBA Weekly Mortgage Applications Survey \u2014 Purchase index. Mortgage Bankers Association. Weekly Wednesday 7:00 ET. Measures mortgage applications for home purchases.\n",
     "why_it_matters": "Real-time housing demand signal. Baumohl Tier 2. Leads housing starts by ~3-6 months. One of the few housing indicators available weekly.\n",
@@ -85,6 +85,6 @@
         "hi95": 205.5857
       }
     ],
-    "computed_at": "2026-06-15T11:59:12.606147+00:00"
+    "computed_at": "2026-06-16T11:05:56.291808+00:00"
   }
 }
