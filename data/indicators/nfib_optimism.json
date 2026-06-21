@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-20T08:50:43.540259+00:00",
+  "last_updated": "2026-06-21T09:45:20.808061+00:00",
   "metadata": {
     "what_it_measures": "National Federation of Independent Business monthly survey of small business conditions. 2nd Tuesday of month. Hiring plans subindex leads NFP.\n",
     "why_it_matters": "Small businesses employ ~50% of private sector workers. Hiring plans subindex leads BLS payrolls by ~2-3 months. Below 98 (long-run average) signals caution.\n",
