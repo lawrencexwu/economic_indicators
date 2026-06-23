@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-22T11:47:58.342264+00:00",
+  "last_updated": "2026-06-23T17:43:04.683491+00:00",
   "metadata": {
     "what_it_measures": "Richmond Fed 5th District manufacturing composite index.",
     "why_it_matters": "Part of 5-Fed composite ISM nowcast. Not on FRED free tier \u2014 scraped from richmondfed.org.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 5.333333492,
-  "previous_value": -2.333333254,
-  "release_date": "2026-05-01",
+  "current_value": 6.666666508,
+  "previous_value": 5.333333492,
+  "release_date": "2026-06-01",
   "data": [
+    {
+      "date": "2026-06-01",
+      "value": 6.666666508
+    },
     {
       "date": "2026-05-01",
       "value": 5.333333492
@@ -499,23 +503,19 @@
     {
       "date": "2016-06-01",
       "value": 1.0
-    },
-    {
-      "date": "2016-05-01",
-      "value": 8.666666985
     }
   ],
   "next_expected_release": "2026-07-28T00:00:00+00:00",
   "zscore": {
-    "level_z": 0.256,
-    "level_mean": 2.244444,
-    "level_std": 12.06253,
-    "level_value_used": 5.333333,
-    "trend_z": 1.31,
-    "trend_value_used": 13.0,
+    "level_z": 0.363,
+    "level_mean": 2.291667,
+    "level_std": 12.068708,
+    "level_value_used": 6.666667,
+    "trend_z": 1.189,
+    "trend_value_used": 12.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-06-23T09:33:42.805546+00:00"
+    "computed_at": "2026-06-23T17:43:35.091953+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -523,30 +523,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-06-01",
-        "mean": -11.0,
-        "lo80": -30.4534,
-        "hi80": 8.4534,
-        "lo95": -40.7514,
-        "hi95": 18.7514
-      },
-      {
         "date": "2026-07-01",
         "mean": -13.6667,
-        "lo80": -33.1201,
-        "hi80": 5.7867,
-        "lo95": -43.4181,
-        "hi95": 16.0847
+        "lo80": -33.2296,
+        "hi80": 5.8963,
+        "lo95": -43.5856,
+        "hi95": 16.2523
       },
       {
         "date": "2026-08-01",
         "mean": -11.6667,
-        "lo80": -31.1201,
-        "hi80": 7.7867,
-        "lo95": -41.4181,
-        "hi95": 18.0847
+        "lo80": -31.2296,
+        "hi80": 7.8963,
+        "lo95": -41.5856,
+        "hi95": 18.2523
+      },
+      {
+        "date": "2026-09-01",
+        "mean": -14.6667,
+        "lo80": -34.2296,
+        "hi80": 4.8963,
+        "lo95": -44.5856,
+        "hi95": 15.2523
       }
     ],
-    "computed_at": "2026-06-22T11:48:29.566128+00:00"
+    "computed_at": "2026-06-23T17:43:35.098366+00:00"
   }
 }
