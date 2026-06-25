@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-24T19:22:27.964439+00:00",
+  "last_updated": "2026-06-25T19:54:26.486040+00:00",
   "metadata": {
     "what_it_measures": "National Association of Home Builders / Wells Fargo Housing Market Index. Diffusion index: >50 = more builders view conditions as good than poor.\n",
     "why_it_matters": "Leads housing starts and permits. One of Baumohl's top leading indicators. NAHB Traffic subindex (prospective buyer traffic) is the most forward-looking component.\n",
@@ -179,7 +179,7 @@
     "trend_value_used": -3.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-06-25T17:59:14.606738+00:00"
+    "computed_at": "2026-06-25T19:54:50.203178+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -211,6 +211,6 @@
         "hi95": 68.0335
       }
     ],
-    "computed_at": "2026-06-24T19:22:54.702555+00:00"
+    "computed_at": "2026-06-25T19:54:50.210641+00:00"
   }
 }
