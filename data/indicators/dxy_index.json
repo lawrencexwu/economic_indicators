@@ -15442,7 +15442,7 @@
     "trend_value_used": 1.2305,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-06-29T20:45:30.112492+00:00"
+    "computed_at": "2026-06-29T22:01:43.354545+00:00"
   },
   "level_trend_state": "Recovering",
   "forecast": {
