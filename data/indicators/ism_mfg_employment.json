@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-06-30T17:44:34.626306+00:00",
+  "last_updated": "2026-07-01T17:44:40.815213+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing Employment subindex. Hiring/firing in manufacturing.",
     "why_it_matters": "Leads BLS manufacturing employment. Below 50 = manufacturing contraction in labor.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 48.6,
-  "previous_value": 46.4,
-  "release_date": "2026-05-01",
+  "current_value": 49.7,
+  "previous_value": 48.6,
+  "release_date": "2026-06-01",
   "data": [
+    {
+      "date": "2026-06-01",
+      "value": 49.7
+    },
     {
       "date": "2026-05-01",
       "value": 48.6
@@ -31,23 +35,19 @@
     {
       "date": "2026-03-01",
       "value": 48.7
-    },
-    {
-      "date": "2026-02-01",
-      "value": 48.8
     }
   ],
   "next_expected_release": "2026-08-03T00:00:00+00:00",
   "zscore": {
-    "level_z": 0.412,
-    "level_mean": 48.125,
-    "level_std": 1.152895,
-    "level_value_used": 48.6,
+    "level_z": 0.97,
+    "level_mean": 48.35,
+    "level_std": 1.391642,
+    "level_value_used": 49.7,
     "trend_z": 0.0,
-    "trend_value_used": -0.2,
+    "trend_value_used": 1.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-01T15:34:02.637501+00:00"
+    "computed_at": "2026-07-01T17:45:50.727368+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
