@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-07-01T17:44:40.815213+00:00",
-  "current_value": 4.3,
+  "last_updated": "2026-07-02T19:03:45.264751+00:00",
+  "current_value": 4.2,
   "previous_value": 4.3,
   "data": [
+    {
+      "date": "2026-06-01",
+      "value": 4.2
+    },
     {
       "date": "2026-05-01",
       "value": 4.3
@@ -518,15 +522,15 @@
   "score": null,
   "next_expected_release": "2026-07-03T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.151,
-    "level_mean": 4.560833,
-    "level_std": 1.723017,
-    "level_value_used": 4.3,
+    "level_z": -0.206,
+    "level_mean": 4.555833,
+    "level_std": 1.723188,
+    "level_value_used": 4.2,
     "trend_z": -0.049,
     "trend_value_used": -0.1,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-02T17:22:50.688353+00:00"
+    "computed_at": "2026-07-02T19:04:08.087354+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -534,30 +538,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-06-01",
-        "mean": 4.3,
-        "lo80": 1.1533,
-        "hi80": 7.4467,
-        "lo95": -0.5125,
-        "hi95": 9.1125
-      },
-      {
         "date": "2026-07-01",
         "mean": 4.1,
-        "lo80": 0.9533,
-        "hi80": 7.2467,
-        "lo95": -0.7125,
-        "hi95": 8.9125
+        "lo80": 0.9672,
+        "hi80": 7.2328,
+        "lo95": -0.6912,
+        "hi95": 8.8912
       },
       {
         "date": "2026-08-01",
         "mean": 4.3,
-        "lo80": 1.1533,
-        "hi80": 7.4467,
-        "lo95": -0.5125,
-        "hi95": 9.1125
+        "lo80": 1.1672,
+        "hi80": 7.4328,
+        "lo95": -0.4912,
+        "hi95": 9.0912
+      },
+      {
+        "date": "2026-09-01",
+        "mean": 4.3,
+        "lo80": 1.1672,
+        "hi80": 7.4328,
+        "lo95": -0.4912,
+        "hi95": 9.0912
       }
     ],
-    "computed_at": "2026-07-01T17:45:09.811114+00:00"
+    "computed_at": "2026-07-02T19:04:08.094935+00:00"
   }
 }
