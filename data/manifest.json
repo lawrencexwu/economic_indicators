@@ -1,8 +1,8 @@
 {
-  "last_run": "2026-07-02T15:02:05.641165+00:00",
-  "n_succeeded": 12,
+  "last_run": "2026-07-02T17:22:46.568270+00:00",
+  "n_succeeded": 9,
   "n_failed": 1,
-  "n_skipped": 85,
+  "n_skipped": 88,
   "errors": [
     {
       "id": "aar_carloads",
@@ -13,51 +13,39 @@
   "indicators": {
     "yield_curve_10y3m": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "yield_curve_10y2y": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
-    },
-    "eci": {
-      "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "breakeven_5y": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "fed_funds_rate": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
-    },
-    "gdp_real": {
-      "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
-    },
-    "gdp_growth_rate": {
-      "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-02T15:02:05.641165+00:00"
+      "last_updated": "2026-07-02T17:22:46.568270+00:00"
     }
   }
 }
