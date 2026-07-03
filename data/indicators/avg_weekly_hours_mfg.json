@@ -524,7 +524,7 @@
     "scoring_rule": "Z-score vs 36-month window."
   },
   "score": null,
-  "next_expected_release": "2026-07-03T00:00:00+00:00",
+  "next_expected_release": "2026-08-07T00:00:00+00:00",
   "zscore": {
     "level_z": 0.484,
     "level_mean": 41.304167,
@@ -534,7 +534,7 @@
     "trend_value_used": 0.1,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-02T22:53:14.049972+00:00"
+    "computed_at": "2026-07-03T08:57:49.836988+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {

@@ -520,7 +520,7 @@
     "scoring_rule": "Score depends on direction vs Fed mandate. Rising + above 4.5% = bullish (cuts coming). Rising from low = early warning. Phase 3.\n"
   },
   "score": null,
-  "next_expected_release": "2026-07-03T00:00:00+00:00",
+  "next_expected_release": "2026-08-07T00:00:00+00:00",
   "zscore": {
     "level_z": -0.206,
     "level_mean": 4.555833,
@@ -530,7 +530,7 @@
     "trend_value_used": -0.1,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-02T22:53:14.019722+00:00"
+    "computed_at": "2026-07-03T08:57:49.806768+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
