@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-07-05T08:48:44.793256+00:00",
+  "last_updated": "2026-07-06T20:46:06.665516+00:00",
   "metadata": {
     "what_it_measures": "ISM Non-Manufacturing PMI covering services sector. Monthly, 3rd business day 10:00 ET. >50 = expansion. Services >2/3 of US economy.\n",
     "why_it_matters": "Arguably should be Tier 1 today given services dominance. ISM Services holding above 52 while Mfg contracts = split economy (soft landing). ISM Services < 50 = broad-based contraction.\n",
     "scoring_rule": "Same bands as ISM Mfg. Phase 3."
   },
   "score": null,
-  "current_value": 54.5,
-  "previous_value": 53.6,
-  "release_date": "2026-05-01",
+  "current_value": 54.0,
+  "previous_value": 54.5,
+  "release_date": "2026-06-01",
   "data": [
+    {
+      "date": "2026-06-01",
+      "value": 54.0
+    },
     {
       "date": "2026-05-01",
       "value": 54.5
@@ -63,23 +67,19 @@
     {
       "date": "2025-07-01",
       "value": 50.5
-    },
-    {
-      "date": "2025-06-01",
-      "value": 50.8
     }
   ],
   "next_expected_release": "2026-08-05T00:00:00+00:00",
   "zscore": {
-    "level_z": 0.948,
-    "level_mean": 52.808333,
-    "level_std": 1.783999,
-    "level_value_used": 54.5,
-    "trend_z": -1.442,
-    "trend_value_used": -1.6,
+    "level_z": 0.546,
+    "level_mean": 53.075,
+    "level_std": 1.693369,
+    "level_value_used": 54.0,
+    "trend_z": -0.597,
+    "trend_value_used": 0.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-05T08:50:10.799779+00:00"
+    "computed_at": "2026-07-06T20:47:20.005012+00:00"
   },
   "level_trend_state": "Peaking",
   "forecast": {
@@ -87,30 +87,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-06-01",
-        "mean": 54.5,
-        "lo80": 52.7595,
-        "hi80": 56.2405,
-        "lo95": 51.8381,
-        "hi95": 57.1619
-      },
-      {
         "date": "2026-07-01",
-        "mean": 54.5,
-        "lo80": 52.0385,
-        "hi80": 56.9615,
-        "lo95": 50.7355,
-        "hi95": 58.2645
+        "mean": 54.0,
+        "lo80": 52.2526,
+        "hi80": 55.7474,
+        "lo95": 51.3276,
+        "hi95": 56.6724
       },
       {
         "date": "2026-08-01",
-        "mean": 54.5,
-        "lo80": 51.4853,
-        "hi80": 57.5147,
-        "lo95": 49.8894,
-        "hi95": 59.1106
+        "mean": 54.0,
+        "lo80": 51.5288,
+        "hi80": 56.4712,
+        "lo95": 50.2207,
+        "hi95": 57.7793
+      },
+      {
+        "date": "2026-09-01",
+        "mean": 54.0,
+        "lo80": 50.9735,
+        "hi80": 57.0265,
+        "lo95": 49.3713,
+        "hi95": 58.6287
       }
     ],
-    "computed_at": "2026-07-05T08:50:10.806700+00:00"
+    "computed_at": "2026-07-06T20:47:20.011980+00:00"
   }
 }
