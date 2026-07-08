@@ -9,17 +9,21 @@
   "frequency": "weekly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-07-07T22:48:07.005513+00:00",
+  "last_updated": "2026-07-08T15:04:27.471742+00:00",
   "metadata": {
     "what_it_measures": "MBA refinance applications index. Sensitive to mortgage rate changes.",
     "why_it_matters": "Refi activity affects household cash flow and consumer spending.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 828.7,
-  "previous_value": 834.2,
-  "release_date": "2026-06-26",
+  "current_value": 794.4,
+  "previous_value": 828.7,
+  "release_date": "2026-07-03",
   "data": [
+    {
+      "date": "2026-07-03",
+      "value": 794.4
+    },
     {
       "date": "2026-06-26",
       "value": 828.7
@@ -65,38 +69,38 @@
     "horizon": 4,
     "values": [
       {
-        "date": "2026-07-05",
-        "mean": 828.7,
-        "lo80": 734.9294,
-        "hi80": 922.4706,
-        "lo95": 685.2902,
-        "hi95": 972.1098
-      },
-      {
         "date": "2026-07-12",
-        "mean": 828.7,
-        "lo80": 696.0883,
-        "hi80": 961.3117,
-        "lo95": 625.888,
-        "hi95": 1031.512
+        "mean": 794.4,
+        "lo80": 704.7862,
+        "hi80": 884.0138,
+        "lo95": 657.3476,
+        "hi95": 931.4524
       },
       {
         "date": "2026-07-19",
-        "mean": 828.7,
-        "lo80": 666.2846,
-        "hi80": 991.1154,
-        "lo95": 580.307,
-        "hi95": 1077.093
+        "mean": 794.4,
+        "lo80": 667.667,
+        "hi80": 921.133,
+        "lo95": 600.5786,
+        "hi95": 988.2214
       },
       {
         "date": "2026-07-26",
-        "mean": 828.7,
-        "lo80": 641.1588,
-        "hi80": 1016.2412,
-        "lo95": 541.8805,
-        "hi95": 1115.5195
+        "mean": 794.4,
+        "lo80": 639.1844,
+        "hi80": 949.6156,
+        "lo95": 557.0182,
+        "hi95": 1031.7818
+      },
+      {
+        "date": "2026-08-02",
+        "mean": 794.4,
+        "lo80": 615.1725,
+        "hi80": 973.6275,
+        "lo95": 520.2951,
+        "hi95": 1068.5049
       }
     ],
-    "computed_at": "2026-07-07T22:49:02.951749+00:00"
+    "computed_at": "2026-07-08T15:04:32.431440+00:00"
   }
 }
