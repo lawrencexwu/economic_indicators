@@ -1,35 +1,340 @@
 {
-  "last_run": "2026-07-08T21:55:12.413994+00:00",
-  "n_succeeded": 5,
-  "n_failed": 1,
-  "n_skipped": 92,
+  "last_run": "2026-07-08T22:51:41.419012+00:00",
+  "n_succeeded": 80,
+  "n_failed": 2,
+  "n_skipped": 16,
   "errors": [
     {
       "id": "aar_carloads",
       "scraper": "aar",
       "error": "AAR: could not find YoY carload percent change in article text. The page structure may have changed \u2014 check aar.org/news/ manually."
+    },
+    {
+      "id": "cass_freight",
+      "scraper": "cass",
+      "error": "Cass: no data parsed from any monthly page"
     }
   ],
   "indicators": {
+    "yield_curve_10y3m": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "yield_curve_10y2y": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "cfnai_ma3": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "cfnai": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "sahm_rule": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "nahb_index": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ny_fed_recession_prob": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "unemp_longterm": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "cpi_core": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "cpi_headline": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "core_pce": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "pce_deflator": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ppi_final_demand": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ppi_crude_ex_food_energy": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "breakeven_5y": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "unemployment_rate": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "unemployment_u6": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "labor_force_participation": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "avg_hourly_earnings": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "fed_funds_rate": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "empire_state_mfg": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "philly_fed_mfg": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "richmond_fed_mfg": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "kc_fed_mfg": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "dallas_fed_mfg": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_mfg": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_mfg_new_orders": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_mfg_production": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_mfg_employment": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_mfg_customer_inv": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_mfg_prices_paid": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_services": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_services_new_orders": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ism_services_prices_paid": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "industrial_production": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "capacity_utilization": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "durable_goods_orders": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "core_capex_orders": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "durable_goods_ex_transport": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "factory_orders": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "business_inventories": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "inventory_sales_ratio": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "nfib_optimism": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "nfp_payrolls": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "nfp_temp_help": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "avg_weekly_hours_mfg": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "nfp_trucks": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "housing_permits_1f": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "housing_starts": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "housing_starts_1f": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "existing_home_sales": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "new_home_sales": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "case_shiller_hpi": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "nahb_traffic": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "retail_sales": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "pce": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "pce_real_durable": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "consumer_confidence": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "umich_sentiment": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "consumer_credit": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "jolts_openings": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "jolts_quits_rate": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "challenger_layoffs": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "gdp_nominal": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "federal_debt_src": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "net_interest_src": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "federal_receipts_src": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "federal_surplus_src": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "fed_balance_sheet": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "tic_foreign_holdings": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "dxy_index": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "hy_credit_spread": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "ig_credit_spread": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "nfci": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
+    "tips_real_yield": {
+      "status": "ok",
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
+    },
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-08T21:55:12.413994+00:00"
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-08T21:55:12.413994+00:00"
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-07-08T21:55:12.413994+00:00"
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-07-08T21:55:12.413994+00:00"
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-08T21:55:12.413994+00:00"
+      "last_updated": "2026-07-08T22:51:41.419012+00:00"
     }
   }
 }
