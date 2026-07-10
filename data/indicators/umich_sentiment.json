@@ -520,7 +520,7 @@
     "scoring_rule": "Z-score vs 3-year trailing + MoM momentum. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-07-10T00:00:00+00:00",
+  "next_expected_release": "2026-08-14T00:00:00+00:00",
   "zscore": {
     "level_z": -2.005,
     "level_mean": 78.010833,
@@ -530,7 +530,7 @@
     "trend_value_used": -11.8,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-09T23:02:42.325163+00:00"
+    "computed_at": "2026-07-10T09:29:40.973189+00:00"
   },
   "level_trend_state": "Deteriorating",
   "forecast": {
