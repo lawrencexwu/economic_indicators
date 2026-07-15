@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-07-14T14:31:18.608404+00:00",
-  "current_value": 5.7,
-  "previous_value": 19.6,
+  "last_updated": "2026-07-15T14:30:58.103423+00:00",
+  "current_value": 15.6,
+  "previous_value": 5.7,
   "data": [
+    {
+      "date": "2026-07-01",
+      "value": 15.6
+    },
     {
       "date": "2026-06-01",
       "value": 5.7
@@ -526,15 +530,15 @@
   "score": null,
   "next_expected_release": "2026-08-15T00:00:00+00:00",
   "zscore": {
-    "level_z": 0.111,
-    "level_mean": 3.883333,
-    "level_std": 16.321324,
-    "level_value_used": 5.7,
-    "trend_z": 0.323,
-    "trend_value_used": 5.9,
+    "level_z": 0.708,
+    "level_mean": 4.024167,
+    "level_std": 16.349111,
+    "level_value_used": 15.6,
+    "trend_z": 0.242,
+    "trend_value_used": 4.6,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-15T08:02:56.114545+00:00"
+    "computed_at": "2026-07-15T14:32:57.104594+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -542,30 +546,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-07-01",
-        "mean": 3.1,
-        "lo80": -26.97,
-        "hi80": 33.17,
-        "lo95": -42.8881,
-        "hi95": 49.0881
-      },
-      {
         "date": "2026-08-01",
         "mean": 9.1,
-        "lo80": -20.97,
-        "hi80": 39.17,
-        "lo95": -36.8881,
-        "hi95": 55.0881
+        "lo80": -20.8762,
+        "hi80": 39.0762,
+        "lo95": -36.7447,
+        "hi95": 54.9447
       },
       {
         "date": "2026-09-01",
         "mean": -7.0,
-        "lo80": -37.07,
-        "hi80": 23.07,
-        "lo95": -52.9881,
-        "hi95": 38.9881
+        "lo80": -36.9762,
+        "hi80": 22.9762,
+        "lo95": -52.8447,
+        "hi95": 38.8447
+      },
+      {
+        "date": "2026-10-01",
+        "mean": 7.8,
+        "lo80": -22.1762,
+        "hi80": 37.7762,
+        "lo95": -38.0447,
+        "hi95": 53.6447
       }
     ],
-    "computed_at": "2026-07-14T14:32:09.730874+00:00"
+    "computed_at": "2026-07-15T14:32:57.111435+00:00"
   }
 }

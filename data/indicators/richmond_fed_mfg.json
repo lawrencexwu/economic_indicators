@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-07-14T14:31:18.608404+00:00",
+  "last_updated": "2026-07-15T14:30:58.103423+00:00",
   "metadata": {
     "what_it_measures": "Richmond Fed 5th District manufacturing composite index.",
     "why_it_matters": "Part of 5-Fed composite ISM nowcast. Not on FRED free tier \u2014 scraped from richmondfed.org.",
@@ -515,7 +515,7 @@
     "trend_value_used": 12.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-15T08:02:56.116774+00:00"
+    "computed_at": "2026-07-15T14:32:57.675710+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -547,6 +547,6 @@
         "hi95": 15.2523
       }
     ],
-    "computed_at": "2026-07-14T14:32:10.534623+00:00"
+    "computed_at": "2026-07-15T14:32:57.682946+00:00"
   }
 }
