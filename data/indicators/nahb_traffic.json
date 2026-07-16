@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-07-15T14:30:58.103423+00:00",
+  "last_updated": "2026-07-16T16:07:37.351519+00:00",
   "metadata": {
     "what_it_measures": "NAHB Housing Market Index sub-component: Traffic of Prospective Buyers. Diffusion index: >50 = more traffic than expected.\n",
     "why_it_matters": "Most leading component of NAHB HMI. Leads starts and permits. Baumohl Tier 2 (#18). Below 25 has historically preceded housing downturns.\n",
     "scoring_rule": "> 50 \u2192 +60 | 40-50 \u2192 +20 | 30-40 \u2192 -20 | 20-30 \u2192 -50 | < 20 \u2192 -80. Phase 3."
   },
   "score": null,
-  "current_value": 25.0,
+  "current_value": 23.0,
   "previous_value": 25.0,
-  "release_date": "2026-06-01",
+  "release_date": "2026-07-01",
   "data": [
+    {
+      "date": "2026-07-01",
+      "value": 23.0
+    },
     {
       "date": "2026-06-01",
       "value": 25.0
@@ -171,15 +175,15 @@
   ],
   "next_expected_release": "2026-08-19T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.502,
-    "level_mean": 31.108108,
-    "level_std": 12.158179,
-    "level_value_used": 25.0,
-    "trend_z": 0.259,
-    "trend_value_used": 0.0,
+    "level_z": -0.654,
+    "level_mean": 30.894737,
+    "level_std": 12.064667,
+    "level_value_used": 23.0,
+    "trend_z": 0.33,
+    "trend_value_used": 1.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-16T08:07:32.070534+00:00"
+    "computed_at": "2026-07-16T16:09:09.530122+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -187,30 +191,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-07-01",
-        "mean": 21.0,
-        "lo80": 3.877,
-        "hi80": 38.123,
-        "lo95": -5.1873,
-        "hi95": 47.1873
-      },
-      {
         "date": "2026-08-01",
         "mean": 20.0,
-        "lo80": 2.877,
-        "hi80": 37.123,
-        "lo95": -6.1873,
-        "hi95": 46.1873
+        "lo80": 3.202,
+        "hi80": 36.798,
+        "lo95": -5.6903,
+        "hi95": 45.6903
       },
       {
         "date": "2026-09-01",
         "mean": 22.0,
-        "lo80": 4.877,
-        "hi80": 39.123,
-        "lo95": -4.1873,
-        "hi95": 48.1873
+        "lo80": 5.202,
+        "hi80": 38.798,
+        "lo95": -3.6903,
+        "hi95": 47.6903
+      },
+      {
+        "date": "2026-10-01",
+        "mean": 21.0,
+        "lo80": 4.202,
+        "hi80": 37.798,
+        "lo95": -4.6903,
+        "hi95": 46.6903
       }
     ],
-    "computed_at": "2026-07-15T14:34:41.994300+00:00"
+    "computed_at": "2026-07-16T16:09:09.535236+00:00"
   }
 }

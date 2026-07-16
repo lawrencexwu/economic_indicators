@@ -9,13 +9,17 @@
   "frequency": "monthly",
   "unit": "ratio",
   "source_type": "fred",
-  "last_updated": "2026-07-15T14:30:58.103423+00:00",
-  "current_value": 1.31,
-  "previous_value": 1.32,
+  "last_updated": "2026-07-16T16:07:37.351519+00:00",
+  "current_value": 1.28,
+  "previous_value": 1.3,
   "data": [
     {
+      "date": "2026-05-01",
+      "value": 1.28
+    },
+    {
       "date": "2026-04-01",
-      "value": 1.31
+      "value": 1.3
     },
     {
       "date": "2026-03-01",
@@ -518,15 +522,15 @@
   "score": null,
   "next_expected_release": null,
   "zscore": {
-    "level_z": -1.244,
-    "level_mean": 1.382,
-    "level_std": 0.057899,
-    "level_value_used": 1.31,
-    "trend_z": -0.674,
-    "trend_value_used": -0.04,
+    "level_z": -1.718,
+    "level_mean": 1.380667,
+    "level_std": 0.058579,
+    "level_value_used": 1.28,
+    "trend_z": -0.842,
+    "trend_value_used": -0.05,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-16T08:07:32.059397+00:00"
+    "computed_at": "2026-07-16T16:09:02.908955+00:00"
   },
   "level_trend_state": "Deteriorating",
   "forecast": {
@@ -534,30 +538,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-05-01",
-        "mean": 1.39,
-        "lo80": 1.2766,
-        "hi80": 1.5034,
-        "lo95": 1.2166,
-        "hi95": 1.5634
-      },
-      {
         "date": "2026-06-01",
         "mean": 1.38,
-        "lo80": 1.2666,
-        "hi80": 1.4934,
-        "lo95": 1.2066,
-        "hi95": 1.5534
+        "lo80": 1.2662,
+        "hi80": 1.4938,
+        "lo95": 1.206,
+        "hi95": 1.554
       },
       {
         "date": "2026-07-01",
         "mean": 1.37,
-        "lo80": 1.2566,
-        "hi80": 1.4834,
-        "lo95": 1.1966,
-        "hi95": 1.5434
+        "lo80": 1.2562,
+        "hi80": 1.4838,
+        "lo95": 1.196,
+        "hi95": 1.544
+      },
+      {
+        "date": "2026-08-01",
+        "mean": 1.37,
+        "lo80": 1.2562,
+        "hi80": 1.4838,
+        "lo95": 1.196,
+        "hi95": 1.544
       }
     ],
-    "computed_at": "2026-07-15T14:33:57.635620+00:00"
+    "computed_at": "2026-07-16T16:09:02.914536+00:00"
   }
 }
