@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-07-16T16:07:37.351519+00:00",
+  "last_updated": "2026-07-17T17:53:59.482453+00:00",
   "metadata": {
     "what_it_measures": "ISM Services New Orders subindex. Forward-looking services demand.",
     "why_it_matters": "Leading component for services sector. Divergence from headline signals turning point.",
@@ -47,7 +47,7 @@
     "trend_value_used": -5.5,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-17T16:05:31.871726+00:00"
+    "computed_at": "2026-07-17T17:55:09.533036+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
