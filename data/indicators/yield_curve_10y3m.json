@@ -9,7 +9,7 @@
   "frequency": "daily",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-07-22T14:51:18.587346+00:00",
+  "last_updated": "2026-07-22T17:58:57.970946+00:00",
   "current_value": 0.76,
   "previous_value": 0.74,
   "data": [
@@ -30602,7 +30602,7 @@
     "trend_value_used": 0.14,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-07-22T16:20:26.914882+00:00"
+    "computed_at": "2026-07-22T17:58:58.818823+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -30650,6 +30650,6 @@
         "hi95": 1.0399
       }
     ],
-    "computed_at": "2026-07-22T14:51:19.526298+00:00"
+    "computed_at": "2026-07-22T17:58:58.891011+00:00"
   }
 }
