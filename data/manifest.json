@@ -1,8 +1,8 @@
 {
-  "last_run": "2026-07-23T20:04:49.064637+00:00",
-  "n_succeeded": 14,
+  "last_run": "2026-07-23T21:51:58.660145+00:00",
+  "n_succeeded": 9,
   "n_failed": 1,
-  "n_skipped": 83,
+  "n_skipped": 88,
   "errors": [
     {
       "id": "aar_carloads",
@@ -11,61 +11,41 @@
     }
   ],
   "indicators": {
-    "ism_mfg": {
+    "yield_curve_10y3m": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
-    "ism_mfg_new_orders": {
+    "yield_curve_10y2y": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
-    "ism_mfg_production": {
+    "breakeven_5y": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
-    "ism_mfg_employment": {
+    "fed_funds_rate": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
-    },
-    "ism_mfg_customer_inv": {
-      "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
-    },
-    "ism_mfg_prices_paid": {
-      "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
-    },
-    "ism_services": {
-      "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
-    },
-    "ism_services_new_orders": {
-      "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
-    },
-    "ism_services_prices_paid": {
-      "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-07-23T20:04:49.064637+00:00"
+      "last_updated": "2026-07-23T21:51:58.660145+00:00"
     }
   }
 }
