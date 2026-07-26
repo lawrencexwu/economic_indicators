@@ -9,68 +9,20 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-07-24T18:08:11.574721+00:00",
+  "last_updated": "2026-07-26T08:21:51.956389+00:00",
   "metadata": {
     "what_it_measures": "National Association of Home Builders / Wells Fargo Housing Market Index. Diffusion index: >50 = more builders view conditions as good than poor.\n",
     "why_it_matters": "Leads housing starts and permits. One of Baumohl's top leading indicators. NAHB Traffic subindex (prospective buyer traffic) is the most forward-looking component.\n",
     "scoring_rule": "> 60 \u2192 +60 | 50-60 \u2192 +30 | 40-50 \u2192 0 | 30-40 \u2192 -30 | 20-30 \u2192 -60 | < 20 \u2192 -90. Phase 3.\n"
   },
   "score": null,
-  "current_value": 34.0,
-  "previous_value": 35.0,
-  "release_date": "2026-07-01",
+  "current_value": 33.0,
+  "previous_value": 40.0,
+  "release_date": "2025-07-01",
   "data": [
-    {
-      "date": "2026-07-01",
-      "value": 34.0
-    },
-    {
-      "date": "2026-06-01",
-      "value": 35.0
-    },
-    {
-      "date": "2026-05-01",
-      "value": 37.0
-    },
-    {
-      "date": "2026-04-01",
-      "value": 34.0
-    },
-    {
-      "date": "2026-03-01",
-      "value": 38.0
-    },
-    {
-      "date": "2026-02-01",
-      "value": 36.0
-    },
-    {
-      "date": "2026-01-01",
-      "value": 37.0
-    },
-    {
-      "date": "2025-12-01",
-      "value": 39.0
-    },
-    {
-      "date": "2025-11-01",
-      "value": 38.0
-    },
-    {
-      "date": "2025-09-01",
-      "value": 32.0
-    },
-    {
-      "date": "2025-08-01",
-      "value": 32.0
-    },
     {
       "date": "2025-07-01",
       "value": 33.0
-    },
-    {
-      "date": "2025-06-01",
-      "value": 32.0
     },
     {
       "date": "2025-04-01",
@@ -175,15 +127,15 @@
   ],
   "next_expected_release": "2026-08-19T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.794,
-    "level_mean": 45.947368,
-    "level_std": 15.047577,
-    "level_value_used": 34.0,
-    "trend_z": 0.304,
-    "trend_value_used": 0.0,
+    "level_z": -1.121,
+    "level_mean": 50.846154,
+    "level_std": 15.914,
+    "level_value_used": 33.0,
+    "trend_z": -0.464,
+    "trend_value_used": -13.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-25T08:01:54.114619+00:00"
+    "computed_at": "2026-07-26T08:22:16.953733+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -191,30 +143,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-08-01",
-        "mean": 33.0,
-        "lo80": 9.891,
-        "hi80": 56.109,
-        "lo95": -2.3421,
-        "hi95": 68.3421
+        "date": "2025-08-01",
+        "mean": 51.0,
+        "lo80": 21.5104,
+        "hi80": 80.4896,
+        "lo95": 5.8995,
+        "hi95": 96.1005
       },
       {
-        "date": "2026-09-01",
-        "mean": 32.0,
-        "lo80": 8.891,
-        "hi80": 55.109,
-        "lo95": -3.3421,
-        "hi95": 67.3421
+        "date": "2025-09-01",
+        "mean": 45.0,
+        "lo80": 15.5104,
+        "hi80": 74.4896,
+        "lo95": -0.1005,
+        "hi95": 90.1005
       },
       {
-        "date": "2026-10-01",
-        "mean": 32.0,
-        "lo80": 8.891,
-        "hi80": 55.109,
-        "lo95": -3.3421,
-        "hi95": 67.3421
+        "date": "2025-10-01",
+        "mean": 43.0,
+        "lo80": 13.5104,
+        "hi80": 72.4896,
+        "lo95": -2.1005,
+        "hi95": 88.1005
       }
     ],
-    "computed_at": "2026-07-24T18:08:36.875799+00:00"
+    "computed_at": "2026-07-26T08:22:16.961805+00:00"
   }
 }
