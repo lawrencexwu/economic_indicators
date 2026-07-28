@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-07-27T09:43:59.503953+00:00",
+  "last_updated": "2026-07-28T15:08:14.490336+00:00",
   "metadata": {
     "what_it_measures": "Dallas Fed 11th District manufacturing composite (General Business Activity index).",
     "why_it_matters": "Part of 5-Fed composite ISM nowcast. Released last Monday of month \u2014 often the last regional Fed report before ISM.",
     "scoring_rule": "Z-score vs trailing 36 months, higher is good."
   },
   "score": null,
-  "current_value": 0.0,
-  "previous_value": 0.4,
-  "release_date": "2026-06-01",
+  "current_value": 1.3,
+  "previous_value": 0.0,
+  "release_date": "2026-07-01",
   "data": [
+    {
+      "date": "2026-07-01",
+      "value": 1.3
+    },
     {
       "date": "2026-06-01",
       "value": 0.0
@@ -1083,15 +1087,15 @@
   ],
   "next_expected_release": "2026-08-31T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.03,
-    "level_mean": 0.61,
-    "level_std": 20.148547,
-    "level_value_used": 0.0,
-    "trend_z": -0.008,
-    "trend_value_used": 0.2,
+    "level_z": 0.034,
+    "level_mean": 0.6175,
+    "level_std": 20.148635,
+    "level_value_used": 1.3,
+    "trend_z": 0.17,
+    "trend_value_used": 3.6,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-28T08:28:28.400193+00:00"
+    "computed_at": "2026-07-28T15:09:13.841393+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -1099,30 +1103,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-07-01",
-        "mean": 1.2,
-        "lo80": -31.7575,
-        "hi80": 34.1575,
-        "lo95": -49.2042,
-        "hi95": 51.6042
-      },
-      {
         "date": "2026-08-01",
         "mean": -1.7,
-        "lo80": -34.6575,
-        "hi80": 31.2575,
-        "lo95": -52.1042,
-        "hi95": 48.7042
+        "lo80": -34.5926,
+        "hi80": 31.1926,
+        "lo95": -52.0049,
+        "hi95": 48.6049
       },
       {
         "date": "2026-09-01",
         "mean": -8.8,
-        "lo80": -41.7575,
-        "hi80": 24.1575,
-        "lo95": -59.2042,
-        "hi95": 41.6042
+        "lo80": -41.6926,
+        "hi80": 24.0926,
+        "lo95": -59.1049,
+        "hi95": 41.5049
+      },
+      {
+        "date": "2026-10-01",
+        "mean": -4.8,
+        "lo80": -37.6926,
+        "hi80": 28.0926,
+        "lo95": -55.1049,
+        "hi95": 45.5049
       }
     ],
-    "computed_at": "2026-07-27T09:44:56.030777+00:00"
+    "computed_at": "2026-07-28T15:09:13.847642+00:00"
   }
 }
