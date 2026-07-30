@@ -2224,7 +2224,7 @@
     "scoring_rule": "Use 4wMA series (IC4WSA) for primary score. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-07-30T00:00:00+00:00",
+  "next_expected_release": "2026-08-06T00:00:00+00:00",
   "zscore": {
     "level_z": -0.316,
     "level_mean": 356566.243194,
@@ -2234,7 +2234,7 @@
     "trend_value_used": -28000.0,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-07-29T22:44:40.434061+00:00"
+    "computed_at": "2026-07-30T08:20:20.417962+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
