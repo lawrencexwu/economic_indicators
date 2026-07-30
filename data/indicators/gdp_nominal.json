@@ -9,10 +9,14 @@
   "frequency": "quarterly",
   "unit": "billions",
   "source_type": "fred",
-  "last_updated": "2026-07-29T15:19:32.854283+00:00",
-  "current_value": 31865.721,
-  "previous_value": 31422.526,
+  "last_updated": "2026-07-30T18:06:39.699255+00:00",
+  "current_value": 32475.21,
+  "previous_value": 31865.721,
   "data": [
+    {
+      "date": "2026-04-01",
+      "value": 32475.21
+    },
     {
       "date": "2026-01-01",
       "value": 31865.721
@@ -506,38 +510,38 @@
   "score": null,
   "next_expected_release": null,
   "zscore": {
-    "level_z": 1.799,
-    "level_mean": 24297.56295,
-    "level_std": 4207.963441,
-    "level_value_used": 31865.721,
-    "trend_z": 0.244,
-    "trend_value_used": 443.195,
+    "level_z": 1.821,
+    "level_mean": 24641.65065,
+    "level_std": 4301.185023,
+    "level_value_used": 32475.21,
+    "trend_z": 0.59,
+    "trend_value_used": 609.489,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-07-30T14:57:48.441818+00:00"
+    "computed_at": "2026-07-30T18:13:03.076684+00:00"
   },
-  "level_trend_state": "Neutral",
+  "level_trend_state": "Strong",
   "forecast": {
     "model": "SeasonalNaive",
     "horizon": 2,
     "values": [
       {
-        "date": "2026-04-01",
-        "mean": 30485.729,
-        "lo80": 29178.6229,
-        "hi80": 31792.8351,
-        "lo95": 28486.6827,
-        "hi95": 32484.7753
-      },
-      {
         "date": "2026-07-01",
         "mean": 31098.027,
-        "lo80": 29790.9209,
-        "hi80": 32405.1331,
-        "lo95": 29098.9807,
-        "hi95": 33097.0733
+        "lo80": 29775.4776,
+        "hi80": 32420.5764,
+        "lo95": 29075.3622,
+        "hi95": 33120.6918
+      },
+      {
+        "date": "2026-10-01",
+        "mean": 31422.526,
+        "lo80": 30099.9766,
+        "hi80": 32745.0754,
+        "lo95": 29399.8612,
+        "hi95": 33445.1908
       }
     ],
-    "computed_at": "2026-07-29T15:27:32.925583+00:00"
+    "computed_at": "2026-07-30T18:13:03.083325+00:00"
   }
 }
