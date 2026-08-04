@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-08-03T09:36:52.176558+00:00",
+  "last_updated": "2026-08-04T17:25:45.889626+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing Customer Inventories subindex.",
     "why_it_matters": "Inverted signal: low customer inventories (<45) with rising new orders is the most bullish ISM configuration \u2014 customers need to restock. This is how ISM cycle bottoms look.\n",
     "scoring_rule": "Inverted: < 45 \u2192 +30 | 45-50 \u2192 +10 | 50-55 \u2192 -10 | > 55 \u2192 -30. Phase 3."
   },
   "score": null,
-  "current_value": 42.3,
-  "previous_value": 42.7,
-  "release_date": "2026-06-01",
+  "current_value": 40.7,
+  "previous_value": 42.3,
+  "release_date": "2026-07-01",
   "data": [
+    {
+      "date": "2026-07-01",
+      "value": 40.7
+    },
     {
       "date": "2026-06-01",
       "value": 42.3
@@ -31,23 +35,19 @@
     {
       "date": "2026-04-01",
       "value": 39.1
-    },
-    {
-      "date": "2026-03-01",
-      "value": 40.1
     }
   ],
   "next_expected_release": "2026-09-01T00:00:00+00:00",
   "zscore": {
-    "level_z": 0.722,
-    "level_mean": 41.05,
-    "level_std": 1.731088,
-    "level_value_used": 42.3,
+    "level_z": -0.304,
+    "level_mean": 41.2,
+    "level_std": 1.645195,
+    "level_value_used": 40.7,
     "trend_z": 0.0,
-    "trend_value_used": 2.2,
+    "trend_value_used": 1.6,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-04T08:31:49.399429+00:00"
+    "computed_at": "2026-08-04T17:26:55.985488+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
