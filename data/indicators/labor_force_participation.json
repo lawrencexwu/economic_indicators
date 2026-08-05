@@ -530,7 +530,7 @@
     "trend_value_used": -0.4,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-05T08:31:20.596921+00:00"
+    "computed_at": "2026-08-05T15:05:27.090898+00:00"
   },
   "level_trend_state": "Deteriorating",
   "forecast": {
