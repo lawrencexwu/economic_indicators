@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-08-04T17:25:45.889626+00:00",
+  "last_updated": "2026-08-05T20:51:37.263975+00:00",
   "metadata": {
     "what_it_measures": "ISM Services Prices Paid subindex. Input cost pressures in services.",
     "why_it_matters": "Services inflation is wage-driven. Watch 60 threshold \u2014 above it signals persistent services CPI.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 67.7,
-  "previous_value": 71.3,
-  "release_date": "2026-06-01",
+  "current_value": 70.3,
+  "previous_value": 67.7,
+  "release_date": "2026-07-01",
   "data": [
+    {
+      "date": "2026-07-01",
+      "value": 70.3
+    },
     {
       "date": "2026-06-01",
       "value": 67.7
@@ -31,23 +35,19 @@
     {
       "date": "2026-04-01",
       "value": 70.7
-    },
-    {
-      "date": "2026-03-01",
-      "value": 70.7
     }
   ],
   "next_expected_release": "2026-09-03T00:00:00+00:00",
   "zscore": {
-    "level_z": -1.477,
-    "level_mean": 70.1,
-    "level_std": 1.624808,
-    "level_value_used": 67.7,
+    "level_z": 0.189,
+    "level_mean": 70.0,
+    "level_std": 1.587451,
+    "level_value_used": 70.3,
     "trend_z": 0.0,
-    "trend_value_used": -3.0,
+    "trend_value_used": -0.4,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-05T17:15:56.292352+00:00"
+    "computed_at": "2026-08-05T20:52:50.575867+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null

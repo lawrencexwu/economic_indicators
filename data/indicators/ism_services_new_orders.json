@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-08-04T17:25:45.889626+00:00",
+  "last_updated": "2026-08-05T20:51:37.263975+00:00",
   "metadata": {
     "what_it_measures": "ISM Services New Orders subindex. Forward-looking services demand.",
     "why_it_matters": "Leading component for services sector. Divergence from headline signals turning point.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 55.1,
-  "previous_value": 57.3,
-  "release_date": "2026-06-01",
+  "current_value": 57.2,
+  "previous_value": 55.1,
+  "release_date": "2026-07-01",
   "data": [
+    {
+      "date": "2026-07-01",
+      "value": 57.2
+    },
     {
       "date": "2026-06-01",
       "value": 55.1
@@ -31,23 +35,19 @@
     {
       "date": "2026-04-01",
       "value": 53.5
-    },
-    {
-      "date": "2026-03-01",
-      "value": 60.6
     }
   ],
   "next_expected_release": "2026-09-03T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.496,
-    "level_mean": 56.625,
-    "level_std": 3.07395,
-    "level_value_used": 55.1,
+    "level_z": 0.781,
+    "level_mean": 55.775,
+    "level_std": 1.8246,
+    "level_value_used": 57.2,
     "trend_z": 0.0,
-    "trend_value_used": -5.5,
+    "trend_value_used": 3.7,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-05T17:15:56.292036+00:00"
+    "computed_at": "2026-08-05T20:52:50.575357+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
