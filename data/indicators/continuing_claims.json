@@ -2224,7 +2224,7 @@
     "scoring_rule": "Z-score with momentum, similar to IC4WSA. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-08-06T00:00:00+00:00",
+  "next_expected_release": "2026-08-13T00:00:00+00:00",
   "zscore": {
     "level_z": -0.303,
     "level_mean": 2788784.615385,
@@ -2234,7 +2234,7 @@
     "trend_value_used": 6000.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-05T22:02:50.511179+00:00"
+    "computed_at": "2026-08-06T08:40:40.620311+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
