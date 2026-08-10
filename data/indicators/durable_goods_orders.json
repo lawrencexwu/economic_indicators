@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "millions",
   "source_type": "fred",
-  "last_updated": "2026-08-09T06:50:49.985033+00:00",
+  "last_updated": "2026-08-10T07:25:28.008419+00:00",
   "current_value": 335418.0,
   "previous_value": 333842.0,
   "data": [
@@ -534,7 +534,7 @@
     "trend_value_used": 0.062378,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-08-09T06:52:03.995763+00:00"
+    "computed_at": "2026-08-10T07:26:53.633901+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -566,6 +566,6 @@
         "hi95": 360655.0813
       }
     ],
-    "computed_at": "2026-08-09T06:52:04.003059+00:00"
+    "computed_at": "2026-08-10T07:26:53.641038+00:00"
   }
 }
