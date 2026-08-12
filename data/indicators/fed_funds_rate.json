@@ -15534,7 +15534,7 @@
     "trend_value_used": 0.01,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-12T21:31:44.812842+00:00"
+    "computed_at": "2026-08-12T22:27:05.931295+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
