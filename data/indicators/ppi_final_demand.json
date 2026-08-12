@@ -524,7 +524,7 @@
     "scoring_rule": "YoY change vs historical average. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-08-12T00:00:00+00:00",
+  "next_expected_release": "2026-09-12T00:00:00+00:00",
   "zscore": {
     "level_z": 0.674,
     "level_mean": 0.035102,
@@ -534,7 +534,7 @@
     "trend_value_used": 0.012187,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-08-11T22:28:35.623682+00:00"
+    "computed_at": "2026-08-12T07:19:35.645990+00:00"
   },
   "level_trend_state": "Strong",
   "forecast": {

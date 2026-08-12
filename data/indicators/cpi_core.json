@@ -520,7 +520,7 @@
     "scoring_rule": "Score as YoY % change vs 2% target: < 2.0% \u2192 +60 | 2.0-2.5% \u2192 +20 | 2.5-3.0% \u2192 -20 | 3.0-4.0% \u2192 -50 | > 4.0% \u2192 -80. Phase 3.\n"
   },
   "score": null,
-  "next_expected_release": "2026-08-12T00:00:00+00:00",
+  "next_expected_release": "2026-09-12T00:00:00+00:00",
   "zscore": {
     "level_z": -0.255,
     "level_mean": 0.031834,
@@ -530,7 +530,7 @@
     "trend_value_used": 0.001327,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-08-11T22:28:35.619112+00:00"
+    "computed_at": "2026-08-12T07:19:35.641795+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
