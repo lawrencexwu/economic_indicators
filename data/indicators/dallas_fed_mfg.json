@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-08-12T14:10:04.382941+00:00",
+  "last_updated": "2026-08-13T14:11:40.469608+00:00",
   "metadata": {
     "what_it_measures": "Dallas Fed 11th District manufacturing composite (General Business Activity index).",
     "why_it_matters": "Part of 5-Fed composite ISM nowcast. Released last Monday of month \u2014 often the last regional Fed report before ISM.",
@@ -1095,7 +1095,7 @@
     "trend_value_used": 3.6,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-13T07:22:01.056980+00:00"
+    "computed_at": "2026-08-13T14:12:38.040764+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -1127,6 +1127,6 @@
         "hi95": 45.5049
       }
     ],
-    "computed_at": "2026-08-12T14:11:06.819944+00:00"
+    "computed_at": "2026-08-13T14:12:38.048466+00:00"
   }
 }
