@@ -6404,7 +6404,7 @@
     "scoring_rule": "z = (current 4wMA - trailing 3y mean) / trailing 3y stddev momentum = (current 4wMA - 4wMA 8 weeks ago) / 4wMA 8 weeks ago raw_score = -50*z - 100*momentum (high & rising = bearish) clamp to [-100, +100]\n"
   },
   "score": null,
-  "next_expected_release": "2026-08-13T00:00:00+00:00",
+  "next_expected_release": "2026-08-20T00:00:00+00:00",
   "zscore": {
     "level_z": -0.536,
     "level_mean": 360992.794486,
@@ -6414,7 +6414,7 @@
     "trend_value_used": -4250.0,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-08-12T22:27:05.888440+00:00"
+    "computed_at": "2026-08-13T07:22:01.018177+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
