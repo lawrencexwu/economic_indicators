@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "ratio",
   "source_type": "fred",
-  "last_updated": "2026-08-13T14:11:40.469608+00:00",
-  "current_value": 1.28,
-  "previous_value": 1.3,
+  "last_updated": "2026-08-14T15:39:14.124324+00:00",
+  "current_value": 1.3,
+  "previous_value": 1.28,
   "data": [
+    {
+      "date": "2026-06-01",
+      "value": 1.3
+    },
     {
       "date": "2026-05-01",
       "value": 1.28
@@ -59,7 +63,7 @@
     },
     {
       "date": "2025-06-01",
-      "value": 1.38
+      "value": 1.39
     },
     {
       "date": "2025-05-01",
@@ -522,46 +526,46 @@
   "score": null,
   "next_expected_release": null,
   "zscore": {
-    "level_z": -1.718,
-    "level_mean": 1.380667,
-    "level_std": 0.058579,
-    "level_value_used": 1.28,
-    "trend_z": -0.842,
-    "trend_value_used": -0.05,
+    "level_z": -1.354,
+    "level_mean": 1.379833,
+    "level_std": 0.058983,
+    "level_value_used": 1.3,
+    "trend_z": -0.302,
+    "trend_value_used": -0.02,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-14T14:05:46.791863+00:00"
+    "computed_at": "2026-08-14T15:40:30.490527+00:00"
   },
-  "level_trend_state": "Deteriorating",
+  "level_trend_state": "Neutral",
   "forecast": {
     "model": "SeasonalNaive",
     "horizon": 3,
     "values": [
       {
-        "date": "2026-06-01",
-        "mean": 1.38,
-        "lo80": 1.2662,
-        "hi80": 1.4938,
-        "lo95": 1.206,
-        "hi95": 1.554
-      },
-      {
         "date": "2026-07-01",
         "mean": 1.37,
-        "lo80": 1.2562,
-        "hi80": 1.4838,
-        "lo95": 1.196,
-        "hi95": 1.544
+        "lo80": 1.2563,
+        "hi80": 1.4837,
+        "lo95": 1.1961,
+        "hi95": 1.5439
       },
       {
         "date": "2026-08-01",
         "mean": 1.37,
-        "lo80": 1.2562,
-        "hi80": 1.4838,
-        "lo95": 1.196,
-        "hi95": 1.544
+        "lo80": 1.2563,
+        "hi80": 1.4837,
+        "lo95": 1.1961,
+        "hi95": 1.5439
+      },
+      {
+        "date": "2026-09-01",
+        "mean": 1.37,
+        "lo80": 1.2563,
+        "hi80": 1.4837,
+        "lo95": 1.1961,
+        "hi95": 1.5439
       }
     ],
-    "computed_at": "2026-08-13T14:12:59.689321+00:00"
+    "computed_at": "2026-08-14T15:40:30.497782+00:00"
   }
 }
