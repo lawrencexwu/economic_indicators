@@ -9,10 +9,14 @@
   "frequency": "daily",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-08-17T06:46:31.626535+00:00",
-  "current_value": 0.79,
+  "last_updated": "2026-08-18T13:33:24.968577+00:00",
+  "current_value": 0.8,
   "previous_value": 0.79,
   "data": [
+    {
+      "date": "2026-08-14",
+      "value": 0.8
+    },
     {
       "date": "2026-08-13",
       "value": 0.79
@@ -3144,18 +3148,6 @@
     {
       "date": "2023-08-18",
       "value": 1.27
-    },
-    {
-      "date": "2023-08-17",
-      "value": 1.26
-    },
-    {
-      "date": "2023-08-16",
-      "value": 1.25
-    },
-    {
-      "date": "2023-08-15",
-      "value": 1.23
     }
   ],
   "metadata": {
@@ -3166,29 +3158,21 @@
   "score": null,
   "next_expected_release": null,
   "zscore": {
-    "level_z": -0.81,
-    "level_mean": 0.909122,
-    "level_std": 0.14703,
-    "level_value_used": 0.79,
-    "trend_z": 0.663,
-    "trend_value_used": 0.04,
+    "level_z": -0.739,
+    "level_mean": 0.907691,
+    "level_std": 0.14577,
+    "level_value_used": 0.8,
+    "trend_z": 0.741,
+    "trend_value_used": 0.05,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-08-18T06:37:23.686828+00:00"
+    "computed_at": "2026-08-18T13:41:08.742764+00:00"
   },
   "level_trend_state": "Recovering",
   "forecast": {
     "model": "SeasonalNaive",
     "horizon": 5,
     "values": [
-      {
-        "date": "2026-08-14",
-        "mean": 0.78,
-        "lo80": 0.7314,
-        "hi80": 0.8286,
-        "lo95": 0.7057,
-        "hi95": 0.8543
-      },
       {
         "date": "2026-08-17",
         "mean": 0.78,
@@ -3220,8 +3204,16 @@
         "hi80": 0.8386,
         "lo95": 0.7157,
         "hi95": 0.8643
+      },
+      {
+        "date": "2026-08-21",
+        "mean": 0.8,
+        "lo80": 0.7514,
+        "hi80": 0.8486,
+        "lo95": 0.7257,
+        "hi95": 0.8743
       }
     ],
-    "computed_at": "2026-08-17T06:53:38.474053+00:00"
+    "computed_at": "2026-08-18T13:41:08.755120+00:00"
   }
 }
