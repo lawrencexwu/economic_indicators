@@ -9,7 +9,7 @@
   "frequency": "weekly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-08-19T19:16:33.808585+00:00",
+  "last_updated": "2026-08-20T13:36:17.622658+00:00",
   "metadata": {
     "what_it_measures": "MBA refinance applications index. Sensitive to mortgage rate changes.",
     "why_it_matters": "Refi activity affects household cash flow and consumer spending.",
@@ -125,6 +125,6 @@
         "hi95": 988.895
       }
     ],
-    "computed_at": "2026-08-19T19:16:40.454148+00:00"
+    "computed_at": "2026-08-20T13:37:10.247839+00:00"
   }
 }
