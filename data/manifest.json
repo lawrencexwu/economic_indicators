@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-08-24T14:29:21.697260+00:00",
+  "last_run": "2026-08-24T15:26:20.454832+00:00",
   "n_succeeded": 5,
   "n_failed": 2,
   "n_skipped": 91,
@@ -18,23 +18,23 @@
   "indicators": {
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-08-24T14:29:21.697260+00:00"
+      "last_updated": "2026-08-24T15:26:20.454832+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-08-24T14:29:21.697260+00:00"
+      "last_updated": "2026-08-24T15:26:20.454832+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-08-24T14:29:21.697260+00:00"
+      "last_updated": "2026-08-24T15:26:20.454832+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-08-24T14:29:21.697260+00:00"
+      "last_updated": "2026-08-24T15:26:20.454832+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-08-24T14:29:21.697260+00:00"
+      "last_updated": "2026-08-24T15:26:20.454832+00:00"
     }
   }
 }
