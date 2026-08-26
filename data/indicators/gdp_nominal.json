@@ -9,13 +9,13 @@
   "frequency": "quarterly",
   "unit": "billions",
   "source_type": "fred",
-  "last_updated": "2026-08-25T14:31:56.912471+00:00",
-  "current_value": 32475.21,
+  "last_updated": "2026-08-26T14:32:05.569015+00:00",
+  "current_value": 32486.066,
   "previous_value": 31865.721,
   "data": [
     {
       "date": "2026-04-01",
-      "value": 32475.21
+      "value": 32486.066
     },
     {
       "date": "2026-01-01",
@@ -510,15 +510,15 @@
   "score": null,
   "next_expected_release": null,
   "zscore": {
-    "level_z": 1.821,
-    "level_mean": 24641.65065,
-    "level_std": 4301.185023,
-    "level_value_used": 32475.21,
-    "trend_z": 0.59,
-    "trend_value_used": 609.489,
+    "level_z": 1.824,
+    "level_mean": 24641.92205,
+    "level_std": 4301.692298,
+    "level_value_used": 32486.066,
+    "trend_z": 0.613,
+    "trend_value_used": 620.345,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-26T13:43:29.491833+00:00"
+    "computed_at": "2026-08-26T14:40:10.721070+00:00"
   },
   "level_trend_state": "Strong",
   "forecast": {
@@ -528,20 +528,20 @@
       {
         "date": "2026-07-01",
         "mean": 31098.027,
-        "lo80": 29775.4776,
-        "hi80": 32420.5764,
-        "lo95": 29075.3622,
-        "hi95": 33120.6918
+        "lo80": 29775.2497,
+        "hi80": 32420.8043,
+        "lo95": 29075.0137,
+        "hi95": 33121.0403
       },
       {
         "date": "2026-10-01",
         "mean": 31422.526,
-        "lo80": 30099.9766,
-        "hi80": 32745.0754,
-        "lo95": 29399.8612,
-        "hi95": 33445.1908
+        "lo80": 30099.7487,
+        "hi80": 32745.3033,
+        "lo95": 29399.5127,
+        "hi95": 33445.5393
       }
     ],
-    "computed_at": "2026-08-25T14:39:33.890984+00:00"
+    "computed_at": "2026-08-26T14:40:10.728245+00:00"
   }
 }
