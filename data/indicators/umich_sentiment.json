@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-08-26T14:32:05.569015+00:00",
-  "current_value": 49.5,
-  "previous_value": 44.8,
+  "last_updated": "2026-08-28T18:09:40.183685+00:00",
+  "current_value": 55.2,
+  "previous_value": 49.5,
   "data": [
+    {
+      "date": "2026-07-01",
+      "value": 55.2
+    },
     {
       "date": "2026-06-01",
       "value": 49.5
@@ -526,46 +530,46 @@
   "score": null,
   "next_expected_release": "2026-09-11T00:00:00+00:00",
   "zscore": {
-    "level_z": -1.685,
-    "level_mean": 77.644167,
-    "level_std": 16.706149,
-    "level_value_used": 49.5,
-    "trend_z": -0.359,
-    "trend_value_used": -3.8,
+    "level_z": -1.319,
+    "level_mean": 77.354167,
+    "level_std": 16.791689,
+    "level_value_used": 55.2,
+    "trend_z": 0.861,
+    "trend_value_used": 5.4,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-08-27T02:18:18.649648+00:00"
+    "computed_at": "2026-08-28T18:11:33.503074+00:00"
   },
-  "level_trend_state": "Neutral",
+  "level_trend_state": "Recovering",
   "forecast": {
     "model": "SeasonalNaive",
     "horizon": 3,
     "values": [
       {
-        "date": "2026-07-01",
-        "mean": 61.7,
-        "lo80": 45.8511,
-        "hi80": 77.5489,
-        "lo95": 37.4612,
-        "hi95": 85.9388
-      },
-      {
         "date": "2026-08-01",
         "mean": 58.2,
-        "lo80": 42.3511,
-        "hi80": 74.0489,
-        "lo95": 33.9612,
-        "hi95": 82.4388
+        "lo80": 42.4011,
+        "hi80": 73.9989,
+        "lo95": 34.0376,
+        "hi95": 82.3624
       },
       {
         "date": "2026-09-01",
         "mean": 55.1,
-        "lo80": 39.2511,
-        "hi80": 70.9489,
-        "lo95": 30.8612,
-        "hi95": 79.3388
+        "lo80": 39.3011,
+        "hi80": 70.8989,
+        "lo95": 30.9376,
+        "hi95": 79.2624
+      },
+      {
+        "date": "2026-10-01",
+        "mean": 53.6,
+        "lo80": 37.8011,
+        "hi80": 69.3989,
+        "lo95": 29.4376,
+        "hi95": 77.7624
       }
     ],
-    "computed_at": "2026-08-26T14:33:54.299916+00:00"
+    "computed_at": "2026-08-28T18:11:33.510270+00:00"
   }
 }
