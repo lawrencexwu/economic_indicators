@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-08-28T18:09:40.183685+00:00",
+  "last_updated": "2026-08-31T12:36:12.894935+00:00",
   "current_value": -0.08,
   "previous_value": 0.06,
   "data": [
@@ -528,7 +528,7 @@
     "scoring_rule": "Use CFNAI-MA3 for primary scoring. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-08-31T00:00:00+00:00",
+  "next_expected_release": "2026-09-28T00:00:00+00:00",
   "zscore": {
     "level_z": -0.004,
     "level_mean": -0.072677,
@@ -538,7 +538,7 @@
     "trend_value_used": -0.18,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-08-29T12:14:29.814907+00:00"
+    "computed_at": "2026-08-31T12:36:15.782171+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -570,6 +570,6 @@
         "hi95": 4.968
       }
     ],
-    "computed_at": "2026-08-28T18:09:43.799542+00:00"
+    "computed_at": "2026-08-31T12:36:15.788118+00:00"
   }
 }
