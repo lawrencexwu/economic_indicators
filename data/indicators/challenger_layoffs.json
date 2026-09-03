@@ -129,7 +129,7 @@
       "value": 4.663
     }
   ],
-  "next_expected_release": "2026-09-03T00:00:00+00:00",
+  "next_expected_release": "2026-10-01T00:00:00+00:00",
   "zscore": {
     "level_z": 1.156,
     "level_mean": 3.347472,
@@ -139,7 +139,7 @@
     "trend_value_used": 1.931616,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-09-02T22:06:57.379635+00:00"
+    "computed_at": "2026-09-03T10:38:15.612560+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
