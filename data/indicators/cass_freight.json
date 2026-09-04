@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-09-02T22:03:02.845888+00:00",
+  "last_updated": "2026-09-04T10:31:24.523760+00:00",
   "metadata": {
     "what_it_measures": "Cass Information Systems Freight Shipments Index. Monthly mid-month. Measures freight transaction volumes (rail, truck, intermodal).\n",
     "why_it_matters": "Real-time truckload demand. Declining Cass freight = goods economy contracting. Complement to AAR rail data.\n",
@@ -27,64 +27,10 @@
     {
       "date": "2026-06-01",
       "value": 1.009
-    },
-    {
-      "date": "2026-05-01",
-      "value": 1.041
-    },
-    {
-      "date": "2026-04-01",
-      "value": 1.011
-    },
-    {
-      "date": "2026-03-01",
-      "value": 1.007
-    },
-    {
-      "date": "2026-02-01",
-      "value": 0.978
-    },
-    {
-      "date": "2026-01-01",
-      "value": 0.886
-    },
-    {
-      "date": "2025-12-01",
-      "value": 0.932
     }
   ],
   "next_expected_release": "2026-09-12T00:00:00+00:00",
   "zscore": null,
   "level_trend_state": "Neutral",
-  "forecast": {
-    "model": "Naive",
-    "horizon": 3,
-    "values": [
-      {
-        "date": "2026-08-01",
-        "mean": 0.983,
-        "lo80": 0.9256,
-        "hi80": 1.0404,
-        "lo95": 0.8952,
-        "hi95": 1.0708
-      },
-      {
-        "date": "2026-09-01",
-        "mean": 0.983,
-        "lo80": 0.9018,
-        "hi80": 1.0642,
-        "lo95": 0.8589,
-        "hi95": 1.1071
-      },
-      {
-        "date": "2026-10-01",
-        "mean": 0.983,
-        "lo80": 0.8836,
-        "hi80": 1.0824,
-        "lo95": 0.831,
-        "hi95": 1.135
-      }
-    ],
-    "computed_at": "2026-09-02T22:09:04.770531+00:00"
-  }
+  "forecast": null
 }

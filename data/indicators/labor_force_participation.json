@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-09-02T22:03:02.845888+00:00",
+  "last_updated": "2026-09-04T10:31:24.523760+00:00",
   "current_value": 61.4,
   "previous_value": 61.5,
   "data": [
@@ -524,7 +524,7 @@
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-09-04T00:00:00+00:00",
+  "next_expected_release": "2026-10-02T00:00:00+00:00",
   "zscore": {
     "level_z": -1.813,
     "level_mean": 62.435833,
@@ -534,7 +534,7 @@
     "trend_value_used": -0.4,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-09-03T21:57:47.080588+00:00"
+    "computed_at": "2026-09-04T10:31:59.295983+00:00"
   },
   "level_trend_state": "Deteriorating",
   "forecast": {
@@ -566,6 +566,6 @@
         "hi95": 63.8656
       }
     ],
-    "computed_at": "2026-09-02T22:04:45.771704+00:00"
+    "computed_at": "2026-09-04T10:31:59.300928+00:00"
   }
 }
