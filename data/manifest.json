@@ -1,8 +1,8 @@
 {
-  "last_run": "2026-09-04T16:37:51.636025+00:00",
-  "n_succeeded": 10,
+  "last_run": "2026-09-04T19:11:20.037237+00:00",
+  "n_succeeded": 9,
   "n_failed": 2,
-  "n_skipped": 86,
+  "n_skipped": 87,
   "errors": [
     {
       "id": "aar_carloads",
@@ -18,43 +18,39 @@
   "indicators": {
     "yield_curve_10y3m": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "yield_curve_10y2y": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "breakeven_5y": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "fed_funds_rate": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
-    },
-    "industrial_production": {
-      "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "debt_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "interest_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "interest_to_receipts": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "primary_deficit_pct": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     },
     "fed_balance_to_gdp": {
       "status": "ok",
-      "last_updated": "2026-09-04T16:37:51.636025+00:00"
+      "last_updated": "2026-09-04T19:11:20.037237+00:00"
     }
   }
 }
