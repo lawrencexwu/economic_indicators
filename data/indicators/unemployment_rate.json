@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-09-04T10:31:24.523760+00:00",
+  "last_updated": "2026-09-07T11:29:59.037300+00:00",
   "current_value": 4.1,
-  "previous_value": 4.2,
+  "previous_value": 4.1,
   "data": [
+    {
+      "date": "2026-08-01",
+      "value": 4.1
+    },
     {
       "date": "2026-07-01",
       "value": 4.1
@@ -526,15 +530,15 @@
   "score": null,
   "next_expected_release": "2026-10-02T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.261,
-    "level_mean": 4.549167,
-    "level_std": 1.723393,
+    "level_z": -0.257,
+    "level_mean": 4.543333,
+    "level_std": 1.723721,
     "level_value_used": 4.1,
-    "trend_z": -0.107,
+    "trend_z": -0.108,
     "trend_value_used": -0.2,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-09-05T09:55:25.576755+00:00"
+    "computed_at": "2026-09-07T11:30:44.979863+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -542,30 +546,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-08-01",
-        "mean": 4.3,
-        "lo80": 1.181,
-        "hi80": 7.419,
-        "lo95": -0.4701,
-        "hi95": 9.0701
-      },
-      {
         "date": "2026-09-01",
         "mean": 4.3,
-        "lo80": 1.181,
-        "hi80": 7.419,
-        "lo95": -0.4701,
-        "hi95": 9.0701
+        "lo80": 1.1945,
+        "hi80": 7.4055,
+        "lo95": -0.4495,
+        "hi95": 9.0495
       },
       {
         "date": "2026-10-01",
         "mean": 4.4,
-        "lo80": 1.281,
-        "hi80": 7.519,
-        "lo95": -0.3701,
-        "hi95": 9.1701
+        "lo80": 1.2945,
+        "hi80": 7.5055,
+        "lo95": -0.3495,
+        "hi95": 9.1495
+      },
+      {
+        "date": "2026-11-01",
+        "mean": 4.5,
+        "lo80": 1.3945,
+        "hi80": 7.6055,
+        "lo95": -0.2495,
+        "hi95": 9.2495
       }
     ],
-    "computed_at": "2026-09-04T10:31:58.823544+00:00"
+    "computed_at": "2026-09-07T11:30:44.987412+00:00"
   }
 }
