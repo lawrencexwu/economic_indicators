@@ -528,7 +528,7 @@
     "scoring_rule": "70-78% \u2192 neutral | >82% \u2192 -30 (overheating) | <70% \u2192 -50 (deep contraction). Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-09-12T00:00:00+00:00",
+  "next_expected_release": "2026-10-12T00:00:00+00:00",
   "zscore": {
     "level_z": -0.147,
     "level_mean": 76.626163,
@@ -538,7 +538,7 @@
     "trend_value_used": 0.1509,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-09-11T22:04:29.973667+00:00"
+    "computed_at": "2026-09-12T10:03:13.012178+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {

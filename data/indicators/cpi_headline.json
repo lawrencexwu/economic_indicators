@@ -528,7 +528,7 @@
     "scoring_rule": "Same bands as core CPI. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-09-12T00:00:00+00:00",
+  "next_expected_release": "2026-10-12T00:00:00+00:00",
   "zscore": {
     "level_z": 0.17,
     "level_mean": 0.033674,
@@ -538,7 +538,7 @@
     "trend_value_used": -0.005571,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-09-11T22:03:24.088923+00:00"
+    "computed_at": "2026-09-12T10:03:12.994835+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
