@@ -1223,7 +1223,7 @@
     "trend_value_used": 10.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-09-16T10:48:17.350333+00:00"
+    "computed_at": "2026-09-16T17:19:59.513665+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
