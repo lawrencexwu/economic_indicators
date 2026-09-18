@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-09-16T23:18:08.127556+00:00",
-  "current_value": 47.4,
-  "previous_value": 41.4,
+  "last_updated": "2026-09-18T10:30:20.652866+00:00",
+  "current_value": 37.8,
+  "previous_value": 47.4,
   "data": [
+    {
+      "date": "2026-09-01",
+      "value": 37.8
+    },
     {
       "date": "2026-08-01",
       "value": 47.4
@@ -534,15 +538,15 @@
   "score": null,
   "next_expected_release": null,
   "zscore": {
-    "level_z": 1.974,
-    "level_mean": 11.119167,
-    "level_std": 18.378423,
-    "level_value_used": 47.4,
-    "trend_z": 2.312,
-    "trend_value_used": 47.8,
+    "level_z": 1.428,
+    "level_mean": 11.33,
+    "level_std": 18.538815,
+    "level_value_used": 37.8,
+    "trend_z": 1.298,
+    "trend_value_used": 27.5,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-09-17T23:09:46.944974+00:00"
+    "computed_at": "2026-09-18T10:31:30.471578+00:00"
   },
   "level_trend_state": "Strong",
   "forecast": {
@@ -550,30 +554,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-09-01",
-        "mean": 19.5,
-        "lo80": -13.6387,
-        "hi80": 52.6387,
-        "lo95": -31.1813,
-        "hi95": 70.1813
-      },
-      {
         "date": "2026-10-01",
         "mean": -10.1,
-        "lo80": -43.2387,
-        "hi80": 23.0387,
-        "lo95": -60.7813,
-        "hi95": 40.5813
+        "lo80": -43.1679,
+        "hi80": 22.9679,
+        "lo95": -60.673,
+        "hi95": 40.473
       },
       {
         "date": "2026-11-01",
         "mean": 0.6,
-        "lo80": -32.5387,
-        "hi80": 33.7387,
-        "lo95": -50.0813,
-        "hi95": 51.2813
+        "lo80": -32.4679,
+        "hi80": 33.6679,
+        "lo95": -49.973,
+        "hi95": 51.173
+      },
+      {
+        "date": "2026-12-01",
+        "mean": -8.8,
+        "lo80": -41.8679,
+        "hi80": 24.2679,
+        "lo95": -59.373,
+        "hi95": 41.773
       }
     ],
-    "computed_at": "2026-09-16T23:19:03.835200+00:00"
+    "computed_at": "2026-09-18T10:31:30.478643+00:00"
   }
 }
