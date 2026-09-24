@@ -9,7 +9,7 @@
   "frequency": "weekly",
   "unit": "thousands",
   "source_type": "fred",
-  "last_updated": "2026-09-23T17:31:01.658467+00:00",
+  "last_updated": "2026-09-24T11:03:31.127213+00:00",
   "current_value": 203250.0,
   "previous_value": 206000.0,
   "data": [
@@ -6428,7 +6428,7 @@
     "scoring_rule": "z = (current 4wMA - trailing 3y mean) / trailing 3y stddev momentum = (current 4wMA - 4wMA 8 weeks ago) / 4wMA 8 weeks ago raw_score = -50*z - 100*momentum (high & rising = bearish) clamp to [-100, +100]\n"
   },
   "score": null,
-  "next_expected_release": "2026-09-24T00:00:00+00:00",
+  "next_expected_release": "2026-10-01T00:00:00+00:00",
   "zscore": {
     "level_z": -0.52,
     "level_mean": 360406.523096,
@@ -6438,7 +6438,7 @@
     "trend_value_used": -20250.0,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-09-23T23:15:42.874566+00:00"
+    "computed_at": "2026-09-24T11:03:43.834058+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -6478,6 +6478,6 @@
         "hi95": 1051885.1389
       }
     ],
-    "computed_at": "2026-09-23T17:31:12.284279+00:00"
+    "computed_at": "2026-09-24T11:03:43.854891+00:00"
   }
 }
