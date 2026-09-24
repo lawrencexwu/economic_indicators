@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-09-23T17:31:01.658467+00:00",
+  "last_updated": "2026-09-24T23:36:25.473264+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing Employment subindex. Hiring/firing in manufacturing.",
     "why_it_matters": "Leads BLS manufacturing employment. Below 50 = manufacturing contraction in labor.",
@@ -47,7 +47,7 @@
     "trend_value_used": 6.4,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-09-24T11:04:27.924681+00:00"
+    "computed_at": "2026-09-24T23:37:47.172083+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
