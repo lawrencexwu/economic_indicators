@@ -528,7 +528,7 @@
     "scoring_rule": "3-month annualized trend. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-09-26T00:00:00+00:00",
+  "next_expected_release": "2026-10-26T00:00:00+00:00",
   "zscore": {
     "level_z": 0.548,
     "level_mean": 0.040911,
@@ -538,7 +538,7 @@
     "trend_value_used": 0.012801,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-09-25T23:40:49.573942+00:00"
+    "computed_at": "2026-09-26T10:46:30.768600+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
