@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "fred",
-  "last_updated": "2026-09-27T11:20:02.436664+00:00",
+  "last_updated": "2026-09-28T12:49:34.275116+00:00",
   "current_value": 0.01,
   "previous_value": -0.01,
   "data": [
@@ -1492,7 +1492,7 @@
     "scoring_rule": "> +1.0 \u2192 -30 (overheating, late-cycle warning) +0.7 to +1.0 \u2192 0 (inflation acceleration risk) +0.2 to +0.7 \u2192 +60 (healthy expansion) -0.7 to +0.2 \u2192 +20 (neutral/slowing) -1.5 to -0.7 \u2192 -60 (recession risk rising) < -1.5 \u2192 -100 (recession underway)\n"
   },
   "score": null,
-  "next_expected_release": "2026-09-28T00:00:00+00:00",
+  "next_expected_release": "2026-10-26T00:00:00+00:00",
   "zscore": {
     "level_z": 0.125,
     "level_mean": -0.08231,
@@ -1502,7 +1502,7 @@
     "trend_value_used": 0.03,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-09-27T11:20:06.503878+00:00"
+    "computed_at": "2026-09-28T12:49:37.921058+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -1534,6 +1534,6 @@
         "hi95": 1.6561
       }
     ],
-    "computed_at": "2026-09-27T11:20:06.512099+00:00"
+    "computed_at": "2026-09-28T12:49:37.930268+00:00"
   }
 }
