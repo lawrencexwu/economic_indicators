@@ -8,9 +8,9 @@
   "weight": 2,
   "frequency": "annual",
   "source_type": "derived",
-  "last_updated": "2026-09-30T18:10:24.395538+00:00",
+  "last_updated": "2026-09-30T22:40:54.140530+00:00",
   "current_value": 2.56,
-  "previous_value": 3.14,
+  "previous_value": 3.13,
   "data": [
     {
       "date": "2025-09-30",
@@ -18,7 +18,7 @@
     },
     {
       "date": "2024-09-30",
-      "value": 3.14
+      "value": 3.13
     },
     {
       "date": "2023-09-30",
@@ -30,7 +30,7 @@
     },
     {
       "date": "2021-09-30",
-      "value": 9.76
+      "value": 9.75
     },
     {
       "date": "2020-09-30",
@@ -142,14 +142,14 @@
   "next_expected_release": null,
   "zscore": {
     "level_z": 0.111,
-    "level_mean": 2.122667,
-    "level_std": 3.955305,
+    "level_mean": 2.122,
+    "level_std": 3.954552,
     "level_value_used": 2.56,
-    "trend_z": -0.255,
-    "trend_value_used": -0.58,
+    "trend_z": -0.251,
+    "trend_value_used": -0.57,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-09-30T18:10:59.854162+00:00"
+    "computed_at": "2026-09-30T22:48:51.597501+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -159,12 +159,12 @@
       {
         "date": "2027-01-01",
         "mean": 2.56,
-        "lo80": -1.0239,
-        "hi80": 6.1439,
-        "lo95": -2.9211,
-        "hi95": 8.0411
+        "lo80": -1.0233,
+        "hi80": 6.1433,
+        "lo95": -2.9202,
+        "hi95": 8.0402
       }
     ],
-    "computed_at": "2026-09-30T18:10:59.861120+00:00"
+    "computed_at": "2026-09-30T22:48:51.603118+00:00"
   }
 }
