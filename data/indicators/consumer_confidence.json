@@ -542,7 +542,7 @@
     "trend_value_used": 7.42401,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-02T11:50:26.017256+00:00"
+    "computed_at": "2026-10-02T18:05:56.345476+00:00"
   },
   "level_trend_state": "Recovering",
   "forecast": {
