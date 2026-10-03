@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-10-01T22:56:41.098887+00:00",
+  "last_updated": "2026-10-03T11:03:36.378566+00:00",
   "metadata": {
     "what_it_measures": "KC Fed 10th District manufacturing composite index.",
     "why_it_matters": "Part of 5-Fed composite ISM nowcast. Not on FRED free tier \u2014 scraped from kansascityfed.org.",
@@ -1223,7 +1223,7 @@
     "trend_value_used": 10.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-02T22:39:01.994093+00:00"
+    "computed_at": "2026-10-03T11:04:43.995164+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -1255,6 +1255,6 @@
         "hi95": 28.1721
       }
     ],
-    "computed_at": "2026-10-01T22:57:38.520729+00:00"
+    "computed_at": "2026-10-03T11:04:44.001550+00:00"
   }
 }

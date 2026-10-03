@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-10-01T22:56:41.098887+00:00",
-  "current_value": -0.07,
-  "previous_value": -0.03,
+  "last_updated": "2026-10-03T11:03:36.378566+00:00",
+  "current_value": 0.0,
+  "previous_value": -0.07,
   "data": [
+    {
+      "date": "2026-09-01",
+      "value": 0.0
+    },
     {
       "date": "2026-08-01",
       "value": -0.07
@@ -1490,15 +1494,15 @@
   "score": null,
   "next_expected_release": "2026-11-06T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.413,
-    "level_mean": 0.410845,
-    "level_std": 1.164541,
-    "level_value_used": -0.07,
-    "trend_z": -0.195,
-    "trend_value_used": -0.17,
+    "level_z": -0.352,
+    "level_mean": 0.409728,
+    "level_std": 1.16315,
+    "level_value_used": 0.0,
+    "trend_z": -0.079,
+    "trend_value_used": -0.07,
     "window": "full",
     "transform": "level",
-    "computed_at": "2026-10-02T22:39:01.968976+00:00"
+    "computed_at": "2026-10-03T11:03:40.772936+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -1506,30 +1510,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-09-01",
-        "mean": 0.13,
-        "lo80": -1.9926,
-        "hi80": 2.2526,
-        "lo95": -3.1162,
-        "hi95": 3.3762
-      },
-      {
         "date": "2026-10-01",
         "mean": 0.23,
-        "lo80": -1.8926,
-        "hi80": 2.3526,
-        "lo95": -3.0162,
-        "hi95": 3.4762
+        "lo80": -1.8896,
+        "hi80": 2.3496,
+        "lo95": -3.0117,
+        "hi95": 3.4717
       },
       {
         "date": "2026-11-01",
         "mean": 0.43,
-        "lo80": -1.6926,
-        "hi80": 2.5526,
-        "lo95": -2.8162,
-        "hi95": 3.6762
+        "lo80": -1.6896,
+        "hi80": 2.5496,
+        "lo95": -2.8117,
+        "hi95": 3.6717
+      },
+      {
+        "date": "2026-12-01",
+        "mean": 0.35,
+        "lo80": -1.7696,
+        "hi80": 2.4696,
+        "lo95": -2.8917,
+        "hi95": 3.5917
       }
     ],
-    "computed_at": "2026-10-01T22:56:44.032919+00:00"
+    "computed_at": "2026-10-03T11:03:40.779621+00:00"
   }
 }

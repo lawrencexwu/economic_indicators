@@ -9,10 +9,14 @@
   "frequency": "monthly",
   "unit": "percent",
   "source_type": "fred",
-  "last_updated": "2026-10-01T22:56:41.098887+00:00",
-  "current_value": 7.7,
-  "previous_value": 7.9,
+  "last_updated": "2026-10-03T11:03:36.378566+00:00",
+  "current_value": 7.6,
+  "previous_value": 7.7,
   "data": [
+    {
+      "date": "2026-09-01",
+      "value": 7.6
+    },
     {
       "date": "2026-08-01",
       "value": 7.7
@@ -530,15 +534,15 @@
   "score": null,
   "next_expected_release": "2026-11-06T00:00:00+00:00",
   "zscore": {
-    "level_z": -0.291,
-    "level_mean": 8.435,
-    "level_std": 2.526553,
-    "level_value_used": 7.7,
-    "trend_z": -0.146,
-    "trend_value_used": -0.4,
+    "level_z": -0.324,
+    "level_mean": 8.418333,
+    "level_std": 2.5254,
+    "level_value_used": 7.6,
+    "trend_z": -0.104,
+    "trend_value_used": -0.3,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-02T22:39:01.986308+00:00"
+    "computed_at": "2026-10-03T11:04:19.191263+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -546,30 +550,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-09-01",
-        "mean": 8.1,
-        "lo80": 3.5028,
-        "hi80": 12.6972,
-        "lo95": 1.0693,
-        "hi95": 15.1307
-      },
-      {
         "date": "2026-10-01",
         "mean": 8.1,
-        "lo80": 3.5028,
-        "hi80": 12.6972,
-        "lo95": 1.0693,
-        "hi95": 15.1307
+        "lo80": 3.5223,
+        "hi80": 12.6777,
+        "lo95": 1.099,
+        "hi95": 15.101
       },
       {
         "date": "2026-11-01",
         "mean": 8.7,
-        "lo80": 4.1028,
-        "hi80": 13.2972,
-        "lo95": 1.6693,
-        "hi95": 15.7307
+        "lo80": 4.1223,
+        "hi80": 13.2777,
+        "lo95": 1.699,
+        "hi95": 15.701
+      },
+      {
+        "date": "2026-12-01",
+        "mean": 8.4,
+        "lo80": 3.8223,
+        "hi80": 12.9777,
+        "lo95": 1.399,
+        "hi95": 15.401
       }
     ],
-    "computed_at": "2026-10-01T22:57:14.612189+00:00"
+    "computed_at": "2026-10-03T11:04:19.196776+00:00"
   }
 }
