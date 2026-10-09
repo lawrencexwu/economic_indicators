@@ -9,21 +9,17 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-10-07T23:53:49.953437+00:00",
+  "last_updated": "2026-10-09T00:00:12.994132+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing Production subindex. Current output levels.",
     "why_it_matters": "Confirms new orders signal. Divergence from new orders = inventory build/draw.",
     "scoring_rule": "Phase 3."
   },
   "score": null,
-  "current_value": 56.7,
-  "previous_value": 58.3,
-  "release_date": "2026-09-01",
+  "current_value": 58.3,
+  "previous_value": 58.5,
+  "release_date": "2026-08-01",
   "data": [
-    {
-      "date": "2026-09-01",
-      "value": 56.7
-    },
     {
       "date": "2026-08-01",
       "value": 58.3
@@ -35,19 +31,23 @@
     {
       "date": "2026-06-01",
       "value": 52.2
+    },
+    {
+      "date": "2026-05-01",
+      "value": 54.3
     }
   ],
   "next_expected_release": "2026-11-02T00:00:00+00:00",
   "zscore": {
-    "level_z": 0.094,
-    "level_mean": 56.425,
-    "level_std": 2.92959,
-    "level_value_used": 56.7,
+    "level_z": 0.8,
+    "level_mean": 55.825,
+    "level_std": 3.095561,
+    "level_value_used": 58.3,
     "trend_z": 0.0,
-    "trend_value_used": 4.5,
+    "trend_value_used": 4.0,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-08T19:03:21.041180+00:00"
+    "computed_at": "2026-10-09T00:02:37.368085+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
