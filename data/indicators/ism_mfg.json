@@ -9,17 +9,21 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-10-09T00:00:12.994132+00:00",
+  "last_updated": "2026-10-10T11:51:19.152831+00:00",
   "metadata": {
     "what_it_measures": "Diffusion index of new orders, production, employment, inventories, prices. ISM. Monthly, 1st business day 10:00 ET. >50 = expansion.\n",
     "why_it_matters": "Baumohl's #2 most stock-sensitive indicator. New Orders subindex is the most forward-looking component; leads headline by ~3 months. ISM Mfg <48 for 3+ months historically signals earnings contraction.\n",
     "scoring_rule": "Headline: > 55 \u2192 +70 | 52-55 \u2192 +40 | 50-52 \u2192 +10 | 48-50 \u2192 -20 | 45-48 \u2192 -50 | < 45 \u2192 -80. New Orders weighted higher. Phase 3.\n"
   },
   "score": null,
-  "current_value": 54.6,
-  "previous_value": 55.6,
-  "release_date": "2026-08-01",
+  "current_value": 54.5,
+  "previous_value": 54.6,
+  "release_date": "2026-09-01",
   "data": [
+    {
+      "date": "2026-09-01",
+      "value": 54.5
+    },
     {
       "date": "2026-08-01",
       "value": 54.6
@@ -63,23 +67,19 @@
     {
       "date": "2025-10-01",
       "value": 48.8
-    },
-    {
-      "date": "2025-09-01",
-      "value": 48.9
     }
   ],
   "next_expected_release": "2026-11-02T00:00:00+00:00",
   "zscore": {
-    "level_z": 1.048,
-    "level_mean": 51.791667,
-    "level_std": 2.680725,
-    "level_value_used": 54.6,
-    "trend_z": -0.665,
-    "trend_value_used": 0.6,
+    "level_z": 0.856,
+    "level_mean": 52.258333,
+    "level_std": 2.618278,
+    "level_value_used": 54.5,
+    "trend_z": -0.572,
+    "trend_value_used": 1.2,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-09T22:57:44.456624+00:00"
+    "computed_at": "2026-10-10T11:52:36.804812+00:00"
   },
   "level_trend_state": "Peaking",
   "forecast": {
@@ -87,30 +87,30 @@
     "horizon": 3,
     "values": [
       {
-        "date": "2026-09-01",
-        "mean": 54.6,
-        "lo80": 52.4365,
-        "hi80": 56.7635,
-        "lo95": 51.2912,
-        "hi95": 57.9088
-      },
-      {
         "date": "2026-10-01",
-        "mean": 54.6,
-        "lo80": 51.5403,
-        "hi80": 57.6597,
-        "lo95": 49.9207,
-        "hi95": 59.2793
+        "mean": 54.5,
+        "lo80": 52.3365,
+        "hi80": 56.6635,
+        "lo95": 51.1912,
+        "hi95": 57.8088
       },
       {
         "date": "2026-11-01",
-        "mean": 54.6,
-        "lo80": 50.8527,
-        "hi80": 58.3473,
-        "lo95": 48.869,
-        "hi95": 60.331
+        "mean": 54.5,
+        "lo80": 51.4403,
+        "hi80": 57.5597,
+        "lo95": 49.8207,
+        "hi95": 59.1793
+      },
+      {
+        "date": "2026-12-01",
+        "mean": 54.5,
+        "lo80": 50.7527,
+        "hi80": 58.2473,
+        "lo95": 48.769,
+        "hi95": 60.231
       }
     ],
-    "computed_at": "2026-10-09T00:02:37.366776+00:00"
+    "computed_at": "2026-10-10T11:52:36.811958+00:00"
   }
 }
