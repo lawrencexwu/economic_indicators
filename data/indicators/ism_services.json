@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-10-12T14:20:19.956585+00:00",
+  "last_updated": "2026-10-13T19:35:26.805661+00:00",
   "metadata": {
     "what_it_measures": "ISM Non-Manufacturing PMI covering services sector. Monthly, 3rd business day 10:00 ET. >50 = expansion. Services >2/3 of US economy.\n",
     "why_it_matters": "Arguably should be Tier 1 today given services dominance. ISM Services holding above 52 while Mfg contracts = split economy (soft landing). ISM Services < 50 = broad-based contraction.\n",
@@ -79,7 +79,7 @@
     "trend_value_used": 0.9,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-13T13:30:23.099240+00:00"
+    "computed_at": "2026-10-13T19:36:44.662123+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -111,6 +111,6 @@
         "hi95": 58.8629
       }
     ],
-    "computed_at": "2026-10-12T14:21:59.548335+00:00"
+    "computed_at": "2026-10-13T19:36:44.669222+00:00"
   }
 }
