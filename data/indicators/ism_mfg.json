@@ -79,7 +79,7 @@
     "trend_value_used": 1.2,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-13T19:36:36.155612+00:00"
+    "computed_at": "2026-10-13T23:28:58.867997+00:00"
   },
   "level_trend_state": "Peaking",
   "forecast": {
