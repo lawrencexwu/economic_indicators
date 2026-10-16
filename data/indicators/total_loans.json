@@ -9,7 +9,7 @@
   "frequency": "weekly",
   "unit": "billions",
   "source_type": "fred",
-  "last_updated": "2026-10-15T17:25:03.678678+00:00",
+  "last_updated": "2026-10-16T10:37:34.156803+00:00",
   "current_value": 14128.1334,
   "previous_value": 14097.2916,
   "data": [
@@ -2264,7 +2264,7 @@
     "scoring_rule": "YoY growth rate. Phase 3."
   },
   "score": null,
-  "next_expected_release": "2026-10-16T00:00:00+00:00",
+  "next_expected_release": "2026-10-23T00:00:00+00:00",
   "zscore": {
     "level_z": 0.827,
     "level_mean": 0.049165,
@@ -2274,7 +2274,7 @@
     "trend_value_used": 0.004311,
     "window": "10y",
     "transform": "yoy",
-    "computed_at": "2026-10-15T23:29:13.468430+00:00"
+    "computed_at": "2026-10-16T10:37:43.252710+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
@@ -2314,6 +2314,6 @@
         "hi95": 14403.042
       }
     ],
-    "computed_at": "2026-10-15T17:25:10.632884+00:00"
+    "computed_at": "2026-10-16T10:37:43.264573+00:00"
   }
 }
