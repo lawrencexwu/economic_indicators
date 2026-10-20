@@ -9,7 +9,7 @@
   "frequency": "monthly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-10-19T12:01:13.345734+00:00",
+  "last_updated": "2026-10-20T17:35:37.858498+00:00",
   "metadata": {
     "what_it_measures": "ISM Manufacturing New Orders subindex. Most forward-looking PMI component.",
     "why_it_matters": "Baumohl Tier 2 (#13). Leads ISM headline by 3 months, leads earnings by ~6 months. New Orders > 52 with inventory < 48 = strongest buy signal.\n",
@@ -47,7 +47,7 @@
     "trend_value_used": -0.7,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-20T10:54:08.691937+00:00"
+    "computed_at": "2026-10-20T17:36:47.820303+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": null
