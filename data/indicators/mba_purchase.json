@@ -9,17 +9,21 @@
   "frequency": "weekly",
   "unit": "index",
   "source_type": "scraper",
-  "last_updated": "2026-10-20T23:31:00.509074+00:00",
+  "last_updated": "2026-10-21T17:42:45.168936+00:00",
   "metadata": {
     "what_it_measures": "MBA Weekly Mortgage Applications Survey \u2014 Purchase index. Mortgage Bankers Association. Weekly Wednesday 7:00 ET. Measures mortgage applications for home purchases.\n",
     "why_it_matters": "Real-time housing demand signal. Baumohl Tier 2. Leads housing starts by ~3-6 months. One of the few housing indicators available weekly.\n",
     "scoring_rule": "YoY change. Phase 3."
   },
   "score": null,
-  "current_value": 139.3,
-  "previous_value": 145.1,
-  "release_date": "2026-10-09",
+  "current_value": 129.2,
+  "previous_value": 139.3,
+  "release_date": "2026-10-16",
   "data": [
+    {
+      "date": "2026-10-16",
+      "value": 129.2
+    },
     {
       "date": "2026-10-09",
       "value": 139.3
@@ -125,38 +129,38 @@
     "horizon": 4,
     "values": [
       {
-        "date": "2026-10-18",
-        "mean": 139.3,
-        "lo80": 132.0739,
-        "hi80": 146.5261,
-        "lo95": 128.2487,
-        "hi95": 150.3513
-      },
-      {
         "date": "2026-10-25",
-        "mean": 139.3,
-        "lo80": 129.0808,
-        "hi80": 149.5192,
-        "lo95": 123.6711,
-        "hi95": 154.9289
+        "mean": 129.2,
+        "lo80": 121.6488,
+        "hi80": 136.7512,
+        "lo95": 117.6514,
+        "hi95": 140.7486
       },
       {
         "date": "2026-11-01",
-        "mean": 139.3,
-        "lo80": 126.7841,
-        "hi80": 151.8159,
-        "lo95": 120.1586,
-        "hi95": 158.4414
+        "mean": 129.2,
+        "lo80": 118.5209,
+        "hi80": 139.8791,
+        "lo95": 112.8678,
+        "hi95": 145.5322
       },
       {
         "date": "2026-11-08",
-        "mean": 139.3,
-        "lo80": 124.8479,
-        "hi80": 153.7521,
-        "lo95": 117.1974,
-        "hi95": 161.4026
+        "mean": 129.2,
+        "lo80": 116.1209,
+        "hi80": 142.2791,
+        "lo95": 109.1972,
+        "hi95": 149.2028
+      },
+      {
+        "date": "2026-11-15",
+        "mean": 129.2,
+        "lo80": 114.0975,
+        "hi80": 144.3025,
+        "lo95": 106.1028,
+        "hi95": 152.2972
       }
     ],
-    "computed_at": "2026-10-20T23:31:18.150785+00:00"
+    "computed_at": "2026-10-21T17:43:42.795708+00:00"
   }
 }
