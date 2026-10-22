@@ -79,7 +79,7 @@
     "trend_value_used": 0.9,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-22T11:09:24.517062+00:00"
+    "computed_at": "2026-10-22T17:41:52.568666+00:00"
   },
   "level_trend_state": "Neutral",
   "forecast": {
