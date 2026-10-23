@@ -550,7 +550,7 @@
     "trend_value_used": -20.5,
     "window": "10y",
     "transform": "level",
-    "computed_at": "2026-10-23T20:41:51.406355+00:00"
+    "computed_at": "2026-10-23T23:43:35.640728+00:00"
   },
   "level_trend_state": "Peaking",
   "forecast": {
